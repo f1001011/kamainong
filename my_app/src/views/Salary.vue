@@ -46,14 +46,14 @@ onMounted(async () => {
 <style scoped>
 .salary-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+  background: var(--bg-base);
   padding: 20px 20px 80px;
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 
@@ -80,7 +80,7 @@ onMounted(async () => {
 .salary-info .level {
   font-size: 16px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .salary-info .condition {
@@ -97,12 +97,12 @@ onMounted(async () => {
 .salary-reward .amount {
   font-size: 20px;
   font-weight: 700;
-  color: #4ade80;
+  color: var(--color-lime);
 }
 
 .salary-reward button {
   padding: 8px 20px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-red));
   border: none;
   border-radius: 8px;
   color: #fff;

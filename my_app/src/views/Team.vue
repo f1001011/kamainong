@@ -67,14 +67,14 @@ onMounted(async () => {
 <style scoped>
 .team-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+  background: var(--bg-base);
   padding: 20px 20px 80px;
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 

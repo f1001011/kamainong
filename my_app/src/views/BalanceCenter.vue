@@ -148,6 +148,7 @@
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue'
 import { CURRENCY } from '@/config'
+import { colors } from '@/config/colors'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
@@ -207,9 +208,9 @@ const actions = computed(() => [
     placeholder: t('balance.actions.deposit.placeholder'),
     note:        t('balance.actions.deposit.note'),
     icon: ArrowDownCircle,
-    c1: '#ff4d4d', c2: '#ff1744',
-    glow: 'rgba(255,77,77,0.55)',
-    gradient: 'linear-gradient(135deg,#ff4d4d,#ff1744)',
+    c1: colors.red, c2: colors.redDark,
+    glow: colors.redGlow,
+    gradient: `linear-gradient(135deg,${colors.red},${colors.redDark})`,
     glowColor: 'radial-gradient(circle,rgba(255,77,77,0.8),transparent)',
   },
   {
@@ -219,9 +220,9 @@ const actions = computed(() => [
     placeholder: t('balance.actions.withdraw.placeholder'),
     note:        t('balance.actions.withdraw.note'),
     icon: ArrowUpCircle,
-    c1: '#00e5ff', c2: '#00b0ff',
-    glow: 'rgba(0,229,255,0.55)',
-    gradient: 'linear-gradient(135deg,#00e5ff,#00b0ff)',
+    c1: colors.cyan, c2: colors.cyanDark,
+    glow: colors.cyanGlow,
+    gradient: `linear-gradient(135deg,${colors.cyan},${colors.cyanDark})`,
     glowColor: 'radial-gradient(circle,rgba(0,229,255,0.8),transparent)',
   },
   {
@@ -231,9 +232,9 @@ const actions = computed(() => [
     placeholder: t('balance.actions.transfer.placeholder'),
     note:        t('balance.actions.transfer.note'),
     icon: ArrowLeftRight,
-    c1: '#ffb800', c2: '#ff6d00',
-    glow: 'rgba(255,184,0,0.55)',
-    gradient: 'linear-gradient(135deg,#ffb800,#ff6d00)',
+    c1: colors.amber, c2: colors.amberDark,
+    glow: colors.amberGlow,
+    gradient: `linear-gradient(135deg,${colors.amber},${colors.amberDark})`,
     glowColor: 'radial-gradient(circle,rgba(255,184,0,0.8),transparent)',
   },
   {
@@ -243,9 +244,9 @@ const actions = computed(() => [
     placeholder: t('balance.actions.history.placeholder'),
     note:        t('balance.actions.history.note'),
     icon: ClipboardList,
-    c1: '#69ff47', c2: '#00e676',
-    glow: 'rgba(105,255,71,0.55)',
-    gradient: 'linear-gradient(135deg,#69ff47,#00e676)',
+    c1: colors.lime, c2: colors.limeDark,
+    glow: colors.limeGlow,
+    gradient: `linear-gradient(135deg,${colors.lime},${colors.limeDark})`,
     glowColor: 'radial-gradient(circle,rgba(105,255,71,0.8),transparent)',
   },
 ])
@@ -261,11 +262,11 @@ const formatRelativeTime = (iso: string): string => {
 
 // ── 交易分类 → 图标/颜色映射（纯前端配置）────────────────────────────────────
 const CATEGORY_MAP: Record<string, { icon: any; color: string; nameKey: string }> = {
-  wechat:  { icon: Banknote,     color: '#00e5ff', nameKey: 'balance.tx.wechat'  },
-  meituan: { icon: ShoppingCart, color: '#ff4d4d', nameKey: 'balance.tx.meituan' },
-  salary:  { icon: PiggyBank,    color: '#69ff47', nameKey: 'balance.tx.salary'  },
-  didi:    { icon: Car,          color: '#ff4d4d', nameKey: 'balance.tx.didi'    },
-  coffee:  { icon: Coffee,       color: '#ffb800', nameKey: 'balance.tx.coffee'  },
+  wechat:  { icon: Banknote,     color: colors.cyan, nameKey: 'balance.tx.wechat'  },
+  meituan: { icon: ShoppingCart, color: colors.red,  nameKey: 'balance.tx.meituan' },
+  salary:  { icon: PiggyBank,    color: colors.lime, nameKey: 'balance.tx.salary'  },
+  didi:    { icon: Car,          color: colors.red,  nameKey: 'balance.tx.didi'    },
+  coffee:  { icon: Coffee,       color: colors.amber, nameKey: 'balance.tx.coffee'  },
 }
 
 // ── Stats（来自接口）──────────────────────────────────────────────────────────
@@ -273,9 +274,9 @@ const stats = computed(() => {
   const d = balanceData.value
   const fmt = (n: number) => `${CURRENCY}${n.toLocaleString('zh-CN')}`
   return [
-    { label: t('balance.monthlyIncome'),  value: d ? fmt(d.monthlyIncome)  : '--', color: '#00e5ff', icon: TrendingUp   },
-    { label: t('balance.monthlyExpense'), value: d ? fmt(d.monthlyExpense) : '--', color: '#ff4d4d', icon: TrendingDown },
-    { label: t('balance.frozen'),         value: d ? fmt(d.frozenAmount)   : '--', color: '#ffb800', icon: Lock         },
+    { label: t('balance.monthlyIncome'),  value: d ? fmt(d.monthlyIncome)  : '--', color: colors.cyan,  icon: TrendingUp   },
+    { label: t('balance.monthlyExpense'), value: d ? fmt(d.monthlyExpense) : '--', color: colors.red,   icon: TrendingDown },
+    { label: t('balance.frozen'),         value: d ? fmt(d.frozenAmount)   : '--', color: colors.amber, icon: Lock         },
   ]
 })
 
@@ -283,7 +284,7 @@ const stats = computed(() => {
 const transactions = computed(() => {
   if (!balanceData.value) return []
   return balanceData.value.transactions.map(tx => {
-    const meta = CATEGORY_MAP[tx.category] ?? { icon: Banknote, color: '#00e5ff', nameKey: tx.category }
+    const meta = CATEGORY_MAP[tx.category] ?? { icon: Banknote, color: colors.cyan, nameKey: tx.category }
     return {
       id:     tx.id,
       name:   meta.nameKey.startsWith('balance.') ? t(meta.nameKey) : tx.category,
@@ -399,7 +400,7 @@ const loadBalance = async () => {
 /* 顶部撞色彩条 */
 .hero-top-bar {
   position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, #ff4d4d 0%, #00e5ff 50%, #ffb800 100%);
+  background: linear-gradient(90deg, var(--color-red) 0%, var(--color-cyan) 50%, var(--color-amber) 100%);
   border-radius: 20px 20px 0 0;
 }
 
@@ -463,7 +464,7 @@ const loadBalance = async () => {
 .balance-badge {
   display: inline-flex; align-items: center; gap: 5px;
   font-size: 12px; font-weight: 500;
-  color: #00e5ff;
+  color: var(--color-cyan);
   background: rgba(0,229,255,0.08);
   border: 1px solid rgba(0,229,255,0.18);
   border-radius: 20px; padding: 3px 10px;
@@ -479,7 +480,7 @@ const loadBalance = async () => {
   color: rgba(255,255,255,0.35); margin-bottom: 4px; text-transform: uppercase;
 }
 .hs-value { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
-.hs-value.amber { color: #ffb800; }
+.hs-value.amber { color: var(--color-amber); }
 .hs-sep { width: 1px; height: 32px; background: rgba(255,255,255,0.07); margin: 0 18px; }
 </style>
 
@@ -573,11 +574,11 @@ const loadBalance = async () => {
 .text-link-btn {
   display: flex; align-items: center; gap: 2px;
   font-size: 11px; font-weight: 500;
-  color: rgba(255,77,77,0.8);
+  color: color-mix(in srgb, var(--color-red) 80%, transparent);
   background: none; border: none; cursor: pointer;
   transition: color 0.2s;
 }
-.text-link-btn:hover { color: #ff4d4d; }
+.text-link-btn:hover { color: var(--color-red); }
 
 .tx-item {
   display: flex; align-items: center; gap: 13px;
@@ -617,8 +618,8 @@ const loadBalance = async () => {
   color: rgba(255,255,255,0.3); margin-top: 3px; letter-spacing: 0.2px;
 }
 .tx-amount { font-size: 14px; font-weight: 600; flex-shrink: 0; }
-.tx-amount.income  { color: #00e5ff; }
-.tx-amount.expense { color: #ff4d4d; }
+.tx-amount.income  { color: var(--color-cyan); }
+.tx-amount.expense { color: var(--color-red); }
 </style>
 
 <style scoped>
@@ -708,7 +709,8 @@ const loadBalance = async () => {
   background: none; border: none; cursor: pointer;
   transition: color 0.2s;
 }
-.text-link-btn:hover { color: #ff4d4d; }
+.text-link-btn:hover { color: var(--color-red); }
+
 
 .tx-item {
   display: flex; align-items: center; gap: 12px;
@@ -743,8 +745,8 @@ const loadBalance = async () => {
   color: rgba(255,255,255,0.28); margin-top: 3px;
 }
 .tx-amount { font-size: 13px; font-weight: 600; flex-shrink: 0; }
-.tx-amount.income  { color: #00e5ff; }
-.tx-amount.expense { color: #ff4d4d; }
+.tx-amount.income  { color: var(--color-cyan); }
+.tx-amount.expense { color: var(--color-red); }
 </style>
 
 <style scoped>
@@ -833,7 +835,7 @@ const loadBalance = async () => {
   background: none; border: none; cursor: pointer;
   transition: color 0.2s;
 }
-.text-link-btn:hover { color: #ff4d4d; }
+.text-link-btn:hover { color: var(--color-red); }
 
 .tx-item {
   display: flex; align-items: center; gap: 12px;
@@ -868,6 +870,6 @@ const loadBalance = async () => {
   color: rgba(255,255,255,0.28); margin-top: 3px;
 }
 .tx-amount { font-size: 13px; font-weight: 600; flex-shrink: 0; }
-.tx-amount.income  { color: #00e5ff; }
-.tx-amount.expense { color: #ff4d4d; }
+.tx-amount.income  { color: var(--color-cyan); }
+.tx-amount.expense { color: var(--color-red); }
 </style>

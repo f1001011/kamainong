@@ -58,7 +58,7 @@ const handleSubmit = async () => {
 <style scoped>
 .upload-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+  background: var(--bg-base);
   padding: 20px;
 }
 
@@ -85,7 +85,7 @@ const handleSubmit = async () => {
 .header h1 {
   font-size: 20px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .upload-area {
@@ -114,7 +114,7 @@ const handleSubmit = async () => {
 .submit-btn {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-red));
   border: none;
   border-radius: 12px;
   color: #fff;

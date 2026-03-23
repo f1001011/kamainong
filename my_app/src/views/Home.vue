@@ -191,6 +191,45 @@ const COLOR_MAP: Record<string, string> = {
 const currentSlide = ref(0)
 let autoTimer: ReturnType<typeof setInterval> | null = null
 
+// When banner API returns no data, show a default banner image.
+const DEFAULT_BANNER_IMAGE_URL = (() => {
+  const svg = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ff4d4d"/>
+        <stop offset="100%" stop-color="#00e5ff"/>
+      </linearGradient>
+      <radialGradient id="r" cx="30%" cy="50%" r="60%">
+        <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+        <stop offset="60%" stop-color="rgba(255,255,255,0)"/>
+      </radialGradient>
+    </defs>
+    <rect width="1200" height="400" fill="url(#g)"/>
+    <rect width="1200" height="400" fill="url(#r)"/>
+    <g opacity="0.95">
+      <text x="70" y="165" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="rgba(255,255,255,0.9)" letter-spacing="2">AVIVA</text>
+      <text x="70" y="230" font-family="Arial,Helvetica,sans-serif" font-size="36" fill="#ffffff" font-weight="700">Default Banner</text>
+      <text x="70" y="285" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="rgba(255,255,255,0.75)">No API data, showing placeholder</text>
+    </g>
+  </svg>
+  `.trim()
+  // encodeURIComponent keeps the SVG safe inside the data URL.
+  return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`
+})()
+
+const FALLBACK_BANNERS = [
+  {
+    id: 1,
+    tag: 'Plaza',
+    title: 'Default Banner',
+    subtitle: 'No API data, showing placeholder',
+    image_url: DEFAULT_BANNER_IMAGE_URL,
+    bg_color: '',
+    link_url: '/upload-proof',
+  },
+]
+
 const goTo       = (i: number) => { currentSlide.value = i }
 const next       = () => {
   const len = bannerList.value.length
@@ -238,8 +277,14 @@ async function loadBanner() {
     if (res.list && res.list.length > 0) {
       bannerList.value = res.list
       currentSlide.value = 0
+    } else {
+      bannerList.value = FALLBACK_BANNERS
+      currentSlide.value = 0
     }
-  } catch { /* silent */ }
+  } catch {
+    bannerList.value = FALLBACK_BANNERS
+    currentSlide.value = 0
+  }
 }
 
 // ── Categories ────────────────────────────────────────────────────────────────

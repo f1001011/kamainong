@@ -75,14 +75,14 @@ onMounted(async () => {
 <style scoped>
 .invite-task-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+  background: var(--bg-base);
   padding: 20px 20px 80px;
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 
@@ -92,7 +92,7 @@ onMounted(async () => {
 
 .task-group h3 {
   font-size: 16px;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 12px;
 }
 
@@ -112,13 +112,13 @@ onMounted(async () => {
 
 .task-info .target {
   font-size: 14px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .task-info .reward {
   font-size: 14px;
   font-weight: 700;
-  color: #fbbf24;
+  color: var(--color-amber);
 }
 
 .progress-bar {
@@ -131,7 +131,7 @@ onMounted(async () => {
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(90deg, var(--color-red), var(--color-cyan));
   transition: width 0.3s;
 }
 
@@ -144,7 +144,7 @@ onMounted(async () => {
   margin-top: 10px;
   width: 100%;
   padding: 10px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-red), var(--color-cyan));
   border: none;
   border-radius: 8px;
   color: #fff;

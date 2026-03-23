@@ -65,14 +65,14 @@ onMounted(async () => {
 <style scoped>
 .settings-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+  background: var(--bg-base);
   padding: 20px 20px 80px;
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 
@@ -102,7 +102,7 @@ onMounted(async () => {
 
 .info-item .value {
   font-size: 14px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .password-section {
@@ -115,7 +115,7 @@ onMounted(async () => {
 
 .password-section h3 {
   font-size: 16px;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 16px;
 }
 
@@ -125,14 +125,14 @@ onMounted(async () => {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 10px;
 }
 
 .password-section button {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-red));
   border: none;
   border-radius: 10px;
   color: #fff;
@@ -143,10 +143,10 @@ onMounted(async () => {
 .logout-btn {
   width: 100%;
   padding: 14px;
-  background: rgba(239, 68, 68, 0.15);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: color-mix(in srgb, var(--color-red) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
   border-radius: 12px;
-  color: #ef4444;
+  color: var(--color-red);
   font-weight: 600;
   cursor: pointer;
 }

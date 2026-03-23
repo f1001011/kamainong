@@ -1,5 +1,13 @@
 <template>
   <div class="income-page">
+    <!-- Orbs background -->
+    <div class="bg-canvas">
+      <div class="orb orb-red"></div>
+      <div class="orb orb-cyan"></div>
+      <div class="orb orb-amber"></div>
+    </div>
+
+    <div class="income-content">
     <div class="header">
       <h1>{{ t('nav.income') }}</h1>
     </div>
@@ -32,6 +40,7 @@
     </div>
 
     <div v-else class="empty">{{ t('income.empty') }}</div>
+    </div>
   </div>
 </template>
 
@@ -62,20 +71,39 @@ onMounted(async () => {
 <style scoped>
 .income-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+  background:
+    radial-gradient(900px 520px at 20% 10%, color-mix(in srgb, var(--color-red) 12%, transparent), transparent 60%),
+    radial-gradient(820px 520px at 90% 25%, color-mix(in srgb, var(--color-cyan) 10%, transparent), transparent 60%),
+    radial-gradient(720px 520px at 45% 95%, color-mix(in srgb, var(--color-amber) 10%, transparent), transparent 60%),
+    var(--bg-base);
   padding: 20px 20px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.income-content { position: relative; z-index: 1; }
+
+.bg-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.orb { position: absolute; border-radius: 50%; filter: blur(85px); opacity: 0.95; }
+.orb-red  { width:480px; height:480px; top:-100px; left:-80px; background:var(--orb-red);  animation:drift 16s ease-in-out infinite; }
+.orb-cyan { width:400px; height:400px; top:28%;    right:-60px; background:var(--orb-cyan); animation:drift 20s ease-in-out infinite reverse; }
+.orb-amber{ width:340px; height:340px; bottom:8%; left:15%; background:var(--orb-amber); animation:drift 24s ease-in-out infinite 5s; }
+@keyframes drift {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%     { transform: translate(24px,-18px) scale(1.05); }
+  70%     { transform: translate(-16px,14px) scale(0.96); }
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 
 .stats-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 20px;
   display: flex;
@@ -98,11 +126,11 @@ onMounted(async () => {
   display: block;
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .stat-item .value.highlight {
-  color: #4ade80;
+  color: var(--color-lime);
 }
 
 .income-list {
@@ -112,8 +140,8 @@ onMounted(async () => {
 }
 
 .income-item {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 14px;
 }
@@ -126,7 +154,7 @@ onMounted(async () => {
 
 .income-info .type {
   font-size: 14px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .income-info .date {
@@ -143,12 +171,12 @@ onMounted(async () => {
 .income-amount .amount {
   font-size: 18px;
   font-weight: 700;
-  color: #4ade80;
+  color: var(--color-lime);
 }
 
 .income-amount button {
   padding: 6px 16px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-red));
   border: none;
   border-radius: 8px;
   color: #fff;

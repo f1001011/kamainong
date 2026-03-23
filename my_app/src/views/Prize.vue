@@ -94,19 +94,19 @@ onMounted(async () => {
 <style scoped>
 .prize-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+  background: var(--bg-base);
   padding: 20px 20px 80px;
 }
 
 .header h1 {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 
 .prize-pool {
-  background: linear-gradient(135deg, #ff6b6b, #ffa500);
+  background: linear-gradient(135deg, var(--color-red), var(--color-amber));
   border-radius: 14px;
   padding: 24px;
   text-align: center;
@@ -124,7 +124,7 @@ onMounted(async () => {
   display: block;
   font-size: 32px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .draw-time {
@@ -152,13 +152,13 @@ onMounted(async () => {
 
 .rule-item .rank {
   font-size: 14px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .rule-item .reward {
   font-size: 16px;
   font-weight: 700;
-  color: #fbbf24;
+  color: var(--color-amber);
 }
 
 .rule-item .condition {
@@ -188,7 +188,7 @@ onMounted(async () => {
 
 .tabs button.active {
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .rank-list, .winners-list {
@@ -216,13 +216,13 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .rank-item .username {
   flex: 1;
   margin-left: 12px;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .rank-item .value {
@@ -244,11 +244,11 @@ onMounted(async () => {
 
 .winner-info .rank {
   font-size: 14px;
-  color: #fbbf24;
+  color: var(--color-amber);
 }
 
 .winner-info .username {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .winner-reward {
@@ -259,7 +259,7 @@ onMounted(async () => {
 .winner-reward .amount {
   font-size: 16px;
   font-weight: 700;
-  color: #4ade80;
+  color: var(--color-lime);
 }
 
 .winner-reward .date {
