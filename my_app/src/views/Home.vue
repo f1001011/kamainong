@@ -23,6 +23,11 @@
         </button>
       </header>
 
+      <!-- Upload Button -->
+      <button class="upload-btn glass-card" @click="router.push('/upload-proof')">
+        <Upload :size="16" /> 上传提款凭证
+      </button>
+
       <!-- Balance Quick Card -->
       <div class="balance-quick glass-card"
         v-motion :initial="{ opacity:0, y:30, scale:0.95 }"
@@ -116,6 +121,8 @@
 
       <div style="height:40px"></div>
     </div>
+
+    <NoticeModal :show="showNotice" :content="noticeContent" @close="showNotice = false" />
   </div>
 </template>
 
@@ -127,13 +134,15 @@ import { colors } from '@/config/colors'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
-  User, Wallet, ArrowRight, ShoppingBag,
+  User, Wallet, ArrowRight, ShoppingBag, Upload,
   Zap, Phone, Crown, Gamepad2, Coffee,
   LayoutGrid, Flame, Gift, Star,
   Wifi, Signal, CreditCard, Music,
   Sword, Gem, ShoppingCart, Car,
 } from 'lucide-vue-next'
 import { fetchCategories, fetchProducts, fetchHomeBalance } from '@/api/product'
+import { getSystemConfig } from '@/api/system'
+import NoticeModal from '@/components/NoticeModal.vue'
 import type { CategoryItem, ProductItem } from '@/types/product'
 
 const router = useRouter()
@@ -206,6 +215,21 @@ async function loadHomeBalance() {
   try {
     const data = await fetchHomeBalance()
     homeBalance.value = data.totalAssets
+  } catch { /* silent */ }
+}
+
+// ── Notice ────────────────────────────────────────────────────────────────────
+const showNotice = ref(false)
+const noticeContent = ref('')
+
+async function loadNotice() {
+  try {
+    const data = await getSystemConfig('home_notice')
+    if (data && !localStorage.getItem('notice_shown')) {
+      noticeContent.value = data
+      showNotice.value = true
+      localStorage.setItem('notice_shown', '1')
+    }
   } catch { /* silent */ }
 }
 
@@ -299,7 +323,7 @@ watch(activeCategory, () => {
 })
 
 onMounted(async () => {
-  await Promise.all([loadCategories(), loadProducts(true), loadHomeBalance()])
+  await Promise.all([loadCategories(), loadProducts(true), loadHomeBalance(), loadNotice()])
   startAuto()
   await nextTick()
   setupObserver()
@@ -363,12 +387,30 @@ onUnmounted(() => {
 .glass-icon-btn {
   width:38px; height:38px; border-radius:11px;
   background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.08);
-  color:rgba(255,255,255,0.6);
+  color:rgba(255,255,255,0.7); cursor:pointer;
   display:flex; align-items:center; justify-content:center;
-  cursor:pointer; transition:background 0.2s, transform 0.15s;
+  transition: background 0.2s, border-color 0.2s;
 }
-.glass-icon-btn:hover  { background:rgba(255,255,255,0.1); }
-.glass-icon-btn:active { transform:scale(0.93); }
+.glass-icon-btn:hover { background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.14); }
+
+/* ── Upload Button ─────────────────────────────────────────────────────────── */
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.upload-btn:hover {
+  background: rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+}
 
 /* ── Balance Quick Card ────────────────────────────────────────────────────── */
 .balance-quick {

@@ -79,3 +79,16 @@ export async function fetchHomeBalance(): Promise<HomeBalanceData> {
   // return request.get<HomeBalanceData>(API_HOME_BALANCE)
   return new Promise(resolve => setTimeout(() => resolve(MOCK_HOME_BALANCE), 300))
 }
+
+// ── 获取产品详情 ──────────────────────────────────────────────────────────────
+export async function getProductDetail(id: number): Promise<any> {
+  const product = MOCK_PRODUCTS.find(p => p.id === id)
+  if (!product) throw new Error('Product not found')
+  return new Promise(resolve => setTimeout(() => resolve({
+    ...product,
+    dailyRate: 2.5,
+    cycle: 30,
+    minAmount: 100,
+    maxAmount: 50000
+  }), 300))
+}

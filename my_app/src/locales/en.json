@@ -39,7 +39,11 @@
     "success": "Success",
     "viewAll": "View All",
     "back": "Back",
-    "settings": "Settings"
+    "settings": "Settings",
+    "loading": "Loading",
+    "days": "days",
+    "people": "people",
+    "enterAmount": "Enter amount"
   },
   "balance": {
     "title": "Balance Center",
@@ -76,10 +80,17 @@
     "operationSuccess": "Success"
   },
   "nav": {
-    "home":    "Home",
-    "products":"Shop",
-    "vip":     "VIP",
-    "mine":    "Mine"
+    "home": "Home",
+    "products": "Shop",
+    "vip": "VIP",
+    "mine": "Mine",
+    "investments": "Investments",
+    "team": "Team",
+    "income": "Income",
+    "prize": "Prize",
+    "settings": "Settings",
+    "inviteTask": "Tasks",
+    "salary": "Salary"
   },
   "home": {
     "greeting":      "Good morning",
@@ -116,6 +127,99 @@
       "task":       "Task Reward"
     },
     "xpUnit":       "XP",
-    "levelRoad":    "Level Road"
+    "levelRoad": "Level Road"
+  },
+  "product": {
+    "dailyIncome": "Daily Income",
+    "totalIncome": "Total Income",
+    "cycle": "Cycle",
+    "detail": "Details",
+    "investAmount": "Amount",
+    "expectedReturn": "Expected Return",
+    "buyNow": "Buy Now",
+    "min": "Min",
+    "max": "Max"
+  },
+  "order": {
+    "all": "All",
+    "active": "Active",
+    "completed": "Completed",
+    "amount": "Amount",
+    "dailyRate": "Daily Rate",
+    "earned": "Earned",
+    "claim": "Claim",
+    "empty": "No orders",
+    "status": {
+      "active": "Active",
+      "completed": "Completed",
+      "expired": "Expired"
+    }
+  },
+  "team": {
+    "totalMembers": "Total",
+    "lv1Members": "LV1",
+    "totalRecharge": "Recharge",
+    "recharge": "Recharge",
+    "empty": "No members"
+  },
+  "income": {
+    "total": "Total",
+    "available": "Available",
+    "claim": "Claim",
+    "claimed": "Claimed",
+    "empty": "No income"
+  },
+  "prize": {
+    "poolAmount": "Pool",
+    "drawTime": "Draw Time",
+    "first": "1st Prize",
+    "second": "2nd Prize",
+    "third": "3rd Prize",
+    "condition1": "Highest team recharge",
+    "condition2": "Highest personal recharge",
+    "condition3": "Most invites",
+    "todayRank": "Today's Rank",
+    "winners": "Winners"
+  },
+  "task": {
+    "group1": "Task Group 1",
+    "group2": "Task Group 2",
+    "claim": "Claim"
+  },
+  "salary": {
+    "condition": "Condition",
+    "claim": "Claim",
+    "claimed": "Claimed",
+    "notReached": "Not Reached"
+  },
+  "upload": {
+    "title": "Upload Proof",
+    "clickToUpload": "Click to Upload",
+    "submit": "Submit"
+  },
+  "withdraw": {
+    "selectCard": "Select Card",
+    "enterAmount": "Enter amount",
+    "bankCard": "Bank Card",
+    "amount": "Amount",
+    "submit": "Submit"
+  },
+  "recharge": {
+    "amount": "Amount",
+    "enterAmount": "Enter amount",
+    "channel": "Payment",
+    "submit": "Submit"
+  },
+  "settings": {
+    "username": "Username",
+    "phone": "Phone",
+    "changePassword": "Change Password",
+    "oldPassword": "Old Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Submit",
+    "logout": "Logout",
+    "passwordMismatch": "Passwords don't match"
   }
 }
+

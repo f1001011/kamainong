@@ -39,7 +39,11 @@
     "success": "操作成功",
     "viewAll": "查看全部",
     "back": "返回",
-    "settings": "设置"
+    "settings": "设置",
+    "loading": "加载中",
+    "days": "天",
+    "people": "人",
+    "enterAmount": "请输入金额"
   },
   "balance": {
     "title": "余额中心",
@@ -76,10 +80,17 @@
     "operationSuccess": "操作成功"
   },
   "nav": {
-    "home":    "首页",
-    "products":"商品",
-    "vip":     "VIP",
-    "mine":    "我的"
+    "home": "首页",
+    "products": "商品",
+    "vip": "VIP",
+    "mine": "我的",
+    "investments": "我的投资",
+    "team": "我的团队",
+    "income": "收益中心",
+    "prize": "奖池",
+    "settings": "设置",
+    "inviteTask": "邀请任务",
+    "salary": "月薪奖励"
   },
   "home": {
     "greeting":      "早上好",
@@ -117,5 +128,98 @@
     },
     "xpUnit":       "经验值",
     "levelRoad":    "等级之路"
+  },
+  "product": {
+    "dailyIncome": "每日收益",
+    "totalIncome": "总收益",
+    "cycle": "周期",
+    "detail": "产品详情",
+    "investAmount": "投资金额",
+    "expectedReturn": "预期收益",
+    "buyNow": "立即购买",
+    "min": "最低",
+    "max": "最高"
+  },
+  "order": {
+    "all": "全部",
+    "active": "进行中",
+    "completed": "已完成",
+    "amount": "投资金额",
+    "dailyRate": "日收益率",
+    "earned": "已赚取",
+    "claim": "领取",
+    "empty": "暂无订单",
+    "status": {
+      "active": "进行中",
+      "completed": "已完成",
+      "expired": "已过期"
+    }
+  },
+  "team": {
+    "totalMembers": "总人数",
+    "lv1Members": "LV1人数",
+    "totalRecharge": "团队充值",
+    "recharge": "充值",
+    "empty": "暂无成员"
+  },
+  "income": {
+    "total": "累计收益",
+    "available": "可领取",
+    "claim": "领取",
+    "claimed": "已领取",
+    "empty": "暂无收益"
+  },
+  "prize": {
+    "poolAmount": "奖池金额",
+    "drawTime": "开奖时间",
+    "first": "一等奖",
+    "second": "二等奖",
+    "third": "三等奖",
+    "condition1": "LV1团队当天充值最高",
+    "condition2": "个人当天累计充值最高",
+    "condition3": "个人当天邀请人数最高",
+    "todayRank": "今日排名",
+    "winners": "获奖记录"
+  },
+  "task": {
+    "group1": "任务组1",
+    "group2": "任务组2",
+    "claim": "领取"
+  },
+  "salary": {
+    "condition": "条件",
+    "claim": "领取",
+    "claimed": "已领取",
+    "notReached": "未达成"
+  },
+  "upload": {
+    "title": "上传提款凭证",
+    "clickToUpload": "点击上传",
+    "submit": "提交"
+  },
+  "withdraw": {
+    "selectCard": "选择银行卡",
+    "enterAmount": "请输入提现金额",
+    "bankCard": "银行卡",
+    "amount": "提现金额",
+    "submit": "提交"
+  },
+  "recharge": {
+    "amount": "充值金额",
+    "enterAmount": "请输入充值金额",
+    "channel": "支付方式",
+    "submit": "提交"
+  },
+  "settings": {
+    "username": "用户名",
+    "phone": "手机号",
+    "changePassword": "修改密码",
+    "oldPassword": "旧密码",
+    "newPassword": "新密码",
+    "confirmPassword": "确认密码",
+    "submit": "提交",
+    "logout": "退出登录",
+    "passwordMismatch": "两次密码不一致"
   }
 }
+

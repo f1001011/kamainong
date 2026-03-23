@@ -42,9 +42,11 @@
                 <div class="digit-strip"
                   :style="{ transform: `translateY(-${Number(char) * 10}%)` }">
                   <span v-for="n in 10" :key="n" class="digit-char">{{ n - 1 }}</span>
-                </div>
-              </div>
-            </template>
+    </div>
+
+    <RechargeWithdrawModal :show="showModal" :type="modalType" @close="showModal = false" @success="loadBalance" />
+  </div>
+</template>
           </div>
           <span class="decimal-part">.{{ decimalPart }}</span>
         </div>
@@ -155,11 +157,16 @@ import {
   ShoppingCart, Car, Banknote, Coffee, PiggyBank
 } from 'lucide-vue-next'
 import ActionModal from '@/components/ActionModal.vue'
+import RechargeWithdrawModal from '@/components/RechargeWithdrawModal.vue'
 import { fetchBalanceData } from '@/api/balance'
 import type { BalanceData } from '@/types/balance'
 
 const router = useRouter()
 const { t } = useI18n()
+
+// ── Modal ──────────────────────────────────────────────────────────────────
+const showModal = ref(false)
+const modalType = ref<'recharge' | 'withdraw'>('recharge')
 
 // ── 接口数据 ────────────────────────────────────────────────────────────────
 const balanceData = ref<BalanceData | null>(null)
@@ -291,8 +298,22 @@ const transactions = computed(() => {
 
 // ── Modal ──────────────────────────────────────────────────────────────────
 const activeAction = ref<typeof actions.value[0] | null>(null)
-const openAction   = (a: typeof actions.value[0]) => { activeAction.value = a }
+const openAction = (a: typeof actions.value[0]) => {
+  if (a.key === 'deposit') {
+    modalType.value = 'recharge'
+    showModal.value = true
+  } else if (a.key === 'withdraw') {
+    modalType.value = 'withdraw'
+    showModal.value = true
+  } else {
+    activeAction.value = a
+  }
+}
 const handleConfirm = () => { activeAction.value = null }
+const loadBalance = async () => {
+  balanceData.value = await fetchBalanceData()
+  if (balanceData.value) startRoll(balanceData.value.totalAssets)
+}
 </script>
 
 <style scoped>
