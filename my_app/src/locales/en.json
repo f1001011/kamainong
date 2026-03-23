@@ -1,0 +1,121 @@
+{
+  "login": "Login",
+  "username": "Username",
+  "password": "Password",
+  "home": "Home Page",
+  "loginSuccess": "Login successful",
+  "loginFailed": "Login failed, please check your phone or password",
+  "logout": "Logout",
+  "auth": {
+    "appName": "FlowPay",
+    "appSlogan": "Secure · Fast · Smart",
+    "phone": "Phone",
+    "phonePlaceholder": "Enter phone number",
+    "passwordPlaceholder": "Enter password",
+    "forgotPassword": "Forgot password?",
+    "loginBtn": "Login",
+    "noAccount": "No account yet?",
+    "toRegister": "Sign up",
+    "registerTitle": "Create Account",
+    "registerSubtitle": "Join us and start your smart payment journey",
+    "smsCode": "SMS Code",
+    "smsPlaceholder": "Enter verification code",
+    "sendCode": "Send Code",
+    "resendCode": "Resend in {n}s",
+    "newPasswordPlaceholder": "Set password (6+ characters)",
+    "registerBtn": "Create Account",
+    "hasAccount": "Already have an account?",
+    "toLogin": "Login",
+    "phoneError": "Please enter a valid phone number",
+    "codeError": "Please enter the verification code",
+    "passwordError": "Password must be at least 6 characters",
+    "codeSent": "Verification code sent",
+    "registerSuccess": "Registration successful, welcome!",
+    "registerFailed": "Registration failed, please try again"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "success": "Success",
+    "viewAll": "View All",
+    "back": "Back",
+    "settings": "Settings"
+  },
+  "balance": {
+    "title": "Balance Center",
+    "totalAssets": "Total Assets",
+    "currency": "CNY",
+    "todayEarnings": "Today's Earnings",
+    "available": "Available",
+    "frozen": "Frozen",
+    "recentTx": "Recent Transactions",
+    "monthlyIncome": "Monthly Income",
+    "monthlyExpense": "Monthly Expense",
+    "actions": {
+      "deposit":  { "label": "Deposit",  "subtitle": "Top up your account",      "placeholder": "Enter deposit amount",  "note": "Instant deposit, supports bank card / Alipay" },
+      "withdraw": { "label": "Withdraw", "subtitle": "Withdraw to bank card",     "placeholder": "Enter withdraw amount", "note": "Withdrawal arrives in 1-3 business days" },
+      "transfer": { "label": "Transfer", "subtitle": "Transfer to a friend",      "placeholder": "Enter transfer amount", "note": "Instant transfer, no fees" },
+      "history":  { "label": "History",  "subtitle": "View transaction history",  "placeholder": "Search amount",         "note": "Query up to 180 days of transactions" }
+    },
+    "tx": {
+      "wechat":  "WeChat Payment",
+      "meituan": "Meituan Takeout",
+      "salary":  "Salary Income",
+      "didi":    "DiDi Ride",
+      "coffee":  "Café Purchase"
+    },
+    "time": {
+      "minutesAgo": "{n} min ago",
+      "hourAgo":    "{n} hr ago",
+      "yesterday":  "Yesterday",
+      "daysAgo":    "{n} days ago"
+    }
+  },
+  "modal": {
+    "confirmAction": "Confirm {action}",
+    "operationSuccess": "Success"
+  },
+  "nav": {
+    "home":    "Home",
+    "products":"Shop",
+    "vip":     "VIP",
+    "mine":    "Mine"
+  },
+  "home": {
+    "greeting":      "Good morning",
+    "welcome":       "Welcome back",
+    "balanceLabel":  "Account Balance",
+    "balanceCenter": "Balance Center",
+    "loadingMore":   "Loading...",
+    "noMore":        "No more items",
+    "purchasable":   "Up to {n} times",
+    "products":      "Products"
+  },
+  "vip": {
+    "title":        "VIP Member",
+    "levelNames":   ["Member","Bronze","Silver","Gold","Platinum","Diamond","Black Gold","Supreme","Legend","Mythic"],
+    "currentXp":    "Current XP",
+    "totalXp":      "Total XP",
+    "nextLevel":    "{n} XP to next level",
+    "maxLevel":     "Max level reached",
+    "xpHistory":    "XP History",
+    "loadingMore":  "Loading...",
+    "noMore":       "No more records",
+    "privileges":   "Exclusive Privileges",
+    "priv": {
+      "discount":   { "title": "Exclusive Discount", "desc": "Enjoy exclusive member discounts" },
+      "service":    { "title": "Priority Support",   "desc": "Dedicated support channel" },
+      "gift":       { "title": "Monthly Gift",       "desc": "Claim monthly exclusive rewards" },
+      "protect":    { "title": "Full Protection",    "desc": "Transaction security guaranteed" }
+    },
+    "source": {
+      "recharge":   "Recharge Reward",
+      "purchase":   "Purchase Reward",
+      "signin":     "Daily Sign-in",
+      "invite":     "Invite Friend",
+      "task":       "Task Reward"
+    },
+    "xpUnit":       "XP",
+    "levelRoad":    "Level Road"
+  }
+}

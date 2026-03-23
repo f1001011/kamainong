@@ -1,0 +1,33 @@
+实名
+
+18222812533
+
+邓翠玲
+20213872	实名3要素	0e7a0114f5d64a68bcc63098	 84b30a9c0d30498f9a8607c060622ea1 
+
+
+50968860	实名1身份2要素	f73f779974924815b95349a5	3ec7cb1fd72f473a8db1f0a19db8fe71
+
+
+/www/wwwroot/api.com/api_php
+
+用户进行实名认证 10min
+php /www/wwwroot/api.com/api_php/think real
+
+代理转移30min
+php /www/wwwroot/api.com/api_php/think path
+
+团队邀请人数 1hour
+php /www/wwwroot/api.com/api_php/think team
+
+返佣计划任务 10min
+php /www/wwwroot/api.com/api_php/think rebate
+
+处理已完成指令用户可提金额 1hour
+php /www/wwwroot/api.com/api_php/think hire
+
+分红 10 min
+php /www/wwwroot/api.com/api_php/think bonus
+
+
+
