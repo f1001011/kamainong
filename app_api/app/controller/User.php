@@ -15,7 +15,7 @@ class User extends BaseController
             ->where('id', $userId)
             ->find();
         
-        return json(['code' => 200, 'data' => $user]);
+        return show(1, $user);
     }
     
     // 获取余额
@@ -25,7 +25,7 @@ class User extends BaseController
         
         $balance = UserModel::where('id', $userId)->value('money_balance');
         
-        return json(['code' => 200, 'data' => ['balance' => $balance]]);
+        return show(1, ['balance' => $balance]);
     }
     
     // 修改密码
@@ -38,11 +38,11 @@ class User extends BaseController
         $user = UserModel::where('id', $userId)->find();
         
         if (md5($oldPwd) != $user['pwd']) {
-            return json(['code' => 400, 'msg' => '原密码错误']);
+            return show(0, [], 10024);
         }
         
         UserModel::where('id', $userId)->update(['pwd' => md5($newPwd)]);
         
-        return json(['code' => 200, 'msg' => '密码修改成功']);
+        return show(1, [], 10025);
     }
 }

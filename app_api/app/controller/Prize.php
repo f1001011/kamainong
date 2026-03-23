@@ -11,7 +11,7 @@ class Prize extends BaseController
     public function config()
     {
         $config = PrizeModel::find();
-        return json(['code' => 200, 'data' => $config]);
+        return show(1, $config);
     }
     
     // 今日排名
@@ -22,13 +22,13 @@ class Prize extends BaseController
             ->limit(10)
             ->select();
         
-        return json(['code' => 200, 'data' => ['recharge_rank' => $rechargeRank]]);
+        return show(1, ['recharge_rank' => $rechargeRank]);
     }
     
     // 获奖记录
     public function winners()
     {
         $list = PrizeModel::getWinners(20);
-        return json(['code' => 200, 'data' => $list]);
+        return show(1, $list);
     }
 }

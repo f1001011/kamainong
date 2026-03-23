@@ -18,6 +18,6 @@ class Agent extends BaseController
     {
         $userId = request()->userId;
         $stats = AgentModel::getTeamStats($userId);
-        return show(1,$stats);
+        return show(1, $stats);
     }
 }

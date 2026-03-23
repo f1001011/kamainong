@@ -1,20 +1,22 @@
 import { useRouter } from 'vue-router'
-import { authApi } from '../api/services'
+import { loginByPhone as loginApi, register as registerApi } from '../api/auth'
 
 export function useAuth() {
   const router = useRouter()
 
   const login = async (phone: string, password: string) => {
-    const res = await authApi.login(phone, password)
+    const res = await loginApi({ phone, password })
     const token = (res as any).token
     if (token) localStorage.setItem('token', token)
     router.push({ name: 'Home' })
     return res
   }
 
-  const register = async (phone: string, password: string) => {
-    const res = await authApi.register(phone, password)
-    router.push({ name: 'Login' })
+  const register = async (phone: string, code: string, password: string) => {
+    const res = await registerApi({ phone, code, password })
+    const token = (res as any).token
+    if (token) localStorage.setItem('token', token)
+    router.push({ name: 'Home' })
     return res
   }
 

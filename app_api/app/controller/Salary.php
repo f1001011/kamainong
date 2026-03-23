@@ -12,7 +12,7 @@ class Salary extends BaseController
     public function config()
     {
         $list = SalaryModel::order('sort', 'asc')->select();
-        return json(['code' => 200, 'data' => $list]);
+        return show(1, $list);
     }
     
     // 领取月薪
@@ -23,7 +23,7 @@ class Salary extends BaseController
         
         // 检查本月是否已领取
         if (SalaryModel::checkMonthlyClaimed($userId, $month)) {
-            return json(['code' => 400, 'msg' => '本月已领取']);
+            return show(0, [], 1001);
         }
         
         // 计算团队LV1充值总额
@@ -35,7 +35,7 @@ class Salary extends BaseController
             ->find();
         
         if (!$config) {
-            return json(['code' => 400, 'msg' => '未达到领取条件']);
+            return show(0, [], 1001);
         }
         
         Db::startTrans();
@@ -44,10 +44,10 @@ class Salary extends BaseController
             User::where('id', $userId)->inc('money_balance', $config['reward_amount'])->update();
             
             Db::commit();
-            return json(['code' => 200, 'msg' => '领取成功', 'data' => ['amount' => $config['reward_amount']]]);
+            return show(1, ['amount' => $config['reward_amount']]);
         } catch (\Exception $e) {
             Db::rollback();
-            return json(['code' => 500, 'msg' => '领取失败']);
+            return show(0, [], 1001);
         }
     }
 }

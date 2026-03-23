@@ -7,15 +7,10 @@ use think\facade\Db;
 
 
 function show($code, $data = [], $msg = ""){
-    if ($code == 0){
-        $code = TC('error_code');
-    }elseif ($code ==1){
-        $code = TC('success_code');
-    }
-
-    // 如果 msg 为空，使用 lang() 获取多语言
-    if (empty($msg)){
-        $msg = lang($code);
+    // 如果 msg 为空或者是数字，使用 lang() 获取多语言
+    if (empty($msg) || is_numeric($msg)){
+        $langCode = is_numeric($msg) ? $msg : ($code == 1 ? 1000 : 1001);
+        $msg = lang($langCode);
     }
     
     $token = md5(uniqid());

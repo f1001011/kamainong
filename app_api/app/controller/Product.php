@@ -10,7 +10,7 @@ class Product extends BaseController
     public function list()
     {
         $list = ProductModel::getList();
-        return json(['code' => 200, 'data' => $list]);
+        return show(1, $list);
     }
     
     // 获取产品详情
@@ -20,9 +20,9 @@ class Product extends BaseController
         $detail = ProductModel::where('id', $id)->where('del', 0)->find();
         
         if (!$detail) {
-            return json(['code' => 404, 'msg' => '产品不存在']);
+            return show(0, [], 20001);
         }
         
-        return json(['code' => 200, 'data' => $detail]);
+        return show(1, $detail);
     }
 }

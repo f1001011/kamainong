@@ -13,7 +13,7 @@ class Vip extends BaseController
     public function config()
     {
         $list = VipModel::order('vip', 'asc')->select();
-        return json(['code' => 200, 'data' => $list]);
+        return show(1, $list);
     }
     
     // 检测VIP升级
@@ -31,7 +31,7 @@ class Vip extends BaseController
             ->find();
         
         if (!$nextVip) {
-            return json(['code' => 200, 'msg' => '已是最高等级', 'data' => ['can_upgrade' => false]]);
+            return show(1, ['can_upgrade' => false]);
         }
         
         // 检查是否购买了足够的产品
@@ -41,11 +41,11 @@ class Vip extends BaseController
         
         $canUpgrade = $count >= $nextVip['buy_goods_num'];
         
-        return json(['code' => 200, 'data' => [
+        return show(1, [
             'can_upgrade' => $canUpgrade,
             'next_vip' => $nextVip,
             'current_count' => $count
-        ]]);
+        ]);
     }
 
     // VIP每日奖励领取
@@ -56,7 +56,7 @@ class Vip extends BaseController
         $user = User::where('id', $userId)->find();
         
         if ($user['level_vip'] == 0) {
-            return json(['code' => 400, 'msg' => '您还不是VIP会员']);
+            return show(0, [], 1001);
         }
         
         // 检查今天是否已领取
@@ -64,7 +64,7 @@ class Vip extends BaseController
         $claimed = VipModel::checkDailyClaimed($userId, $today);
         
         if ($claimed) {
-            return json(['code' => 400, 'msg' => '今日已领取']);
+            return show(0, [], 40001);
         }
         
         // 获取VIP配置
@@ -79,10 +79,10 @@ class Vip extends BaseController
             User::where('id', $userId)->inc('money_balance', $vipConfig['reward_money'])->update();
             
             Db::commit();
-            return json(['code' => 200, 'msg' => '领取成功', 'data' => ['amount' => $vipConfig['reward_money']]]);
+            return show(1, ['amount' => $vipConfig['reward_money']], 40002);
         } catch (\Exception $e) {
             Db::rollback();
-            return json(['code' => 500, 'msg' => '领取失败']);
+            return show(0, [], 1001);
         }
     }
 }

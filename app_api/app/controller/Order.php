@@ -18,13 +18,13 @@ class Order extends BaseController
         // 获取产品信息
         $goods = Product::where('id', $goodsId)->find();
         if (!$goods) {
-            return json(['code' => 404, 'msg' => '产品不存在']);
+            return show(0, [], 20001);
         }
         
         // 检查用户余额
         $user = User::where('id', $userId)->find();
         if ($user['money_balance'] < $goods['goods_money']) {
-            return json(['code' => 400, 'msg' => '余额不足']);
+            return show(0, [], 10049);
         }
         
         // 创建订单
@@ -45,10 +45,10 @@ class Order extends BaseController
             User::where('id', $userId)->dec('money_balance', $goods['goods_money'])->update();
             
             Db::commit();
-            return json(['code' => 200, 'msg' => '购买成功', 'data' => ['order_id' => $orderId]]);
+            return show(1, ['order_id' => $orderId], 20002);
         } catch (\Exception $e) {
             Db::rollback();
-            return json(['code' => 500, 'msg' => '购买失败']);
+            return show(0, [], 20003);
         }
     }
 
@@ -61,7 +61,7 @@ class Order extends BaseController
             ->order('create_time', 'desc')
             ->select();
         
-        return json(['code' => 200, 'data' => $list]);
+        return show(1, $list);
     }
     
     // 订单详情
@@ -75,9 +75,9 @@ class Order extends BaseController
             ->find();
         
         if (!$order) {
-            return json(['code' => 404, 'msg' => '订单不存在']);
+            return show(0, [], 30001);
         }
         
-        return json(['code' => 200, 'data' => $order]);
+        return show(1, $order);
     }
 }

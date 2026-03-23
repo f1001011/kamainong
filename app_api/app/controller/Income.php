@@ -17,7 +17,7 @@ class Income extends BaseController
             ->order('create_time', 'desc')
             ->select();
         
-        return json(['code' => 200, 'data' => $list]);
+        return show(1, $list);
     }
     
     // 可领取收益
@@ -30,7 +30,7 @@ class Income extends BaseController
             ->where('expire_time', '>', date('Y-m-d H:i:s'))
             ->select();
         
-        return json(['code' => 200, 'data' => $list]);
+        return show(1, $list);
     }
 
     // 领取收益
@@ -44,21 +44,21 @@ class Income extends BaseController
             ->find();
         
         if (!$claim) {
-            return json(['code' => 404, 'msg' => '收益记录不存在']);
+            return show(0, [], 50001);
         }
         
         if ($claim['status'] == 1) {
-            return json(['code' => 400, 'msg' => '已领取']);
+            return show(0, [], 50001);
         }
         
         if ($claim['status'] == 2) {
-            return json(['code' => 400, 'msg' => '已过期']);
+            return show(0, [], 50002);
         }
         
         // 检查是否过期
         if (strtotime($claim['expire_time']) < time()) {
             IncomeModel::where('id', $claimId)->update(['status' => 2]);
-            return json(['code' => 400, 'msg' => '收益已过期']);
+            return show(0, [], 50002);
         }
         
         Db::startTrans();
@@ -73,10 +73,10 @@ class Income extends BaseController
             User::where('id', $userId)->inc('money_balance', $claim['claim_amount'])->update();
             
             Db::commit();
-            return json(['code' => 200, 'msg' => '领取成功']);
+            return show(1, [], 50003);
         } catch (\Exception $e) {
             Db::rollback();
-            return json(['code' => 500, 'msg' => '领取失败']);
+            return show(0, [], 1001);
         }
     }
 }

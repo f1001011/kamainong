@@ -14,7 +14,7 @@ class Auth extends BaseController
         $pwd = input('pwd');
         
         if (!$phone || !$pwd) {
-            return json(['code' => 400, 'msg' => '手机号和密码不能为空']);
+            return show(0, [], 10016);
         }
         
         $user = User::where('phone', $phone)
@@ -22,7 +22,7 @@ class Auth extends BaseController
             ->find();
         
         if (!$user || md5($pwd) != $user['pwd']) {
-            return json(['code' => 401, 'msg' => '手机号或密码错误']);
+            return show(0, [], 10017);
         }
         
         // 生成token
@@ -34,19 +34,15 @@ class Auth extends BaseController
             'create_time' => date('Y-m-d H:i:s')
         ]);
         
-        return json([
-            'code' => 200,
-            'msg' => '登录成功',
-            'data' => [
-                'token' => $token,
-                'user' => [
-                    'id' => $user['id'],
-                    'phone' => $user['phone'],
-                    'nickname' => $user['nickname'],
-                    'level_vip' => $user['level_vip']
-                ]
+        return show(1, [
+            'token' => $token,
+            'user' => [
+                'id' => $user['id'],
+                'phone' => $user['phone'],
+                'nickname' => $user['nickname'],
+                'level_vip' => $user['level_vip']
             ]
-        ]);
+        ], 10018);
     }
 
     // 注册
@@ -54,15 +50,32 @@ class Auth extends BaseController
     {
         $phone = input('phone');
         $pwd = input('pwd');
+        $agentId = input('agent_id', 0);
         
         if (!$phone || !$pwd) {
-            return show(['code' => 400,[], 'msg' => '手机号和密码不能为空']);
+            return show(0, [], 10016);
         }
         
         // 检查手机号是否已注册
         $exists = User::where('phone', $phone)->find();
         if ($exists) {
-            return show(['code' => 400,[], 'msg' => '手机号已注册']);
+            return show(0, [], 10007);
+        }
+        
+        // 处理上级关系
+        $agent_id_1 = 0;
+        $agent_id_2 = 0;
+        $agent_id_3 = 0;
+        $user_team = time() . rand(1000, 9999); // 默认生成团队号
+        
+        if ($agentId > 0) {
+            $parent = User::find($agentId);
+            if ($parent) {
+                $agent_id_1 = $agentId;
+                $agent_id_2 = $parent['agent_id_1'];
+                $agent_id_3 = $parent['agent_id_2'];
+                $user_team = $parent['user_team'];
+            }
         }
         
         // 创建用户
@@ -72,10 +85,15 @@ class Auth extends BaseController
             'phone' => $phone,
             'pwd' => md5($pwd),
             'withdraw_pwd' => base64_encode($pwd),
+            'agent_id' => $agentId,
+            'agent_id_1' => $agent_id_1,
+            'agent_id_2' => $agent_id_2,
+            'agent_id_3' => $agent_id_3,
+            'user_team' => $user_team,
             'create_time' => date('Y-m-d H:i:s'),
             'ip' => request()->ip()
         ]);
         
-        return json(['code' => 200, ['user_id' => $userId]]);
+        return show(1, ['user_id' => $userId], 10019);
     }
 }
