@@ -29,4 +29,19 @@ class Upload extends BaseController
         
         return show(1, ['path' => $savename], '上传成功');
     }
+    
+    // 通用图片上传
+    public function image()
+    {
+        $file = request()->file('file');
+        
+        if (!$file) {
+            return show(0, [], '请上传文件');
+        }
+        
+        $savename = Filesystem::disk('public')->putFile('images', $file);
+        $url = '/storage/' . $savename;
+        
+        return show(1, ['url' => $url], '上传成功');
+    }
 }

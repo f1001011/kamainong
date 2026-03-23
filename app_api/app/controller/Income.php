@@ -4,6 +4,7 @@ namespace app\controller;
 use app\BaseController;
 use app\api\model\Income as IncomeModel;
 use app\api\model\User;
+use app\model\MoneyLog;
 use think\facade\Db;
 
 class Income extends BaseController
@@ -69,8 +70,12 @@ class Income extends BaseController
                 'claim_time' => date('Y-m-d H:i:s')
             ]);
             
-            // 增加余额
-            User::where('id', $userId)->inc('money_balance', $claim['claim_amount'])->update();
+            // 增加余额并记录流水
+            $result = User::changeMoney($userId, 'inc', 1, $claim['claim_amount'], MoneyLog::STATUS_DAILY_INCOME, $claimId, '领取每日收益');
+            if ($result['code'] == 0) {
+                Db::rollback();
+                return show(0, [], $result['msg']);
+            }
             
             Db::commit();
             return show(1, [], 50003);

@@ -5,6 +5,7 @@ use app\BaseController;
 use app\api\model\Vip as VipModel;
 use app\api\model\User;
 use app\api\model\Order;
+use app\model\MoneyLog;
 use think\facade\Db;
 
 class Vip extends BaseController
@@ -75,8 +76,12 @@ class Vip extends BaseController
             // 记录领取
             VipModel::recordDailyReward($userId, $user['level_vip'], $vipConfig['reward_money'], $today);
             
-            // 增加余额
-            User::where('id', $userId)->inc('money_balance', $vipConfig['reward_money'])->update();
+            // 增加余额并记录流水
+            $result = User::changeMoney($userId, 'inc', 1, $vipConfig['reward_money'], MoneyLog::STATUS_VIP_REWARD, 0, 'VIP每日奖励');
+            if ($result['code'] == 0) {
+                Db::rollback();
+                return show(0, [], $result['msg']);
+            }
             
             Db::commit();
             return show(1, ['amount' => $vipConfig['reward_money']], 40002);

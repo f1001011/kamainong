@@ -16,7 +16,7 @@ function show($code, $data = [], $msg = ""){
     $token = md5(uniqid());
     $result = array(
         'code' => $code,
-        'msg'  => $msg,
+        'message'  => $msg,
         'data' => $data,
     );
 

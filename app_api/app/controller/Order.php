@@ -5,6 +5,7 @@ use app\BaseController;
 use app\api\model\Order as OrderModel;
 use app\api\model\Product;
 use app\api\model\User;
+use app\model\MoneyLog;
 use think\facade\Db;
 
 class Order extends BaseController
@@ -41,8 +42,12 @@ class Order extends BaseController
                 'create_time' => date('Y-m-d H:i:s')
             ]);
             
-            // 扣除余额
-            User::where('id', $userId)->dec('money_balance', $goods['goods_money'])->update();
+            // 扣除余额并记录流水
+            $result = User::changeMoney($userId, 'dec', 1, $goods['goods_money'], MoneyLog::STATUS_BUY_GOODS, $orderId, '购买商品：' . $goods['goods_name']);
+            if ($result['code'] == 0) {
+                Db::rollback();
+                return show(0, [], $result['msg']);
+            }
             
             Db::commit();
             return show(1, ['order_id' => $orderId], 20002);

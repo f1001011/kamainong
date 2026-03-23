@@ -11,7 +11,7 @@
  Target Server Version : 50726 (5.7.26)
  File Encoding         : 65001
 
- Date: 23/03/2026 16:26:43
+ Date: 23/03/2026 20:29:58
 */
 
 SET NAMES utf8mb4;
@@ -269,6 +269,66 @@ CREATE TABLE `ntp_common_income_claim_log`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for ntp_common_lottery_chance
+-- ----------------------------
+DROP TABLE IF EXISTS `ntp_common_lottery_chance`;
+CREATE TABLE `ntp_common_lottery_chance`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
+  `total_chance` int(11) NULL DEFAULT 0 COMMENT '总次数',
+  `used_chance` int(11) NULL DEFAULT 0 COMMENT '已使用次数',
+  `today_chance` int(11) NULL DEFAULT 0 COMMENT '今日已转次数',
+  `last_spin_date` date NULL DEFAULT NULL COMMENT '最后转盘日期',
+  `update_time` datetime NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uk_user_id`(`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户转盘次数表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ntp_common_lottery_chance
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ntp_common_lottery_log
+-- ----------------------------
+DROP TABLE IF EXISTS `ntp_common_lottery_log`;
+CREATE TABLE `ntp_common_lottery_log`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '用户ID',
+  `prize_id` int(11) NOT NULL COMMENT '奖品ID',
+  `prize_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '奖品名称',
+  `prize_type` tinyint(1) NOT NULL COMMENT '奖品类型',
+  `amount` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '中奖金额',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_user_id`(`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户转盘记录表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ntp_common_lottery_log
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for ntp_common_lottery_prize
+-- ----------------------------
+DROP TABLE IF EXISTS `ntp_common_lottery_prize`;
+CREATE TABLE `ntp_common_lottery_prize`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '奖品名称',
+  `type` tinyint(1) NOT NULL DEFAULT 1 COMMENT '奖品类型 1现金 2实物',
+  `amount` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '现金金额',
+  `probability` decimal(5, 2) NOT NULL COMMENT '中奖概率(%)',
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '奖品图片',
+  `status` tinyint(1) NULL DEFAULT 1 COMMENT '状态 1启用 0禁用',
+  `create_time` datetime NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '转盘奖品配置表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ntp_common_lottery_prize
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for ntp_common_monthly_salary_config
 -- ----------------------------
 DROP TABLE IF EXISTS `ntp_common_monthly_salary_config`;
@@ -433,6 +493,7 @@ CREATE TABLE `ntp_common_pay_recharge`  (
   `money_before` decimal(20, 2) NULL DEFAULT NULL,
   `channel_id` int(11) NULL DEFAULT NULL COMMENT '支付渠道id',
   `channel_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付渠道名称',
+  `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '图片凭证地址',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '充值表' ROW_FORMAT = DYNAMIC;
 
@@ -556,7 +617,7 @@ CREATE TABLE `ntp_common_user_sign_log`  (
   `create_time` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `money`(`uid`, `money`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户签到' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户签到' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_user_sign_log

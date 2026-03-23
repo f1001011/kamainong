@@ -5,10 +5,10 @@ class Auth
 {
     public function handle($request, \Closure $next)
     {
-        $token = $request->header('token');
+        $token = $request->header('authorization') ?: $request->header('token');
         
         if (!$token) {
-            return json(['code' => 401, 'msg' => '请先登录']);
+            return json(['code' => 204, 'message' => '请先登录', 'data' => []]);
         }
         
         $tokenInfo = \think\facade\Db::name('common_home_token')
@@ -16,7 +16,7 @@ class Auth
             ->find();
         
         if (!$tokenInfo) {
-            return json(['code' => 401, 'msg' => 'token无效']);
+            return json(['code' => 204, 'message' => 'token无效', 'data' => []]);
         }
         
         $request->userId = $tokenInfo['user_id'];

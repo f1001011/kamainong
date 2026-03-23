@@ -46,6 +46,21 @@ Route::group('api', function(){
     Route::get('prize/config', 'Prize/config');
     Route::get('prize/today_rank', 'Prize/todayRank');
     Route::get('prize/winners', 'Prize/winners');
+    
+    // 转盘相关
+    Route::get('lottery/config', 'Lottery/config');
+    Route::get('lottery/chance', 'Lottery/getChance');
+    Route::post('lottery/spin', 'Lottery/spin');
+    Route::get('lottery/history', 'Lottery/history');
+    
+    // 充值相关
+    Route::get('recharge/channels', 'Recharge/channels');
+    Route::post('recharge/create', 'Recharge/create');
+    Route::get('recharge/history', 'Recharge/history');
+    
+    // 上传相关
+    Route::post('upload/image', 'Upload/image');
+    Route::post('upload/withdraw_proof', 'Upload/withdrawProof');
 
 })->middleware(\app\api\middleware\Auth::class);
 

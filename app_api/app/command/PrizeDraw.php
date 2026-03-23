@@ -68,13 +68,14 @@ class PrizeDraw extends Command
     
     private function giveReward($userId, $amount, $rank)
     {
-        db('common_user')->where('id', $userId)->inc('money_balance', $amount)->update();
-        
         db('common_prize_pool_log')->insert([
             'user_id' => $userId,
             'money' => $amount,
             'rank' => $rank,
             'create_time' => time()
         ]);
+        
+        // 增加余额并记录流水
+        \app\api\model\User::changeMoney($userId, 'inc', 1, $amount, \app\model\MoneyLog::STATUS_PRIZE_REWARD, 0, '奖池奖励：' . $rank);
     }
 }

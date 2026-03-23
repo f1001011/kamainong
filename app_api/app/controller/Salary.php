@@ -4,6 +4,7 @@ namespace app\controller;
 use app\BaseController;
 use app\api\model\Salary as SalaryModel;
 use app\api\model\User;
+use app\model\MoneyLog;
 use think\facade\Db;
 
 class Salary extends BaseController
@@ -41,7 +42,13 @@ class Salary extends BaseController
         Db::startTrans();
         try {
             SalaryModel::recordClaim($userId, $teamRecharge, $config['reward_amount'], $month);
-            User::where('id', $userId)->inc('money_balance', $config['reward_amount'])->update();
+            
+            // 增加余额并记录流水
+            $result = User::changeMoney($userId, 'inc', 1, $config['reward_amount'], MoneyLog::STATUS_SALARY_REWARD, 0, '月薪奖励');
+            if ($result['code'] == 0) {
+                Db::rollback();
+                return show(0, [], $result['msg']);
+            }
             
             Db::commit();
             return show(1, ['amount' => $config['reward_amount']]);
