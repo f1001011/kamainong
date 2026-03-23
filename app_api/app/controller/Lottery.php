@@ -4,7 +4,7 @@ namespace app\controller;
 
 use app\BaseController;
 use app\model\MoneyLog;
-use app\api\model\User;
+use app\model\User;
 use think\facade\Db;
 
 class Lottery extends BaseController

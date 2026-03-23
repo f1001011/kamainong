@@ -2,7 +2,7 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\api\model\User as UserModel;
+use app\model\User as UserModel;
 
 class User extends BaseController
 {

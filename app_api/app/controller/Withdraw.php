@@ -2,8 +2,8 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\api\model\Withdraw as WithdrawModel;
-use app\api\model\BankCard;
+use app\model\Withdraw as WithdrawModel;
+use app\model\BankCard;
 
 class Withdraw extends BaseController
 {

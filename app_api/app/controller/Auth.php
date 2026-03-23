@@ -2,7 +2,7 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\api\model\User;
+use app\model\User;
 use think\facade\Db;
 
 class Auth extends BaseController

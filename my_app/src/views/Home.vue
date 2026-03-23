@@ -23,25 +23,6 @@
         </button>
       </header>
 
-      <!-- Upload Button -->
-      <button class="upload-btn glass-card" @click="router.push('/upload-proof')">
-        <Upload :size="16" /> 上传提款凭证
-      </button>
-
-      <!-- Balance Quick Card -->
-      <div class="balance-quick glass-card"
-        v-motion :initial="{ opacity:0, y:30, scale:0.95 }"
-        :enter="{ opacity:1, y:0, scale:1, transition:{ delay:120, type:'spring', stiffness:200, damping:22 } }">
-        <div class="bq-bar"></div>
-        <div class="bq-left">
-          <span class="bq-label">{{ t('home.balanceLabel') }}</span>
-          <span class="bq-amount">{{ CURRENCY }} {{ balanceDisplay }}</span>
-        </div>
-        <button class="bq-btn" @click="router.push('/balance')">
-          <ArrowRight :size="13" />{{ t('home.balanceCenter') }}
-        </button>
-      </div>
-
       <!-- Carousel Banner -->
       <div class="carousel-wrap"
         v-motion :initial="{ opacity:0, y:24 }"
@@ -69,6 +50,20 @@
             :class="['dot', { active: i === currentSlide }]"
             @click="goTo(i)"></span>
         </div>
+      </div>
+
+      <!-- Balance Quick Card -->
+      <div class="balance-quick glass-card"
+        v-motion :initial="{ opacity:0, y:30, scale:0.95 }"
+        :enter="{ opacity:1, y:0, scale:1, transition:{ delay:120, type:'spring', stiffness:200, damping:22 } }">
+        <div class="bq-bar"></div>
+        <div class="bq-left">
+          <span class="bq-label">{{ t('home.balanceLabel') }}</span>
+          <span class="bq-amount">{{ CURRENCY }} {{ balanceDisplay }}</span>
+        </div>
+        <button class="bq-btn" @click="router.push('/balance')">
+          <ArrowRight :size="13" />{{ t('home.balanceCenter') }}
+        </button>
       </div>
 
       <!-- Upload Proof Card (Fixed) -->
@@ -149,9 +144,9 @@ import { colors } from '@/config/colors'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
-  User, Wallet, ArrowRight, ShoppingBag, Upload,
+  User, Wallet, ArrowRight, ShoppingBag,
   Zap, Phone, Crown, Gamepad2, Coffee,
-  LayoutGrid, Flame, Gift, Star, CheckCircle2,
+  LayoutGrid, Star, CheckCircle2,
   Wifi, Signal, CreditCard, Music,
   Sword, Gem, ShoppingCart, Car,
 } from 'lucide-vue-next'
@@ -196,28 +191,12 @@ const COLOR_MAP: Record<string, string> = {
 const currentSlide = ref(0)
 let autoTimer: ReturnType<typeof setInterval> | null = null
 
-const banners = [
-  { id:1, tag:'Plaza', title:'Testimonios de retiros', sub:'Hemos pagado exitosamente a 13982 usuarios',
-    gradient:'linear-gradient(135deg,#00e676,#00c853)',
-    glow:'radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%)',
-    icon: CheckCircle2,
-    action: '/upload-proof' },
-  { id:2, tag:'新用户专享', title:'首充赠送 50 元', sub:'注册即送，充值立到账',
-    gradient:'linear-gradient(135deg,#00e5ff,#00b0ff)',
-    glow:'radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%)',
-    icon: Gift },
-  { id:3, tag:'限时秒杀', title:'低至 1 折起', sub:'每日 10:00 准时开抢',
-    gradient:'linear-gradient(135deg,#ffb800,#ff6d00)',
-    glow:'radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%)',
-    icon: Flame },
-  { id:4, tag:'VIP 专属', title:'会员特权礼包', sub:'专属折扣 · 优先客服 · 专属礼包',
-    gradient:'linear-gradient(135deg,#69ff47,#00e676)',
-    glow:'radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%)',
-    icon: Crown },
-]
-
 const goTo       = (i: number) => { currentSlide.value = i }
-const next       = () => { currentSlide.value = (currentSlide.value + 1) % banners.length }
+const next       = () => {
+  const len = bannerList.value.length
+  if (!len) return
+  currentSlide.value = (currentSlide.value + 1) % len
+}
 const startAuto  = () => { autoTimer = setInterval(next, 2000) }
 const pauseAuto  = () => { if (autoTimer) { clearInterval(autoTimer); autoTimer = null } }
 const resumeAuto = () => { if (!autoTimer) startAuto() }
@@ -258,6 +237,7 @@ async function loadBanner() {
     const res = await getBannerList()
     if (res.list && res.list.length > 0) {
       bannerList.value = res.list
+      currentSlide.value = 0
     }
   } catch { /* silent */ }
 }

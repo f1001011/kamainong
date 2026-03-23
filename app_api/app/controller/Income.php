@@ -2,8 +2,8 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\api\model\Income as IncomeModel;
-use app\api\model\User;
+use app\model\Income as IncomeModel;
+use app\model\User;
 use app\model\MoneyLog;
 use think\facade\Db;
 

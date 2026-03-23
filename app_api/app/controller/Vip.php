@@ -2,9 +2,9 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\api\model\Vip as VipModel;
-use app\api\model\User;
-use app\api\model\Order;
+use app\model\Vip as VipModel;
+use app\model\User;
+use app\model\Order;
 use app\model\MoneyLog;
 use think\facade\Db;
 

@@ -2,7 +2,7 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\api\model\Product as ProductModel;
+use app\model\Product as ProductModel;
 
 class Product extends BaseController
 {

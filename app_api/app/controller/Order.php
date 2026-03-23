@@ -2,9 +2,9 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\api\model\Order as OrderModel;
-use app\api\model\Product;
-use app\api\model\User;
+use app\model\Order as OrderModel;
+use app\model\Product;
+use app\model\User;
 use app\model\MoneyLog;
 use think\facade\Db;
 

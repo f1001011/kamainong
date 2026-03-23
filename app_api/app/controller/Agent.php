@@ -2,7 +2,7 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\api\model\Agent as AgentModel;
+use app\model\Agent as AgentModel;
 
 class Agent extends BaseController
 {
