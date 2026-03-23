@@ -42,18 +42,47 @@
         </button>
       </div>
 
-      <!-- Banner Card -->
-      <div class="banner-card glass-card"
+      <!-- Carousel Banner -->
+      <div class="carousel-wrap"
+        v-motion :initial="{ opacity:0, y:24 }"
+        :enter="{ opacity:1, y:0, transition:{ delay:150 } }"
+        @mouseenter="pauseAuto" @mouseleave="resumeAuto">
+        <div class="carousel-viewport">
+          <div class="carousel-track"
+            :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+            <div v-for="banner in bannerList" :key="banner.id"
+              class="carousel-slide"
+              @click="router.push(banner.link_url || '/')"
+              :style="{ background: banner.bg_color || 'linear-gradient(135deg,#ff4d4d,#ff1744)', cursor: 'pointer' }">
+              <img v-if="banner.image_url" class="slide-bg-img" :src="banner.image_url" />
+              <div class="slide-glow" :style="{ background: 'radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%)' }"></div>
+              <div class="slide-content">
+                <span class="slide-tag">{{ banner.tag }}</span>
+                <div class="slide-title">{{ banner.title }}</div>
+                <div class="slide-sub">{{ banner.subtitle }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-dots">
+          <span v-for="(_, i) in bannerList" :key="i"
+            :class="['dot', { active: i === currentSlide }]"
+            @click="goTo(i)"></span>
+        </div>
+      </div>
+
+      <!-- Upload Proof Card (Fixed) -->
+      <div class="upload-proof-card glass-card"
         v-motion :initial="{ opacity:0, y:24 }"
         :enter="{ opacity:1, y:0, transition:{ delay:200 } }"
-        @click="handleBannerClick"
-        :style="{ background: bannerData?.bg_color || 'linear-gradient(135deg,#00e676,#00c853)', cursor: 'pointer', padding: '24px', borderRadius: '16px', position: 'relative', overflow: 'hidden', marginBottom: '20px' }">
+        @click="router.push('/upload-proof')"
+        style="background: linear-gradient(135deg,#00e676,#00c853); cursor: pointer; padding: 24px; border-radius: 16px; position: relative; overflow: hidden; margin-bottom: 20px;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%);"></div>
         <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between;">
           <div>
-            <div style="font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 8px;">{{ bannerData?.tag || 'Plaza' }}</div>
-            <div style="font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px;">{{ bannerData?.title || 'Testimonios de retiros' }}</div>
-            <div style="font-size: 13px; color: rgba(255,255,255,0.9);">{{ bannerData?.subtitle || 'Hemos pagado exitosamente a 13982 usuarios' }}</div>
+            <div style="font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 8px;">Plaza</div>
+            <div style="font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px;">Testimonios de retiros</div>
+            <div style="font-size: 13px; color: rgba(255,255,255,0.9);">Hemos pagado exitosamente a 13982 usuarios</div>
           </div>
           <CheckCircle2 :size="48" style="color: white; opacity: 0.9;" />
         </div>
