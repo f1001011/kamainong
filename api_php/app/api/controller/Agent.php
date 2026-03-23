@@ -10,7 +10,7 @@ class Agent extends BaseController
     public function config()
     {
         $list = AgentModel::order('level', 'asc')->select();
-        return json(['code' => 200, 'data' => $list]);
+        return show(1, $list);
     }
     
     // 我的团队
@@ -18,6 +18,6 @@ class Agent extends BaseController
     {
         $userId = request()->userId;
         $stats = AgentModel::getTeamStats($userId);
-        return json(['code' => 200, 'data' => $stats]);
+        return show(1,$stats);
     }
 }

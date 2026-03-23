@@ -1,24 +1,24 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/HomeNew.vue'
+import Dashboard from '../views/Dashboard.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-import BalanceCenter from '../views/BalanceCenter.vue'
 import Products from '../views/Products.vue'
-import Vip from '../views/Vip.vue'
+import MyInvestments from '../views/MyInvestments.vue'
+import Vip from '../views/VipNew.vue'
 import { setLocale } from '@/i18n'
 
 // ── 无需登录 ────────────────────────────────────────────────────────────────
 const publicRoutes: Array<RouteRecordRaw> = [
-    { path: '/login',    name: 'Login',        component: Login },
-    { path: '/register', name: 'Register',     component: Register },
-    { path: '/balance',  name: 'BalanceCenter', component: BalanceCenter },
-    { path: '/',         name: 'Home',          component: Home },
+    { path: '/login',    name: 'Login',    component: Login },
+    { path: '/register', name: 'Register', component: Register },
 ]
 
 // ── 需要登录 ────────────────────────────────────────────────────────────────
 const authRoutes: Array<RouteRecordRaw> = [
-    { path: '/products', name: 'Products', component: Products, meta: { requiresAuth: true } },
-    { path: '/vip',      name: 'Vip',      component: Vip,      meta: { requiresAuth: true } },
+    { path: '/',           name: 'Dashboard',     component: Dashboard,     meta: { requiresAuth: true } },
+    { path: '/products',   name: 'Products',      component: Products,      meta: { requiresAuth: true } },
+    { path: '/investments', name: 'MyInvestments', component: MyInvestments, meta: { requiresAuth: true } },
+    { path: '/vip',        name: 'Vip',           component: Vip,           meta: { requiresAuth: true } },
 ]
 
 const routes: Array<RouteRecordRaw> = [...publicRoutes, ...authRoutes]

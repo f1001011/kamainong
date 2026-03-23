@@ -56,13 +56,13 @@ class Auth extends BaseController
         $pwd = input('pwd');
         
         if (!$phone || !$pwd) {
-            return json(['code' => 400, 'msg' => '手机号和密码不能为空']);
+            return show(['code' => 400,[], 'msg' => '手机号和密码不能为空']);
         }
         
         // 检查手机号是否已注册
         $exists = User::where('phone', $phone)->find();
         if ($exists) {
-            return json(['code' => 400, 'msg' => '手机号已注册']);
+            return show(['code' => 400,[], 'msg' => '手机号已注册']);
         }
         
         // 创建用户
@@ -76,6 +76,6 @@ class Auth extends BaseController
             'ip' => request()->ip()
         ]);
         
-        return json(['code' => 200, 'msg' => '注册成功', 'data' => ['user_id' => $userId]]);
+        return json(['code' => 200, ['user_id' => $userId]]);
     }
 }

@@ -3,6 +3,9 @@
 use think\facade\Cache;
 use think\facade\Db;
 
+// 获取多语言翻译
+
+
 function show($code, $data = [], $msg = ""){
     if ($code == 0){
         $code = TC('error_code');
@@ -11,9 +14,8 @@ function show($code, $data = [], $msg = ""){
     }
 
     if (empty($msg)){
-        $msg = 'ok';
-        if ($code == 0){
-            $msg = 'no';
+        if ($msg == $code) {
+            $msg = $code == 200 ? 'ok' : 'error';
         }
     }
     $token = md5(uniqid());

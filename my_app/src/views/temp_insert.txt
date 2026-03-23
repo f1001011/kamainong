@@ -1,0 +1,12 @@
+
+      <!-- Quick Links -->
+      <div class="quick-links">
+        <div class="quick-card glass-card" @click="router.push('/investments')">
+          <TrendingUp :size="20" class="quick-icon" />
+          <div class="quick-text">我的投资</div>
+        </div>
+        <div class="quick-card glass-card" @click="router.push('/vip')">
+          <Crown :size="20" class="quick-icon" />
+          <div class="quick-text">VIP会员</div>
+        </div>
+      </div>

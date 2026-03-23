@@ -40,6 +40,18 @@
         </div>
       </div>
 
+      <!-- Quick Links -->
+      <div class="quick-links">
+        <div class="quick-card glass-card" @click="router.push('/investments')">
+          <TrendingUp :size="20" class="quick-icon" />
+          <div class="quick-text">我的投资</div>
+        </div>
+        <div class="quick-card glass-card" @click="router.push('/vip')">
+          <Crown :size="20" class="quick-icon" />
+          <div class="quick-text">VIP会员</div>
+        </div>
+      </div>
+
       <!-- Products Section -->
       <div class="section-header">
         <h2 class="section-title">投资产品</h2>
@@ -70,7 +82,7 @@
 <script lang="ts" setup>
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { User, Wallet, ArrowRight, Loader2 } from 'lucide-vue-next'
+import { User, Wallet, ArrowRight, Loader2, TrendingUp, Crown } from 'lucide-vue-next'
 import { userApi, productApi } from '@/api/services'
 
 const router = useRouter()
@@ -209,3 +221,25 @@ onMounted(async () => {
   backdrop-filter: blur(10px);
 }
 </style>
+
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.quick-card {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.quick-card:hover { transform: translateY(-2px); }
+.quick-icon { color: #00e5ff; }
+.quick-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+}

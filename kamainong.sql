@@ -5,13 +5,13 @@
  Source Server Type    : MySQL
  Source Server Version : 50726 (5.7.26)
  Source Host           : localhost:3306
- Source Schema         : newv1
+ Source Schema         : kamainong
 
  Target Server Type    : MySQL
  Target Server Version : 50726 (5.7.26)
  File Encoding         : 65001
 
- Date: 23/03/2026 11:49:53
+ Date: 23/03/2026 16:26:43
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `ntp_common_admin`  (
   `market_uid` int(11) NULL DEFAULT NULL,
   `operate_pwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '用户余额变更使用的操作密码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台管理员表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台管理员表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_admin
@@ -51,7 +51,7 @@ CREATE TABLE `ntp_common_admin_token`  (
   `admin_uid` int(10) NULL DEFAULT NULL COMMENT '管理员ID',
   `type` tinyint(4) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台确定单点登陆' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '后台确定单点登陆' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_admin_token
@@ -135,7 +135,7 @@ CREATE TABLE `ntp_common_email`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '变化时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '邮件发送表' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '邮件发送表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_email
@@ -173,12 +173,24 @@ CREATE TABLE `ntp_common_goods`  (
   `goods_agent_3` decimal(12, 2) NOT NULL DEFAULT 0.00,
   `buy_num` int(11) NOT NULL DEFAULT 0 COMMENT '0无限次 可以购买次数',
   `level_vip` int(11) NOT NULL DEFAULT 0 COMMENT '可购买等级  0 随便购买',
+  `minute_claim` int(11) NOT NULL COMMENT '多少分钟可以领取一次',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '项目表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '项目表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_goods
 -- ----------------------------
+INSERT INTO `ntp_common_goods` VALUES (1, 1, 'Produit d\'expérience', 0.00, 0.00, 110.00, 1, 110.00, 330.00, 0.00, 3, 1, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 1, 1, 1, 0, 0.00, 0.00, 0.00, 0.00, 1, 0, 0);
+INSERT INTO `ntp_common_goods` VALUES (2, 1, 'Revenu fixe 1', 8000.00, 0.00, 330.00, 3, 110.00, 120450.00, 24.24, 365, 1, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 2, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 480);
+INSERT INTO `ntp_common_goods` VALUES (3, 1, 'Revenu fixe 2', 45000.00, 0.00, 1600.00, 5, 320.00, 584000.00, 28.13, 365, 1, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 3, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 288);
+INSERT INTO `ntp_common_goods` VALUES (4, 1, 'Revenu fixe 3', 100000.00, 0.00, 3600.00, 10, 360.00, 1314000.00, 27.78, 365, 2, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 4, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 144);
+INSERT INTO `ntp_common_goods` VALUES (5, 1, 'Revenu fixe 4', 380000.00, 0.00, 14250.00, 15, 950.00, 5201250.00, 26.67, 365, 2, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 5, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 96);
+INSERT INTO `ntp_common_goods` VALUES (6, 1, 'Revenu fixe 5', 800000.00, 0.00, 31000.00, 20, 1550.00, 11315000.00, 25.81, 365, 2, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 6, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 72);
+INSERT INTO `ntp_common_goods` VALUES (7, 1, 'Revenu fixe 6', 1600000.00, 0.00, 64500.00, 30, 2150.00, 23542500.00, 24.81, 365, 2, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 7, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 48);
+INSERT INTO `ntp_common_goods` VALUES (8, 1, 'Revenu fixe 7', 3000000.00, 0.00, 160000.00, 40, 4000.00, 58400000.00, 18.75, 365, 2, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 8, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 36);
+INSERT INTO `ntp_common_goods` VALUES (9, 1, 'Revenu fixe 8', 7000000.00, 0.00, 410000.00, 50, 8200.00, 149650000.00, 17.07, 365, 2, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 9, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 29);
+INSERT INTO `ntp_common_goods` VALUES (10, 1, 'Revenu fixe 9', 13000000.00, 0.00, 810000.00, 60, 13500.00, 295650000.00, 16.05, 365, 2, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 10, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 24);
+INSERT INTO `ntp_common_goods` VALUES (11, 1, 'Revenu fixe 10', 18000000.00, 0.00, 1200000.00, 80, 15000.00, 438000000.00, 15.00, 365, 2, 2, 'AVIVA', '2026-03-23 15:15:07', NULL, NULL, 0, 11, 1, 0, 0.00, 0.00, 0.00, 0.00, 0, 0, 18);
 
 -- ----------------------------
 -- Table structure for ntp_common_goods_order
@@ -212,7 +224,7 @@ CREATE TABLE `ntp_common_goods_order`  (
   `order_no` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '订单号',
   `one_money` decimal(20, 0) NOT NULL DEFAULT 0 COMMENT '商品单价 单件商品价',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品订单表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品订单表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_goods_order
@@ -228,7 +240,7 @@ CREATE TABLE `ntp_common_home_token`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `user_id` int(10) NULL DEFAULT NULL COMMENT '管理员ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '前台token' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '前台token' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_home_token
@@ -327,7 +339,7 @@ CREATE TABLE `ntp_common_pay_cash`  (
   `channel_id` int(11) NULL DEFAULT NULL COMMENT '支付渠道id',
   `channel_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付渠道名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '提现表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '提现表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_pay_cash
@@ -345,7 +357,7 @@ CREATE TABLE `ntp_common_pay_channel`  (
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 上架  0 下架',
   `create_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'z支付渠道表' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'z支付渠道表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_pay_channel
@@ -365,7 +377,7 @@ CREATE TABLE `ntp_common_pay_coupon`  (
   `status` tinyint(4) NOT NULL COMMENT '1 使用了  2未使用',
   `exp_time` datetime NOT NULL COMMENT '过期时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '付款优惠卷' ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '付款优惠卷' ROW_FORMAT = FIXED;
 
 -- ----------------------------
 -- Records of ntp_common_pay_coupon
@@ -390,7 +402,7 @@ CREATE TABLE `ntp_common_pay_money_log`  (
   `rmark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `sel`(`type`, `status`, `uid`, `money_type`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '资金流水表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '资金流水表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_pay_money_log
@@ -422,7 +434,7 @@ CREATE TABLE `ntp_common_pay_recharge`  (
   `channel_id` int(11) NULL DEFAULT NULL COMMENT '支付渠道id',
   `channel_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '支付渠道名称',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '充值表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '充值表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_pay_recharge
@@ -527,7 +539,7 @@ CREATE TABLE `ntp_common_user`  (
   INDEX `sel`(`user_name`, `phone`, `agent_id_1`, `agent_id_2`, `agent_id_3`, `agent_id`) USING BTREE,
   INDEX `agent_id`(`agent_id`) USING BTREE,
   INDEX `is_real_name`(`is_real_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_user
@@ -544,7 +556,7 @@ CREATE TABLE `ntp_common_user_sign_log`  (
   `create_time` datetime NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `money`(`uid`, `money`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户签到' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户签到' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_user_sign_log
@@ -562,11 +574,21 @@ CREATE TABLE `ntp_common_vip`  (
   `buy_goods_id` int(11) NOT NULL DEFAULT 0 COMMENT '需要购买的产品id',
   `buy_goods_num` int(11) NOT NULL COMMENT '需要购买的产品数量',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'vip表' ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'vip表' ROW_FORMAT = FIXED;
 
 -- ----------------------------
 -- Records of ntp_common_vip
 -- ----------------------------
+INSERT INTO `ntp_common_vip` VALUES (1, 0, 1, 50.00, 2, 2);
+INSERT INTO `ntp_common_vip` VALUES (2, 0, 2, 80.00, 3, 2);
+INSERT INTO `ntp_common_vip` VALUES (3, 0, 3, 120.00, 4, 2);
+INSERT INTO `ntp_common_vip` VALUES (4, 0, 4, 160.00, 5, 2);
+INSERT INTO `ntp_common_vip` VALUES (5, 0, 5, 200.00, 6, 2);
+INSERT INTO `ntp_common_vip` VALUES (6, 0, 6, 240.00, 7, 2);
+INSERT INTO `ntp_common_vip` VALUES (7, 0, 7, 280.00, 8, 2);
+INSERT INTO `ntp_common_vip` VALUES (8, 0, 8, 320.00, 9, 2);
+INSERT INTO `ntp_common_vip` VALUES (9, 0, 9, 360.00, 10, 2);
+INSERT INTO `ntp_common_vip` VALUES (10, 0, 10, 500.00, 11, 2);
 
 -- ----------------------------
 -- Table structure for ntp_common_vip_daily_reward_log
@@ -601,7 +623,7 @@ CREATE TABLE `ntp_common_vip_log`  (
   `update_time` datetime NOT NULL,
   `remarks` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'vip日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'vip日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ntp_common_vip_log
