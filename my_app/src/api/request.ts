@@ -4,7 +4,7 @@ import router from '@/router'
 
 // 创建 axios 实例
 const request = axios.create({
-    baseURL: 'http://www.v1.com', // 替换成你的接口
+    baseURL: 'http://kemainong.com/api',
     timeout: 5000
 })
 

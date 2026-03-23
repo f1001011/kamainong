@@ -61,6 +61,9 @@ Route::group('api', function(){
     // 上传相关
     Route::post('upload/image', 'Upload/image');
     Route::post('upload/withdraw_proof', 'Upload/withdrawProof');
+    
+    // 系统配置
+
 
 })->middleware(\app\api\middleware\Auth::class);
 
@@ -69,5 +72,6 @@ Route::group('api', function(){
     // 认证相关
     Route::post('login', 'Auth/login');
     Route::post('register', 'Auth/register');
+    Route::get('system/config', 'System/config');
 })->middleware(think\middleware\AllowCrossDomain::class);
 

@@ -2,6 +2,7 @@
 namespace app\controller;
 
 use app\BaseController;
+use app\model\SysConfig;
 
 class System extends BaseController
 {
@@ -9,10 +10,12 @@ class System extends BaseController
     public function config()
     {
         $key = input('key');
-        
-        $config = db('common_sys_config')
-            ->where('key', $key)
-            ->value('value');
+
+        $map = [];
+        if(!$key){
+            $map['key'] = $key;
+        }
+        $config = SysConfig::where($map)->value('value');
         
         return show(1, $config);
     }

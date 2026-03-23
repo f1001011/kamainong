@@ -5,10 +5,16 @@ export const buyProduct = (goodsId: number) => {
   return request.post('/order/buy', { goods_id: goodsId })
 }
 
+// 别名
+export const createOrder = buyProduct
+
 // 我的订单列表
 export const getMyOrders = () => {
   return request.get('/order/my_orders')
 }
+
+// 别名
+export const getOrderList = getMyOrders
 
 // 订单详情
 export const getOrderDetail = (orderId: number) => {

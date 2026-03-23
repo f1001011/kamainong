@@ -136,7 +136,7 @@ import { useI18n } from 'vue-i18n'
 import {
   User, Wallet, ArrowRight, ShoppingBag, Upload,
   Zap, Phone, Crown, Gamepad2, Coffee,
-  LayoutGrid, Flame, Gift, Star,
+  LayoutGrid, Flame, Gift, Star, CheckCircle2,
   Wifi, Signal, CreditCard, Music,
   Sword, Gem, ShoppingCart, Car,
 } from 'lucide-vue-next'
@@ -181,10 +181,11 @@ const currentSlide = ref(0)
 let autoTimer: ReturnType<typeof setInterval> | null = null
 
 const banners = [
-  { id:1, tag:'限时优惠', title:'充值立享 8 折', sub:'银行卡 / 支付宝 / 微信 均可',
-    gradient:'linear-gradient(135deg,#ff4d4d,#ff1744)',
+  { id:1, tag:'Plaza', title:'Testimonios de retiros', sub:'Hemos pagado exitosamente a 13982 usuarios',
+    gradient:'linear-gradient(135deg,#00e676,#00c853)',
     glow:'radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%)',
-    icon: Zap },
+    icon: CheckCircle2,
+    action: '/upload-proof' },
   { id:2, tag:'新用户专享', title:'首充赠送 50 元', sub:'注册即送，充值立到账',
     gradient:'linear-gradient(135deg,#00e5ff,#00b0ff)',
     glow:'radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%)',

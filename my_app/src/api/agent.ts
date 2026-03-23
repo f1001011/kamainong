@@ -9,3 +9,7 @@ export const getAgentConfig = () => {
 export const getMyTeam = () => {
   return request.get('/agent/my_team')
 }
+
+// 别名
+export const getTeamData = getMyTeam
+export const getTeamMembers = getMyTeam

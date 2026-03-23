@@ -14,3 +14,6 @@ export const getAvailableIncome = () => {
 export const claimIncome = (claimId: number) => {
   return request.post('/income/claim', { claim_id: claimId })
 }
+
+// 别名
+export const getIncomeStats = getIncomeList
