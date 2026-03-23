@@ -251,21 +251,15 @@ async function loadNotice() {
 }
 
 // ── Banner ────────────────────────────────────────────────────────────────────
-const bannerData = ref(null)
+const bannerList = ref([])
 
 async function loadBanner() {
   try {
     const res = await getBannerList()
     if (res.list && res.list.length > 0) {
-      bannerData.value = res.list[0]
+      bannerList.value = res.list
     }
   } catch { /* silent */ }
-}
-
-function handleBannerClick() {
-  if (bannerData.value?.link_url) {
-    router.push(bannerData.value.link_url)
-  }
 }
 
 // ── Categories ────────────────────────────────────────────────────────────────
