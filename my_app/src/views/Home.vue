@@ -42,34 +42,20 @@
         </button>
       </div>
 
-      <!-- Carousel -->
-      <div class="carousel-wrap"
+      <!-- Banner Card -->
+      <div class="banner-card glass-card"
         v-motion :initial="{ opacity:0, y:24 }"
         :enter="{ opacity:1, y:0, transition:{ delay:200 } }"
-        @mouseenter="pauseAuto" @mouseleave="resumeAuto">
-        <div class="carousel-viewport">
-          <div class="carousel-track"
-            :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
-            <div v-for="banner in banners" :key="banner.id"
-              class="carousel-slide"
-              :style="banner.imageUrl ? {} : { background: banner.gradient }">
-              <img v-if="banner.imageUrl" class="slide-bg-img" :src="banner.imageUrl" />
-              <div class="slide-glow" :style="{ background: banner.glow }"></div>
-              <div class="slide-content">
-                <span class="slide-tag">{{ banner.tag }}</span>
-                <div class="slide-title">{{ banner.title }}</div>
-                <div class="slide-sub">{{ banner.sub }}</div>
-              </div>
-              <div v-if="!banner.imageUrl" class="slide-icon-wrap">
-                <component :is="banner.icon" :size="54" class="slide-icon" />
-              </div>
-            </div>
+        @click="handleBannerClick"
+        :style="{ background: bannerData?.bg_color || 'linear-gradient(135deg,#00e676,#00c853)', cursor: 'pointer', padding: '24px', borderRadius: '16px', position: 'relative', overflow: 'hidden', marginBottom: '20px' }">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%);"></div>
+        <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between;">
+          <div>
+            <div style="font-size: 12px; color: rgba(255,255,255,0.8); margin-bottom: 8px;">{{ bannerData?.tag || 'Plaza' }}</div>
+            <div style="font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px;">{{ bannerData?.title || 'Testimonios de retiros' }}</div>
+            <div style="font-size: 13px; color: rgba(255,255,255,0.9);">{{ bannerData?.subtitle || 'Hemos pagado exitosamente a 13982 usuarios' }}</div>
           </div>
-        </div>
-        <div class="carousel-dots">
-          <span v-for="(_, i) in banners" :key="i"
-            :class="['dot', { active: i === currentSlide }]"
-            @click="goTo(i)"></span>
+          <CheckCircle2 :size="48" style="color: white; opacity: 0.9;" />
         </div>
       </div>
 
@@ -142,6 +128,7 @@ import {
 } from 'lucide-vue-next'
 import { fetchCategories, fetchProducts, fetchHomeBalance } from '@/api/product'
 import { getSystemConfig } from '@/api/system'
+import { getBannerList } from '@/api/banner'
 import NoticeModal from '@/components/NoticeModal.vue'
 import type { CategoryItem, ProductItem } from '@/types/product'
 
@@ -234,6 +221,24 @@ async function loadNotice() {
   } catch { /* silent */ }
 }
 
+// ── Banner ────────────────────────────────────────────────────────────────────
+const bannerData = ref(null)
+
+async function loadBanner() {
+  try {
+    const res = await getBannerList()
+    if (res.list && res.list.length > 0) {
+      bannerData.value = res.list[0]
+    }
+  } catch { /* silent */ }
+}
+
+function handleBannerClick() {
+  if (bannerData.value?.link_url) {
+    router.push(bannerData.value.link_url)
+  }
+}
+
 // ── Categories ────────────────────────────────────────────────────────────────
 const activeCategory  = ref('all')
 const categoriesRaw   = ref<CategoryItem[]>([])
@@ -324,7 +329,7 @@ watch(activeCategory, () => {
 })
 
 onMounted(async () => {
-  await Promise.all([loadCategories(), loadProducts(true), loadHomeBalance(), loadNotice()])
+  await Promise.all([loadCategories(), loadProducts(true), loadHomeBalance(), loadNotice(), loadBanner()])
   startAuto()
   await nextTick()
   setupObserver()

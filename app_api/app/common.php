@@ -25,7 +25,7 @@ function show($code, $data = [], $msg = ""){
         session('sub_token',$token);
     }
     //输出json
-    return json_encode($result,JSON_UNESCAPED_UNICODE);
+    return json($result);
     exit;
 }
 
