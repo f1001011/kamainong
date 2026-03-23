@@ -45,6 +45,24 @@ class PrizeDraw extends Command
             $output->writeln("二等奖: 用户 {$winner2['user_id']}");
         }
         
+        // 条件3: 个人当天邀请人数最高
+        $winner3 = db('common_user')
+            ->where('invite_count_today', '>', 0)
+            ->order('invite_count_today desc')
+            ->limit(1)
+            ->find();
+        
+        if ($winner3) {
+            $this->giveReward($winner3['id'], 688, '三等奖');
+            $output->writeln("三等奖: 用户 {$winner3['id']}");
+        }
+        
+        // 重置今日统计
+        db('common_user')->update([
+            'team_recharge_today' => 0,
+            'invite_count_today' => 0
+        ]);
+        
         $output->writeln('开奖完成！');
     }
     

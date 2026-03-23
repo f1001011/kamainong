@@ -50,7 +50,7 @@ Route::group('api', function(){
 })->middleware(\app\api\middleware\Auth::class);
 
 //不需要权限验证
-Route::group('/api', function(){
+Route::group('api', function(){
     // 认证相关
     Route::post('login', 'Auth/login');
     Route::post('register', 'Auth/register');
