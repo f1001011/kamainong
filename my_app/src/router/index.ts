@@ -15,6 +15,10 @@ import InviteTask from '../views/InviteTask.vue'
 import Salary from '../views/Salary.vue'
 import UploadProof from '../views/UploadProof.vue'
 import ExchangeProducts from '../views/ExchangeProducts.vue'
+import Records from '../views/Records.vue'
+import PointsRecords from '../views/PointsRecords.vue'
+import Lottery from '../views/Lottery.vue'
+import Activities from '../views/Activities.vue'
 import { setLocale } from '@/i18n'
 
 // ── 无需登录 ────────────────────────────────────────────────────────────────
@@ -39,6 +43,10 @@ const authRoutes: Array<RouteRecordRaw> = [
     { path: '/salary', name: 'Salary', component: Salary, meta: { requiresAuth: true } },
     { path: '/upload-proof', name: 'UploadProof', component: UploadProof, meta: { requiresAuth: true } },
     { path: '/exchange-products', name: 'ExchangeProducts', component: ExchangeProducts, meta: { requiresAuth: true } },
+    { path: '/records', name: 'Records', component: Records, meta: { requiresAuth: true } },
+    { path: '/points-records', name: 'PointsRecords', component: PointsRecords, meta: { requiresAuth: true } },
+    { path: '/lottery', name: 'Lottery', component: Lottery, meta: { requiresAuth: true } },
+    { path: '/activities', name: 'Activities', component: Activities, meta: { requiresAuth: true } },
 ]
 
 const routes: Array<RouteRecordRaw> = [...publicRoutes, ...authRoutes]

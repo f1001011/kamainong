@@ -1,31 +1,112 @@
 import request from './request'
-import type { ApiResponse, BalanceData } from '@/types/balance'
+import type {
+  BalanceData,
+  MoneyLogItem,
+  MoneyLogListData,
+  SignInResult,
+} from '@/types/balance'
 
-// ── 接口路由（后续直接在此修改）──────────────────────────────────────────────
-const API_BALANCE_OVERVIEW = '/balance/overview'
+const API_USER_INFO = '/user/info'
+const API_MONEY_SUMMARY = '/user/money_summary'
+const API_MONEY_LOGS = '/user/money_logs'
+const API_SIGN_IN = '/user/sign_in'
 
-// ── Mock 数据（接口就绪后删除此块）───────────────────────────────────────────
-const MOCK: BalanceData = {
-  totalAssets:      128450.88,
-  todayEarnings:    2341.50,
-  availableBalance: 123450.88,
-  frozenAmount:     5000.00,
-  monthlyIncome:    32100,
-  monthlyExpense:   18650,
-  transactions: [
-    { id: 1, category: 'wechat',  type: 'income',  amount: 3200.00,  createdAt: '2026-02-25T13:43:00Z' },
-    { id: 2, category: 'meituan', type: 'expense', amount: 68.50,    createdAt: '2026-02-25T12:58:00Z' },
-    { id: 3, category: 'salary',  type: 'income',  amount: 18000.00, createdAt: '2026-02-24T09:00:00Z' },
-    { id: 4, category: 'didi',    type: 'expense', amount: 45.20,    createdAt: '2026-02-24T18:30:00Z' },
-    { id: 5, category: 'coffee',  type: 'expense', amount: 38.00,    createdAt: '2026-02-23T10:15:00Z' },
-  ],
+const STATUS_TITLE_MAP: Record<number, string> = {
+  101: '充值',
+  102: '签到',
+  103: '每日收益',
+  104: '代理返佣',
+  105: 'VIP奖励',
+  106: '月薪奖励',
+  107: '奖池奖励',
+  108: '转盘奖励',
+  110: '购买商品',
+  111: '积分兑换',
+  201: '提现',
 }
 
-// ── 获取余额中心数据 ───────────────────────────────────────────────────────────
-export async function fetchBalanceData(): Promise<BalanceData> {
-  // 接口就绪后：删除 mock 块，取消下面一行注释即可
-  // 注：拦截器已处理 token / code / message，此处直接拿到 BalanceData
-  // return request.get<BalanceData>(API_BALANCE_OVERVIEW)
+const toNumber = (value: unknown) => {
+  const n = Number(value)
+  return Number.isFinite(n) ? n : 0
+}
 
-  return new Promise(resolve => setTimeout(() => resolve(MOCK), 400))
+const toString = (value: unknown) => String(value || '').trim()
+
+const mapMoneyLog = (raw: any): MoneyLogItem => {
+  const status = toNumber(raw.status)
+  const amount = toNumber(raw.money)
+  const type = toNumber(raw.type) === 2 ? 'expense' : 'income'
+  const title = toString(raw.rmark) || STATUS_TITLE_MAP[status] || '资金变动'
+
+  return {
+    id: toNumber(raw.id),
+    type,
+    status,
+    moneyType: toNumber(raw.money_type),
+    amount,
+    moneyBefore: toNumber(raw.money_before),
+    moneyEnd: toNumber(raw.money_end),
+    title,
+    remark: toString(raw.rmark),
+    createdAt: toString(raw.create_time),
+  }
+}
+
+export async function fetchBalanceData(): Promise<BalanceData> {
+  const [userInfo, summary, logsResp] = await Promise.all([
+    request.get<any>(API_USER_INFO),
+    request.get<any>(API_MONEY_SUMMARY),
+    request.get<any>(API_MONEY_LOGS, {
+      params: { page: 1, page_size: 10, money_type: 1 },
+    }),
+  ])
+
+  const logsRaw = Array.isArray(logsResp?.list) ? logsResp.list : []
+  const logs = logsRaw.map(mapMoneyLog)
+
+  return {
+    totalAssets: toNumber(userInfo?.money_balance),
+    todayEarnings: toNumber(summary?.today_income),
+    availableBalance: toNumber(userInfo?.money_balance),
+    frozenAmount: toNumber(userInfo?.money_freeze),
+    integral: toNumber(userInfo?.money_integral),
+    monthlyIncome: toNumber(summary?.month_income),
+    monthlyExpense: toNumber(summary?.month_expense),
+    transactions: logs,
+  }
+}
+
+export async function fetchMoneyLogs(params: {
+  page?: number
+  pageSize?: number
+  moneyType?: 1 | 2
+} = {}): Promise<MoneyLogListData> {
+  const page = params.page || 1
+  const pageSize = params.pageSize || 10
+  const moneyType = params.moneyType || 1
+
+  const data = await request.get<any>(API_MONEY_LOGS, {
+    params: {
+      page,
+      page_size: pageSize,
+      money_type: moneyType,
+    },
+  })
+
+  const listRaw = Array.isArray(data?.list) ? data.list : []
+
+  return {
+    list: listRaw.map(mapMoneyLog),
+    page: toNumber(data?.page) || page,
+    pageSize: toNumber(data?.page_size) || pageSize,
+    total: toNumber(data?.total),
+    hasMore: Boolean(data?.has_more),
+  }
+}
+
+export async function signIn(): Promise<SignInResult> {
+  const data = await request.post<any>(API_SIGN_IN)
+  return {
+    amount: toNumber(data?.amount),
+  }
 }

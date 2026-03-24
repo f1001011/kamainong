@@ -66,6 +66,11 @@ Route::group('api', function(){
     Route::post('recharge/create', 'Recharge/create');
     Route::get('recharge/history', 'Recharge/history');
     
+    // 提现相关
+    Route::post('withdraw/create', 'Withdraw/create');
+    Route::get('withdraw/history', 'Withdraw/history');
+    Route::get('withdraw/cards', 'Withdraw/cards');
+
     // 上传相关
     Route::post('upload/image', 'Upload/image');
     Route::post('upload/withdraw_proof', 'Upload/withdrawProof');
