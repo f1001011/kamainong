@@ -1,0 +1,31 @@
+{
+  "name": "honeywell",
+  "version": "1.0.0",
+  "private": true,
+  "description": "秘鲁市场理财投资平台",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix",
+    "typecheck": "turbo run typecheck",
+    "db:generate": "pnpm --filter @honeywell/database db:generate",
+    "db:migrate": "pnpm --filter @honeywell/database db:migrate",
+    "db:seed": "pnpm --filter @honeywell/database db:seed",
+    "db:studio": "pnpm --filter @honeywell/database db:studio",
+    "db:reset": "pnpm --filter @honeywell/database db:reset",
+    "clean": "turbo run clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.3"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "dependencies": {
+    "@prisma/engines": "^7.5.0"
+  }
+}
