@@ -12,7 +12,7 @@ use think\facade\Db;
 /**
  * Honeywell 订单/持仓模块
  */
-class HoneywellOrder extends BaseController
+class HoneywellOrder extends HoneywellBase
 {
     /**
      * 持仓列表

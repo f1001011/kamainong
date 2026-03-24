@@ -2,6 +2,125 @@
 // 应用公共文件
 use think\facade\Cache;
 use think\facade\Db;
+use app\helper\Response;
+use app\helper\Money;
+
+// ============================================
+// Honeywell Web API 统一响应方法
+// ============================================
+
+/**
+ * 成功响应
+ * @param mixed $data 数据
+ * @param string $message 消息
+ * @return \think\response\Json
+ */
+function api_success($data = null, $message = '')
+{
+    return Response::success($data, $message);
+}
+
+/**
+ * 错误响应
+ * @param string $code 错误码名称（对应法语语言包）
+ * @param array $params 参数替换（如 ['min' => 5000]）
+ * @param int $httpStatus HTTP状态码
+ * @return \think\response\Json
+ */
+function api_error($code, $params = [], $httpStatus = 400)
+{
+    return Response::error($code, $params, $httpStatus);
+}
+
+/**
+ * 分页响应
+ * @param array $list 数据列表
+ * @param int $total 总数
+ * @param int $page 当前页
+ * @param int $pageSize 每页数量
+ * @return \think\response\Json
+ */
+function api_paginated($list, $total, $page = 1, $pageSize = 20)
+{
+    return Response::paginated($list, $total, $page, $pageSize);
+}
+
+/**
+ * 列表响应（带总数）
+ * @param array $list 数据列表
+ * @param int|null $total 总数
+ * @return \think\response\Json
+ */
+function api_list($list, $total = null)
+{
+    return Response::list($list, $total);
+}
+
+/**
+ * 空响应
+ * @param string $message 消息
+ * @return \think\response\Json
+ */
+function api_empty($message = '')
+{
+    return Response::empty($message);
+}
+
+/**
+ * 格式化金额（XAF）
+ * @param float $amount 金额
+ * @param bool $withSymbol 是否带货币符号
+ * @return string
+ */
+function api_money($amount, $withSymbol = false)
+{
+    return Money::format($amount, $withSymbol);
+}
+
+/**
+ * 获取当前用户ID
+ * @return int|null
+ */
+function api_user_id()
+{
+    $token = request()->header('authorization');
+    if (empty($token)) return null;
+    
+    $token = str_replace('Bearer ', '', $token);
+    if (empty($token)) return null;
+    
+    $tokenInfo = Db::name('common_home_token')
+        ->where('token', $token)
+        ->where('expire_time', '>', time())
+        ->find();
+    
+    return $tokenInfo ? $tokenInfo['uid'] : null;
+}
+
+/**
+ * 未授权响应
+ * @return \think\response\Json
+ */
+function api_unauthorized()
+{
+    return api_error('UNAUTHORIZED', [], 401);
+}
+
+/**
+ * 获取分页参数
+ * @return array [page, pageSize]
+ */
+function api_page_params()
+{
+    $page = max(1, (int)input('page', 1));
+    $pageSize = min(100, max(1, (int)input('pageSize', 20)));
+    
+    return [$page, $pageSize];
+}
+
+// ============================================
+// 原有方法保持不变
+// ============================================
 
 // 获取多语言翻译
 

@@ -8,7 +8,7 @@ use think\facade\Db;
 /**
  * 用户认证控制器
  */
-class HoneywellAuth extends BaseController
+class HoneywellAuth
 {
     /**
      * 登录
@@ -21,11 +21,11 @@ class HoneywellAuth extends BaseController
 
         // 参数验证
         if (empty($phone) || empty($password)) {
-            return $this->error('INVALID_PARAMS');
+            return api_error('INVALID_PARAMS');
         }
 
         if (!preg_match('/^\d{9}$/', $phone)) {
-            return $this->error('INVALID_PHONE');
+            return api_error('INVALID_PHONE');
         }
 
         // 查询用户
@@ -35,7 +35,7 @@ class HoneywellAuth extends BaseController
             ->find();
 
         if (!$user || md5($password) !== $user['pwd']) {
-            return $this->error('INVALID_CREDENTIALS');
+            return api_error('INVALID_CREDENTIALS');
         }
 
         // 生成Token (30天有效期)
