@@ -2,83 +2,118 @@
 
 use think\facade\Route;
 
-//Route::get('new/<id>','News/read'); // 定义GET请求路由规则
-//Route::post('new/<id>','News/update'); // 定义POST请求路由规则
-//Route::put('new/:id','News/update'); // 定义PUT请求路由规则
-//Route::delete('new/:id','News/delete'); // 定义DELETE请求路由规则
-//Route::any('new/:id','News/read'); // 所有请求都支持的路由规则
+// ========================================
+// Honeywell 接口路由
+// ========================================
 
-//需要权限验证
+// 认证接口（无需token）
+Route::post('api/login', 'Honeywell/login');
+Route::post('api/register', 'Honeywell/register');
+
+// 需要token的接口
 Route::group('api', function(){
-    // 用户相关
-    Route::get('user/info', 'User/info');
-    Route::get('user/balance', 'User/balance');
-    Route::get('user/money_summary', 'User/moneySummary');
-    Route::get('user/money_logs', 'User/moneyLogs');
-    Route::post('user/sign_in', 'User/signIn');
-    Route::post('user/change_password', 'User/changePassword');
+    // 用户
+    Route::get('user/profile', 'Honeywell/userProfile');
     
-    // 产品相关
-    Route::get('product/list', 'Product/list');
-    Route::get('product/detail', 'Product/detail');
-
-    // 兑换商品相关
-    Route::get('wares/list', 'Wares/list');
-    Route::get('wares/detail', 'Wares/detail');
+    // 配置
+    Route::get('global-config', 'HoneywellConfig/global');
+    Route::get('texts', 'HoneywellConfig/texts');
+    Route::get('config/products', 'HoneywellConfig/products');
+    Route::get('config/animation', 'HoneywellConfig/animation');
+    Route::get('config/versions', 'HoneywellConfig/versions');
     
-    // 订单相关
-    Route::post('order/buy', 'Order/buy');
-    Route::get('order/my_orders', 'Order/myOrders');
-    Route::get('order/detail', 'Order/detail');
+    // 产品
+    Route::get('products', 'HoneywellProduct/list');
     
-    // VIP相关
-    Route::get('vip/config', 'Vip/config');
-    Route::get('vip/buy_log', 'Vip/buyLog');
-    Route::post('vip/check_upgrade', 'Vip/checkUpgrade');
-    Route::post('vip/daily_reward', 'Vip/dailyReward');
+    // 订单/持仓
+    Route::get('order/positions', 'HoneywellOrder/positions');
+    Route::get('order/detail', 'HoneywellOrder/detail');
+    Route::get('order/incomes', 'HoneywellOrder/incomes');
+    Route::post('order/claim', 'HoneywellOrder/claim');
+    Route::post('order/buy', 'HoneywellOrder/buy');
     
-    // 收益相关
-    Route::get('income/list', 'Income/list');
-    Route::get('income/available', 'Income/available');
-    Route::post('income/claim', 'Income/claim');
+    // 充值
+    Route::get('recharge/records', 'HoneywellRecharge/records');
+    Route::get('recharge/detail', 'HoneywellRecharge/detail');
+    Route::post('recharge/create', 'HoneywellRecharge/create');
+    Route::post('recharge/orders/:id/cancel', 'HoneywellRecharge/cancel');
     
-    // 月薪相关
-    Route::get('salary/config', 'Salary/config');
-    Route::post('salary/claim', 'Salary/claim');
+    // 提现
+    Route::get('withdraw/records', 'HoneywellWithdraw/records');
+    Route::get('withdraw/detail', 'HoneywellWithdraw/detail');
+    Route::post('withdraw/create', 'HoneywellWithdraw/create');
+    Route::get('withdraw/can_withdraw', 'HoneywellWithdraw/canWithdraw');
     
-    // 代理相关
-    Route::get('agent/config', 'Agent/config');
-    Route::get('agent/my_team', 'Agent/myTeam');
+    // 交易记录
+    Route::get('transaction/list', 'HoneywellTransaction/list');
     
-    // 奖池相关
-    Route::get('prize/config', 'Prize/config');
-    Route::get('prize/today_rank', 'Prize/todayRank');
-    Route::get('prize/winners', 'Prize/winners');
+    // 团队
+    Route::get('team/stats', 'HoneywellTeam/stats');
+    Route::get('team/members', 'HoneywellTeam/members');
+    Route::get('team/commissions', 'HoneywellTeam/commissions');
+    Route::get('team/invite_info', 'HoneywellTeam/inviteInfo');
     
-    // 转盘相关
-    Route::get('lottery/config', 'Lottery/config');
-    Route::get('lottery/chance', 'Lottery/getChance');
-    Route::post('lottery/spin', 'Lottery/spin');
-    Route::get('lottery/history', 'Lottery/history');
+    // 签到
+    Route::get('signin/status', 'HoneywellSignin/status');
+    Route::post('signin/sign', 'HoneywellSignin/sign');
+    Route::get('signin/records', 'HoneywellSignin/records');
     
-    // 充值相关
-    Route::get('recharge/channels', 'Recharge/channels');
-    Route::post('recharge/create', 'Recharge/create');
-    Route::get('recharge/history', 'Recharge/history');
+    // VIP
+    Route::get('vip/status', 'HoneywellVip/status');
+    Route::post('vip/claim', 'HoneywellVip/claim');
+    Route::get('vip/rewards', 'HoneywellVip/rewards');
     
-    // 提现相关
-    Route::post('withdraw/create', 'Withdraw/create');
-    Route::get('withdraw/history', 'Withdraw/history');
-    Route::get('withdraw/cards', 'Withdraw/cards');
-
-    // 上传相关
-    Route::post('upload/image', 'Upload/image');
-    Route::post('upload/withdraw_proof', 'Upload/withdrawProof');
+    // SVIP (新增)
+    Route::get('svip/status', 'HoneywellVip/svipStatus');
+    Route::post('svip/claim', 'HoneywellVip/svipClaim');
+    Route::get('svip/rewards', 'HoneywellVip/svipRewards');
     
-    // 系统配置
-    Route::get('system/config', 'System/config');
+    // 任务
+    Route::get('task/invite', 'HoneywellTask/invite');
+    Route::post('task/claim_invite', 'HoneywellTask/claimInvite');
+    Route::get('task/collection', 'HoneywellTask/collection');
+    Route::post('task/claim_collection', 'HoneywellTask/claimCollection');
     
-    // Banner
-    Route::get('banner/list', 'Banner/list');
-})->middleware(think\middleware\AllowCrossDomain::class);
-
+    // 月薪/周薪
+    Route::get('salary/status', 'HoneywellSalary/status');
+    Route::post('salary/claim', 'HoneywellSalary/claim');
+    Route::get('weekly-salary/status', 'HoneywellSalary/weeklyStatus');
+    Route::post('weekly-salary/claim', 'HoneywellSalary/weeklyClaim');
+    
+    // 奖池
+    Route::get('prize/status', 'HoneywellPrize/status');
+    Route::post('prize/claim', 'HoneywellPrize/claim');
+    Route::get('prize-pool/status', 'HoneywellPrize/poolStatus');
+    Route::post('prize-pool/claim', 'HoneywellPrize/poolClaim');
+    
+    // 转盘
+    Route::get('lottery/status', 'HoneywellLottery/status');
+    Route::get('lottery/prizes', 'HoneywellLottery/prizes');
+    Route::post('lottery/spin', 'HoneywellLottery/spin');
+    
+    // 社区
+    Route::get('community/posts', 'HoneywellCommunity/posts');
+    Route::post('community/posts', 'HoneywellCommunity/create');
+    Route::get('community/posts/:id', 'HoneywellCommunity/detail');
+    Route::post('community/posts/:id/like', 'HoneywellCommunity/like');
+    Route::post('community/posts/:id/comments', 'HoneywellCommunity/comment');
+    Route::get('community/my_posts', 'HoneywellCommunity/myPosts');
+    Route::get('community/completed-withdraws', 'HoneywellCommunity/completedWithdraws');
+    
+    // 礼品码
+    Route::post('gift/redeem', 'HoneywellGift/redeem');
+    Route::get('gift/history', 'HoneywellGift/history');
+    
+    // 通知
+    Route::get('notifications', 'HoneywellNotification/list');
+    Route::get('notifications/:id', 'HoneywellNotification/detail');
+    Route::get('notifications/unread-count', 'HoneywellNotification/unreadCount');
+    Route::post('notifications/:id/read', 'HoneywellNotification/read');
+    Route::post('notifications/read-all', 'HoneywellNotification/readAll');
+    
+    // 其他
+    Route::get('other/banners', 'HoneywellOther/banners');
+    Route::get('other/announcements', 'HoneywellOther/announcements');
+    Route::get('other/about_us', 'HoneywellOther/aboutUs');
+    Route::get('other/service_links', 'HoneywellOther/serviceLinks');
+});
