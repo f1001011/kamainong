@@ -1,0 +1,84 @@
+<?php
+namespace app\controller;
+
+use app\BaseController;
+use think\facade\Db;
+
+class HoneywellOther extends BaseController
+{
+    public function banners()
+    {
+        $list = Db::name('common_ads')
+            ->where('position', 'home_banner')
+            ->where('status', 1)
+            ->order('sort', 'asc')
+            ->select()
+            ->toArray();
+        
+        $banners = [];
+        foreach ($list as $item) {
+            $banners[] = [
+                'id' => (int)$item['id'],
+                'image' => $item['image'],
+                'link' => $item['link'] ?? ''
+            ];
+        }
+        
+        return json(['success' => true, 'data' => ['banners' => $banners]]);
+    }
+
+    public function announcements()
+    {
+        $page = input('page', 1);
+        $pageSize = input('pageSize', 20);
+        
+        $list = Db::name('common_ads')
+            ->where('position', 'announcement')
+            ->where('status', 1)
+            ->order('id', 'desc')
+            ->page($page, $pageSize)
+            ->select()
+            ->toArray();
+        
+        $total = Db::name('common_ads')->where('position', 'announcement')->where('status', 1)->count();
+        
+        $announcements = [];
+        foreach ($list as $item) {
+            $announcements[] = [
+                'id' => (int)$item['id'],
+                'title' => $item['title'],
+                'content' => $item['content'] ?? '',
+                'createdAt' => date('c', strtotime($item['create_time']))
+            ];
+        }
+        
+        return json([
+            'success' => true,
+            'data' => [
+                'list' => $announcements,
+                'pagination' => ['total' => (int)$total, 'page' => (int)$page, 'pageSize' => (int)$pageSize]
+            ]
+        ]);
+    }
+
+    public function aboutUs()
+    {
+        $content = Db::name('common_sys_config')->where('key', 'about_us')->value('value');
+        
+        return json(['success' => true, 'data' => ['content' => $content ?? '']]);
+    }
+
+    public function serviceLinks()
+    {
+        $telegram = Db::name('common_sys_config')->where('key', 'telegram_link')->value('value');
+        $whatsapp = Db::name('common_sys_config')->where('key', 'whatsapp_link')->value('value');
+        
+        return json([
+            'success' => true,
+            'data' => [
+                'telegram' => $telegram ?? '',
+                'whatsapp' => $whatsapp ?? ''
+            ]
+        ]);
+    }
+}
