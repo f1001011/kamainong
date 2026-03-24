@@ -1,12 +1,12 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
-use app\model\User;
-use app\model\MoneyLog;
 use think\facade\Db;
 
-class HoneywellGift extends BaseController
+/**
+ * Honeywell 礼品码模块
+ */
+class HoneywellGift extends HoneywellBase
 {
     public function redeem()
     {
@@ -55,17 +55,19 @@ class HoneywellGift extends BaseController
         $userId = $this->getUserId();
         if (!$userId) return $this->unauthorized();
         
-        $page = input('page', 1);
-        $pageSize = input('pageSize', 20);
+        list($page, $pageSize) = $this->getPageParams();
         
-        $list = Db::name('common_gift_code_log')
+        // 使用 paginate 方法
+        $result = Db::name('common_gift_code_log')
             ->where('uid', $userId)
             ->order('id', 'desc')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $total = Db::name('common_gift_code_log')->where('uid', $userId)->count();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $records = [];
         foreach ($list as $item) {

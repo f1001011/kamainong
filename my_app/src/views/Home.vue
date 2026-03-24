@@ -18,7 +18,7 @@
             <span class="username">{{ t('home.welcome') }}</span>
           </div>
         </div>
-        <button class="glass-icon-btn" @click="router.push('/settings')">
+        <button class="glass-icon-btn" @click="router.push('/profile')">
           <Settings :size="18" />
         </button>
       </header>
@@ -61,16 +61,33 @@
           <span class="bq-label">{{ t('home.balanceLabel') }}</span>
           <span class="bq-amount">{{ CURRENCY }} {{ balanceDisplay }}</span>
         </div>
-        <button class="bq-btn" @click="router.push('/balance')">
-          <ArrowRight :size="13" />{{ t('home.balanceCenter') }}
+        <button class="bq-btn" @click="router.push('/transactions')">
+          <ArrowRight :size="13" />交易记录
         </button>
       </div>
 
-      <!-- Upload Proof Card (Fixed) -->
-      <div class="upload-proof-card glass-card"
+      <!-- 快捷入口 -->
+      <div class="quick-entry"
         v-motion :initial="{ opacity:0, y:24 }"
-        :enter="{ opacity:1, y:0, transition:{ delay:200 } }"
-        @click="router.push('/upload-proof')"
+        :enter="{ opacity:1, y:0, transition:{ delay:200 } }">
+        
+        <div class="quick-item" @click="router.push('/recharge')">
+          <Wallet :size="24" />
+          <span>充值</span>
+        </div>
+        <div class="quick-item" @click="router.push('/withdraw')">
+          <Banknote :size="24" />
+          <span>提现</span>
+        </div>
+        <div class="quick-item" @click="router.push('/gift-code')">
+          <Gift :size="24" />
+          <span>礼包码</span>
+        </div>
+        <div class="quick-item" @click="router.push('/activities')">
+          <Zap :size="24" />
+          <span>活动</span>
+        </div>
+      </div>
         style="background: linear-gradient(135deg,#00e676,#00c853); cursor: pointer; padding: 24px; border-radius: 16px; position: relative; overflow: hidden; margin-bottom: 20px;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%);"></div>
         <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between;">
@@ -137,6 +154,7 @@ import {
   Star, CheckCircle2,
   Wifi, Signal, CreditCard, Music,
   Sword, Gem, ShoppingCart, Car,
+  Wallet, Banknote, Gift,
 } from 'lucide-vue-next'
 import { fetchProducts, fetchHomeBalance } from '@/api/product'
 import { getSystemConfig } from '@/api/system'
@@ -442,6 +460,29 @@ onUnmounted(() => {
   cursor:pointer; transition:all 0.2s; font-family:inherit;
 }
 .bq-btn:hover { background:rgba(255,77,77,0.2); color:#ff4d4d; }
+
+/* ── Quick Entry ─────────────────────────────────────────────────────────────── */
+.quick-entry {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.quick-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.quick-item:active { transform: scale(0.95); }
+.quick-item svg { color: rgba(255,255,255,0.8); }
+.quick-item span { font-size: 12px; color: rgba(255,255,255,0.6); }
 
 /* ── Carousel ──────────────────────────────────────────────────────────────── */
 .carousel-wrap { margin-bottom:18px; }

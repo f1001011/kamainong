@@ -1,10 +1,12 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use think\facade\Db;
 
-class HoneywellOther extends BaseController
+/**
+ * Honeywell 其他模块
+ */
+class HoneywellOther extends HoneywellBase
 {
     public function banners()
     {
@@ -15,16 +17,18 @@ class HoneywellOther extends BaseController
             ->select()
             ->toArray();
         
+        // 返回数组格式给前端
         $banners = [];
         foreach ($list as $item) {
             $banners[] = [
                 'id' => (int)$item['id'],
-                'image' => $item['image'],
-                'link' => $item['link'] ?? ''
+                'imageUrl' => $item['image'] ?? '',
+                'linkUrl' => $item['link'] ?? null,
+                'sortOrder' => (int)($item['sort'] ?? 0)
             ];
         }
         
-        return json(['success' => true, 'data' => ['banners' => $banners]]);
+        return json(['success' => true, 'data' => ['list' => $banners]]);
     }
 
     public function announcements()
@@ -32,23 +36,26 @@ class HoneywellOther extends BaseController
         $page = input('page', 1);
         $pageSize = input('pageSize', 20);
         
-        $list = Db::name('common_ads')
+        // 使用 paginate 方法
+        $result = Db::name('common_ads')
             ->where('position', 'announcement')
             ->where('status', 1)
             ->order('id', 'desc')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $total = Db::name('common_ads')->where('position', 'announcement')->where('status', 1)->count();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $announcements = [];
         foreach ($list as $item) {
             $announcements[] = [
                 'id' => (int)$item['id'],
-                'title' => $item['title'],
+                'title' => $item['title'] ?? '',
                 'content' => $item['content'] ?? '',
-                'createdAt' => date('c', strtotime($item['create_time']))
+                'createdAt' => date('c', strtotime($item['create_time'] ?? 'now'))
             ];
         }
         
@@ -56,7 +63,12 @@ class HoneywellOther extends BaseController
             'success' => true,
             'data' => [
                 'list' => $announcements,
-                'pagination' => ['total' => (int)$total, 'page' => (int)$page, 'pageSize' => (int)$pageSize]
+                'pagination' => [
+                    'total' => (int)$total,
+                    'page' => (int)$page,
+                    'pageSize' => (int)$pageSize,
+                    'totalPages' => ceil($total / $pageSize)
+                ]
             ]
         ]);
     }

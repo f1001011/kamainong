@@ -1,13 +1,12 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use think\facade\Db;
 
 /**
- * Honeywell 配置接口
+ * Honeywell 配置模块
  */
-class HoneywellConfig extends BaseController
+class HoneywellConfig extends HoneywellBase
 {
     /**
      * 全局配置
@@ -112,6 +111,73 @@ class HoneywellConfig extends BaseController
             'data' => [
                 'config' => 1,
                 'texts' => 1
+            ]
+        ]);
+    }
+
+    /**
+     * 首页配置
+     * GET /api/config/home
+     */
+    public function home()
+    {
+        $configs = Db::name('common_sys_config')->column('value', 'name');
+        
+        // 获取推荐产品
+        $products = Db::name('common_goods')
+            ->where('status', 1)
+            ->where('is_tuijian', 1)
+            ->limit(5)
+            ->select()
+            ->toArray();
+        
+        $recommendProducts = [];
+        foreach ($products as $p) {
+            $recommendProducts[] = [
+                'id' => (int)$p['id'],
+                'name' => $p['goods_name'],
+                'price' => number_format($p['goods_money'], 2, '.', ''),
+                'dailyIncome' => number_format($p['day_red'], 2, '.', ''),
+                'image' => $p['goods_img']
+            ];
+        }
+        
+        return json([
+            'success' => true,
+            'data' => [
+                'quickEntries' => [
+                    ['id' => 'recharge', 'icon' => 'wallet', 'label' => 'Recharge'],
+                    ['id' => 'withdraw', 'icon' => '提现', 'label' => 'Withdraw'],
+                    ['id' => 'team', 'icon' => 'team', 'label' => 'Team'],
+                    ['id' => 'activities', 'icon' => 'gift', 'label' => 'Activities']
+                ],
+                'recommendProducts' => $recommendProducts,
+                'bannerVisible' => true,
+                'todayIncomeVisible' => true,
+                'signInEntryVisible' => true,
+                'marqueeVisible' => true,
+                'recommendEnabled' => true,
+                'recommendTitle' => 'Produits recommandés'
+            ]
+        ]);
+    }
+
+    /**
+     * 个人资料配置
+     * GET /api/config/profile
+     */
+    public function profile()
+    {
+        return json([
+            'success' => true,
+            'data' => [
+                'nicknameMaxLength' => 20,
+                'nicknameMinLength' => 2,
+                'avatarMaxSize' => 2048,  // KB
+                'passwordMinLength' => 6,
+                'passwordMaxLength' => 20,
+                'passwordRequireLetter' => false,
+                'passwordRequireNumber' => true
             ]
         ]);
     }

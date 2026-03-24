@@ -40,6 +40,7 @@ class Recharge extends Model
     
     /**
      * 格式化充值记录
+     * 匹配前端 RechargeOrderData 接口
      */
     public static function format($record)
     {
@@ -51,8 +52,22 @@ class Recharge extends Model
             'channelName' => $record['pay_type'] ?? '',
             'status' => self::getStatusText($record['status']),
             'createdAt' => date('c', strtotime($record['create_time'])),
-            'paidAt' => $record['pay_time'] ? date('c', strtotime($record['pay_time'])) : null
+            'expireAt' => isset($record['expire_at']) && $record['expire_at'] ? date('c', strtotime($record['expire_at'])) : null,
+            'paidAt' => isset($record['pay_time']) && $record['pay_time'] ? date('c', strtotime($record['pay_time'])) : null
         ];
+    }
+    
+    /**
+     * 获取状态文本（匹配前端 RechargeOrderStatus）
+     */
+    public static function getStatusText($status)
+    {
+        $map = [
+            self::STATUS_PENDING => 'PENDING_PAYMENT',  // 待支付
+            self::STATUS_PAID => 'PAID',                 // 已支付
+            self::STATUS_CANCELLED => 'CANCELLED'       // 已取消
+        ];
+        return $map[$status] ?? 'UNKNOWN';
     }
     
     /**

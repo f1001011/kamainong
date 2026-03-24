@@ -1,136 +1,207 @@
 <template>
-  <div class="products-page">
-    <div class="bg-canvas">
-      <div class="orb orb-red"></div>
-      <div class="orb orb-cyan"></div>
+  <div class="page-container">
+    <!-- 返回按钮 -->
+    <button class="back-btn" @click="router.back()">
+      <ArrowLeft :size="24" />
+    </button>
+
+    <!-- 标题 -->
+    <h1 class="page-title">استثمارات</h1>
+    <h1 class="page-title">عقارية</h1>
+
+    <!-- Tab 栏 -->
+    <div class="tabs-wrapper" :class="{ scrolled: isScrolled }">
+      <div class="tabs">
+        <button
+          v-for="tab in tabs"
+          :key="tab.value"
+          :class="['tab', { active: activeTab === tab.value }]"
+          @click="handleTabChange(tab.value)"
+        >
+          {{ tab.label }}
+        </button>
+      </div>
     </div>
 
-    <div class="page-content">
-      <div class="header">
-        <h1>{{ t('nav.products') }}</h1>
+    <!-- 产品列表 -->
+    <div class="products-list">
+      <div v-if="isLoading" class="loading">
+        <LoadingSpinner />
       </div>
-
-      <div v-if="loading" class="loading">{{ t('common.loading') }}</div>
-
-      <div v-else-if="products.length" class="product-grid">
+      <div v-else-if="products.length === 0" class="empty">
+        <p>暂无产品</p>
+      </div>
+      <div v-else class="product-grid">
         <div
-          v-for="(item, i) in products"
-          :key="item.id"
-          class="product-card glass-card"
-          @click="router.push(`/product/${item.id}`)"
-          v-motion
-          :initial="{ opacity: 0, y: 24, scale: 0.92 }"
-          :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: Math.min(120 + i * 45, 800), type: 'spring', stiffness: 260, damping: 20 } }"
+          v-for="product in products"
+          :key="product.id"
+          class="product-card"
+          @click="router.push(`/product/${product.id}`)"
         >
-          <div class="product-img">
-            <img v-if="item.imageUrl" class="product-img-pic" :src="item.imageUrl" />
-            <div v-else class="product-fallback">NO IMAGE</div>
-            <span v-if="item.tag" class="product-tag">{{ item.tag }}</span>
+          <div class="product-image" :style="{ background: product.gradient }">
+            <img v-if="product.imageUrl" :src="product.imageUrl" alt="" />
+            <div v-else class="product-icon">
+              <Wifi :size="26" />
+            </div>
           </div>
-
           <div class="product-info">
-            <div class="product-name">{{ item.name }}</div>
-            <div class="product-price">{{ CURRENCY }}{{ item.price.toLocaleString() }}</div>
-            <div class="product-meta">{{ t('product.dailyIncome') }}: {{ CURRENCY }}{{ item.dailyIncome.toLocaleString() }}</div>
-            <div class="product-meta">{{ t('product.totalIncome') }}: {{ CURRENCY }}{{ item.totalIncome.toLocaleString() }}</div>
-            <div class="product-meta">{{ t('product.cycle') }}: {{ item.cycle }} {{ t('common.days') }}</div>
+            <div class="product-name">{{ product.name }}</div>
+            <div class="product-price">${{ product.price }}</div>
+            <div class="product-stock">
+              <ShoppingBag :size="12" />
+              可购 {{ product.maxPurchase }}
+            </div>
           </div>
         </div>
       </div>
-
-      <div v-else class="empty">暂无商品</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
-import { CURRENCY } from '@/config'
-import { fetchProducts } from '@/api/product'
-import type { ProductItem } from '@/types/product'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { ArrowLeft, Wifi, ShoppingBag } from 'lucide-vue-next'
+import LoadingSpinner from '@/components/ui/LoadingSpinner.vue'
+import request from '@/api/request'
 
-const { t } = useI18n()
 const router = useRouter()
+const route = useRoute()
 
-const loading = ref(true)
-const products = ref<ProductItem[]>([])
+// 状态
+const isScrolled = ref(false)
+const isLoading = ref(true)
+const activeTab = ref('1')
+const products = ref<any[]>([])
 
-onMounted(async () => {
+// Tab 配置
+const tabs = [
+  { value: '1', label: '全部' },
+  { value: '2', label: '数据' },
+  { value: '3', label: '手机' },
+  { value: '4', label: '会员' },
+  { value: '5', label: '游戏' },
+  { value: '6', label: '生活' },
+]
+
+// 滚动监听
+function handleScroll() {
+  isScrolled.value = window.scrollY > 80
+}
+
+// 加载产品
+async function loadProducts() {
   try {
-    const result = await fetchProducts({ page: 1, pageSize: 500 })
-    products.value = result.list
+    isLoading.value = true
+    const res = await request.get('/products', {
+      params: { series: activeTab.value }
+    })
+    products.value = res.list || []
+  } catch (e) {
+    console.error('加载产品失败', e)
   } finally {
-    loading.value = false
+    isLoading.value = false
   }
+}
+
+// Tab 切换
+function handleTabChange(tab: string) {
+  activeTab.value = tab
+  loadProducts()
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+  loadProducts()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
 <style scoped>
-.products-page {
+.page-container {
   min-height: 100vh;
-  background: var(--bg-base);
-  padding: 20px 20px 80px;
-  position: relative;
-  overflow: hidden;
+  background: var(--bg-base, #f5f5f5);
+  padding: 16px;
 }
 
-.page-content {
-  position: relative;
-  z-index: 1;
-}
-
-.bg-canvas {
+.back-btn {
   position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
+  top: 16px;
+  left: 16px;
+  z-index: 40;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
 }
 
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(85px);
-  opacity: 0.95;
-}
-
-.orb-red {
-  width: 420px;
-  height: 420px;
-  top: -100px;
-  left: -80px;
-  background: var(--orb-red);
-}
-
-.orb-cyan {
-  width: 360px;
-  height: 360px;
-  top: 28%;
-  right: -60px;
-  background: var(--orb-cyan);
-}
-
-.header h1 {
-  font-size: 24px;
+.page-title {
+  font-size: 28px;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 20px;
+  color: #333;
+  line-height: 1.2;
+  margin-top: 40px;
 }
 
-.loading,
-.empty {
-  text-align: center;
-  padding: 40px;
-  color: color-mix(in srgb, var(--text-primary) 50%, transparent);
+.tabs-wrapper {
+  margin-top: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: transparent;
+  transition: background 0.3s;
 }
 
-.glass-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(28px) saturate(160%);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-  border: 1px solid var(--border);
-  border-radius: 20px;
+.tabs-wrapper.scrolled {
+  background: rgba(250, 250, 248, 0.88);
+  backdrop-filter: blur(20px);
+}
+
+.tabs {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.tab {
+  font-size: 14px;
+  font-weight: 500;
+  color: #999;
+  background: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 8px 0;
+  position: relative;
+}
+
+.tab.active {
+  color: #333;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 184, 0, 0.5), transparent);
+}
+
+.products-list {
+  padding-top: 20px;
 }
 
 .product-grid {
@@ -140,75 +211,68 @@ onMounted(async () => {
 }
 
 .product-card {
+  background: white;
+  border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s;
 }
 
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+.product-card:active {
+  transform: scale(0.97);
 }
 
-.product-img {
-  position: relative;
+.product-image {
   height: 120px;
-  background: linear-gradient(160deg, rgba(0, 229, 255, 0.14), rgba(0, 176, 255, 0.06));
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  position: relative;
 }
 
-.product-img-pic {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product-fallback {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.45);
-}
-
-.product-tag {
-  position: absolute;
-  top: 9px;
-  right: 9px;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 2px 7px;
-  border-radius: 20px;
-  color: var(--color-amber);
-  border: 1px solid color-mix(in srgb, var(--color-amber) 40%, transparent);
-  background: color-mix(in srgb, var(--color-amber) 16%, transparent);
+.product-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .product-info {
-  padding: 12px 13px 13px;
+  padding: 12px;
 }
 
 .product-name {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .product-price {
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 700;
-  color: var(--color-lime);
-  margin-bottom: 6px;
+  color: #ff4d4d;
+  margin-bottom: 4px;
 }
 
-.product-meta {
-  font-size: 10px;
-  color: color-mix(in srgb, var(--text-primary) 60%, transparent);
-  line-height: 1.4;
+.product-stock {
+  font-size: 12px;
+  color: #999;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 40px;
+  color: #999;
 }
 </style>

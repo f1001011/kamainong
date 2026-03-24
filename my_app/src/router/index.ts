@@ -2,51 +2,59 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
-import BalanceCenter from '../views/BalanceCenter.vue'
 import Products from '../views/Products.vue'
-import Vip from '../views/Vip.vue'
 import ProductDetail from '../views/ProductDetail.vue'
-import Investments from '../views/Investments.vue'
+import Recharge from '../views/Recharge.vue'
+import RechargeRecords from '../views/RechargeRecords.vue'
+import Withdraw from '../views/Withdraw.vue'
+import WithdrawRecords from '../views/WithdrawRecords.vue'
+import Transactions from '../views/Transactions.vue'
 import Team from '../views/Team.vue'
-import Income from '../views/Income.vue'
-import Prize from '../views/Prize.vue'
+import Profile from '../views/Profile.vue'
 import Settings from '../views/Settings.vue'
-import InviteTask from '../views/InviteTask.vue'
-import Salary from '../views/Salary.vue'
-import UploadProof from '../views/UploadProof.vue'
-import ExchangeProducts from '../views/ExchangeProducts.vue'
-import Records from '../views/Records.vue'
-import PointsRecords from '../views/PointsRecords.vue'
-import Lottery from '../views/Lottery.vue'
+import BankCards from '../views/BankCards.vue'
+import Messages from '../views/Messages.vue'
+import About from '../views/About.vue'
 import Activities from '../views/Activities.vue'
+import Security from '../views/Security.vue'
+import GiftCode from '../views/GiftCode.vue'
+import Positions from '../views/Positions.vue'
+import Community from '../views/Community.vue'
+import CommunityDetail from '../views/CommunityDetail.vue'
+import CommunityCreate from '../views/CommunityCreate.vue'
+import CommunityMy from '../views/CommunityMy.vue'
 import { setLocale } from '@/i18n'
 
 // ── 无需登录 ────────────────────────────────────────────────────────────────
 const publicRoutes: Array<RouteRecordRaw> = [
     { path: '/login',    name: 'Login',        component: Login },
     { path: '/register', name: 'Register',     component: Register },
-    { path: '/balance',  name: 'BalanceCenter', component: BalanceCenter },
     { path: '/',         name: 'Home',          component: Home },
 ]
 
 // ── 需要登录 ────────────────────────────────────────────────────────────────
 const authRoutes: Array<RouteRecordRaw> = [
     { path: '/products', name: 'Products', component: Products, meta: { requiresAuth: true } },
-    { path: '/vip', name: 'Vip', component: Vip, meta: { requiresAuth: true } },
     { path: '/product/:id', name: 'ProductDetail', component: ProductDetail, meta: { requiresAuth: true } },
-    { path: '/investments', name: 'Investments', component: Investments, meta: { requiresAuth: true } },
+    { path: '/recharge', name: 'Recharge', component: Recharge, meta: { requiresAuth: true } },
+    { path: '/recharge/records', name: 'RechargeRecords', component: RechargeRecords, meta: { requiresAuth: true } },
+    { path: '/withdraw', name: 'Withdraw', component: Withdraw, meta: { requiresAuth: true } },
+    { path: '/withdraw/records', name: 'WithdrawRecords', component: WithdrawRecords, meta: { requiresAuth: true } },
+    { path: '/transactions', name: 'Transactions', component: Transactions, meta: { requiresAuth: true } },
     { path: '/team', name: 'Team', component: Team, meta: { requiresAuth: true } },
-    { path: '/income', name: 'Income', component: Income, meta: { requiresAuth: true } },
-    { path: '/prize', name: 'Prize', component: Prize, meta: { requiresAuth: true } },
+    { path: '/profile', name: 'Profile', component: Profile, meta: { requiresAuth: true } },
     { path: '/settings', name: 'Settings', component: Settings, meta: { requiresAuth: true } },
-    { path: '/invite-task', name: 'InviteTask', component: InviteTask, meta: { requiresAuth: true } },
-    { path: '/salary', name: 'Salary', component: Salary, meta: { requiresAuth: true } },
-    { path: '/upload-proof', name: 'UploadProof', component: UploadProof, meta: { requiresAuth: true } },
-    { path: '/exchange-products', name: 'ExchangeProducts', component: ExchangeProducts, meta: { requiresAuth: true } },
-    { path: '/records', name: 'Records', component: Records, meta: { requiresAuth: true } },
-    { path: '/points-records', name: 'PointsRecords', component: PointsRecords, meta: { requiresAuth: true } },
-    { path: '/lottery', name: 'Lottery', component: Lottery, meta: { requiresAuth: true } },
+    { path: '/bank-cards', name: 'BankCards', component: BankCards, meta: { requiresAuth: true } },
+    { path: '/messages', name: 'Messages', component: Messages, meta: { requiresAuth: true } },
+    { path: '/about', name: 'About', component: About, meta: { requiresAuth: true } },
     { path: '/activities', name: 'Activities', component: Activities, meta: { requiresAuth: true } },
+    { path: '/security', name: 'Security', component: Security, meta: { requiresAuth: true } },
+    { path: '/gift-code', name: 'GiftCode', component: GiftCode, meta: { requiresAuth: true } },
+    { path: '/positions', name: 'Positions', component: Positions, meta: { requiresAuth: true } },
+    { path: '/community', name: 'Community', component: Community, meta: { requiresAuth: true } },
+    { path: '/community/:id', name: 'CommunityDetail', component: CommunityDetail, meta: { requiresAuth: true } },
+    { path: '/community/create', name: 'CommunityCreate', component: CommunityCreate, meta: { requiresAuth: true } },
+    { path: '/community/my', name: 'CommunityMy', component: CommunityMy, meta: { requiresAuth: true } },
 ]
 
 const routes: Array<RouteRecordRaw> = [...publicRoutes, ...authRoutes]

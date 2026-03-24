@@ -1,14 +1,13 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use app\model\User;
 use think\facade\Db;
 
 /**
  * Honeywell 团队模块
  */
-class HoneywellTeam extends BaseController
+class HoneywellTeam extends HoneywellBase
 {
     /**
      * 团队统计
@@ -56,13 +55,17 @@ class HoneywellTeam extends BaseController
         
         $field = 'agent_id_' . $level;
         
-        $query = User::where($field, $userId);
-        $total = $query->count();
+        // 使用 paginate 方法
+        $result = User::where($field, $userId)
+            ->field('id, user_phone, total_recharge, create_time')
+            ->order('id', 'desc')
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $list = $query->field('id, user_phone, total_recharge, create_time')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $members = [];
         foreach ($list as $item) {
@@ -89,13 +92,17 @@ class HoneywellTeam extends BaseController
         
         list($page, $pageSize) = $this->getPageParams();
         
-        $query = Db::name('money_fanyong_log')->where('uid', $userId);
-        $total = $query->count();
+        // 使用 paginate 方法
+        $result = Db::name('money_fanyong_log')
+            ->where('uid', $userId)
+            ->order('id', 'desc')
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $list = $query->order('id', 'desc')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $records = [];
         foreach ($list as $item) {

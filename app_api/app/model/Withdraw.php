@@ -40,18 +40,33 @@ class Withdraw extends Model
     
     /**
      * 格式化提现记录
+     * 匹配前端 WithdrawOrderData 接口
      */
     public static function format($record)
     {
+        // 获取银行卡信息
+        $bankCard = null;
+        if (!empty($record['bank_card_id'])) {
+            $bankCard = Db::name('common_user_bank')
+                ->where('id', $record['bank_card_id'])
+                ->find();
+        }
+        
+        // 计算手续费
+        $fee = $record['money'] - ($record['actual_amount'] ?? $record['money']);
+        
         return [
             'id' => (int)$record['id'],
             'orderNo' => $record['order_no'] ?? '',
             'amount' => number_format($record['money'], 2, '.', ''),
             'actualAmount' => number_format($record['actual_amount'] ?? $record['money'], 2, '.', ''),
-            'fee' => number_format(($record['money'] - $record['actual_amount']) ?? 0, 2, '.', ''),
+            'fee' => number_format($fee > 0 ? $fee : 0, 2, '.', ''),
+            'bankName' => $bankCard['bank_name'] ?? '',
+            'accountNoMask' => isset($bankCard['bank_number']) ? substr($bankCard['bank_number'], -4) : '',
             'status' => self::getStatusText($record['status']),
+            'rejectReason' => $record['reject_reason'] ?? null,
             'createdAt' => date('c', strtotime($record['create_time'])),
-            'processedAt' => $record['update_time'] ? date('c', strtotime($record['update_time'])) : null
+            'completedAt' => $record['update_time'] ? date('c', strtotime($record['update_time'])) : null
         ];
     }
     
@@ -150,14 +165,14 @@ class Withdraw extends Model
     }
     
     /**
-     * 获取状态文本
+     * 获取状态文本（匹配前端 WithdrawOrderStatus）
      */
     public static function getStatusText($status)
     {
         $map = [
-            self::STATUS_PENDING => 'PENDING',
-            self::STATUS_APPROVED => 'APPROVED',
-            self::STATUS_REJECTED => 'REJECTED'
+            self::STATUS_PENDING => 'PENDING_REVIEW',   // 待审核
+            self::STATUS_APPROVED => 'APPROVED',       // 已通过
+            self::STATUS_REJECTED => 'REJECTED'        // 已拒绝
         ];
         return $map[$status] ?? 'UNKNOWN';
     }

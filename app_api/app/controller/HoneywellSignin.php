@@ -1,14 +1,14 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use app\model\User;
 use app\model\MoneyLog;
+use think\facade\Db;
 
 /**
  * Honeywell 签到模块
  */
-class HoneywellSignin extends BaseController
+class HoneywellSignin extends HoneywellBase
 {
     /**
      * 签到状态
@@ -19,20 +19,17 @@ class HoneywellSignin extends BaseController
         if (!$userId) return $this->unauthorized();
         
         $today = date('Y-m-d');
-        $todayLog = \think\facade\Db::name('common_user_sign_log')
+        $todayLog = Db::name('common_user_sign_log')
             ->where('uid', $userId)
             ->where('sign_date', $today)
             ->find();
         
         $continuousDays = $this->getContinuousDays($userId);
         
-        return json([
-            'success' => true,
-            'data' => [
-                'hasSigned' => (bool)$todayLog,
-                'continuousDays' => $continuousDays,
-                'reward' => 1
-            ]
+        return $this->success([
+            'hasSigned' => (bool)$todayLog,
+            'continuousDays' => $continuousDays,
+            'reward' => 1
         ]);
     }
 
@@ -45,33 +42,33 @@ class HoneywellSignin extends BaseController
         if (!$userId) return $this->unauthorized();
         
         $today = date('Y-m-d');
-        $exists = \think\facade\Db::name('common_user_sign_log')
+        $exists = Db::name('common_user_sign_log')
             ->where('uid', $userId)
             ->where('sign_date', $today)
             ->find();
         
         if ($exists) {
-            return json(['success' => false, 'error' => ['code' => 'ALREADY_SIGNED', 'message' => 'Ya has firmado hoy']]);
+            return $this->error('ALREADY_SIGNED');
         }
         
-        \think\facade\Db::startTrans();
+        Db::startTrans();
         try {
             // 增加积分
             User::changeMoney($userId, 'inc', 2, 1, MoneyLog::STATUS_SIGNIN, 0, '签到奖励');
             
             // 记录签到
-            \think\facade\Db::name('common_user_sign_log')->insert([
+            Db::name('common_user_sign_log')->insert([
                 'uid' => $userId,
                 'sign_date' => $today,
                 'create_time' => date('Y-m-d H:i:s')
             ]);
             
-            \think\facade\Db::commit();
-            return json(['success' => true, 'data' => ['reward' => 1]]);
+            Db::commit();
+            return $this->success(['reward' => 1]);
             
         } catch (\Exception $e) {
-            \think\facade\Db::rollback();
-            return json(['success' => false, 'error' => ['code' => 'SIGN_FAILED', 'message' => $e->getMessage()]]);
+            Db::rollback();
+            return $this->error('SIGN_FAILED');
         }
     }
 
@@ -86,22 +83,74 @@ class HoneywellSignin extends BaseController
         $days = input('days', 7);
         $startDate = date('Y-m-d', strtotime("-{$days} days"));
         
-        $records = \think\facade\Db::name('common_user_sign_log')
+        list($page, $pageSize) = $this->getPageParams();
+        
+        // 使用 paginate 方法
+        $result = Db::name('common_user_sign_log')
             ->where('uid', $userId)
             ->where('sign_date', '>=', $startDate)
             ->order('sign_date', 'desc')
-            ->select()
-            ->toArray();
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $list = [];
-        foreach ($records as $item) {
-            $list[] = [
+        $total = $result->total();
+        $list = $result->items()->toArray();
+        
+        // 匹配前端 SignInRecord 接口
+        $records = [];
+        foreach ($list as $item) {
+            $records[] = [
                 'date' => $item['sign_date'],
-                'reward' => 1
+                'signed' => true,
+                'signType' => 'NORMAL',
+                'amount' => '1',
+                'signedAt' => date('c', strtotime($item['create_time']))
             ];
         }
         
-        return json(['success' => true, 'data' => ['list' => $list]]);
+        // 如果需要填充未签到的日期
+        $allRecords = $this->fillMissingDates($startDate, $records, $days);
+        
+        return $this->success([
+            'records' => $allRecords,
+            'pagination' => [
+                'total' => (int)$total,
+                'page' => (int)$page,
+                'pageSize' => (int)$pageSize,
+                'totalPages' => ceil($total / $pageSize)
+            ]
+        ]);
+    }
+
+    /**
+     * 填充缺失的日期（未签到的日期）
+     */
+    private function fillMissingDates($startDate, $signedRecords, $days)
+    {
+        $result = [];
+        for ($i = 0; $i < $days; $i++) {
+            $date = date('Y-m-d', strtotime($startDate) + ($i * 86400));
+            $found = false;
+            foreach ($signedRecords as $record) {
+                if ($record['date'] === $date) {
+                    $result[] = $record;
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $result[] = [
+                    'date' => $date,
+                    'signed' => false,
+                    'signType' => null,
+                    'amount' => null,
+                    'signedAt' => null
+                ];
+            }
+        }
+        return $result;
     }
     
     private function getContinuousDays($userId)
@@ -110,7 +159,7 @@ class HoneywellSignin extends BaseController
         $date = date('Y-m-d');
         
         while (true) {
-            $log = \think\facade\Db::name('common_user_sign_log')
+            $log = Db::name('common_user_sign_log')
                 ->where('uid', $userId)
                 ->where('sign_date', $date)
                 ->find();
@@ -122,20 +171,5 @@ class HoneywellSignin extends BaseController
         }
         
         return $days;
-    }
-    
-    private function getUserId()
-    {
-        $token = request()->header('authorization');
-        $token = str_replace('Bearer ', '', $token);
-        if (empty($token)) return null;
-        
-        $tokenInfo = \think\facade\Db::name('common_home_token')->where('token', $token)->find();
-        return $tokenInfo ? $tokenInfo['uid'] : null;
-    }
-    
-    private function unauthorized()
-    {
-        return json(['success' => false, 'error' => ['code' => 'UNAUTHORIZED', 'message' => 'No autorizado']], 401);
     }
 }

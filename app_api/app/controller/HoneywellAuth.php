@@ -57,7 +57,7 @@ class HoneywellAuth
             ->find();
         $vipLevel = $vipLog ? (int)$vipLog['vip'] : 0;
 
-        return $this->success([
+        return api_success([
             'token' => $token,
             'expireTime' => $expireTime,
             'user' => [
@@ -89,11 +89,11 @@ class HoneywellAuth
 
         // 参数验证
         if (empty($phone) || empty($password)) {
-            return $this->error('INVALID_PARAMS');
+            return api_error('INVALID_PARAMS');
         }
 
         if (!preg_match('/^\d{9}$/', $phone)) {
-            return $this->error('INVALID_PHONE');
+            return api_error('INVALID_PHONE');
         }
 
         // 检查手机号是否已存在
@@ -102,7 +102,7 @@ class HoneywellAuth
             ->find();
         
         if ($exists) {
-            return $this->error('PHONE_EXISTS');
+            return api_error('PHONE_EXISTS');
         }
 
         // 查找邀请人
@@ -136,12 +136,60 @@ class HoneywellAuth
             Db::commit();
 
             // 生成Token
-            return $this->login();
+            return $this->doLogin($userId);
 
         } catch (\Exception $e) {
             Db::rollback();
-            return $this->error('SYSTEM_ERROR');
+            return api_error('SYSTEM_ERROR');
         }
+    }
+
+    /**
+     * 执行登录（注册后调用）
+     */
+    private function doLogin($userId)
+    {
+        $user = Db::name('common_user')->where('id', $userId)->find();
+        if (!$user) {
+            return api_error('USER_NOT_FOUND');
+        }
+
+        // 生成Token
+        $token = md5($user['id'] . time() . rand(1000, 9999));
+        $expireTime = time() + 30 * 86400;
+
+        Db::name('common_home_token')->insert([
+            'token' => $token,
+            'uid' => $user['id'],
+            'create_time' => date('Y-m-d H:i:s'),
+            'expire_time' => $expireTime
+        ]);
+
+        // 获取VIP等级
+        $vipLog = Db::name('common_vip_log')
+            ->where('uid', $userId)
+            ->order('id', 'desc')
+            ->find();
+        $vipLevel = $vipLog ? (int)$vipLog['vip'] : 0;
+
+        return api_success([
+            'token' => $token,
+            'expireTime' => $expireTime,
+            'user' => [
+                'id' => (int)$user['id'],
+                'phone' => $user['user_phone'],
+                'nickname' => $user['nickname'] ?? '',
+                'avatar' => $user['avatar'] ?? '',
+                'availableBalance' => number_format($user['money_balance'] ?? 0, 2, '.', ''),
+                'frozenBalance' => '0.00',
+                'inviteCode' => $user['invitation_code'],
+                'vipLevel' => $vipLevel,
+                'svipLevel' => $vipLevel,
+                'firstPurchaseDone' => false,
+                'status' => 'ACTIVE',
+                'createdAt' => date('c', strtotime($user['create_time']))
+            ]
+        ]);
     }
     
     /**

@@ -1,14 +1,14 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
+use app\model\User;
 use app\model\Recharge;
 use think\facade\Db;
 
 /**
  * Honeywell 充值模块
  */
-class HoneywellRecharge extends BaseController
+class HoneywellRecharge extends HoneywellBase
 {
     /**
      * 充值订单列表
@@ -21,14 +21,24 @@ class HoneywellRecharge extends BaseController
         
         list($page, $pageSize) = $this->getPageParams();
         
-        $result = Recharge::getRecords($userId, $page, $pageSize);
+        // 使用 paginate 方法
+        $result = Db::name('common_pay_recharge')
+            ->where('uid', $userId)
+            ->order('id', 'desc')
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
+        
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $records = [];
-        foreach ($result['list'] as $item) {
+        foreach ($list as $item) {
             $records[] = Recharge::format($item);
         }
         
-        return $this->paginated($records, $result['total'], $page, $pageSize);
+        return $this->paginated($records, $total, $page, $pageSize);
     }
 
     /**
@@ -120,5 +130,52 @@ class HoneywellRecharge extends BaseController
             ->update(['status' => Recharge::STATUS_CANCELLED]);
         
         return $this->success();
+    }
+
+    /**
+     * 充值通道列表
+     * GET /api/recharge/channels
+     */
+    public function channels()
+    {
+        $configs = Db::name('common_sys_config')->column('value', 'name');
+        
+        $minAmount = (int)($configs['min_recharge'] ?? 8000);
+        $maxAmount = (int)($configs['max_recharge'] ?? 10000000);
+        
+        // 预设金额
+        $presets = [1000, 3000, 5000, 10000, 20000, 50000];
+        
+        // 支付通道（从数据库读取）
+        $paymentChannels = Db::name('common_payment_channel')
+            ->where('status', 1)
+            ->select()
+            ->toArray();
+        
+        $channels = [];
+        foreach ($paymentChannels as $channel) {
+            $channels[] = [
+                'id' => (int)$channel['id'],
+                'code' => $channel['channel_code'],
+                'name' => $channel['channel_name'],
+                'icon' => $channel['channel_icon'] ?? '',
+                'description' => $channel['channel_desc'] ?? ''
+            ];
+        }
+        
+        // 如果没有配置通道，返回默认通道
+        if (empty($channels)) {
+            $channels = [
+                ['id' => 1, 'code' => 'default', 'name' => 'Paiement par défaut', 'icon' => '', 'description' => '']
+            ];
+        }
+        
+        return $this->success([
+            'channels' => $channels,
+            'presets' => $presets,
+            'minAmount' => (string)$minAmount,
+            'maxAmount' => (string)$maxAmount,
+            'tips' => 'Le dépôt sera crédité sous 5 minutes'
+        ]);
     }
 }

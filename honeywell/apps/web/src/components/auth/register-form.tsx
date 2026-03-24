@@ -153,7 +153,7 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
 
       setToken(response.token);
       setUser(response.user);
-      document.cookie = `token=${response.token}; path=/; max-age=${7 * 24 * 60 * 60}`;
+      document.cookie = `token=${response.token}; path=/; max-age=${7 * 24 * 60 * 60}; SameSite=Lax`;
 
       const rewardAmount = Number(config.registerBonus) || 0;
       if (rewardAmount > 0 && isAnimationEnabled) {

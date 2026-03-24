@@ -1,153 +1,136 @@
 <template>
-  <div class="settings-page">
-    <div class="header">
-      <h1>{{ t('nav.settings') }}</h1>
+  <div class="page-container">
+    <div class="top-nav">
+      <button class="nav-btn" @click="router.back()">
+        <ArrowLeft :size="24" />
+      </button>
+      <h1 class="nav-title">设置</h1>
+      <div class="nav-btn"></div>
     </div>
 
-    <div class="user-info">
-      <div class="info-item">
-        <span class="label">{{ t('settings.username') }}</span>
-        <span class="value">{{ userInfo.username }}</span>
+    <div class="settings-list">
+      <div class="setting-item" @click="router.push('/settings/password')">
+        <Lock :size="20" />
+        <span>修改密码</span>
+        <ArrowRight :size="16" />
       </div>
-      <div class="info-item">
-        <span class="label">{{ t('settings.phone') }}</span>
-        <span class="value">{{ userInfo.phone }}</span>
+      <div class="setting-item" @click="router.push('/security')">
+        <Shield :size="20" />
+        <span>安全中心</span>
+        <ArrowRight :size="16" />
+      </div>
+      <div class="setting-item" @click="handleLanguage">
+        <Globe :size="20" />
+        <span>语言</span>
+        <span class="setting-value">中文</span>
+      </div>
+      <div class="setting-item" @click="router.push('/about')">
+        <Info :size="20" />
+        <span>关于我们</span>
+        <ArrowRight :size="16" />
+      </div>
+      <div class="setting-item">
+        <FileText :size="20" />
+        <span>用户协议</span>
+        <ArrowRight :size="16" />
+      </div>
+      <div class="setting-item">
+        <Shield :size="20" />
+        <span>隐私政策</span>
+        <ArrowRight :size="16" />
       </div>
     </div>
 
-    <div class="password-section">
-      <h3>{{ t('settings.changePassword') }}</h3>
-      <input v-model="oldPassword" type="password" :placeholder="t('settings.oldPassword')" />
-      <input v-model="newPassword" type="password" :placeholder="t('settings.newPassword')" />
-      <input v-model="confirmPassword" type="password" :placeholder="t('settings.confirmPassword')" />
-      <button @click="handleChangePassword">{{ t('settings.submit') }}</button>
-    </div>
-
-    <button class="logout-btn" @click="handleLogout">{{ t('settings.logout') }}</button>
+    <div class="version">版本 1.0.0</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import { getUserInfo, changePassword } from '@/api/user'
+import { ArrowLeft, ArrowRight, Lock, Shield, Globe, Info, FileText } from 'lucide-vue-next'
 
 const router = useRouter()
-const { t } = useI18n()
 
-const userInfo = ref({ username: '', phone: '' })
-const oldPassword = ref('')
-const newPassword = ref('')
-const confirmPassword = ref('')
-
-const handleChangePassword = async () => {
-  if (newPassword.value !== confirmPassword.value) {
-    alert(t('settings.passwordMismatch'))
-    return
-  }
-  await changePassword({ oldPassword: oldPassword.value, newPassword: newPassword.value })
-  oldPassword.value = ''
-  newPassword.value = ''
-  confirmPassword.value = ''
+function handleLanguage() {
+  // TODO: 语言切换
 }
-
-const handleLogout = () => {
-  localStorage.removeItem('token')
-  router.push('/login')
-}
-
-onMounted(async () => {
-  userInfo.value = await getUserInfo()
-})
 </script>
 
 <style scoped>
-.settings-page {
+.page-container {
   min-height: 100vh;
-  background: var(--bg-base);
-  padding: 20px 20px 80px;
+  background: #f5f5f5;
+  padding-bottom: 100px;
 }
 
-.header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 20px;
-}
-
-.user-info {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.info-item {
+.top-nav {
+  position: sticky;
+  top: 0;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 12px 16px;
+  background: white;
+  z-index: 10;
 }
 
-.info-item:last-child {
+.nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.nav-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+.settings-list {
+  background: white;
+  margin: 16px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+}
+
+.setting-item:last-child {
   border-bottom: none;
 }
 
-.info-item .label {
+.setting-item span {
+  flex: 1;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #333;
 }
 
-.info-item .value {
-  font-size: 14px;
-  color: var(--text-primary);
+.setting-item svg:last-child {
+  color: #ccc;
 }
 
-.password-section {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 20px;
+.setting-value {
+  color: #999 !important;
 }
 
-.password-section h3 {
-  font-size: 16px;
-  color: var(--text-primary);
-  margin-bottom: 16px;
-}
-
-.password-section input {
-  width: 100%;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  color: var(--text-primary);
-  margin-bottom: 10px;
-}
-
-.password-section button {
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, var(--color-cyan), var(--color-red));
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.logout-btn {
-  width: 100%;
-  padding: 14px;
-  background: color-mix(in srgb, var(--color-red) 15%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-red) 30%, transparent);
-  border-radius: 12px;
-  color: var(--color-red);
-  font-weight: 600;
-  cursor: pointer;
+.version {
+  text-align: center;
+  padding: 24px;
+  color: #ccc;
+  font-size: 12px;
 }
 </style>

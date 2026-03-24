@@ -1,15 +1,13 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use app\model\User;
-use app\model\MoneyLog;
-use app\model\Salary;
+use think\facade\Db;
 
 /**
  * Honeywell 月薪模块
  */
-class HoneywellSalary extends BaseController
+class HoneywellSalary extends HoneywellBase
 {
     /**
      * 月薪状态

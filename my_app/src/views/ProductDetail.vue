@@ -1,223 +1,251 @@
 <template>
-  <div class="product-detail">
-    <div class="header">
-      <button class="back-btn" @click="$router.back()">
-        <ArrowLeft :size="20" />
+  <div class="page-container">
+    <div class="top-nav">
+      <button class="nav-btn" @click="router.back()">
+        <ArrowLeft :size="24" />
       </button>
-      <h1>{{ t('product.detail') }}</h1>
+      <h1 class="nav-title">产品详情</h1>
+      <div class="nav-btn"></div>
     </div>
 
-    <div v-if="loading" class="loading">{{ t('common.loading') }}</div>
-
-    <div v-else-if="product" class="content">
-      <div class="product-hero">
-        <div class="hero-icon" :style="{ background: iconGradient }">
-          <TrendingUp :size="32" />
-        </div>
-        <h2 class="product-name">{{ product.name }}</h2>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-card">
-          <span class="stat-label">{{ t('product.dailyIncome') }}</span>
-          <span class="stat-value">{{ CURRENCY }}{{ product.dailyIncome.toLocaleString() }}</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-label">{{ t('product.cycle') }}</span>
-          <span class="stat-value">{{ product.cycle }} {{ t('common.days') }}</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-label">{{ t('product.totalIncome') }}</span>
-          <span class="stat-value">{{ CURRENCY }}{{ product.totalIncome.toLocaleString() }}</span>
-        </div>
-      </div>
-
-      <div class="amount-section">
-        <label>{{ t('product.investAmount') }}</label>
-        <div class="amount-fixed">{{ CURRENCY }} {{ product.price.toLocaleString() }}</div>
-      </div>
-
-      <button class="buy-btn" :disabled="product.status !== 1" @click="handleBuy">
-        {{ t('product.buyNow') }}
-      </button>
+    <div v-if="isLoading" class="loading">
+      <LoadingSpinner />
     </div>
+    <template v-else-if="product">
+      <div class="product-image" :style="{ background: product.gradient }">
+        <img v-if="product.imageUrl" :src="product.imageUrl" alt="" />
+      </div>
+
+      <div class="product-content">
+        <div class="product-name">{{ product.name }}</div>
+        <div class="product-price">${{ product.price }}</div>
+        
+        <div class="product-stats">
+          <div class="stat-item">
+            <span class="stat-value">{{ product.dailyIncome }}</span>
+            <span class="stat-label">每日收益</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">{{ product.days }}</span>
+            <span class="stat-label">周期(天)</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">{{ product.maxPurchase }}</span>
+            <span class="stat-label">可购次数</span>
+          </div>
+        </div>
+
+        <div class="product-desc">
+          <div class="desc-title">产品说明</div>
+          <div class="desc-content">{{ product.description }}</div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="price-display">
+          <span class="label">总价</span>
+          <span class="value">${{ product.price }}</span>
+        </div>
+        <button class="buy-btn" @click="handleBuy">
+          立即购买
+        </button>
+      </div>
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import { ArrowLeft, TrendingUp } from 'lucide-vue-next'
-import { CURRENCY } from '@/config'
-import { getProductDetail } from '@/api/product'
-import { createOrder } from '@/api/order'
-import type { ProductDetailData } from '@/types/product'
+import { ref, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { ArrowLeft } from 'lucide-vue-next'
+import LoadingSpinner from '@/components/ui/LoadingSpinner.vue'
+import request from '@/api/request'
 
-const route = useRoute()
 const router = useRouter()
-const { t } = useI18n()
+const route = useRoute()
 
-const loading = ref(true)
-const product = ref<ProductDetailData | null>(null)
-const amount = ref('')
+const isLoading = ref(true)
+const product = ref<any>(null)
 
-const iconGradient = computed(() => {
-  if (!product.value) return ''
-  if (product.value.status === 2) return 'linear-gradient(135deg, #ff9800, #ffb347)'
-  return 'linear-gradient(135deg, #00c853, #00e676)'
-})
-
-const handleBuy = async () => {
-  if (!product.value || product.value.status !== 1) return
+async function loadProduct() {
   try {
-    await createOrder(product.value.id)
-    router.push('/investments')
-  } catch (err) {
-    console.error(err)
+    isLoading.value = true
+    const res = await request.get(`/products/${route.params.id}`)
+    product.value = res
+  } catch (e) {
+    console.error('加载产品失败', e)
+  } finally {
+    isLoading.value = false
   }
 }
 
-onMounted(async () => {
-  try {
-    product.value = await getProductDetail(Number(route.params.id))
-  } finally {
-    loading.value = false
-  }
+function handleBuy() {
+  // 跳转购买页面或直接购买
+  router.push(`/product/${route.params.id}/buy`)
+}
+
+onMounted(() => {
+  loadProduct()
 })
 </script>
 
 <style scoped>
-.product-detail {
+.page-container {
   min-height: 100vh;
-  background: var(--bg-base);
-  padding: 20px;
+  background: #f5f5f5;
+  padding-bottom: 100px;
 }
 
-.header {
+.top-nav {
+  position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: white;
+  z-index: 10;
 }
 
-.back-btn {
+.nav-btn {
   width: 40px;
   height: 40px;
-  border-radius: 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  color: #666;
 }
 
-.header h1 {
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-primary);
+.nav-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
 }
 
 .loading {
   text-align: center;
-  color: color-mix(in srgb, var(--text-primary) 50%, transparent);
   padding: 40px;
 }
 
-.product-hero {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.hero-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
+.product-image {
+  height: 250px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  margin: 0 auto 16px;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-content {
+  background: white;
+  margin-top: -20px;
+  border-radius: 24px 24px 0 0;
+  padding: 24px;
+  position: relative;
 }
 
 .product-name {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 8px;
+  color: #333;
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+.product-price {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ff4d4d;
+  margin-top: 8px;
 }
 
-.stat-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+.product-stats {
+  display: flex;
+  margin-top: 24px;
+  padding: 16px;
+  background: #f9f9f9;
   border-radius: 12px;
-  padding: 16px 12px;
-  text-align: center;
 }
 
-.stat-label {
-  display: block;
-  font-size: 11px;
-  color: color-mix(in srgb, var(--text-primary) 55%, transparent);
-  margin-bottom: 8px;
+.stat-item {
+  flex: 1;
+  text-align: center;
 }
 
 .stat-value {
   display: block;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #333;
 }
 
-.amount-section {
-  margin-bottom: 20px;
+.stat-label {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
 }
 
-.amount-section label {
-  display: block;
+.product-desc {
+  margin-top: 24px;
+}
+
+.desc-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.desc-content {
   font-size: 14px;
-  color: color-mix(in srgb, var(--text-primary) 75%, transparent);
-  margin-bottom: 10px;
+  color: #666;
+  line-height: 1.8;
 }
 
-.amount-fixed {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px 16px;
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: white;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+}
+
+.price-display {
+  flex: 1;
+}
+
+.price-display .label {
+  font-size: 12px;
+  color: #999;
+}
+
+.price-display .value {
+  display: block;
   font-size: 20px;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #333;
 }
 
 .buy-btn {
-  width: 100%;
-  padding: 16px;
-  background: linear-gradient(135deg, var(--color-cyan), var(--color-red));
-  border: none;
-  border-radius: 12px;
-  color: #fff;
+  padding: 16px 48px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
   font-size: 16px;
   font-weight: 600;
+  border: none;
+  border-radius: 24px;
   cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.buy-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.buy-btn:not(:disabled):hover {
-  opacity: 0.9;
 }
 </style>

@@ -1,175 +1,267 @@
 <template>
-  <div class="team-page">
-    <div class="header">
-      <h1>{{ t('nav.team') }}</h1>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card">
-        <span class="label">{{ t('team.totalMembers') }}</span>
-        <span class="value">{{ teamData.total }}</span>
-      </div>
-      <div class="stat-card">
-        <span class="label">{{ t('team.lv1Members') }}</span>
-        <span class="value">{{ teamData.lv1 }}</span>
-      </div>
-      <div class="stat-card">
-        <span class="label">{{ t('team.totalRecharge') }}</span>
-        <span class="value">{{ teamData.recharge.toLocaleString() }}</span>
-      </div>
-    </div>
-
-    <div class="level-tabs">
-      <button v-for="lv in [1, 2, 3]" :key="lv" :class="{ active: level === lv }" @click="level = lv">
-        LV{{ lv }}
+  <div class="page-container">
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+      <button class="nav-btn" @click="router.back()">
+        <ArrowLeft :size="24" />
       </button>
+      <h1 class="nav-title">我的团队</h1>
+      <div class="nav-btn"></div>
     </div>
 
-    <div v-if="members.length" class="members-list">
-      <div v-for="member in members" :key="member.id" class="member-card">
-        <div class="member-info">
-          <span class="name">{{ member.username }}</span>
-          <span class="date">{{ formatDate(member.created_at) }}</span>
-        </div>
-        <div class="member-stats">
-          <span>{{ t('team.recharge') }}: {{ member.recharge }}</span>
+    <!-- 团队统计卡片 -->
+    <div class="stats-card">
+      <div class="stat-item">
+        <div class="stat-value">{{ teamCount }}</div>
+        <div class="stat-label">团队人数</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-value">{{ formatNumber(teamPerformance) }}</div>
+        <div class="stat-label">团队业绩</div>
+      </div>
+    </div>
+
+    <!-- 团队列表 -->
+    <div class="team-section">
+      <div class="section-title">团队成员</div>
+      <div v-if="isLoading" class="loading">
+        <LoadingSpinner />
+      </div>
+      <div v-else-if="teamMembers.length === 0" class="empty">
+        <p>暂无团队成员</p>
+        <p class="tip">邀请好友加入获得奖励</p>
+      </div>
+      <div v-else class="team-list">
+        <div v-for="member in teamMembers" :key="member.id" class="member-item">
+          <div class="member-avatar">
+            <img v-if="member.avatar" :src="member.avatar" alt="" />
+            <User v-else :size="20" />
+          </div>
+          <div class="member-info">
+            <div class="member-name">{{ member.nickname || '用户' + member.id }}</div>
+            <div class="member-time">加入时间: {{ member.joinTime }}</div>
+          </div>
+          <div class="member-performance">
+            业绩: ${{ formatNumber(member.performance) }}
+          </div>
         </div>
       </div>
     </div>
 
-    <div v-else class="empty">{{ t('team.empty') }}</div>
+    <!-- 邀请按钮 -->
+    <button class="invite-btn" @click="router.push('/invite-task')">
+      <UserPlus :size="20" />
+      邀请好友
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { getTeamData, getTeamMembers } from '@/api/agent'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { ArrowLeft, User, UserPlus } from 'lucide-vue-next'
+import LoadingSpinner from '@/components/ui/LoadingSpinner.vue'
+import request from '@/api/request'
 
-const { t } = useI18n()
+const router = useRouter()
 
-const teamData = ref({ total: 0, lv1: 0, recharge: 0 })
-const level = ref(1)
-const members = ref<any[]>([])
+// 状态
+const isLoading = ref(true)
+const teamCount = ref(0)
+const teamPerformance = ref(0)
+const teamMembers = ref<any[]>([])
 
-const formatDate = (date: string) => new Date(date).toLocaleDateString()
+// 格式化数字
+function formatNumber(num: number): string {
+  return Math.floor(num).toLocaleString('zh-CN')
+}
 
-watch(level, async (lv) => {
-  members.value = await getTeamMembers(lv)
-})
+// 加载团队数据
+async function loadTeamData() {
+  try {
+    isLoading.value = true
+    const res = await request.get('/team/stats')
+    teamCount.value = res.count || 0
+    teamPerformance.value = parseFloat(res.performance) || 0
+  } catch (e) {
+    console.error('加载团队统计失败', e)
+  }
 
-onMounted(async () => {
-  teamData.value = await getTeamData()
-  members.value = await getTeamMembers(1)
+  try {
+    const res = await request.get('/team/list')
+    teamMembers.value = res.list || []
+  } catch (e) {
+    console.error('加载团队列表失败', e)
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  loadTeamData()
 })
 </script>
 
 <style scoped>
-.team-page {
+.page-container {
   min-height: 100vh;
-  background: var(--bg-base);
-  padding: 20px 20px 80px;
+  background: #f5f5f5;
+  padding-bottom: 100px;
 }
 
-.header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 20px;
+.top-nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: white;
+  z-index: 10;
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.stat-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.nav-btn {
+  width: 40px;
+  height: 40px;
   border-radius: 12px;
-  padding: 14px 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.nav-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+}
+
+.stats-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  margin: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  color: white;
+}
+
+.stat-item {
+  flex: 1;
   text-align: center;
 }
 
-.stat-card .label {
-  display: block;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 6px;
-}
-
-.stat-card .value {
-  display: block;
-  font-size: 18px;
+.stat-value {
+  font-size: 28px;
   font-weight: 700;
-  color: #fff;
 }
 
-.level-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 4px;
-  border-radius: 12px;
-}
-
-.level-tabs button {
-  flex: 1;
-  padding: 10px;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.5);
+.stat-label {
   font-size: 14px;
-  cursor: pointer;
+  opacity: 0.8;
+  margin-top: 4px;
 }
 
-.level-tabs button.active {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.3);
 }
 
-.members-list {
+.team-section {
+  padding: 0 16px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+}
+
+.empty .tip {
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+.team-list {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.member-item {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-bottom: 1px solid #f5f5f5;
 }
 
-.member-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 14px;
+.member-item:last-child {
+  border-bottom: none;
+}
+
+.member-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #999;
 }
 
 .member-info {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  flex: 1;
 }
 
-.member-info .name {
+.member-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.member-time {
+  font-size: 12px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.member-performance {
   font-size: 14px;
   font-weight: 600;
-  color: #fff;
+  color: #667eea;
 }
 
-.member-info .date {
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.member-stats {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.empty {
-  text-align: center;
-  padding: 40px;
-  color: rgba(255, 255, 255, 0.5);
+.invite-btn {
+  position: fixed;
+  bottom: 80px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
 }
 </style>

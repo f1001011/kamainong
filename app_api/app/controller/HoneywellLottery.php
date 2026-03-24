@@ -1,12 +1,13 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
-use app\model\User;
-use app\model\MoneyLog;
+use app\model\Lottery;
 use think\facade\Db;
 
-class HoneywellLottery extends BaseController
+/**
+ * Honeywell 转盘模块
+ */
+class HoneywellLottery extends HoneywellBase
 {
     public function status()
     {

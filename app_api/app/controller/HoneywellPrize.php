@@ -1,15 +1,13 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
-use app\model\User;
-use app\model\MoneyLog;
 use app\model\Prize;
+use think\facade\Db;
 
 /**
  * Honeywell 奖池模块
  */
-class HoneywellPrize extends BaseController
+class HoneywellPrize extends HoneywellBase
 {
     /**
      * 奖池状态

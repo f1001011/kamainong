@@ -1,13 +1,13 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use app\model\Product;
+use think\facade\Db;
 
 /**
- * Honeywell 产品接口
+ * Honeywell 产品模块
  */
-class HoneywellProduct extends BaseController
+class HoneywellProduct extends HoneywellBase
 {
     /**
      * 产品列表

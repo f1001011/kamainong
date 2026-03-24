@@ -66,14 +66,17 @@ class HoneywellOrder extends HoneywellBase
         $orderId = input('id', 0);
         list($page, $pageSize) = $this->getPageParams();
         
-        $query = Db::name('common_income_claim_log')
-            ->where('order_id', $orderId);
+        // 使用 paginate 方法
+        $result = Db::name('common_income_claim_log')
+            ->where('order_id', $orderId)
+            ->order('id', 'desc')
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $total = $query->count();
-        $list = $query->order('id', 'desc')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $records = [];
         foreach ($list as $item) {

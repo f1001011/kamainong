@@ -9,10 +9,10 @@
         @click="router.push(item.path)"
       >
         <div class="nav-icon-wrap">
-          <component :is="item.icon" :size="20" />
+          <component :is="item.icon" :size="22" />
           <span v-if="isActive(item)" class="nav-dot"></span>
         </div>
-        <span class="nav-label">{{ t(item.labelKey) }}</span>
+        <span class="nav-label">{{ item.label }}</span>
       </button>
     </div>
   </nav>
@@ -21,25 +21,26 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import { Home, Package, Crown, User } from 'lucide-vue-next'
-import { colors } from '@/config/colors'
+import { Home, Package, Gift, Users, User } from 'lucide-vue-next'
 
 const router = useRouter()
-const route  = useRoute()
-const { t }  = useI18n()
+const route = useRoute()
 
 const navItems = [
-  { name: 'Home',          path: '/',         icon: Home,    color: colors.red,   labelKey: 'nav.home'     },
-  { name: 'Products',      path: '/products', icon: Package, color: colors.cyan,  labelKey: 'nav.products' },
-  { name: 'Vip',           path: '/vip',      icon: Crown,   color: colors.amber, labelKey: 'nav.vip'      },
-  { name: 'BalanceCenter', path: '/balance',  icon: User,    color: colors.lime,  labelKey: 'nav.mine'     },
+  { name: 'Home', path: '/', icon: Home, color: '#ff4d4d', label: '首页' },
+  { name: 'Products', path: '/products', icon: Package, color: '#00e5ff', label: '产品' },
+  { name: 'Activities', path: '/activities', icon: Gift, color: '#ffb800', label: '活动' },
+  { name: 'Team', path: '/team', icon: Users, color: '#69ff47', label: '团队' },
+  { name: 'Profile', path: '/profile', icon: User, color: '#ff6b6b', label: '我的' },
 ]
 
-const showNav = computed(() => !['Login', 'Register'].includes(route.name as string))
+const showNav = computed(() => {
+  const hideNavRoutes = ['Login', 'Register']
+  return !hideNavRoutes.includes(route.name as string)
+})
 
 function isActive(item: typeof navItems[0]) {
-  return route.name === item.name
+  return route.path === item.path || route.path.startsWith(item.path + '/')
 }
 </script>
 
@@ -53,7 +54,7 @@ function isActive(item: typeof navItems[0]) {
   align-items: stretch;
   height: 64px;
   padding-bottom: env(safe-area-inset-bottom, 0px);
-  background: var(--nav-bg);
+  background: rgba(20, 20, 20, 0.85);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
 }
@@ -77,7 +78,7 @@ function isActive(item: typeof navItems[0]) {
   background: none;
   border: none;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.4);
   transition: color 0.2s;
   -webkit-tap-highlight-color: transparent;
 }
@@ -86,7 +87,6 @@ function isActive(item: typeof navItems[0]) {
 
 .nav-item.active {
   color: var(--nc);
-  filter: drop-shadow(0 0 8px var(--nc));
 }
 
 .nav-icon-wrap {
@@ -108,10 +108,9 @@ function isActive(item: typeof navItems[0]) {
 }
 
 .nav-label {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.3px;
   line-height: 1;
-  font-family: 'Inter', 'PingFang SC', sans-serif;
 }
 </style>

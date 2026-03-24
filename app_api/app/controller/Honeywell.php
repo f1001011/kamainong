@@ -1,14 +1,13 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use app\model\User;
 use think\facade\Db;
 
 /**
- * Honeywell 认证控制器
+ * Honeywell 用户主控制器
  */
-class Honeywell extends BaseController
+class Honeywell extends HoneywellBase
 {
     /**
      * 登录接口
@@ -220,5 +219,130 @@ class Honeywell extends BaseController
                 'createdAt' => date('c', strtotime($user['create_time']))
             ]
         ]);
+    }
+
+    /**
+     * 更新用户资料
+     * PUT /api/user/profile
+     */
+    public function updateProfile()
+    {
+        $token = request()->header('authorization');
+        $token = str_replace('Bearer ', '', $token);
+        
+        if (empty($token)) {
+            return json(['success' => false, 'error' => ['code' => 'UNAUTHORIZED', 'message' => 'No autorizado']], 401);
+        }
+        
+        $tokenInfo = Db::name('common_home_token')->where('token', $token)->find();
+        if (!$tokenInfo) {
+            return json(['success' => false, 'error' => ['code' => 'INVALID_TOKEN', 'message' => 'Token inválido']], 401);
+        }
+        
+        $userId = $tokenInfo['uid'];
+        $nickname = input('nickname', '');
+        
+        // 更新昵称
+        if (!empty($nickname)) {
+            Db::name('common_user')->where('id', $userId)->update(['nickname' => $nickname]);
+        }
+        
+        return json(['success' => true, 'data' => ['message' => 'Profil mis à jour']]);
+    }
+
+    /**
+     * 更新密码
+     * PUT /api/user/password
+     */
+    public function updatePassword()
+    {
+        $token = request()->header('authorization');
+        $token = str_replace('Bearer ', '', $token);
+        
+        if (empty($token)) {
+            return json(['success' => false, 'error' => ['code' => 'UNAUTHORIZED', 'message' => 'No autorizado']], 401);
+        }
+        
+        $tokenInfo = Db::name('common_home_token')->where('token', $token)->find();
+        if (!$tokenInfo) {
+            return json(['success' => false, 'error' => ['code' => 'INVALID_TOKEN', 'message' => 'Token inválido']], 401);
+        }
+        
+        $userId = $tokenInfo['uid'];
+        $oldPassword = input('oldPassword', '');
+        $newPassword = input('newPassword', '');
+        
+        if (empty($oldPassword) || empty($newPassword)) {
+            return json(['success' => false, 'error' => ['code' => 'INVALID_PARAMS', 'message' => 'Paramètres invalides']]);
+        }
+        
+        $user = Db::name('common_user')->where('id', $userId)->find();
+        
+        // 验证旧密码
+        if (md5($oldPassword) !== $user['pwd']) {
+            return json(['success' => false, 'error' => ['code' => 'WRONG_PASSWORD', 'message' => 'Ancien mot de passe incorrect']]);
+        }
+        
+        // 更新密码
+        Db::name('common_user')->where('id', $userId)->update([
+            'pwd' => md5($newPassword)
+        ]);
+        
+        return json(['success' => true, 'data' => ['message' => 'Mot de passe mis à jour']]);
+    }
+
+    /**
+     * 退出登录
+     * POST /api/auth/logout
+     */
+    public function logout()
+    {
+        $token = request()->header('authorization');
+        $token = str_replace('Bearer ', '', $token);
+        
+        if (!empty($token)) {
+            Db::name('common_home_token')->where('token', $token)->delete();
+        }
+        
+        return json(['success' => true, 'data' => ['message' => 'Déconnexion réussie']]);
+    }
+
+    /**
+     * 上传文件
+     * POST /api/upload
+     */
+    public function upload()
+    {
+        $userId = $this->getUserIdFromToken();
+        if (!$userId) {
+            return json(['success' => false, 'error' => ['code' => 'UNAUTHORIZED', 'message' => 'No autorizado']], 401);
+        }
+        
+        $file = request()->file('file');
+        if (!$file) {
+            return json(['success' => false, 'error' => ['code' => 'NO_FILE', 'message' => 'Aucun fichier']]);
+        }
+        
+        try {
+            $savename = \think\facade\Filesystem::disk('public')->putFile('uploads', $file);
+            $url = '/storage/' . $savename;
+            
+            return json(['success' => true, 'data' => ['url' => $url]]);
+        } catch (\Exception $e) {
+            return json(['success' => false, 'error' => ['code' => 'UPLOAD_FAILED', 'message' => $e->getMessage()]]);
+        }
+    }
+
+    /**
+     * 从Token获取用户ID
+     */
+    private function getUserIdFromToken()
+    {
+        $token = request()->header('authorization');
+        $token = str_replace('Bearer ', '', $token);
+        if (empty($token)) return null;
+        
+        $tokenInfo = Db::name('common_home_token')->where('token', $token)->find();
+        return $tokenInfo ? $tokenInfo['uid'] : null;
     }
 }

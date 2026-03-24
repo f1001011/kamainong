@@ -1,15 +1,13 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use app\model\User;
-use app\model\Vip;
-use app\model\MoneyLog;
+use think\facade\Db;
 
 /**
- * Honeywell VIP模块
+ * Honeywell VIP 模块
  */
-class HoneywellVip extends BaseController
+class HoneywellVip extends HoneywellBase
 {
     /**
      * VIP状态
@@ -100,17 +98,19 @@ class HoneywellVip extends BaseController
         $userId = $this->getUserId();
         if (!$userId) return $this->unauthorized();
         
-        $page = input('page', 1);
-        $pageSize = input('pageSize', 20);
+        list($page, $pageSize) = $this->getPageParams();
         
-        $list = \think\facade\Db::name('common_vip_daily_reward_log')
+        // 使用 paginate 方法
+        $result = \think\facade\Db::name('common_vip_daily_reward_log')
             ->where('uid', $userId)
             ->order('id', 'desc')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $total = \think\facade\Db::name('common_vip_daily_reward_log')->where('uid', $userId)->count();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $records = [];
         foreach ($list as $item) {

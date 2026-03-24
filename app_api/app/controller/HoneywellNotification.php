@@ -1,27 +1,31 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use think\facade\Db;
 
-class HoneywellNotification extends BaseController
+/**
+ * Honeywell 通知模块
+ */
+class HoneywellNotification extends HoneywellBase
 {
     public function list()
     {
         $userId = $this->getUserId();
         if (!$userId) return $this->unauthorized();
         
-        $page = input('page', 1);
-        $pageSize = input('pageSize', 20);
+        list($page, $pageSize) = $this->getPageParams();
         
-        $list = Db::name('common_notification')
+        // 使用 paginate 方法
+        $result = Db::name('common_notification')
             ->where('uid', $userId)
             ->order('id', 'desc')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $total = Db::name('common_notification')->where('uid', $userId)->count();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $notifications = [];
         foreach ($list as $item) {

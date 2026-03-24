@@ -1,29 +1,34 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
+use app\model\Community;
 use think\facade\Db;
 
-class HoneywellCommunity extends BaseController
+/**
+ * Honeywell 社区模块
+ */
+class HoneywellCommunity extends HoneywellBase
 {
     public function posts()
     {
         $userId = $this->getUserId();
         if (!$userId) return $this->unauthorized();
         
-        $page = input('page', 1);
-        $pageSize = input('pageSize', 20);
+        list($page, $pageSize) = $this->getPageParams();
         
-        $list = Db::name('common_withdraw_showcase')
+        // 使用 paginate 方法
+        $result = Db::name('common_withdraw_showcase')
             ->alias('s')
             ->leftJoin('common_user u', 's.uid = u.id')
             ->field('s.*, u.phone')
             ->order('s.id', 'desc')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $total = Db::name('common_withdraw_showcase')->count();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $posts = [];
         foreach ($list as $item) {
@@ -52,7 +57,19 @@ class HoneywellCommunity extends BaseController
         $userId = $this->getUserId();
         if (!$userId) return $this->unauthorized();
         
-        $list = Db::name('common_withdraw_showcase')->where('uid', $userId)->order('id', 'desc')->select()->toArray();
+        list($page, $pageSize) = $this->getPageParams();
+        
+        // 使用 paginate 方法
+        $result = Db::name('common_withdraw_showcase')
+            ->where('uid', $userId)
+            ->order('id', 'desc')
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
+        
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $posts = [];
         foreach ($list as $item) {
@@ -64,7 +81,7 @@ class HoneywellCommunity extends BaseController
             ];
         }
         
-        return json(['success' => true, 'data' => ['list' => $posts]]);
+        return json(['success' => true, 'data' => ['list' => $posts, 'pagination' => ['total' => (int)$total, 'page' => (int)$page, 'pageSize' => (int)$pageSize]]]);
     }
 
     public function detail()

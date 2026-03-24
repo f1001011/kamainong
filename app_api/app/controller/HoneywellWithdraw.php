@@ -1,16 +1,14 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
-use app\model\Withdraw;
 use app\model\User;
-use app\model\MoneyLog;
+use app\model\Withdraw;
 use think\facade\Db;
 
 /**
  * Honeywell 提现模块
  */
-class HoneywellWithdraw extends BaseController
+class HoneywellWithdraw extends HoneywellBase
 {
     /**
      * 提现订单列表
@@ -23,14 +21,24 @@ class HoneywellWithdraw extends BaseController
         
         list($page, $pageSize) = $this->getPageParams();
         
-        $result = Withdraw::getRecords($userId, $page, $pageSize);
+        // 使用 paginate 方法
+        $result = Db::name('common_pay_cash')
+            ->where('uid', $userId)
+            ->order('id', 'desc')
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
+        
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $records = [];
-        foreach ($result['list'] as $item) {
+        foreach ($list as $item) {
             $records[] = Withdraw::format($item);
         }
         
-        return $this->paginated($records, $result['total'], $page, $pageSize);
+        return $this->paginated($records, $total, $page, $pageSize);
     }
 
     /**
@@ -138,6 +146,86 @@ class HoneywellWithdraw extends BaseController
         return $this->success([
             'canWithdraw' => $check['can'],
             'reason' => $check['can'] ? null : $check['reason']
+        ]);
+    }
+
+    /**
+     * 提现条件检查（前端 /withdraw/check）
+     * GET /api/withdraw/check
+     */
+    public function check()
+    {
+        $userId = $this->getUserId();
+        if (!$userId) return $this->unauthorized();
+        
+        $configs = Db::name('common_sys_config')->column('value', 'name');
+        $user = Db::name('common_user')->where('id', $userId)->find();
+        
+        $now = date('H:i:s');
+        $withdrawStart = $configs['withdraw_start_time'] ?? '10:00';
+        $withdrawEnd = $configs['withdraw_end_time'] ?? '18:00';
+        $dailyLimit = (int)($configs['withdraw_daily_limit'] ?? 1);
+        $minAmount = (int)($configs['min_withdraw'] ?? 500);
+        $maxAmount = (int)($configs['max_withdraw'] ?? 1000000);
+        $feePercent = (float)($configs['withdraw_tax_rate'] ?? 0.1);
+        
+        // 检查时间
+        $inTimeRange = ($now >= $withdrawStart && $now <= $withdrawEnd);
+        
+        // 检查每日次数
+        $todayCount = Db::name('common_pay_cash')
+            ->where('uid', $userId)
+            ->where('status', '<>', 2)  // 非已拒绝
+            ->whereTime('create_time', 'today')
+            ->count();
+        
+        // 检查是否充值过
+        $hasRecharged = (bool)Db::name('common_pay_recharge')
+            ->where('uid', $userId)
+            ->where('status', 1)  // 已支付
+            ->count();
+        
+        // 检查是否购买过付费产品
+        $hasPurchasedPaid = (bool)Db::name('common_goods_order')
+            ->where('uid', $userId)
+            ->where('status', 1)
+            ->count();
+        
+        // 提现门槛
+        $thresholdMet = $hasRecharged || $hasPurchasedPaid;
+        
+        // 不可提现原因
+        $reason = null;
+        if (!$thresholdMet) {
+            $reason = 'THRESHOLD_NOT_MET';
+        } elseif (!$hasRecharged) {
+            $reason = 'NOT_RECHARGED';
+        } elseif (!$inTimeRange) {
+            $reason = 'TIME_INVALID';
+        } elseif ($todayCount >= $dailyLimit) {
+            $reason = 'LIMIT_EXCEEDED';
+        }
+        
+        // 快捷金额
+        $quickAmounts = [1000, 3000, 5000, 10000, 20000];
+        
+        $canWithdraw = ($thresholdMet && $inTimeRange && $todayCount < $dailyLimit);
+        
+        return $this->success([
+            'canWithdraw' => $canWithdraw,
+            'reason' => $reason,
+            'hasRecharged' => $hasRecharged,
+            'hasPurchasedPaid' => $hasPurchasedPaid,
+            'availableBalance' => number_format($user['money_balance'] ?? $user['money'] ?? 0, 2, '.', ''),
+            'feePercent' => $feePercent * 100,
+            'minAmount' => (string)$minAmount,
+            'maxAmount' => (string)$maxAmount,
+            'timeRange' => $withdrawStart . ' - ' . $withdrawEnd,
+            'inTimeRange' => $inTimeRange,
+            'todayCount' => $todayCount,
+            'dailyLimit' => $dailyLimit,
+            'quickAmounts' => $quickAmounts,
+            'tips' => 'Les retraits sont traités sous 24 heures'
         ]);
     }
 }

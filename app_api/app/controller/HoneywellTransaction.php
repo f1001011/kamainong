@@ -1,25 +1,24 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
-use app\model\MoneyLog;
+use app\model\Transaction;
+use think\facade\Db;
 
 /**
  * Honeywell 交易记录模块
  */
-class HoneywellTransaction extends BaseController
+class HoneywellTransaction extends HoneywellBase
 {
     /**
      * 交易记录列表
-     * GET /api/honeywell_transaction/list
+     * GET /api/transaction/list
      */
     public function list()
     {
         $userId = $this->getUserId();
         if (!$userId) return $this->unauthorized();
         
-        $page = input('page', 1);
-        $pageSize = input('pageSize', 20);
+        list($page, $pageSize) = $this->getPageParams();
         $type = input('type', 'all');
         
         $where = ['uid' => $userId];
@@ -35,13 +34,16 @@ class HoneywellTransaction extends BaseController
             $where['status'] = MoneyLog::STATUS_DAILY_INCOME;
         }
         
-        $list = MoneyLog::where($where)
+        // 使用 paginate 方法
+        $result = MoneyLog::where($where)
             ->order('id', 'desc')
-            ->page($page, $pageSize)
-            ->select()
-            ->toArray();
+            ->paginate([
+                'list_rows' => $pageSize,
+                'page' => $page,
+            ]);
         
-        $total = MoneyLog::where($where)->count();
+        $total = $result->total();
+        $list = $result->items()->toArray();
         
         $records = [];
         foreach ($list as $item) {

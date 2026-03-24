@@ -12,6 +12,12 @@ import { SPRINGS } from '@/lib/animation';
 import type { AnimationConfig } from '@/types';
 import api from '@/lib/api';
 
+interface AnimationConfigApiResponse extends Partial<AnimationConfig> {
+  animationEnabled?: boolean;
+  animationSpeed?: number;
+  reducedMotion?: boolean;
+}
+
 /**
  * 默认动画配置
  */
@@ -22,6 +28,38 @@ const defaultAnimationConfig: AnimationConfig = {
   mass: 1,
   durationMultiplier: 1,
 };
+
+function normalizePositiveNumber(value: unknown, fallback: number): number {
+  const parsed = typeof value === 'number' ? value : Number(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+}
+
+function normalizeAnimationConfig(
+  config: AnimationConfigApiResponse | undefined,
+  prefersReducedMotion: boolean
+): AnimationConfig {
+  const baseConfig: AnimationConfigApiResponse = config ?? {};
+  const enabled = typeof baseConfig.enabled === 'boolean'
+    ? baseConfig.enabled
+    : typeof baseConfig.animationEnabled === 'boolean'
+      ? baseConfig.animationEnabled
+      : defaultAnimationConfig.enabled;
+  const reducedMotion = typeof baseConfig.reducedMotion === 'boolean'
+    ? baseConfig.reducedMotion
+    : false;
+
+  return {
+    // Backward-compatible with both legacy spring fields and current API payload.
+    enabled: enabled && !reducedMotion && !prefersReducedMotion,
+    stiffness: normalizePositiveNumber(baseConfig.stiffness, defaultAnimationConfig.stiffness),
+    damping: normalizePositiveNumber(baseConfig.damping, defaultAnimationConfig.damping),
+    mass: normalizePositiveNumber(baseConfig.mass, defaultAnimationConfig.mass),
+    durationMultiplier: normalizePositiveNumber(
+      baseConfig.durationMultiplier ?? baseConfig.animationSpeed,
+      defaultAnimationConfig.durationMultiplier
+    ),
+  };
+}
 
 /**
  * 动画配置 Hook 返回类型
@@ -59,7 +97,7 @@ interface UseAnimationConfigReturn {
  */
 export function useAnimationConfig(): UseAnimationConfigReturn {
   // 从后台获取动画配置
-  const { data: config } = useQuery<AnimationConfig>({
+  const { data: config } = useQuery<AnimationConfigApiResponse>({
     queryKey: ['animation-config'],
     queryFn: () => api.get('/config/animation'),
     staleTime: 10 * 60 * 1000, // 10 分钟缓存
@@ -83,12 +121,7 @@ export function useAnimationConfig(): UseAnimationConfigReturn {
 
   // 合并配置
   const finalConfig = useMemo(() => {
-    const baseConfig = config || defaultAnimationConfig;
-    return {
-      ...baseConfig,
-      // 如果用户偏好减少动画，则禁用
-      enabled: baseConfig.enabled && !prefersReducedMotion,
-    };
+    return normalizeAnimationConfig(config, prefersReducedMotion);
   }, [config, prefersReducedMotion]);
 
   /**
@@ -109,10 +142,19 @@ export function useAnimationConfig(): UseAnimationConfigReturn {
       }
 
       // 应用配置调整
+      const stiffnessScale = normalizePositiveNumber(
+        finalConfig.stiffness / defaultAnimationConfig.stiffness,
+        1
+      );
+      const dampingScale = normalizePositiveNumber(
+        finalConfig.damping / defaultAnimationConfig.damping,
+        1
+      );
+
       return {
         type: 'spring' as const,
-        stiffness: baseSpring.stiffness * (finalConfig.stiffness / 200),
-        damping: baseSpring.damping * (finalConfig.damping / 25),
+        stiffness: baseSpring.stiffness * stiffnessScale,
+        damping: baseSpring.damping * dampingScale,
         mass: baseSpring.mass * finalConfig.mass,
       };
     };
@@ -124,7 +166,10 @@ export function useAnimationConfig(): UseAnimationConfigReturn {
   const getDuration = useMemo(() => {
     return (baseDuration: number) => {
       if (!finalConfig.enabled) return 0.01;
-      return baseDuration * finalConfig.durationMultiplier;
+      return normalizePositiveNumber(
+        baseDuration * finalConfig.durationMultiplier,
+        baseDuration
+      );
     };
   }, [finalConfig]);
 

@@ -42,23 +42,70 @@ class Product extends Model
     
     /**
      * 格式化产品数据
+     * 匹配前端 ProductData 接口
      */
-    public static function format($product)
+    public static function format($product, $userId = null)
     {
+        // 检查用户是否已购买
+        $purchased = false;
+        $purchaseCount = 0;
+        if ($userId) {
+            $purchaseCount = \think\facade\Db::name('common_goods_order')
+                ->where('uid', $userId)
+                ->where('goods_id', $product['id'])
+                ->where('status', 1)
+                ->count();
+            $purchased = $purchaseCount > 0;
+        }
+        
+        // 判断购买限制
+        $canPurchase = true;
+        $lockReason = null;
+        $userLimit = $product['user_limit'] ?? null;
+        if ($userLimit && $purchaseCount >= $userLimit) {
+            $canPurchase = false;
+            $lockReason = 'ALREADY_PURCHASED';
+        }
+        
+        // 判断库存
+        $globalStock = $product['global_stock'] ?? null;
+        $globalStockRemaining = $product['global_stock_remaining'] ?? null;
+        if ($globalStock !== null && $globalStockRemaining !== null && $globalStockRemaining <= 0) {
+            $canPurchase = false;
+            $lockReason = 'STOCK_EXHAUSTED';
+        }
+        
+        // 计算总收益
+        $price = $product['goods_money'] ?? 0;
+        $dailyIncome = $product['day_red'] ?? 0;
+        $period = $product['period'] ?? 30;
+        $totalIncome = $price + ($dailyIncome * $period);
+        
         return [
             'id' => (int)$product['id'],
-            'name' => $product['goods_name'],
-            'series' => $product['goods_type_id'] == self::SERIES_REVENU_FIXE ? 'REVENU_FIXE' : 'PERIODIC',
-            'price' => number_format($product['goods_money'], 2, '.', ''),
-            'dailyIncome' => number_format($product['day_red'], 2, '.', ''),
-            'totalIncome' => number_format($product['total_money'], 2, '.', ''),
-            'period' => (int)$product['period'],
-            'minuteClaim' => (int)$product['minute_claim'],
-            'incomeTimesPerDay' => (int)$product['income_times_per_day'],
-            'incomePerTime' => number_format($product['income_per_time'], 2, '.', ''),
+            'code' => $product['goods_code'] ?? 'P' . $product['id'],
+            'name' => $product['goods_name'] ?? '',
+            'type' => $product['is_trial'] ? 'TRIAL' : ($product['goods_type_id'] == self::SERIES_REVENU_FIXE ? 'PAID' : 'FINANCIAL'),
+            'series' => $product['series_code'] ?? ($product['goods_type_id'] == self::SERIES_REVENU_FIXE ? 'VIC' : 'NWS'),
+            'price' => number_format($price, 2, '.', ''),
+            'dailyIncome' => number_format($dailyIncome, 2, '.', ''),
+            'cycleDays' => (int)$period,
+            'totalIncome' => number_format($totalIncome, 2, '.', ''),
+            'grantVipLevel' => (int)($product['grant_vip'] ?? 0),
+            'grantSvipLevel' => (int)($product['grant_svip'] ?? 0),
+            'requireVipLevel' => (int)($product['require_vip'] ?? 0),
+            'purchaseLimit' => (int)($product['buy_num'] ?? 0),
+            'userPurchaseLimit' => $product['user_limit'] ?? null,
+            'globalStock' => $globalStock,
+            'globalStockRemaining' => $globalStockRemaining,
+            'mainImage' => $product['goods_img'] ?? null,
+            'showRecommendBadge' => (bool)($product['is_tuijian'] ?? false),
+            'customBadgeText' => $product['badge_text'] ?? null,
             'status' => self::getStatusText($product['status']),
-            'purchaseLimit' => (int)$product['buy_num'],
-            'sort' => (int)$product['sort']
+            'purchased' => $purchased,
+            'purchaseCount' => $purchaseCount,
+            'canPurchase' => $canPurchase,
+            'lockReason' => $lockReason
         ];
     }
     

@@ -7,7 +7,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { m, AnimatePresence } from 'motion/react';
+import { m } from 'motion/react';
 import { useAnimationConfig } from '@/hooks/use-animation-config';
 
 export default function AuthLayout({
@@ -110,9 +110,7 @@ export default function AuthLayout({
 
       {/* 内容区域 - 固定一屏，底部对齐，不滚动 */}
       <div className="relative z-10 h-screen flex items-end justify-center px-5 pb-5 sm:pb-8">
-        <AnimatePresence mode="wait">
-          {children}
-        </AnimatePresence>
+        {children}
       </div>
     </div>
   );
