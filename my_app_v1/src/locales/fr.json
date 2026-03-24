@@ -1,0 +1,224 @@
+{
+  "login": "Connexion",
+  "username": "Nom d'utilisateur",
+  "password": "Mot de passe",
+  "home": "Accueil",
+  "loginSuccess": "Connexion réussie",
+  "loginFailed": "Échec de la connexion, vérifiez votre téléphone ou mot de passe",
+  "logout": "Déconnexion",
+  "auth": {
+    "appName": "AVIVA",
+    "appSlogan": "Sécurisé · Rapide · Intelligent",
+    "phone": "Téléphone",
+    "phonePlaceholder": "Entrez le numéro de téléphone",
+    "passwordPlaceholder": "Entrez le mot de passe",
+    "forgotPassword": "Mot de passe oublié?",
+    "loginBtn": "Se connecter",
+    "noAccount": "Pas encore de compte?",
+    "toRegister": "S'inscrire",
+    "registerTitle": "Créer un compte",
+    "registerSubtitle": "Rejoignez-nous et commencez votre voyage d'investissement",
+    "smsCode": "Code SMS",
+    "smsPlaceholder": "Entrez le code de vérification",
+    "sendCode": "Envoyer le code",
+    "resendCode": "Renvoyer dans {n}s",
+    "newPasswordPlaceholder": "Définir le mot de passe (6+ caractères)",
+    "registerBtn": "Créer un compte",
+    "hasAccount": "Vous avez déjà un compte?",
+    "toLogin": "Se connecter",
+    "phoneError": "Veuillez entrer un numéro de téléphone valide",
+    "codeError": "Veuillez entrer le code de vérification",
+    "passwordError": "Le mot de passe doit contenir au moins 6 caractères",
+    "codeSent": "Code de vérification envoyé",
+    "registerSuccess": "Inscription réussie, bienvenue!",
+    "registerFailed": "Échec de l'inscription, veuillez réessayer"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "success": "Succès",
+    "viewAll": "Voir tout",
+    "back": "Retour",
+    "settings": "Paramètres",
+    "loading": "Chargement",
+    "days": "jours",
+    "people": "personnes",
+    "enterAmount": "Entrez le montant"
+  },
+  "balance": {
+    "title": "Centre de solde",
+    "totalAssets": "Total des actifs",
+    "currency": "XAF",
+    "todayEarnings": "Gains d'aujourd'hui",
+    "available": "Disponible",
+    "frozen": "Gelé",
+    "recentTx": "Transactions récentes",
+    "monthlyIncome": "Revenu mensuel",
+    "monthlyExpense": "Dépense mensuelle",
+    "actions": {
+      "deposit":  { "label": "Dépôt",  "subtitle": "Rechargez votre compte",      "placeholder": "Entrez le montant du dépôt",  "note": "Dépôt instantané, prend en charge carte bancaire" },
+      "withdraw": { "label": "Retrait", "subtitle": "Retirer sur carte bancaire",     "placeholder": "Entrez le montant du retrait", "note": "Le retrait arrive en 1-3 jours ouvrables" },
+      "transfer": { "label": "Transfert", "subtitle": "Transférer à un ami",      "placeholder": "Entrez le montant du transfert", "note": "Transfert instantané, sans frais" },
+      "history":  { "label": "Historique",  "subtitle": "Voir l'historique des transactions",  "placeholder": "Rechercher le montant",         "note": "Interroger jusqu'à 180 jours de transactions" }
+    },
+    "tx": {
+      "wechat":  "Paiement WeChat",
+      "meituan": "Meituan Takeout",
+      "salary":  "Revenu salarial",
+      "didi":    "DiDi Ride",
+      "coffee":  "Achat au café"
+    },
+    "time": {
+      "minutesAgo": "il y a {n} min",
+      "hourAgo":    "il y a {n} h",
+      "yesterday":  "Hier",
+      "daysAgo":    "il y a {n} jours"
+    }
+  },
+  "modal": {
+    "confirmAction": "Confirmer {action}",
+    "operationSuccess": "Succès"
+  },
+  "nav": {
+    "home": "Accueil",
+    "products": "Boutique",
+    "vip": "VIP",
+    "mine": "Moi",
+    "investments": "Investissements",
+    "team": "Équipe",
+    "income": "Revenu",
+    "prize": "Prix",
+    "settings": "Paramètres",
+    "inviteTask": "Tâches",
+    "salary": "Salaire"
+  },
+  "home": {
+    "greeting":      "Bonjour",
+    "welcome":       "Bon retour",
+    "balanceLabel":  "Solde du compte",
+    "balanceCenter": "Centre de solde",
+    "loadingMore":   "Chargement...",
+    "noMore":        "Plus d'articles",
+    "purchasable":   "Jusqu'à {n} fois",
+    "products":      "Produits"
+  },
+  "vip": {
+    "title":        "Membre VIP",
+    "levelNames":   ["Membre","Bronze","Argent","Or","Platine","Diamant","Or noir","Suprême","Légende","Mythique"],
+    "currentXp":    "XP actuel",
+    "totalXp":      "XP total",
+    "nextLevel":    "{n} XP au niveau suivant",
+    "maxLevel":     "Niveau maximum atteint",
+    "xpHistory":    "Historique XP",
+    "loadingMore":  "Chargement...",
+    "noMore":       "Plus d'enregistrements",
+    "privileges":   "Privilèges exclusifs",
+    "priv": {
+      "discount":   { "title": "Remise exclusive", "desc": "Profitez de remises exclusives pour les membres" },
+      "service":    { "title": "Support prioritaire",   "desc": "Canal de support dédié" },
+      "gift":       { "title": "Cadeau mensuel",       "desc": "Réclamez des récompenses exclusives mensuelles" },
+      "protect":    { "title": "Protection complète",    "desc": "Sécurité des transactions garantie" }
+    },
+    "source": {
+      "recharge":   "Récompense de recharge",
+      "purchase":   "Récompense d'achat",
+      "signin":     "Connexion quotidienne",
+      "invite":     "Inviter un ami",
+      "task":       "Récompense de tâche"
+    },
+    "xpUnit":       "XP",
+    "levelRoad": "Route de niveau"
+  },
+  "product": {
+    "dailyIncome": "Revenu quotidien",
+    "totalIncome": "Revenu total",
+    "cycle": "Cycle",
+    "detail": "Détails",
+    "investAmount": "Montant",
+    "expectedReturn": "Rendement attendu",
+    "buyNow": "Acheter maintenant",
+    "min": "Min",
+    "max": "Max"
+  },
+  "order": {
+    "all": "Tous",
+    "active": "Actif",
+    "completed": "Terminé",
+    "amount": "Montant",
+    "dailyRate": "Taux quotidien",
+    "earned": "Gagné",
+    "claim": "Réclamer",
+    "empty": "Aucune commande",
+    "status": {
+      "active": "Actif",
+      "completed": "Terminé",
+      "expired": "Expiré"
+    }
+  },
+  "team": {
+    "totalMembers": "Total",
+    "lv1Members": "LV1",
+    "totalRecharge": "Recharge",
+    "recharge": "Recharge",
+    "empty": "Aucun membre"
+  },
+  "income": {
+    "total": "Total",
+    "available": "Disponible",
+    "claim": "Réclamer",
+    "claimed": "Réclamé",
+    "empty": "Aucun revenu"
+  },
+  "prize": {
+    "poolAmount": "Cagnotte",
+    "drawTime": "Heure du tirage",
+    "first": "1er prix",
+    "second": "2e prix",
+    "third": "3e prix",
+    "condition1": "Recharge d'équipe la plus élevée",
+    "condition2": "Recharge personnelle la plus élevée",
+    "condition3": "Le plus d'invitations",
+    "todayRank": "Classement d'aujourd'hui",
+    "winners": "Gagnants"
+  },
+  "task": {
+    "group1": "Groupe de tâches 1",
+    "group2": "Groupe de tâches 2",
+    "claim": "Réclamer"
+  },
+  "salary": {
+    "condition": "Condition",
+    "claim": "Réclamer",
+    "claimed": "Réclamé",
+    "notReached": "Non atteint"
+  },
+  "upload": {
+    "title": "Télécharger la preuve",
+    "clickToUpload": "Cliquez pour télécharger",
+    "submit": "Soumettre"
+  },
+  "withdraw": {
+    "selectCard": "Sélectionner la carte",
+    "enterAmount": "Entrez le montant",
+    "bankCard": "Carte bancaire",
+    "amount": "Montant",
+    "submit": "Soumettre"
+  },
+  "recharge": {
+    "amount": "Montant",
+    "enterAmount": "Entrez le montant",
+    "channel": "Paiement",
+    "submit": "Soumettre"
+  },
+  "settings": {
+    "username": "Nom d'utilisateur",
+    "phone": "Téléphone",
+    "changePassword": "Changer le mot de passe",
+    "oldPassword": "Ancien mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "submit": "Soumettre",
+    "logout": "Déconnexion",
+    "passwordMismatch": "Les mots de passe ne correspondent pas"
+  }
+}

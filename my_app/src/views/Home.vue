@@ -18,8 +18,8 @@
             <span class="username">{{ t('home.welcome') }}</span>
           </div>
         </div>
-        <button class="glass-icon-btn" @click="router.push('/balance')">
-          <Wallet :size="18" />
+        <button class="glass-icon-btn" @click="router.push('/settings')">
+          <Settings :size="18" />
         </button>
       </header>
 
@@ -132,7 +132,7 @@ import { colors } from '@/config/colors'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import {
-  User, Wallet, ArrowRight, ShoppingBag,
+  User, Settings, ArrowRight, ShoppingBag,
   Zap, Phone, Crown, Gamepad2, Coffee,
   Star, CheckCircle2,
   Wifi, Signal, CreditCard, Music,
