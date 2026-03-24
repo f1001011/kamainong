@@ -95,9 +95,9 @@ class Withdraw extends Model
     }
     
     /**
-     * 创建提现订单
+     * 申请提现
      */
-    public static function create($userId, $money, $bankCardId)
+    public static function apply($userId, $money, $bankCardId)
     {
         // 获取用户余额
         $user = Db::name('common_user')->where('id', $userId)->find();
