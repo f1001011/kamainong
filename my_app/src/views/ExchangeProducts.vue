@@ -1,23 +1,22 @@
 <template>
-  <div class="products-page">
+  <div class="exchange-page">
     <div class="bg-canvas">
-      <div class="orb orb-red"></div>
+      <div class="orb orb-amber"></div>
       <div class="orb orb-cyan"></div>
     </div>
 
     <div class="page-content">
       <div class="header">
-        <h1>{{ t('nav.products') }}</h1>
+        <h1>兑换商品</h1>
       </div>
 
       <div v-if="loading" class="loading">{{ t('common.loading') }}</div>
 
-      <div v-else-if="products.length" class="product-grid">
+      <div v-else-if="list.length" class="product-grid">
         <div
-          v-for="(item, i) in products"
+          v-for="(item, i) in list"
           :key="item.id"
           class="product-card glass-card"
-          @click="router.push(`/product/${item.id}`)"
           v-motion
           :initial="{ opacity: 0, y: 24, scale: 0.92 }"
           :enter="{ opacity: 1, y: 0, scale: 1, transition: { delay: Math.min(120 + i * 45, 800), type: 'spring', stiffness: 260, damping: 20 } }"
@@ -25,20 +24,17 @@
           <div class="product-img">
             <img v-if="item.imageUrl" class="product-img-pic" :src="item.imageUrl" />
             <div v-else class="product-fallback">NO IMAGE</div>
-            <span v-if="item.tag" class="product-tag">{{ item.tag }}</span>
           </div>
 
           <div class="product-info">
             <div class="product-name">{{ item.name }}</div>
-            <div class="product-price">{{ CURRENCY }}{{ item.price.toLocaleString() }}</div>
-            <div class="product-meta">{{ t('product.dailyIncome') }}: {{ CURRENCY }}{{ item.dailyIncome.toLocaleString() }}</div>
-            <div class="product-meta">{{ t('product.totalIncome') }}: {{ CURRENCY }}{{ item.totalIncome.toLocaleString() }}</div>
-            <div class="product-meta">{{ t('product.cycle') }}: {{ item.cycle }} {{ t('common.days') }}</div>
+            <div class="product-price">{{ item.price.toLocaleString() }} 积分</div>
+            <div class="product-meta">规格: {{ item.spec || '-' }}</div>
           </div>
         </div>
       </div>
 
-      <div v-else class="empty">暂无商品</div>
+      <div v-else class="empty">暂无兑换商品</div>
     </div>
   </div>
 </template>
@@ -46,21 +42,16 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
-import { CURRENCY } from '@/config'
-import { fetchProducts } from '@/api/product'
-import type { ProductItem } from '@/types/product'
+import { fetchWaresList, type WaresItem } from '@/api/wares'
 
 const { t } = useI18n()
-const router = useRouter()
 
 const loading = ref(true)
-const products = ref<ProductItem[]>([])
+const list = ref<WaresItem[]>([])
 
 onMounted(async () => {
   try {
-    const result = await fetchProducts({ page: 1, pageSize: 500 })
-    products.value = result.list
+    list.value = await fetchWaresList()
   } finally {
     loading.value = false
   }
@@ -68,7 +59,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.products-page {
+.exchange-page {
   min-height: 100vh;
   background: var(--bg-base);
   padding: 20px 20px 80px;
@@ -95,12 +86,12 @@ onMounted(async () => {
   opacity: 0.95;
 }
 
-.orb-red {
+.orb-amber {
   width: 420px;
   height: 420px;
   top: -100px;
   left: -80px;
-  background: var(--orb-red);
+  background: var(--orb-amber);
 }
 
 .orb-cyan {
@@ -141,19 +132,12 @@ onMounted(async () => {
 
 .product-card {
   overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
 .product-img {
   position: relative;
   height: 120px;
-  background: linear-gradient(160deg, rgba(0, 229, 255, 0.14), rgba(0, 176, 255, 0.06));
+  background: linear-gradient(160deg, rgba(255, 184, 0, 0.14), rgba(255, 109, 0, 0.06));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,20 +153,6 @@ onMounted(async () => {
 .product-fallback {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.45);
-}
-
-.product-tag {
-  position: absolute;
-  top: 9px;
-  right: 9px;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 2px 7px;
-  border-radius: 20px;
-  color: var(--color-amber);
-  border: 1px solid color-mix(in srgb, var(--color-amber) 40%, transparent);
-  background: color-mix(in srgb, var(--color-amber) 16%, transparent);
 }
 
 .product-info {
@@ -202,7 +172,7 @@ onMounted(async () => {
 .product-price {
   font-size: 17px;
   font-weight: 700;
-  color: var(--color-lime);
+  color: var(--color-amber);
   margin-bottom: 6px;
 }
 

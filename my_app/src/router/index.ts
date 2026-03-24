@@ -14,6 +14,7 @@ import Settings from '../views/Settings.vue'
 import InviteTask from '../views/InviteTask.vue'
 import Salary from '../views/Salary.vue'
 import UploadProof from '../views/UploadProof.vue'
+import ExchangeProducts from '../views/ExchangeProducts.vue'
 import { setLocale } from '@/i18n'
 
 // ── 无需登录 ────────────────────────────────────────────────────────────────
@@ -37,6 +38,7 @@ const authRoutes: Array<RouteRecordRaw> = [
     { path: '/invite-task', name: 'InviteTask', component: InviteTask, meta: { requiresAuth: true } },
     { path: '/salary', name: 'Salary', component: Salary, meta: { requiresAuth: true } },
     { path: '/upload-proof', name: 'UploadProof', component: UploadProof, meta: { requiresAuth: true } },
+    { path: '/exchange-products', name: 'ExchangeProducts', component: ExchangeProducts, meta: { requiresAuth: true } },
 ]
 
 const routes: Array<RouteRecordRaw> = [...publicRoutes, ...authRoutes]

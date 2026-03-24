@@ -15,44 +15,29 @@
           <TrendingUp :size="32" />
         </div>
         <h2 class="product-name">{{ product.name }}</h2>
-        <p class="product-category">{{ product.category }}</p>
       </div>
 
       <div class="stats-grid">
         <div class="stat-card">
-          <span class="stat-label">{{ t('product.dailyReturn') }}</span>
-          <span class="stat-value">{{ product.dailyRate }}%</span>
+          <span class="stat-label">{{ t('product.dailyIncome') }}</span>
+          <span class="stat-value">{{ CURRENCY }}{{ product.dailyIncome.toLocaleString() }}</span>
         </div>
         <div class="stat-card">
           <span class="stat-label">{{ t('product.cycle') }}</span>
-          <span class="stat-value">{{ product.cycle }}{{ t('common.days') }}</span>
+          <span class="stat-value">{{ product.cycle }} {{ t('common.days') }}</span>
         </div>
         <div class="stat-card">
-          <span class="stat-label">{{ t('product.totalReturn') }}</span>
-          <span class="stat-value">{{ totalReturn }}%</span>
+          <span class="stat-label">{{ t('product.totalIncome') }}</span>
+          <span class="stat-value">{{ CURRENCY }}{{ product.totalIncome.toLocaleString() }}</span>
         </div>
       </div>
 
       <div class="amount-section">
         <label>{{ t('product.investAmount') }}</label>
-        <div class="amount-input">
-          <span class="currency">{{ CURRENCY }}</span>
-          <input v-model="amount" type="number" :placeholder="String(product.minAmount)" />
-        </div>
-        <div class="amount-info">
-          <span>{{ t('product.min') }}: {{ CURRENCY }}{{ product.minAmount }}</span>
-          <span>{{ t('product.max') }}: {{ CURRENCY }}{{ product.maxAmount }}</span>
-        </div>
+        <div class="amount-fixed">{{ CURRENCY }} {{ product.price.toLocaleString() }}</div>
       </div>
 
-      <div class="return-preview">
-        <div class="preview-row">
-          <span>{{ t('product.expectedReturn') }}</span>
-          <span class="preview-value">{{ CURRENCY }}{{ expectedReturn }}</span>
-        </div>
-      </div>
-
-      <button class="buy-btn" :disabled="!canBuy" @click="handleBuy">
+      <button class="buy-btn" :disabled="product.status !== 1" @click="handleBuy">
         {{ t('product.buyNow') }}
       </button>
     </div>
@@ -67,37 +52,26 @@ import { ArrowLeft, TrendingUp } from 'lucide-vue-next'
 import { CURRENCY } from '@/config'
 import { getProductDetail } from '@/api/product'
 import { createOrder } from '@/api/order'
+import type { ProductDetailData } from '@/types/product'
 
 const route = useRoute()
 const router = useRouter()
 const { t } = useI18n()
 
 const loading = ref(true)
-const product = ref<any>(null)
+const product = ref<ProductDetailData | null>(null)
 const amount = ref('')
-
-const totalReturn = computed(() => product.value ? product.value.dailyRate * product.value.cycle : 0)
-const expectedReturn = computed(() => {
-  const amt = Number(amount.value) || 0
-  return (amt * totalReturn.value / 100).toFixed(2)
-})
-
-const canBuy = computed(() => {
-  const amt = Number(amount.value)
-  return amt >= (product.value?.minAmount || 0) && amt <= (product.value?.maxAmount || 0)
-})
 
 const iconGradient = computed(() => {
   if (!product.value) return ''
-  const rate = product.value.dailyRate
-  if (rate >= 3) return 'linear-gradient(135deg, #ff4d4d, #ff6b6b)'
-  if (rate >= 2) return 'linear-gradient(135deg, #ffa500, #ffb347)'
-  return 'linear-gradient(135deg, #6366f1, #8b5cf6)'
+  if (product.value.status === 2) return 'linear-gradient(135deg, #ff9800, #ffb347)'
+  return 'linear-gradient(135deg, #00c853, #00e676)'
 })
 
 const handleBuy = async () => {
+  if (!product.value || product.value.status !== 1) return
   try {
-    await createOrder({ productId: product.value.id, amount: Number(amount.value) })
+    await createOrder(product.value.id)
     router.push('/investments')
   } catch (err) {
     console.error(err)
@@ -116,7 +90,7 @@ onMounted(async () => {
 <style scoped>
 .product-detail {
   min-height: 100vh;
-  background: linear-gradient(180deg, #0a0a0f 0%, #1a1a2e 100%);
+  background: var(--bg-base);
   padding: 20px;
 }
 
@@ -131,9 +105,9 @@ onMounted(async () => {
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #fff;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,12 +117,12 @@ onMounted(async () => {
 .header h1 {
   font-size: 20px;
   font-weight: 600;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .loading {
   text-align: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in srgb, var(--text-primary) 50%, transparent);
   padding: 40px;
 }
 
@@ -171,13 +145,8 @@ onMounted(async () => {
 .product-name {
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
   margin-bottom: 8px;
-}
-
-.product-category {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
 }
 
 .stats-grid {
@@ -188,8 +157,8 @@ onMounted(async () => {
 }
 
 .stat-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px 12px;
   text-align: center;
@@ -198,15 +167,15 @@ onMounted(async () => {
 .stat-label {
   display: block;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: color-mix(in srgb, var(--text-primary) 55%, transparent);
   margin-bottom: 8px;
 }
 
 .stat-value {
   display: block;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .amount-section {
@@ -216,69 +185,24 @@ onMounted(async () => {
 .amount-section label {
   display: block;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: color-mix(in srgb, var(--text-primary) 75%, transparent);
   margin-bottom: 10px;
 }
 
-.amount-input {
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.amount-fixed {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 14px 16px;
-  gap: 8px;
-}
-
-.currency {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.amount-input input {
-  flex: 1;
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 20px;
-  font-weight: 600;
-  color: #fff;
-}
-
-.amount-info {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.return-preview {
-  background: rgba(74, 222, 128, 0.1);
-  border: 1px solid rgba(74, 222, 128, 0.2);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 24px;
-}
-
-.preview-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.preview-value {
   font-size: 20px;
   font-weight: 700;
-  color: #4ade80;
+  color: var(--text-primary);
 }
 
 .buy-btn {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, var(--color-cyan), var(--color-red));
   border: none;
   border-radius: 12px;
   color: #fff;

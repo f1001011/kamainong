@@ -1,13 +1,16 @@
 export interface VipInfo {
-  level: number          // 0-9
-  currentXp: number
-  nextLevelXp: number    // level 9 时为 0
-  totalXp: number
+  level: number
+  label: string
+  totalBuyCount: number
+  currentBuyCount: number
+  nextBuyCount: number
+  nextNeed: number
+  rewardMoney: number
 }
 
-export interface XpRecord {
-  id: string
-  sourceKey: string      // recharge | purchase | signin | invite | task
-  xp: number
+export interface BuyRecord {
+  id: number
+  name: string
+  amount: number
   createdAt: string
 }

@@ -13,11 +13,18 @@ Route::group('api', function(){
     // 用户相关
     Route::get('user/info', 'User/info');
     Route::get('user/balance', 'User/balance');
+    Route::get('user/money_summary', 'User/moneySummary');
+    Route::get('user/money_logs', 'User/moneyLogs');
+    Route::post('user/sign_in', 'User/signIn');
     Route::post('user/change_password', 'User/changePassword');
     
     // 产品相关
     Route::get('product/list', 'Product/list');
     Route::get('product/detail', 'Product/detail');
+
+    // 兑换商品相关
+    Route::get('wares/list', 'Wares/list');
+    Route::get('wares/detail', 'Wares/detail');
     
     // 订单相关
     Route::post('order/buy', 'Order/buy');
@@ -26,6 +33,7 @@ Route::group('api', function(){
     
     // VIP相关
     Route::get('vip/config', 'Vip/config');
+    Route::get('vip/buy_log', 'Vip/buyLog');
     Route::post('vip/check_upgrade', 'Vip/checkUpgrade');
     Route::post('vip/daily_reward', 'Vip/dailyReward');
     

@@ -83,23 +83,11 @@
         </div>
       </div>
 
-      <!-- Categories -->
-      <div class="category-row"
-        v-motion :initial="{ opacity:0 }"
-        :enter="{ opacity:1, transition:{ delay:300 } }">
-        <button v-for="cat in displayCategories" :key="cat.key"
-          :class="['cat-btn', { active: activeCategory === cat.key }]"
-          :style="activeCategory === cat.key ? { '--ac': cat.color, borderColor: cat.color + '55' } : {}"
-          @click="activeCategory = cat.key">
-          <component :is="cat.icon" :size="12" />
-          {{ catLabel(cat) }}
-        </button>
-      </div>
-
       <!-- Product Grid -->
       <div class="product-grid">
         <div v-for="(product, i) in displayProducts" :key="product.id"
           class="product-card glass-card"
+          @click="router.push(`/product/${product.id}`)"
           v-motion
           :initial="{ opacity:0, y:24, scale:0.92 }"
           :enter="{ opacity:1, y:0, scale:1, transition:{ delay: Math.min(360 + i*45, 800), type:'spring', stiffness:260, damping:20 } }">
@@ -137,7 +125,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import type { Component } from 'vue'
 import { CURRENCY } from '@/config'
 import { colors } from '@/config/colors'
@@ -146,28 +134,26 @@ import { useI18n } from 'vue-i18n'
 import {
   User, Wallet, ArrowRight, ShoppingBag,
   Zap, Phone, Crown, Gamepad2, Coffee,
-  LayoutGrid, Star, CheckCircle2,
+  Star, CheckCircle2,
   Wifi, Signal, CreditCard, Music,
   Sword, Gem, ShoppingCart, Car,
 } from 'lucide-vue-next'
-import { fetchCategories, fetchProducts, fetchHomeBalance } from '@/api/product'
+import { fetchProducts, fetchHomeBalance } from '@/api/product'
 import { getSystemConfig } from '@/api/system'
 import { getBannerList } from '@/api/banner'
 import NoticeModal from '@/components/NoticeModal.vue'
-import type { CategoryItem, ProductItem } from '@/types/product'
+import type { ProductItem } from '@/types/product'
 
 const router = useRouter()
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
 // ── Icon map ──────────────────────────────────────────────────────────────────
 const ICON_MAP: Record<string, Component> = {
-  layoutgrid: LayoutGrid, wifi: Wifi,       phone: Phone,       crown: Crown,
+  wifi: Wifi,       phone: Phone,       crown: Crown,
   gamepad2:   Gamepad2,   coffee: Coffee,   signal: Signal,     creditcard: CreditCard,
   music:      Music,      star:  Star,      sword:  Sword,      gem:   Gem,
   shoppingcart: ShoppingCart, car: Car,
 }
-
-// ── Category visual config ────────────────────────────────────────────────────
 const CATEGORY_VISUAL: Record<string, { gradient: string; glow: string; priceColor: string }> = {
   data:   { gradient:'linear-gradient(160deg,rgba(0,229,255,0.14),rgba(0,176,255,0.06))',   glow:'radial-gradient(circle at 60% 40%,rgba(0,229,255,0.25),transparent 65%)',   priceColor:'#00e5ff' },
   phone:  { gradient:'linear-gradient(160deg,rgba(255,184,0,0.14),rgba(255,109,0,0.06))',   glow:'radial-gradient(circle at 60% 40%,rgba(255,184,0,0.25),transparent 65%)',   priceColor:'#ffb800' },
@@ -179,12 +165,7 @@ const CATEGORY_VISUAL: Record<string, { gradient: string; glow: string; priceCol
 // ── Tag color map ─────────────────────────────────────────────────────────────
 const TAG_COLOR: Record<string, string> = {
   '热门': colors.red,   '推荐': colors.lime,  '爆款': colors.amber,
-  '超值': colors.amber, '精选': colors.lime,
-}
-
-// ── Color map (colorKey → hex) ────────────────────────────────────────────────
-const COLOR_MAP: Record<string, string> = {
-  red: colors.red, cyan: colors.cyan, amber: colors.amber, green: colors.lime,
+  '超值': colors.amber, '精选': colors.lime, '即将推出': colors.amber,
 }
 
 // ── Carousel ──────────────────────────────────────────────────────────────────
@@ -287,28 +268,6 @@ async function loadBanner() {
   }
 }
 
-// ── Categories ────────────────────────────────────────────────────────────────
-const activeCategory  = ref('all')
-const categoriesRaw   = ref<CategoryItem[]>([])
-
-const displayCategories = computed(() =>
-  categoriesRaw.value.map(cat => ({
-    ...cat,
-    icon:  ICON_MAP[cat.iconKey]  ?? LayoutGrid,
-    color: COLOR_MAP[cat.colorKey] ?? '#ff4d4d',
-  }))
-)
-
-function catLabel(cat: CategoryItem & { icon: Component; color: string }) {
-  return locale.value === 'zh' ? cat.labelZh : cat.labelEn
-}
-
-async function loadCategories() {
-  try {
-    categoriesRaw.value = await fetchCategories()
-  } catch { /* silent */ }
-}
-
 // ── Products ──────────────────────────────────────────────────────────────────
 const productList = ref<ProductItem[]>([])
 const page        = ref(1)
@@ -341,8 +300,7 @@ async function loadProducts(reset = false) {
   }
   try {
     const result = await fetchProducts({
-      category: activeCategory.value,
-      page:     page.value,
+      page: page.value,
       pageSize: PAGE_SIZE,
     })
     productList.value = reset ? result.list : [...productList.value, ...result.list]
@@ -372,12 +330,8 @@ function setupObserver() {
   if (sentinel.value) observer.observe(sentinel.value)
 }
 
-watch(activeCategory, () => {
-  loadProducts(true).then(() => nextTick(setupObserver))
-})
-
 onMounted(async () => {
-  await Promise.all([loadCategories(), loadProducts(true), loadHomeBalance(), loadNotice(), loadBanner()])
+  await Promise.all([loadProducts(true), loadHomeBalance(), loadNotice(), loadBanner()])
   startAuto()
   await nextTick()
   setupObserver()
@@ -535,27 +489,6 @@ onUnmounted(() => {
   cursor:pointer; transition:all 0.3s;
 }
 .dot.active { width:18px; border-radius:3px; background:#ff4d4d; }
-
-/* ── Categories ────────────────────────────────────────────────────────────── */
-.category-row {
-  display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; margin-bottom:16px;
-  scrollbar-width:none;
-}
-.category-row::-webkit-scrollbar { display:none; }
-.cat-btn {
-  display:flex; align-items:center; gap:5px;
-  padding:7px 14px; border-radius:20px; white-space:nowrap;
-  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08);
-  color:rgba(255,255,255,0.45); font-size:12px; font-weight:500;
-  cursor:pointer; transition:all 0.22s; font-family:inherit;
-  flex-shrink:0;
-}
-.cat-btn:hover { background:rgba(255,255,255,0.09); color:rgba(255,255,255,0.75); }
-.cat-btn.active {
-  background:color-mix(in srgb, var(--ac) 14%, transparent);
-  border-color:var(--ac);
-  color:var(--ac);
-}
 
 /* ── Product Grid ──────────────────────────────────────────────────────────── */
 .product-grid {
