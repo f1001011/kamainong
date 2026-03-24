@@ -163,7 +163,7 @@ export const MemberCard = memo(function MemberCard({
         {member.isValidInvite && (
           <div className="flex items-center gap-1 bg-success-50 text-success text-[10px] font-medium px-2 py-1 rounded-full">
             <RiCheckboxCircleFill className="w-3 h-3" />
-            <span>{t('team.valid_invite', 'صالح')}</span>
+            <span>{t('team.valid_invite')}</span>
           </div>
         )}
       </div>
@@ -174,13 +174,13 @@ export const MemberCard = memo(function MemberCard({
       {/* 底部：贡献与注册时间 */}
       <div className="flex items-center justify-between text-xs">
         <div>
-          <span className="text-neutral-400">{t('team.contributed', 'المساهمة')}: </span>
+          <span className="text-neutral-400">{t('team.contributed')}: </span>
           <span className="text-neutral-500 font-medium">
             {config ? formatCurrency(member.contributedCommission, config) : member.contributedCommission}
           </span>
         </div>
         <div>
-          <span className="text-neutral-400">{t('team.registered_at', 'التسجيل')}: </span>
+          <span className="text-neutral-400">{t('team.registered_at')}: </span>
           <span className="text-neutral-500">
             {formatSystemTime(member.registeredAt, timezone, 'yyyy-MM-dd')}
           </span>

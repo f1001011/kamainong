@@ -114,13 +114,13 @@ export function HomeInvestmentCard({
           )}
         >
           <p className="font-heading text-[22px] text-neutral-800 leading-snug mb-1">
-            {t('home.discoverNext', 'اكتشف استثمارك')}
+            {t('home.discoverNext')}
           </p>
           <p className="font-heading text-[22px] text-neutral-800 leading-snug mb-5">
-            {t('home.realEstateInvestment', 'العقاري القادم')}
+            {t('home.realEstateInvestment')}
           </p>
           <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-500">
-            {t('home.exploreProducts', 'استكشاف المنتجات')}
+            {t('home.exploreProducts')}
             <RiArrowRightSLine className="w-4 h-4" />
           </span>
         </m.div>
@@ -156,7 +156,7 @@ export function HomeInvestmentCard({
                 <RiLineChartLine className="w-4.5 h-4.5 text-primary-400" />
               </div>
               <span className="text-sm font-semibold text-white/70">
-                {t('home.myInvestments', 'استثماراتي')}
+                {t('home.myInvestments')}
               </span>
             </div>
             <RiArrowRightSLine className="w-5 h-5 text-white/20 transition-transform duration-200 group-hover/invest:translate-x-0.5" />
@@ -172,16 +172,16 @@ export function HomeInvestmentCard({
                   className="text-2xl font-heading text-white font-financial"
                 />
                 <span className="text-sm text-white/40">
-                  {t('home.activePositions', 'نشطة')}
+                  {t('home.activePositions')}
                 </span>
               </div>
               <div className="text-xs text-white/30 mb-3 font-financial">
-                {formatCurrency(totalInvested, globalConfig)} {t('home.invested', 'مستثمر')}
+                {formatCurrency(totalInvested, globalConfig)} {t('home.invested')}
               </div>
               <div className="flex gap-6">
                 <div>
                   <div className="text-[10px] font-medium text-white/25 uppercase tracking-[0.15em] mb-0.5">
-                    {t('home.todayLabel', 'اليوم')}
+                    {t('home.todayLabel')}
                   </div>
                   <AnimatedNumber
                     value={todayIncome}
@@ -195,7 +195,7 @@ export function HomeInvestmentCard({
                 </div>
                 <div>
                   <div className="text-[10px] font-medium text-white/25 uppercase tracking-[0.15em] mb-0.5">
-                    {t('home.totalLabel', 'الإجمالي')}
+                    {t('home.totalLabel')}
                   </div>
                   <AnimatedNumber
                     value={totalEarned}

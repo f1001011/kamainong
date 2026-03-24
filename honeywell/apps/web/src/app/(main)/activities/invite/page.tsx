@@ -48,9 +48,9 @@ export default function InviteActivityPage() {
       <div className="min-h-screen bg-neutral-50 flex items-center justify-center px-4">
         <EmptyState
           icon={<RiTrophyFill className="size-12 text-neutral-400" />}
-          title={t('error.load_failed', 'خطأ في التحميل')}
-          description={t('error.try_again', 'تعذر التحميل. حاول مرة أخرى.')}
-          actionText={t('btn.retry', 'إعادة المحاولة')}
+          title={t('error.load_failed')}
+          description={t('error.try_again')}
+          actionText={t('btn.retry')}
           onAction={() => refetch()}
         />
       </div>

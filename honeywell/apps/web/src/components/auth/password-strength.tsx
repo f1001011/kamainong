@@ -154,7 +154,7 @@ export function PasswordStrength({ password, minLength }: PasswordStrengthProps)
             className="flex items-center justify-between"
           >
             <p className={`text-xs ${strengthCfg.textColor} transition-colors duration-300`}>
-              {t('password.strength', 'قوة كلمة المرور')}: {t(strengthCfg.textKey, strength === 'weak' ? 'ضعيف' : strength === 'medium' ? 'متوسط' : 'قوي')}
+              {t('password.strength')}: {t(strengthCfg.textKey)}
             </p>
           </m.div>
         )}

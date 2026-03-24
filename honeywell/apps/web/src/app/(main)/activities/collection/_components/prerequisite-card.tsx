@@ -56,11 +56,11 @@ export function PrerequisiteCard({ prerequisite }: PrerequisiteCardProps) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-sm text-neutral-700">
-                {t('collection.prerequisite_title', 'الشرط المسبق')}
+                {t('collection.prerequisite_title')}
               </span>
               <span className="text-xs font-semibold text-success-600 bg-success-50 px-2 py-0.5 rounded-full flex items-center gap-1 border border-success-200/50">
                 <RiCheckLine className="w-3 h-3" />
-                {t('collection.prerequisite_met', 'تم استيفاء الشرط')}
+                {t('collection.prerequisite_met')}
               </span>
             </div>
             <p className="text-xs text-neutral-400 mt-0.5">{prerequisite.description}</p>
@@ -97,10 +97,10 @@ export function PrerequisiteCard({ prerequisite }: PrerequisiteCardProps) {
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-1">
               <span className="font-semibold text-[15px] text-neutral-800">
-                {t('collection.prerequisite_title', 'الشرط المسبق')}
+                {t('collection.prerequisite_title')}
               </span>
               <span className="text-xs font-medium text-primary-600/70 bg-primary-50 px-2 py-0.5 rounded-full border border-primary-200/40">
-                {t('collection.prerequisite_unmet', 'معلّق')}
+                {t('collection.prerequisite_unmet')}
               </span>
             </div>
 
@@ -113,7 +113,7 @@ export function PrerequisiteCard({ prerequisite }: PrerequisiteCardProps) {
               onClick={() => router.push('/products')}
               className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white rounded-xl btn-gradient transition-all"
             >
-              {t('collection.go_products', 'عرض المنتجات')}
+              {t('collection.go_products')}
             </button>
           </div>
         </div>

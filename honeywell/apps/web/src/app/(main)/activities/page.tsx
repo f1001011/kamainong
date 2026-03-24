@@ -161,8 +161,8 @@ export default function ActivitiesPage() {
         <div className="flex items-center justify-center px-4 py-20">
           <EmptyState
             icon={<RiTrophyFill className="w-12 h-12 text-neutral-400" />}
-            title={t('activities.empty_title', 'لا توجد أنشطة')}
-            description={t('activities.empty_description', 'عُد قريباً لمشاهدة أنشطة جديدة')}
+            title={t('activities.empty_title')}
+            description={t('activities.empty_description')}
           />
         </div>
       </div>
@@ -192,10 +192,10 @@ function ActivityHeader() {
       <div className="px-4 pt-6 pb-4">
         <m.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={SPRINGS.gentle}>
           <h1 className="text-xl font-bold text-neutral-800 tracking-tight">
-            {t('page.activities', 'مركز الأنشطة')}
+            {t('page.activities')}
           </h1>
           <p className="text-sm text-neutral-400 mt-1">
-            {t('activities.subtitle', 'شارك واربح مكافآت رائعة')}
+            {t('activities.subtitle')}
           </p>
         </m.div>
       </div>

@@ -114,7 +114,7 @@ export function PositionBasicInfo({
             {position.isGift && (
               <span className="inline-flex items-center gap-1 mt-1 px-2 py-0.5 bg-primary-50 text-primary-600 text-xs rounded-full">
                 <RiGiftFill className="h-3 w-3" />
-                {t('label.gift', 'هدية')}
+                {t('label.gift')}
               </span>
             )}
           </div>
@@ -128,8 +128,8 @@ export function PositionBasicInfo({
             : 'bg-neutral-100 text-neutral-500'
         )}>
           {isActive
-            ? t('status.active', 'نشط')
-            : t('status.completed', 'مكتمل')
+            ? t('status.active')
+            : t('status.completed')
           }
         </span>
       </div>
@@ -142,14 +142,14 @@ export function PositionBasicInfo({
 
       {/* 购买时间 */}
       <InfoRow
-        label={t('label.purchase_time', 'تاريخ الشراء')}
+        label={t('label.purchase_time')}
         value={formatSystemTime(position.startAt, config.systemTimezone || DEFAULT_SYSTEM_TIMEZONE, 'yyyy-MM-dd HH:mm')}
       />
 
       {/* 完成时间（仅已完成持仓） */}
       {!isActive && position.endAt && (
         <InfoRow
-          label={t('label.complete_time', 'تاريخ الانتهاء')}
+          label={t('label.complete_time')}
           value={formatSystemTime(position.endAt, config.systemTimezone || DEFAULT_SYSTEM_TIMEZONE, 'yyyy-MM-dd HH:mm')}
         />
       )}
@@ -161,20 +161,20 @@ export function PositionBasicInfo({
       {/* 依据：03.8.2-持仓详情页.md - grid-cols-2 gap-x-4 gap-y-3 */}
       <div className="grid grid-cols-2 gap-x-4 gap-y-3">
         <InfoBlock
-          label={t('label.purchase_amount', 'مبلغ الاستثمار')}
+          label={t('label.purchase_amount')}
           value={displayPurchaseAmount}
         />
         <InfoBlock
-          label={t('label.daily_income', 'الدخل اليومي')}
+          label={t('label.daily_income')}
           value={`+${displayDailyIncome}`}
           highlight
         />
         <InfoBlock
-          label={t('label.cycle_days', 'مدة الدورة')}
-          value={`${position.cycleDays} ${t('label.days', 'أيام')}`}
+          label={t('label.cycle_days')}
+          value={`${position.cycleDays} ${t('label.days')}`}
         />
         <InfoBlock
-          label={t('label.total_income', 'إجمالي الدخل')}
+          label={t('label.total_income')}
           value={displayTotalIncome}
           highlight
         />
@@ -203,7 +203,7 @@ function OrderNoRow({ orderNo }: { orderNo: string }) {
   return (
     <div className="flex items-center justify-between py-2">
       <span className="text-sm text-neutral-500">
-        {t('label.order_no', 'رقم الطلب')}
+        {t('label.order_no')}
       </span>
       <div className="flex items-center gap-2">
         <span className="text-sm font-mono text-neutral-600">
@@ -216,7 +216,7 @@ function OrderNoRow({ orderNo }: { orderNo: string }) {
             'hover:bg-neutral-100 active:bg-neutral-200',
             copied && 'text-success'
           )}
-          aria-label={t('btn.copy', 'نسخ')}
+          aria-label={t('btn.copy')}
         >
           {copied ? (
             <RiCheckLine className="h-4 w-4" />

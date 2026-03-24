@@ -95,12 +95,12 @@ function InviteItem({ record, index }: InviteItemProps) {
       case 'RECHARGE_PURCHASE':
         return {
           icon: RiShoppingCartLine,
-          text: t('activity.invite.validByPurchase', 'تم الشراء'),
+          text: t('activity.invite.validByPurchase'),
         };
       case 'COMPLETE_SIGNIN':
         return {
           icon: RiCalendarCheckLine,
-          text: t('activity.invite.validBySignin', '3 أيام تسجيل دخول'),
+          text: t('activity.invite.validBySignin'),
         };
       default:
         return null;
@@ -171,14 +171,14 @@ function InviteItem({ record, index }: InviteItemProps) {
           <div className="flex items-center gap-1 text-success">
             <RiCheckboxCircleLine className="size-4" />
             <span className="text-xs font-medium">
-              {t('activity.invite.valid', 'صالح')}
+              {t('activity.invite.valid')}
             </span>
           </div>
         ) : (
           <div className="flex items-center gap-1 text-neutral-400">
             <RiCloseLine className="size-4" />
             <span className="text-xs">
-              {t('activity.invite.invalid', 'معلّق')}
+              {t('activity.invite.invalid')}
             </span>
           </div>
         )}
@@ -259,7 +259,7 @@ export function InviteList({
       )}>
         <RiUserLine className="size-12 mb-3 text-neutral-300" />
         <p className="text-sm">
-          {emptyText || t('activity.invite.empty', 'لا توجد لديك دعوات بعد')}
+          {emptyText || t('activity.invite.empty')}
         </p>
       </div>
     );
@@ -272,14 +272,14 @@ export function InviteList({
         {showGroupTitle && (
           <div className="flex items-center justify-between">
             <h3 className="text-base font-semibold text-neutral-800">
-              {t('activity.invite.listTitle', 'المدعوون')}
+              {t('activity.invite.listTitle')}
             </h3>
             <div className="flex items-center gap-3 text-sm">
               <span className="text-success">
-                {t('activity.invite.validCount', 'صالحون')}: {stats.valid}
+                {t('activity.invite.validCount')}: {stats.valid}
               </span>
               <span className="text-neutral-400">
-                {t('activity.invite.pendingCount', 'معلّقون')}: {stats.pending}
+                {t('activity.invite.pendingCount')}: {stats.pending}
               </span>
             </div>
           </div>
@@ -301,7 +301,7 @@ export function InviteList({
         {/* 更多提示 */}
         {maxShow && records.length > maxShow && (
           <p className="text-center text-xs text-neutral-400 pt-2">
-            {t('activity.invite.moreHint', 'يتم عرض {n} من {total} مدعو')
+            {t('activity.invite.moreHint')
               .replace('{n}', String(maxShow))
               .replace('{total}', String(records.length))}
           </p>

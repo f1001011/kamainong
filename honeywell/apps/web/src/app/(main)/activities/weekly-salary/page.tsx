@@ -127,12 +127,12 @@ export default function WeeklySalaryPage() {
               <button
                 onClick={() => router.back()}
                 className="p-2 -ml-2 rounded-xl hover:bg-blue-100/80 active:scale-95 transition-all"
-                aria-label={t('btn.back', 'رجوع')}
+                aria-label={t('btn.back')}
               >
                 <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
               </button>
               <h1 className="text-lg font-bold text-neutral-800 tracking-tight">
-                {t('weekly.title', 'الراتب الأسبوعي LV1')}
+                {t('weekly.title')}
               </h1>
               <div className="w-10" />
             </div>
@@ -151,7 +151,7 @@ export default function WeeklySalaryPage() {
               <div className="flex items-center gap-2 mb-3">
                 <RiTeamFill className="size-5 text-blue-200" />
                 <span className="text-sm text-blue-100">
-                  {t('weekly.team_recharge', 'إيداعات فريق LV1 هذا الأسبوع')}
+                  {t('weekly.team_recharge')}
                 </span>
               </div>
 
@@ -177,7 +177,7 @@ export default function WeeklySalaryPage() {
               {/* 倒计时 */}
               <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/10">
                 <span className="text-xs text-blue-200">
-                  {t('weekly.time_remaining', 'الوقت المتبقي')}
+                  {t('weekly.time_remaining')}
                 </span>
                 <CountdownTimer
                   targetTime={data.weekEndTime}
@@ -192,7 +192,7 @@ export default function WeeklySalaryPage() {
             <div className="space-y-3">
               <h3 className="text-base font-semibold text-neutral-800 flex items-center gap-2">
                 <RiMedalFill className="size-5 text-gold-500" />
-                {t('weekly.tiers', 'مستويات المكافآت')}
+                {t('weekly.tiers')}
               </h3>
 
               {data.tiers.map((tier, index) => (
@@ -223,11 +223,11 @@ export default function WeeklySalaryPage() {
                   size="lg"
                   fullWidth
                   isLoading={claimMutation.isPending}
-                  loadingText={t('tip.claiming', 'جارٍ المطالبة...')}
+                  loadingText={t('tip.claiming')}
                   onClick={() => claimMutation.mutate(claimableTier.id)}
                   leftIcon={<RiTrophyFill className="size-5" />}
                 >
-                  {t('weekly.claim_reward', 'المطالبة بالمكافأة')} - {formatCurrency(claimableTier.reward, config)}
+                  {t('weekly.claim_reward')} - {formatCurrency(claimableTier.reward, config)}
                 </Button>
               </m.div>
             )}
@@ -242,13 +242,13 @@ export default function WeeklySalaryPage() {
               <div className="flex items-center gap-2 mb-3">
                 <RiHistoryLine className="size-5 text-neutral-500" />
                 <h3 className="text-base font-semibold text-neutral-800">
-                  {t('weekly.history', 'السجل')}
+                  {t('weekly.history')}
                 </h3>
               </div>
 
               {data.history.length === 0 ? (
                 <p className="text-sm text-neutral-400 text-center py-4">
-                  {t('weekly.no_history', 'لم تحصل على راتب أسبوعي بعد')}
+                  {t('weekly.no_history')}
                 </p>
               ) : (
                 <div className="space-y-2">
@@ -330,13 +330,13 @@ function TierCard({
               <RiMedalFill className="size-5 text-gold-500" />
             )}
             <span className={`text-sm font-semibold ${isLocked ? 'text-neutral-400' : 'text-neutral-700'}`}>
-              {t('weekly.tier_level', 'المستوى')} {index + 1}
+              {t('weekly.tier_level')} {index + 1}
             </span>
           </div>
 
           {isClaimed && (
             <span className="text-xs font-semibold text-primary-600 px-2.5 py-1 rounded-full bg-primary-100/60">
-              {t('weekly.claimed', 'تم المطالبة')}
+              {t('weekly.claimed')}
             </span>
           )}
         </div>
@@ -344,7 +344,7 @@ function TierCard({
         <div className="flex items-end justify-between">
           <div>
             <p className={`text-xs ${isLocked ? 'text-neutral-400' : 'text-neutral-500'}`}>
-              {t('weekly.threshold', 'الهدف')}
+              {t('weekly.threshold')}
             </p>
             <p className={`text-base font-bold tabular-nums ${isLocked ? 'text-neutral-400' : 'text-neutral-700'}`}>
               {formatCurrency(tier.threshold, config)}
@@ -352,7 +352,7 @@ function TierCard({
           </div>
           <div className="text-right">
             <p className={`text-xs ${isLocked ? 'text-neutral-400' : 'text-neutral-500'}`}>
-              {t('weekly.reward', 'المكافأة')}
+              {t('weekly.reward')}
             </p>
             <p className={`text-lg font-black tabular-nums ${
               isClaimable ? 'text-gold-600' : isClaimed ? 'text-primary-600' : isLocked ? 'text-neutral-400' : 'text-primary-600'

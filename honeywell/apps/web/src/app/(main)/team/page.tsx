@@ -72,8 +72,8 @@ export default function TeamPage() {
 
   // 胶囊 Tab
   const tabs = [
-    { key: 'members', label: t('team.tabMembers', 'الأعضاء') },
-    { key: 'commissions', label: t('team.tabCommissions', 'العمولات') },
+    { key: 'members', label: t('team.tabMembers') },
+    { key: 'commissions', label: t('team.tabCommissions') },
   ];
 
   const headerContent = isHeaderLoading ? (
@@ -106,7 +106,7 @@ export default function TeamPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={SPRINGS.gentle}
         >
-          {t('team.pageTitle', 'فريقي')}
+          {t('team.pageTitle')}
         </m.h1>
       </div>
 

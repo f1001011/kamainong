@@ -182,12 +182,12 @@ export default function SpinWheelPage() {
               <button
                 onClick={() => router.back()}
                 className="p-2 -ml-2 rounded-xl hover:bg-primary-100/80 active:scale-95 transition-all"
-                aria-label={t('btn.back', 'رجوع')}
+                aria-label={t('btn.back')}
               >
                 <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
               </button>
               <h1 className="text-lg font-bold text-neutral-800 tracking-tight">
-                {t('spin.title', 'عجلة الحظ')}
+                {t('spin.title')}
               </h1>
               <div className="w-10" />
             </div>
@@ -205,7 +205,7 @@ export default function SpinWheelPage() {
             <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-primary-200/50 shadow-[0_2px_12px_rgba(var(--color-primary-rgb),0.1)]">
               <RiStarFill className="size-5 text-primary-500" />
               <span className="text-sm font-semibold text-neutral-700">
-                {t('spin.chances', 'الفرص')}:
+                {t('spin.chances')}:
               </span>
               <span className="text-lg font-bold text-primary-600 tabular-nums">
                 {status.remainingChances}
@@ -282,7 +282,7 @@ export default function SpinWheelPage() {
                       >
                         {prize.amount > 0
                           ? formatCurrency(prize.amount, config, { decimals: 0 })
-                          : t('spin.thanks', 'شكراً')}
+                          : t('spin.thanks')}
                       </text>
                     </g>
                   );
@@ -299,7 +299,7 @@ export default function SpinWheelPage() {
               {isSpinning ? (
                 <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
-                t('spin.go', 'أدِر')
+                t('spin.go')
               )}
             </button>
           </m.div>
@@ -314,13 +314,13 @@ export default function SpinWheelPage() {
             <div className="flex items-center gap-2 mb-3">
               <RiHistoryLine className="size-5 text-primary-500" />
               <h3 className="text-base font-semibold text-neutral-800">
-                {t('spin.today_history', 'سجل اليوم')}
+                {t('spin.today_history')}
               </h3>
             </div>
 
             {status.todayHistory.length === 0 ? (
               <p className="text-sm text-neutral-400 text-center py-4">
-                {t('spin.no_history', 'لم تقم بالدوران اليوم بعد')}
+                {t('spin.no_history')}
               </p>
             ) : (
               <div className="space-y-2">
@@ -352,19 +352,19 @@ export default function SpinWheelPage() {
             <div className="flex items-center gap-2 mb-3">
               <RiQuestionLine className="size-5 text-primary-500" />
               <h3 className="text-base font-semibold text-neutral-800">
-                {t('spin.how_to_get', 'كيف تحصل على فرص')}
+                {t('spin.how_to_get')}
               </h3>
             </div>
             <div className="space-y-3">
               <ChanceMethod
                 icon={<RiCoinsFill className="size-4 text-primary-500" />}
-                title={t('spin.method_recharge', 'إيداع رصيد')}
-                desc={t('spin.method_recharge_desc', 'كل عملية إيداع = فرصة واحدة')}
+                title={t('spin.method_recharge')}
+                desc={t('spin.method_recharge_desc')}
               />
               <ChanceMethod
                 icon={<RiAddCircleLine className="size-4 text-blue-500" />}
-                title={t('spin.method_invite', 'دعوة أصدقاء')}
-                desc={t('spin.method_invite_desc', 'كل 5 أصدقاء مدعوين = فرصة واحدة (حد أقصى 5 مرات/يوم)')}
+                title={t('spin.method_invite')}
+                desc={t('spin.method_invite_desc')}
               />
             </div>
           </m.div>
@@ -406,8 +406,8 @@ export default function SpinWheelPage() {
 
                 <h3 className="text-xl font-bold text-neutral-800 mb-2">
                   {winPrize.amount > 0
-                    ? t('spin.congratulations', 'تهانينا!')
-                    : t('spin.thanks_msg', 'شكراً على المشاركة')}
+                    ? t('spin.congratulations')
+                    : t('spin.thanks_msg')}
                 </h3>
 
                 {winPrize.amount > 0 ? (
@@ -421,7 +421,7 @@ export default function SpinWheelPage() {
                   </m.p>
                 ) : (
                   <p className="text-base text-neutral-500 mb-2">
-                    {t('spin.try_again', 'حاول مرة أخرى غداً')}
+                    {t('spin.try_again')}
                   </p>
                 )}
 
@@ -433,7 +433,7 @@ export default function SpinWheelPage() {
                   whileTap={{ scale: 0.96 }}
                   transition={SPRINGS.snappy}
                 >
-                  {t('btn.confirm', 'تأكيد')}
+                  {t('btn.confirm')}
                 </m.button>
               </m.div>
             </m.div>

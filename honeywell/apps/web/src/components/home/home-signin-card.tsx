@@ -119,7 +119,7 @@ export function HomeSigninCard({
             <RiCalendarCheckFill className="w-4 h-4 text-gold-500" />
           </div>
           <span className="text-sm font-bold text-neutral-800">
-            {t('home.dailySignin', 'التوقيع اليومي')}
+            {t('home.dailySignin')}
           </span>
         </div>
 
@@ -128,18 +128,18 @@ export function HomeSigninCard({
             {targetDays > 0 ? (
               <div className="text-lg font-bold text-neutral-800">
                 {completed ? (
-                  t('signin.completed', 'مكتمل')
+                  t('signin.completed')
                 ) : (
                   <>
-                    {t('signin.day', 'يوم')} {currentStreak} {t('common.of', 'من')} {targetDays}
+                    {t('signin.day')} {currentStreak} {t('common.of')} {targetDays}
                   </>
                 )}
               </div>
             ) : (
               <div className="text-lg font-bold text-neutral-800">
                 {todaySigned
-                  ? t('signin.todayDone', 'تم التوقيع اليوم')
-                  : t('signin.dailyReward', 'مكافأة يومية')}
+                  ? t('signin.todayDone')
+                  : t('signin.dailyReward')}
               </div>
             )}
           </div>
@@ -151,12 +151,12 @@ export function HomeSigninCard({
         {completed ? (
           <div className="flex items-center justify-center gap-1.5 h-10 rounded-xl bg-primary-50 text-primary-600 text-sm font-semibold">
             <RiCheckLine className="w-4 h-4" />
-            {t('signin.allCompleted', 'مكتمل')}
+            {t('signin.allCompleted')}
           </div>
         ) : todaySigned ? (
           <div className="flex items-center justify-center gap-1.5 h-10 rounded-xl bg-neutral-100 text-neutral-400 text-sm font-semibold">
             <RiCheckLine className="w-4 h-4" />
-            {t('signin.signed', 'تم التوقيع')}
+            {t('signin.signed')}
           </div>
         ) : (
           <m.button
@@ -175,7 +175,7 @@ export function HomeSigninCard({
               setShowModal(true);
             }}
           >
-            {t('signin.signNow', 'توقيع')} +{reward}
+            {t('signin.signNow')} +{reward}
           </m.button>
         )}
       </m.div>

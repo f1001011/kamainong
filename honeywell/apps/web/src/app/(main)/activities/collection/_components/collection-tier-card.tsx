@@ -162,7 +162,7 @@ export function CollectionTierCard({
             {/* 状态/操作 */}
             {tier.status === 'LOCKED' && (
               <span className="text-[11px] text-neutral-400 flex-shrink-0 ml-2">
-                {t('collection.status_locked', 'غير مكتمل')}
+                {t('collection.status_locked')}
               </span>
             )}
             
@@ -175,7 +175,7 @@ export function CollectionTierCard({
                   disabled={isClaiming || !prerequisiteMet}
                   className="shadow-glow-sm flex-shrink-0 ml-2"
                 >
-                  {t('collection.status_claimable', 'المطالبة')}
+                  {t('collection.status_claimable')}
                 </Button>
               </PulseWrapper>
             )}
@@ -183,7 +183,7 @@ export function CollectionTierCard({
             {tier.status === 'CLAIMED' && (
               <span className="text-xs text-success-600 font-medium bg-success-50 px-2 py-0.5 rounded-full flex items-center gap-1 flex-shrink-0 ml-2">
                 <RiCheckLine className="w-3 h-3" />
-                {t('collection.status_claimed', 'تم المطالبة')}
+                {t('collection.status_claimed')}
               </span>
             )}
           </div>

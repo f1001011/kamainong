@@ -93,7 +93,7 @@ export function ProductInfo({ product, className }: ProductInfoProps) {
               transition={{ delay: 0.2 }}
               className="rounded-full bg-gradient-to-r from-primary-400 to-primary-500 px-3 py-1 text-xs font-medium text-white shadow-soft"
             >
-              {t('tag.trial', 'تجربة')}
+              {t('tag.trial')}
             </m.span>
           )}
 
@@ -105,7 +105,7 @@ export function ProductInfo({ product, className }: ProductInfoProps) {
               transition={{ delay: 0.2 }}
               className="rounded-full bg-gradient-to-r from-success to-success-600 px-3 py-1 text-xs font-medium text-white shadow-soft"
             >
-              {product.customBadgeText || t('tag.recommend', 'مُوصى به')}
+              {product.customBadgeText || t('tag.recommend')}
             </m.span>
           )}
 
@@ -150,7 +150,7 @@ export function ProductInfo({ product, className }: ProductInfoProps) {
         <div className="flex items-baseline justify-between">
           <div>
             <p className="text-xs text-neutral-400 mb-1">
-              {t('product.price', 'السعر')}
+              {t('product.price')}
             </p>
             <p className="text-3xl font-bold text-primary-500 tabular-nums">
               {formattedPrice}
@@ -160,10 +160,10 @@ export function ProductInfo({ product, className }: ProductInfoProps) {
           {/* 周期标签 */}
           <div className="text-right">
             <p className="text-xs text-neutral-400 mb-1">
-              {t('product.cycle', 'الدورة')}
+              {t('product.cycle')}
             </p>
             <p className="text-lg font-semibold text-foreground">
-              {product.cycleDays} {t('unit.days', 'أيام')}
+              {product.cycleDays} {t('unit.days')}
             </p>
           </div>
         </div>
@@ -179,7 +179,7 @@ export function ProductInfo({ product, className }: ProductInfoProps) {
         {/* 日收益 */}
         <div className="rounded-xl bg-white p-4 shadow-soft">
           <div className="flex items-center gap-1 text-xs text-neutral-400 mb-1">
-            <span>{t('biz.daily_income', 'الدخل اليومي')}</span>
+            <span>{t('biz.daily_income')}</span>
           </div>
           <p className="text-lg font-semibold text-success tabular-nums">
             +{formattedDailyIncome}
@@ -189,7 +189,7 @@ export function ProductInfo({ product, className }: ProductInfoProps) {
         {/* 总收益 */}
         <div className="rounded-xl bg-white p-4 shadow-soft">
           <div className="flex items-center gap-1 text-xs text-neutral-400 mb-1">
-            <span>{t('biz.total_return', 'العائد الإجمالي')}</span>
+            <span>{t('biz.total_return')}</span>
             <RiInformationLine className="h-3.5 w-3.5 text-neutral-300" />
           </div>
           <p className="text-lg font-semibold text-foreground tabular-nums">
@@ -216,12 +216,12 @@ export function ProductInfo({ product, className }: ProductInfoProps) {
           <div>
             <p className="text-sm font-medium text-foreground">
               {hasGrantSvip 
-                ? t('tag.vip_upgrade', 'الترقية إلى SVIP{level}').replace('{level}', String(product.grantSvipLevel))
-                : t('tag.vip_upgrade', 'الترقية إلى VIP{level}').replace('{level}', String(product.grantVipLevel))
+                ? t('tag.vip_upgrade').replace('{level}', String(product.grantSvipLevel))
+                : t('tag.vip_upgrade').replace('{level}', String(product.grantVipLevel))
               }
             </p>
             <p className="text-xs text-neutral-400">
-              {t('product.grant_vip_desc', 'اشترِ هذا المنتج واستمتع بمزايا VIP')}
+              {t('product.grant_vip_desc')}
             </p>
           </div>
         </m.div>

@@ -50,7 +50,7 @@ export function HomePropertyGallery({
   if (!products.length) {
     return (
       <div className={cn('py-8 text-center text-neutral-400', className)}>
-        <p className="text-sm">{t('home.noProducts', 'لا توجد منتجات متاحة')}</p>
+        <p className="text-sm">{t('home.noProducts')}</p>
       </div>
     );
   }
@@ -110,11 +110,11 @@ export function HomePropertyGallery({
                         </h3>
                         <div className="flex items-center gap-2 mt-1">
                           <span className="text-sm font-semibold text-gold-on-dark font-financial">
-                            {formatCurrency(dailyIncome, config)}/{t('unit.day', 'يوم')}
+                            {formatCurrency(dailyIncome, config)}/{t('unit.day')}
                           </span>
                           <span className="text-xs text-white/40">·</span>
                           <span className="text-xs text-white/50">
-                            {product.cycleDays} {t('unit.days', 'أيام')}
+                            {product.cycleDays} {t('unit.days')}
                           </span>
                         </div>
                       </div>
@@ -122,7 +122,7 @@ export function HomePropertyGallery({
                       {/* 推荐角标 */}
                       {product.showRecommendBadge && (
                         <div className="absolute top-3 left-3 px-2 py-1 rounded-lg bg-gold-500/90 text-white text-[10px] font-semibold tracking-wide">
-                          {product.customBadgeText || t('product.recommend', 'موصى به')}
+                          {product.customBadgeText || t('product.recommend')}
                         </div>
                       )}
                     </div>

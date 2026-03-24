@@ -97,22 +97,19 @@ function PasswordStrengthIndicator({
     weak: {
       width: '30%',
       gradient: 'bg-gradient-to-r from-red-400 to-gold-400',
-      label: 'strength.weak',
-      defaultLabel: 'ضعيفة',
+      label: 'password.weak',
       color: 'text-red-500',
     },
     medium: {
       width: '60%',
       gradient: 'bg-gradient-to-r from-gold-400 to-gold-500',
-      label: 'strength.medium',
-      defaultLabel: 'متوسطة',
+      label: 'password.medium',
       color: 'text-gold-500',
     },
     strong: {
       width: '100%',
       gradient: 'bg-gradient-to-r from-primary-400 to-primary-300',
-      label: 'strength.strong',
-      defaultLabel: 'قوية',
+      label: 'password.strong',
       color: 'text-primary-500',
     },
   };
@@ -133,7 +130,7 @@ function PasswordStrengthIndicator({
 
       {/* 强度文字 */}
       <p className={cn('text-xs', config.color)}>
-        {t(config.label, config.defaultLabel)}
+        {t(config.label)}
       </p>
     </div>
   );
@@ -237,29 +234,29 @@ export default function ChangePasswordPage() {
   // 动态创建表单验证 Schema
   const formSchema = useMemo(() => {
     return z.object({
-      oldPassword: z.string().min(1, t('error.old_password_required', 'يرجى إدخال كلمة المرور الحالية')),
+      oldPassword: z.string().min(1, t('error.old_password_required')),
       newPassword: z.string()
         .min(passwordConfig.minLength, t.withVars('error.password_min_length', { min: passwordConfig.minLength }))
         .max(passwordConfig.maxLength, t.withVars('error.password_max_length', { max: passwordConfig.maxLength }))
         .refine(
           (val) => !passwordConfig.requireLetter || /[a-zA-Z]/.test(val),
-          t('error.password_letter', 'يجب أن تحتوي كلمة المرور على حرف واحد على الأقل')
+          t('error.password_letter')
         )
         .refine(
           (val) => !passwordConfig.requireNumber || /\d/.test(val),
-          t('error.password_number', 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل')
+          t('error.password_number')
         ),
-      confirmPassword: z.string().min(1, t('error.confirm_password_required', 'يرجى تأكيد كلمة المرور الجديدة')),
+      confirmPassword: z.string().min(1, t('error.confirm_password_required')),
     }).refine(
       (data) => data.newPassword === data.confirmPassword,
       {
-        message: t('error.password_mismatch', 'كلمتا المرور غير متطابقتين'),
+        message: t('error.password_mismatch'),
         path: ['confirmPassword'],
       }
     ).refine(
       (data) => data.oldPassword !== data.newPassword,
       {
-        message: t('error.same_password', 'كلمة المرور الجديدة لا يمكن أن تكون مطابقة للحالية'),
+        message: t('error.same_password'),
         path: ['newPassword'],
       }
     );
@@ -289,7 +286,7 @@ export default function ChangePasswordPage() {
       api.put<void>('/user/password', data as unknown as Record<string, unknown>),
     onSuccess: () => {
       // 显示成功提示
-      toast.success(t('toast.password_changed', 'تم تغيير كلمة المرور بنجاح'));
+      toast.success(t('toast.password_changed'));
 
       // 延迟清除 Token 并跳转（给用户看到成功提示的时间）
       setTimeout(() => {
@@ -304,7 +301,7 @@ export default function ChangePasswordPage() {
         router.replace('/login');
 
         // 4. 显示重新登录提示
-        toast.info(t('toast.redirect_login', 'يرجى تسجيل الدخول مجدداً'));
+        toast.info(t('toast.redirect_login'));
       }, 1500);
     },
     onError: (error: Error & { code?: string }) => {
@@ -312,21 +309,21 @@ export default function ChangePasswordPage() {
       switch (error.code) {
         case 'OLD_PASSWORD_WRONG':
           // 聚焦旧密码输入框
-          setError('oldPassword', { message: t('error.old_password_wrong', 'كلمة المرور الحالية غير صحيحة') });
+          setError('oldPassword', { message: t('error.old_password_wrong') });
           setFocus('oldPassword');
           break;
         case 'SAME_PASSWORD':
-          setError('newPassword', { message: t('error.same_password', 'كلمة المرور الجديدة لا يمكن أن تكون مطابقة للحالية') });
+          setError('newPassword', { message: t('error.same_password') });
           setFocus('newPassword');
           break;
         case 'VALIDATION_ERROR':
-          toast.error(t('error.password_validation', 'كلمة المرور لا تستوفي المتطلبات'));
+          toast.error(t('error.password_validation'));
           break;
         case 'RATE_LIMITED':
-          toast.error(t('error.rate_limited', 'عملية متكررة جداً، يرجى المحاولة لاحقاً'));
+          toast.error(t('error.rate_limited'));
           break;
         default:
-          toast.error(t('error.network', 'خطأ في الشبكة، يرجى التحقق من اتصالك'));
+          toast.error(t('error.network'));
       }
     },
   });
@@ -369,7 +366,7 @@ export default function ChangePasswordPage() {
               <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
             </button>
             <h1 className="text-lg font-bold tracking-tight text-neutral-800">
-              {t('page.change_password', 'تغيير كلمة المرور')}
+              {t('page.change_password')}
             </h1>
           </header>
 
@@ -389,8 +386,8 @@ export default function ChangePasswordPage() {
               {/* 旧密码 */}
               <m.div variants={listItemVariants}>
                 <PasswordInput
-                  label={t('label.old_password', 'كلمة المرور الحالية')}
-                  placeholder={t('placeholder.old_password', 'أدخل كلمة المرور الحالية')}
+                  label={t('label.old_password')}
+                  placeholder={t('placeholder.old_password')}
                   error={errors.oldPassword?.message}
                   showPassword={showPassword.old}
                   onToggleVisibility={() => togglePasswordVisibility('old')}
@@ -402,8 +399,8 @@ export default function ChangePasswordPage() {
               {/* 新密码 */}
               <m.div variants={listItemVariants}>
                 <PasswordInput
-                  label={t('label.new_password', 'كلمة المرور الجديدة')}
-                  placeholder={t('placeholder.new_password', 'أدخل كلمة المرور الجديدة')}
+                  label={t('label.new_password')}
+                  placeholder={t('placeholder.new_password')}
                   error={errors.newPassword?.message}
                   showPassword={showPassword.new}
                   onToggleVisibility={() => togglePasswordVisibility('new')}
@@ -427,8 +424,8 @@ export default function ChangePasswordPage() {
               {/* 确认密码 */}
               <m.div variants={listItemVariants}>
                 <PasswordInput
-                  label={t('label.confirm_password', 'تأكيد كلمة المرور')}
-                  placeholder={t('placeholder.confirm_password', 'أكد كلمة المرور الجديدة')}
+                  label={t('label.confirm_password')}
+                  placeholder={t('placeholder.confirm_password')}
                   error={errors.confirmPassword?.message}
                   showPassword={showPassword.confirm}
                   onToggleVisibility={() => togglePasswordVisibility('confirm')}
@@ -453,10 +450,10 @@ export default function ChangePasswordPage() {
                   {isSubmitting ? (
                     <span className="flex items-center justify-center gap-2">
                       <RiLoader4Line className="w-5 h-5 animate-spin" />
-                      {t('btn.submitting', 'جارٍ المعالجة...')}
+                      {t('btn.submitting')}
                     </span>
                   ) : (
-                    t('btn.submit', 'تأكيد')
+                    t('btn.submit')
                   )}
                 </button>
               </m.div>

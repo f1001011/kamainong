@@ -136,12 +136,12 @@ export function ResponsiveModal({
               {/* 无障碍标题 */}
               {!title && (
                 <VisuallyHidden.Root asChild>
-                  <Drawer.Title>{t('a11y.modal', 'نافذة منبثقة')}</Drawer.Title>
+                  <Drawer.Title>{t('a11y.modal')}</Drawer.Title>
                 </VisuallyHidden.Root>
               )}
               {!description && (
                 <VisuallyHidden.Root asChild>
-                  <Drawer.Description>{t('a11y.modal_content', 'محتوى النافذة المنبثقة')}</Drawer.Description>
+                  <Drawer.Description>{t('a11y.modal_content')}</Drawer.Description>
                 </VisuallyHidden.Root>
               )}
               
@@ -164,7 +164,7 @@ export function ResponsiveModal({
                     <button
                       onClick={() => onOpenChange(false)}
                       className="rounded-full p-2 hover:bg-neutral-100 transition-colors"
-                      aria-label={t('aria.close', 'إغلاق')}
+                      aria-label={t('aria.close')}
                     >
                       <RiCloseLine className="h-5 w-5 text-neutral-400" />
                     </button>
@@ -216,12 +216,12 @@ export function ResponsiveModal({
                 >
                   {!title && (
                     <VisuallyHidden.Root asChild>
-                      <Dialog.Title>{t('a11y.modal', 'نافذة منبثقة')}</Dialog.Title>
+                      <Dialog.Title>{t('a11y.modal')}</Dialog.Title>
                     </VisuallyHidden.Root>
                   )}
                   {!description && (
                     <VisuallyHidden.Root asChild>
-                      <Dialog.Description>{t('a11y.modal_content', 'محتوى النافذة المنبثقة')}</Dialog.Description>
+                      <Dialog.Description>{t('a11y.modal_content')}</Dialog.Description>
                     </VisuallyHidden.Root>
                   )}
 
@@ -243,7 +243,7 @@ export function ResponsiveModal({
                         <Dialog.Close asChild>
                           <button
                             className="rounded-full p-2 hover:bg-neutral-100 transition-colors -mr-2 -mt-2"
-                            aria-label={t('aria.close', 'إغلاق')}
+                            aria-label={t('aria.close')}
                           >
                             <RiCloseLine className="h-5 w-5 text-neutral-400" />
                           </button>

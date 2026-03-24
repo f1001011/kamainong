@@ -59,7 +59,7 @@ export function DetailsPanel({
 
     // 订单号
     items.push({
-      label: t('label.order_no', 'رقم الطلب'),
+      label: t('label.order_no'),
       value: (
         <div className="flex items-center gap-2">
           <span className="text-xs font-mono text-neutral-600 truncate max-w-[180px]">{orderNo}</span>
@@ -75,26 +75,26 @@ export function DetailsPanel({
 
     // 购买日期
     items.push({
-      label: t('label.purchase_time', 'تاريخ الشراء'),
+      label: t('label.purchase_time'),
       value: formatSystemTime(startAt, tz, 'yyyy-MM-dd HH:mm'),
     });
 
     // 结束/预计日期
     if (isActive && estimatedEndAt) {
       items.push({
-        label: t('label.estimated_end', 'التاريخ المتوقع'),
+        label: t('label.estimated_end'),
         value: formatSystemTime(estimatedEndAt, tz, 'yyyy-MM-dd HH:mm'),
       });
     } else if (!isActive && endAt) {
       items.push({
-        label: t('label.complete_time', 'تاريخ الانتهاء'),
+        label: t('label.complete_time'),
         value: formatSystemTime(endAt, tz, 'yyyy-MM-dd HH:mm'),
       });
     }
 
     // 产品类型
     items.push({
-      label: t('label.product_type', 'نوع المنتج'),
+      label: t('label.product_type'),
       value: (
         <div className="flex items-center gap-2">
           <span className={cn(
@@ -110,19 +110,19 @@ export function DetailsPanel({
 
     // 订单类型
     items.push({
-      label: t('label.order_type', 'نوع الطلب'),
-      value: isGift ? t('label.gift', 'هدية') : t('label.purchase', 'شراء'),
+      label: t('label.order_type'),
+      value: isGift ? t('label.gift') : t('label.purchase'),
     });
 
     // 连续发放天数
     if (settledStreak > 0) {
       items.push({
-        label: t('label.income_streak', 'سلسلة الأرباح'),
+        label: t('label.income_streak'),
         value: (
           <div className="flex items-center gap-1.5">
             <RiFireFill className="h-4 w-4 text-gold-500" />
             <span className="text-sm font-medium text-neutral-700">
-              {settledStreak} {t('label.consecutive_days', 'أيام متتالية')}
+              {settledStreak} {t('label.consecutive_days')}
             </span>
           </div>
         ),

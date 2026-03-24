@@ -91,7 +91,7 @@ export function CollectionShowcase({ purchasedProducts }: CollectionShowcaseProp
         <div className="flex items-center justify-center gap-2.5 mb-5">
           <RiVipDiamondFill className="w-5 h-5 text-primary-400" />
           <h2 className="text-base font-bold text-white/90">
-            {t('collection.purchased_title', 'مجموعتي')}
+            {t('collection.purchased_title')}
           </h2>
           <span className="text-xs font-bold text-primary-400 bg-white/8 px-2.5 py-0.5 rounded-full border border-white/10">
             {purchasedProducts.length}
@@ -128,10 +128,10 @@ export function CollectionShowcase({ purchasedProducts }: CollectionShowcaseProp
               />
             </div>
             <p className="text-sm font-medium text-white/30 mb-1">
-              {t('collection.no_purchased', 'لا تملك منتجات VIP بعد')}
+              {t('collection.no_purchased')}
             </p>
             <p className="text-xs text-white/15">
-              {t('collection.no_purchased_hint', 'اشترِ VIP لفتح المكافآت')}
+              {t('collection.no_purchased_hint')}
             </p>
           </div>
         )}
@@ -146,7 +146,7 @@ export function CollectionShowcase({ purchasedProducts }: CollectionShowcaseProp
             color: 'rgba(var(--color-primary-rgb),0.9)',
           }}
         >
-          {t('collection.go_products', 'عرض المنتجات')}
+          {t('collection.go_products')}
           <RiArrowRightSLine className="w-4 h-4" />
         </button>
       </div>

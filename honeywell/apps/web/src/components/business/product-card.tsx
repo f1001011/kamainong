@@ -154,7 +154,7 @@ export function ProductCard({ product, onClick, className }: ProductCardProps) {
             transition={{ delay: 0.1 }}
             className="absolute top-2 left-2 px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-gradient-to-r from-primary-400 to-primary-500 text-white backdrop-blur-sm shadow-sm z-10"
           >
-            {t('product.recommend', 'موصى به')}
+            {t('product.recommend')}
           </m.div>
         )}
 
@@ -181,7 +181,7 @@ export function ProductCard({ product, onClick, className }: ProductCardProps) {
               <RiTimeLine className="w-5 h-5 text-neutral-400" />
             </div>
             <p className="text-xs text-neutral-500 font-medium">
-              {t('product.coming_soon', 'قريبًا')}
+              {t('product.coming_soon')}
             </p>
           </m.div>
         )}
@@ -202,7 +202,7 @@ export function ProductCard({ product, onClick, className }: ProductCardProps) {
           'text-xs font-financial font-semibold',
           isDark ? 'text-gold-on-dark' : 'text-primary-500',
         )}>
-          +{formatCurrency(product.dailyIncome, globalConfig)}/{t('unit.day', 'يوم')}
+          +{formatCurrency(product.dailyIncome, globalConfig)}/{t('unit.day')}
         </div>
 
         {/* 周期 */}
@@ -210,7 +210,7 @@ export function ProductCard({ product, onClick, className }: ProductCardProps) {
           'text-xs',
           isDark ? 'text-white/40' : 'text-neutral-400',
         )}>
-          {product.cycleDays}{t('unit.days', ' أيام')}
+          {product.cycleDays}{t('unit.days')}
         </div>
       </div>
     </m.div>
@@ -269,10 +269,10 @@ export function HeroProductCard({ product }: { product: ProductData }) {
               </span>
               <span className="text-white/30">&middot;</span>
               <span className="text-gold-on-dark font-financial">
-                +{formatCurrency(product.dailyIncome, globalConfig)}/{t('unit.day', 'يوم')}
+                +{formatCurrency(product.dailyIncome, globalConfig)}/{t('unit.day')}
               </span>
               <span className="text-white/30">&middot;</span>
-              <span>{product.cycleDays}{t('unit.days', ' أيام')}</span>
+              <span>{product.cycleDays}{t('unit.days')}</span>
             </div>
           </div>
 
@@ -286,7 +286,7 @@ export function HeroProductCard({ product }: { product: ProductData }) {
           {/* 推荐角标 */}
           {product.showRecommendBadge && !isPurchased && (
             <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-primary-400 to-primary-500 text-white backdrop-blur-sm shadow-sm">
-              {t('product.recommend', 'موصى به')}
+              {t('product.recommend')}
             </div>
           )}
 

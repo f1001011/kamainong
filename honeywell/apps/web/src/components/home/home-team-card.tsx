@@ -91,17 +91,17 @@ export function HomeTeamCard({
                 <RiTeamFill className="w-4 h-4 text-gold-on-dark" />
               </div>
               <span className="text-sm font-semibold text-white/60">
-                {t('home.myTeam', 'فريقي')}
+                {t('home.myTeam')}
               </span>
             </div>
             <p className="text-sm font-semibold text-white/70 mb-1">
-              {t('home.inviteAndEarn', 'ادعُ واربح')}
+              {t('home.inviteAndEarn')}
             </p>
             <p className="text-sm font-semibold text-white/70 mb-3">
-              {t('home.commission', 'عمولة')}
+              {t('home.commission')}
             </p>
             <span className="text-xs text-gold-on-dark font-semibold">
-              {t('home.inviteNow', 'ادعُ الآن')} →
+              {t('home.inviteNow')} →
             </span>
           </div>
         </m.div>
@@ -137,7 +137,7 @@ export function HomeTeamCard({
                 <RiTeamFill className="w-4 h-4 text-gold-on-dark" />
               </div>
               <span className="text-sm font-semibold text-white/60">
-                {t('home.myTeam', 'فريقي')}
+                {t('home.myTeam')}
               </span>
             </div>
             <RiArrowRightSLine className="w-4 h-4 text-white/20 transition-transform duration-200 group-hover/team:translate-x-0.5" />
@@ -146,10 +146,10 @@ export function HomeTeamCard({
             <AnimatedNumber value={members} decimals={0} className="text-[28px] font-heading text-white font-financial" />
           </div>
           <div className="text-xs text-white/35 mb-3">
-            {t('home.members', 'أعضاء')}
+            {t('home.members')}
           </div>
           <div className="text-[10px] font-medium text-white/25 uppercase tracking-[0.15em] mb-0.5">
-            {t('home.totalCommission', 'إجمالي العمولة')}
+            {t('home.totalCommission')}
           </div>
           <div className={cn(
             'text-base font-semibold font-financial',

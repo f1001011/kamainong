@@ -228,7 +228,7 @@ export function OrderDetail({
           <div className="flex items-center justify-between">
             <div className="flex-1 min-w-0">
               <p className="text-sm text-neutral-500 mb-1">
-                {t('biz.order_no', 'رقم الطلب')}
+                {t('biz.order_no')}
               </p>
               <p className="font-mono text-neutral-800 break-all">
                 {order.orderNo}
@@ -248,14 +248,14 @@ export function OrderDetail({
       >
         <Card className="p-4">
           <InfoItem
-            label={t('biz.apply_amount', 'المبلغ المطلوب')}
+            label={t('biz.apply_amount')}
             value={<span className="font-mono text-lg font-bold text-primary-500">{formatAmount(order.amount)}</span>}
           />
           
           {/* 充值：实际到账 */}
           {type === 'recharge' && (
             <InfoItem
-              label={t('biz.actual_amount', 'المبلغ المستلم')}
+              label={t('biz.actual_amount')}
               value={
                 <span className={cn('font-mono', hasAmountDiff && 'text-warning-600 font-semibold')}>
                   {formatAmount((order as RechargeOrderDetail).actualAmount)}
@@ -269,11 +269,11 @@ export function OrderDetail({
           {type === 'withdraw' && (
             <>
               <InfoItem
-                label={t('biz.fee', 'الرسوم')}
+                label={t('biz.fee')}
                 value={<span className="font-mono">{formatAmount((order as WithdrawOrderDetail).fee)}</span>}
               />
               <InfoItem
-                label={t('biz.actual_amount', 'المبلغ المستلم')}
+                label={t('biz.actual_amount')}
                 value={
                   <span className="font-mono text-success font-semibold">
                     {formatAmount((order as WithdrawOrderDetail).actualAmount)}
@@ -295,7 +295,7 @@ export function OrderDetail({
       >
         <Card className="p-4">
           <InfoItem
-            label={t('biz.status', 'الحالة')}
+            label={t('biz.status')}
             value={
               <StatusBadge variant={statusConfig.variant} size="md" dot>
                 {t(statusConfig.textKey)}
@@ -306,7 +306,7 @@ export function OrderDetail({
           {/* 充值：支付通道 */}
           {type === 'recharge' && (order as RechargeOrderDetail).channelName && (
             <InfoItem
-              label={t('biz.channel_name', 'قناة الدفع')}
+              label={t('biz.channel_name')}
               value={(order as RechargeOrderDetail).channelName}
             />
           )}
@@ -316,19 +316,19 @@ export function OrderDetail({
             <>
               {(order as WithdrawOrderDetail).bankName && (
                 <InfoItem
-                  label={t('biz.bank_name', 'البنك')}
+                  label={t('biz.bank_name')}
                   value={(order as WithdrawOrderDetail).bankName}
                 />
               )}
               {(order as WithdrawOrderDetail).accountNoMask && (
                 <InfoItem
-                  label={t('biz.account_no', 'رقم الحساب')}
+                  label={t('biz.account_no')}
                   value={<span className="font-mono">{(order as WithdrawOrderDetail).accountNoMask}</span>}
                 />
               )}
               {(order as WithdrawOrderDetail).accountName && (
                 <InfoItem
-                  label={t('biz.account_name', 'صاحب الحساب')}
+                  label={t('biz.account_name')}
                   value={(order as WithdrawOrderDetail).accountName}
                 />
               )}
@@ -338,7 +338,7 @@ export function OrderDetail({
           {/* 提现：拒绝原因 */}
           {type === 'withdraw' && (order as WithdrawOrderDetail).rejectReason && (
             <InfoItem
-              label={t('biz.reject_reason', 'سبب الرفض')}
+              label={t('biz.reject_reason')}
               value={
                 <span className="text-error">
                   {(order as WithdrawOrderDetail).rejectReason}
@@ -358,7 +358,7 @@ export function OrderDetail({
       >
         <Card className="p-4">
           <InfoItem
-            label={t('biz.create_time', 'تاريخ الإنشاء')}
+            label={t('biz.create_time')}
             value={formatTime(order.createdAt)}
           />
 
@@ -367,7 +367,7 @@ export function OrderDetail({
             <div className="py-3 border-b border-neutral-100">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-neutral-500">
-                  {t('biz.expire_time', 'وقت الانتهاء')}
+                  {t('biz.expire_time')}
                 </span>
                 <Countdown
                   expireAt={expireTime}
@@ -382,7 +382,7 @@ export function OrderDetail({
           {/* 充值完成时间 */}
           {type === 'recharge' && (order as RechargeOrderDetail).paidAt && (
             <InfoItem
-              label={t('biz.complete_time', 'تاريخ الدفع')}
+              label={t('biz.complete_time')}
               value={formatTime((order as RechargeOrderDetail).paidAt)}
             />
           )}
@@ -390,7 +390,7 @@ export function OrderDetail({
           {/* 提现审核时间 */}
           {type === 'withdraw' && (order as WithdrawOrderDetail).reviewedAt && (
             <InfoItem
-              label={t('biz.review_time', 'تاريخ المراجعة')}
+              label={t('biz.review_time')}
               value={formatTime((order as WithdrawOrderDetail).reviewedAt)}
             />
           )}
@@ -398,7 +398,7 @@ export function OrderDetail({
           {/* 提现完成时间 */}
           {type === 'withdraw' && (order as WithdrawOrderDetail).completedAt && (
             <InfoItem
-              label={t('biz.complete_time', 'تاريخ الإكمال')}
+              label={t('biz.complete_time')}
               value={formatTime((order as WithdrawOrderDetail).completedAt)}
             />
           )}
@@ -422,7 +422,7 @@ export function OrderDetail({
               isLoading={isCancelling}
               disabled={isCancelling}
             >
-              {t('btn.cancel_order', 'إلغاء الطلب')}
+              {t('btn.cancel_order')}
             </Button>
           )}
           {onContinuePay && (
@@ -432,7 +432,7 @@ export function OrderDetail({
               onClick={onContinuePay}
               disabled={isCancelling}
             >
-              {t('btn.continue_pay', 'متابعة الدفع')}
+              {t('btn.continue_pay')}
             </Button>
           )}
         </m.div>

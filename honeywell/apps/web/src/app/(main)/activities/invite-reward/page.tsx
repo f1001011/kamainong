@@ -149,9 +149,9 @@ export default function InviteRewardPage() {
       <div className="min-h-screen bg-neutral-50 flex items-center justify-center px-4">
         <EmptyState
           icon={<RiTrophyFill className="size-12 text-neutral-400" />}
-          title={t('activity.invite.errorTitle', 'خطأ في التحميل')}
-          description={t('activity.invite.errorDesc', 'تعذر تحميل النشاط. حاول مرة أخرى.')}
-          actionText={t('common.retry', 'إعادة المحاولة')}
+          title={t('activity.invite.errorTitle')}
+          description={t('activity.invite.errorDesc')}
+          actionText={t('common.retry')}
           onAction={() => refetch()}
         />
       </div>
@@ -189,7 +189,7 @@ export default function InviteRewardPage() {
                 transition={{ ...SPRINGS.gentle, delay: 0.2 }}
                 className="text-base font-semibold text-neutral-800 mb-3"
               >
-                {t('activity.invite.tiersTitle', 'مستويات المكافآت')}
+                {t('activity.invite.tiersTitle')}
               </m.h2>
               
               <RewardTiers
@@ -197,16 +197,16 @@ export default function InviteRewardPage() {
                 currentProgress={validInviteCount}
                 onClaim={handleClaim}
                 claimingTier={claimingTier}
-                progressUnit={t('activity.invite.unit', 'دعوات')}
-                tierTitleTemplate={t('activity.invite.tierTitle', 'المستوى {n}')}
-                requirementTemplate={t('activity.invite.requirement', 'دعوة {n} أصدقاء')}
+                progressUnit={t('activity.invite.unit')}
+                tierTitleTemplate={t('activity.invite.tierTitle')}
+                requirementTemplate={t('activity.invite.requirement')}
               />
             </section>
 
             {/* 规则说明 */}
             <TipsCard
-              title={t('activity.invite.rulesTitle', 'قواعد النشاط')}
-              content={`• ${t('activity.invite.rule1', 'الدعوة الصالحة هي عندما يسجل صديقك ويكمل عملية شراء، أو يكمل 3 أيام متتالية من تسجيل الدخول.')}\n• ${t('activity.invite.rule2', 'تُضاف المكافآت فوراً إلى رصيدك المتاح.')}\n• ${t('activity.invite.rule3', 'يمكن تعديل أو إلغاء هذا النشاط في أي وقت.')}`}
+              title={t('activity.invite.rulesTitle')}
+              content={`• ${t('activity.invite.rule1')}\n• ${t('activity.invite.rule2')}\n• ${t('activity.invite.rule3')}`}
             />
 
             {/* 邀请记录 */}
@@ -234,7 +234,7 @@ export default function InviteRewardPage() {
                 leftIcon={<RiShareLine className="size-5" />}
                 onClick={handleShare}
               >
-                {t('activity.invite.shareNow', 'ادعُ أصدقاءك الآن')}
+                {t('activity.invite.shareNow')}
               </Button>
             </m.div>
           </div>

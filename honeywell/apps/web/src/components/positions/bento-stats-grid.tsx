@@ -53,7 +53,7 @@ export function BentoStatsGrid({
           className={cn(cardBase, 'col-span-3')}
         >
           <p className="text-[11px] text-neutral-400 uppercase tracking-wider font-medium mb-2">
-            {t('label.purchase_amount', 'مبلغ الاستثمار')}
+            {t('label.purchase_amount')}
           </p>
           <p className="text-xl font-bold font-mono tabular-nums text-neutral-800">{displayPurchase}</p>
         </m.div>
@@ -65,7 +65,7 @@ export function BentoStatsGrid({
           className={cn(cardBase, 'col-span-2')}
         >
           <p className="text-[11px] text-neutral-400 uppercase tracking-wider font-medium mb-2">
-            {t('label.daily_income', 'الدخل اليومي')}
+            {t('label.daily_income')}
           </p>
           <p className="text-xl font-bold font-mono tabular-nums text-success">+{displayDaily}</p>
         </m.div>
@@ -80,10 +80,10 @@ export function BentoStatsGrid({
           className={cardBase}
         >
           <p className="text-[11px] text-neutral-400 uppercase tracking-wider font-medium mb-2">
-            {t('label.cycle_days', 'المدة')}
+            {t('label.cycle_days')}
           </p>
           <p className="text-lg font-bold text-neutral-800">
-            {cycleDays} <span className="text-xs font-normal text-neutral-400">{t('label.days', 'أيام')}</span>
+            {cycleDays} <span className="text-xs font-normal text-neutral-400">{t('label.days')}</span>
           </p>
         </m.div>
 
@@ -94,7 +94,7 @@ export function BentoStatsGrid({
           className={cardBase}
         >
           <p className="text-[11px] text-neutral-400 uppercase tracking-wider font-medium mb-2">
-            {t('label.completed_days', 'مكتمل')}
+            {t('label.completed_days')}
           </p>
           <p className="text-lg font-bold text-neutral-800 font-mono tabular-nums">
             {paidDays} <span className="text-xs font-normal text-neutral-400">/ {cycleDays}</span>
@@ -117,7 +117,7 @@ export function BentoStatsGrid({
           className={cardBase}
         >
           <p className="text-[11px] text-neutral-400 uppercase tracking-wider font-medium mb-2">
-            {t('label.total_income', 'إجمالي الأرباح')}
+            {t('label.total_income')}
           </p>
           <p className={cn(
             'text-lg font-bold font-mono tabular-nums',

@@ -90,7 +90,7 @@ export function InviteActivityHeader({
               </div>
               <div>
                 <p className="text-xs text-neutral-400">
-                  {t('activity.invite.validCount', 'دعوات صالحة')}
+                  {t('activity.invite.validCount')}
                 </p>
                 <p className="text-2xl font-bold text-primary-600 tabular-nums">
                   <AnimatedNumber 

@@ -126,7 +126,7 @@ export function ActivityCard({ activity, progress, index = 0 }: ActivityCardProp
           className="absolute top-3 right-3 flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-primary-400 to-primary-500 text-white text-[10px] font-bold shadow-sm"
         >
           <RiGiftFill className="w-3 h-3" />
-          {t('tag.new', 'جديد')}
+          {t('tag.new')}
         </m.div>
       )}
 
@@ -140,7 +140,7 @@ export function ActivityCard({ activity, progress, index = 0 }: ActivityCardProp
             <h3 className="text-base font-bold text-neutral-800 truncate">{activity.name}</h3>
             {claimedCount > 0 && (
               <span className="text-[10px] font-medium text-primary-600 bg-primary-50 px-1.5 py-0.5 rounded-full flex-shrink-0">
-                {claimedCount} {t('activities.obtained', 'تم الحصول عليها')}
+                {claimedCount} {t('activities.obtained')}
               </span>
             )}
           </div>
@@ -178,7 +178,7 @@ export function ActivityCard({ activity, progress, index = 0 }: ActivityCardProp
           className="rounded-lg bg-gold-50/60 border border-gold-200/40 px-3 py-2 mb-3"
         >
           <p className="text-xs font-semibold text-gold-700">
-            {t('activities.almost_there', 'فقط {count} {unit} أخرى للفوز بـ {amount}!')
+            {t('activities.almost_there')
               .replace('{count}', String(remainingSteps))
               .replace('{unit}', progress?.unit || '')
               .replace('{amount}', formatCurrency(nextTier.reward, config))
@@ -197,8 +197,8 @@ export function ActivityCard({ activity, progress, index = 0 }: ActivityCardProp
         )}
       >
         {hasClaimable
-          ? t('btn.claim_reward', 'المطالبة بالمكافأة')
-          : t('btn.participate', 'المشاركة')
+          ? t('btn.claim_reward')
+          : t('btn.participate')
         }
       </div>
       </m.div>

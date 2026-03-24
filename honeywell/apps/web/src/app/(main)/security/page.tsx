@@ -66,7 +66,7 @@ export default function SecurityPage() {
               <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
             </button>
             <h1 className="text-lg font-bold tracking-tight text-neutral-800">
-              {t('page.security', 'إعدادات الأمان')}
+              {t('page.security')}
             </h1>
           </header>
 
@@ -100,7 +100,7 @@ export default function SecurityPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
                         <h3 className="text-neutral-800 font-medium">
-                          {t(`menu.${item.key}`, 'تغيير كلمة المرور')}
+                          {t(`menu.${item.key}`)}
                         </h3>
                         <RiArrowRightSLine className="w-5 h-5 text-neutral-400 flex-shrink-0" />
                       </div>
@@ -108,7 +108,7 @@ export default function SecurityPage() {
                       {/* 功能描述 */}
                       {item.hasDescription && (
                         <p className="text-neutral-500 text-sm mt-1.5 leading-relaxed">
-                          {t(`menu.${item.key}_desc`, 'قم بتحديث كلمة المرور بانتظام لمزيد من الأمان')}
+                          {t(`menu.${item.key}_desc`)}
                         </p>
                       )}
                     </div>

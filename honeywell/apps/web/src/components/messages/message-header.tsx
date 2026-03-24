@@ -69,7 +69,7 @@ export function MessageHeader({
         {/* 标题与未读角标 */}
         <div className="flex items-center gap-2">
           <span className="text-base font-medium text-neutral-800">
-            {t('messages.title', 'الرسائل')}
+            {t('messages.title')}
           </span>
           {/* 未读数量角标 - 弹性出现动画 */}
           {unreadCount > 0 && (
@@ -105,7 +105,7 @@ export function MessageHeader({
             )}
           >
             <RiCheckDoubleFill className="w-4 h-4" />
-            <span>{t('messages.mark_all_read', 'تحديد الكل كمقروء')}</span>
+            <span>{t('messages.mark_all_read')}</span>
           </m.button>
         )}
       </div>

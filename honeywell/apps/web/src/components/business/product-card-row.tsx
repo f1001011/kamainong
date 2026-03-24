@@ -162,11 +162,11 @@ export function ProductCardRow({ product, className }: ProductCardRowProps) {
                   <div className="flex items-center gap-4 text-xs text-neutral-500 mb-2">
                     <span className="flex items-center gap-1">
                       <RiPercentLine className="w-3.5 h-3.5" />
-                      {formatCurrency(dailyIncome, config)}/{t('unit.days', 'يوم')}
+                      {formatCurrency(dailyIncome, config)}/{t('unit.days')}
                     </span>
                     <span className="flex items-center gap-1">
                       <RiTimeLine className="w-3.5 h-3.5" />
-                      {product.cycleDays} {t('unit.days', 'أيام')}
+                      {product.cycleDays} {t('unit.days')}
                     </span>
                   </div>
 
@@ -174,7 +174,7 @@ export function ProductCardRow({ product, className }: ProductCardRowProps) {
                   <div className="flex items-end justify-between">
                     <div>
                       <span className="text-xs text-neutral-400">
-                        {t('biz.price', 'السعر')}
+                        {t('biz.price')}
                       </span>
                       <div className="text-lg font-bold text-primary-600 font-mono">
                         {formatCurrency(price, config)}
@@ -182,7 +182,7 @@ export function ProductCardRow({ product, className }: ProductCardRowProps) {
                     </div>
                     <div className="text-right">
                       <span className="text-xs text-neutral-400">
-                        {t('biz.total_return', 'العائد الإجمالي')}
+                        {t('biz.total_return')}
                       </span>
                       <div className="text-sm font-semibold text-primary-600 font-mono">
                         {formatCurrency(totalIncome, config, { showSign: true })}

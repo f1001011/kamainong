@@ -32,7 +32,7 @@ type TextGetter = {
  * <span>{t('btn.confirm')}</span>
  * 
  * // 带默认值
- * <span>{t('custom.key', 'Default Text')}</span>
+ * <span>{t('custom.key')}</span>
  * 
  * // 带变量替换
  * <span>{t.withVars('welcome.message', { name: 'Juan' })}</span>

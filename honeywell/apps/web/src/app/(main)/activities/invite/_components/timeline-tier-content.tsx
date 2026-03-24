@@ -59,8 +59,8 @@ export function TimelineTierContent({
     [onClaim, tier.tier],
   );
 
-  const tierLabel = t('invite.tier_level', 'المستوى {n}').replace('{n}', String(tier.tier));
-  const requirementLabel = t('invite.tier_requirement', 'دعوة {n} أصدقاء').replace(
+  const tierLabel = t('invite.tier_level').replace('{n}', String(tier.tier));
+  const requirementLabel = t('invite.tier_requirement').replace(
     '{n}',
     String(tier.requiredCount),
   );
@@ -76,7 +76,7 @@ export function TimelineTierContent({
         <span>·</span>
         <span className="flex items-center gap-1 text-gold-600">
           <RiCheckLine className="w-3.5 h-3.5" />
-          {t('invite.status_claimed', 'تم المطالبة')}
+          {t('invite.status_claimed')}
         </span>
       </div>
     );
@@ -112,7 +112,7 @@ export function TimelineTierContent({
             isLoading={isClaiming}
             disabled={isClaiming}
           >
-            {t('invite.status_claimable', 'مطالبة')}
+            {t('invite.status_claimable')}
           </Button>
         </PulseWrapper>
       </div>
@@ -148,7 +148,7 @@ export function TimelineTierContent({
             {currentCount}/{tier.requiredCount}
           </span>
           <span className="text-xs text-primary-600 font-medium">
-            {t('invite.next_goal_need', 'باقي {n}').replace('{n}', String(remaining))}
+            {t('invite.next_goal_need').replace('{n}', String(remaining))}
           </span>
         </div>
       </div>

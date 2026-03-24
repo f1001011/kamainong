@@ -109,12 +109,12 @@ function TierItem({
   // 渲染阶梯标题
   const tierTitle = tierTitleTemplate 
     ? tierTitleTemplate.replace('{n}', String(tier.tier))
-    : tier.name || `${t('activity.tier.level', 'المستوى')} ${tier.tier}`;
+    : tier.name || `${t('activity.tier.level')} ${tier.tier}`;
 
   // 渲染需求文案
   const requirementText = requirementTemplate
     ? requirementTemplate.replace('{n}', String(tier.requiredCount))
-    : `${tier.requiredCount} ${progressUnit || t('activity.tier.unit', 'دعوات')}`;
+    : `${tier.requiredCount} ${progressUnit || t('activity.tier.unit')}`;
 
   // 渲染状态图标
   const renderStatusIcon = () => {
@@ -139,7 +139,7 @@ function TierItem({
     if (tier.status === 'CLAIMED') {
       return (
         <span className={cn('text-sm font-medium', styles.textClass)}>
-          {t('activity.tier.claimed', 'تم المطالبة')}
+          {t('activity.tier.claimed')}
         </span>
       );
     }
@@ -152,11 +152,11 @@ function TierItem({
             size="sm"
             onClick={(e) => onClaim(tier.tier, e)}
             isLoading={isClaimingThis}
-            loadingText={t('activity.tier.claiming', 'جارٍ المطالبة...')}
+            loadingText={t('activity.tier.claiming')}
             disabled={disabled}
             className="min-w-[80px]"
           >
-            {t('activity.tier.claim', 'مطالبة')}
+            {t('activity.tier.claim')}
           </Button>
         </PulseWrapper>
       );

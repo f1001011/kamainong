@@ -61,11 +61,11 @@ export function CollectionTierList({ tiers, prerequisiteMet }: CollectionTierLis
           triggerConfetti();
         }
         
-        toast.success(t('toast.claim_success', 'تم المطالبة بالمكافأة'));
+        toast.success(t('toast.claim_success'));
         setClaimingTier(null);
       },
       onError: (error) => {
-        toast.error(error.message || t('error.claim_failed', 'فشل في المطالبة'));
+        toast.error(error.message || t('error.claim_failed'));
         setClaimingTier(null);
       },
     });
@@ -80,10 +80,10 @@ export function CollectionTierList({ tiers, prerequisiteMet }: CollectionTierLis
         </div>
         <div>
           <h2 className="text-base font-bold text-neutral-800">
-            {t('collection.tier_title', 'مستويات المكافآت')}
+            {t('collection.tier_title')}
           </h2>
           <p className="text-xs text-neutral-400 mt-0.5">
-            {t('collection.tier_subtitle', 'أكمل المجموعات واطلب المكافآت')}
+            {t('collection.tier_subtitle')}
           </p>
         </div>
       </div>

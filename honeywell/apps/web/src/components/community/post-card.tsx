@@ -53,12 +53,12 @@ export interface PostCardProps {
 function formatRelativeTime(dateStr: string, t: ReturnType<typeof useText>) {
   const diff = Date.now() - new Date(dateStr).getTime();
   const minutes = Math.floor(diff / 60000);
-  if (minutes < 1) return t('time.justNow', 'الآن');
-  if (minutes < 60) return `${minutes}${t('time.minutesAgo', 'د')}`;
+  if (minutes < 1) return t('time.justNow');
+  if (minutes < 60) return `${minutes}${t('time.minutesAgo')}`;
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}${t('time.hoursAgo', 'س')}`;
+  if (hours < 24) return `${hours}${t('time.hoursAgo')}`;
   const days = Math.floor(hours / 24);
-  return `${days}${t('time.daysAgo', 'ي')}`;
+  return `${days}${t('time.daysAgo')}`;
 }
 
 /**
@@ -132,26 +132,26 @@ export function PostCard({ post, onLike, onClick, index = 0, className }: PostCa
         <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100">
           <img
             src={post.platformScreenshot}
-            alt={t('community.platform_screenshot', 'لقطة شاشة المنصة')}
+            alt={t('community.platform_screenshot')}
             className="w-full h-full object-cover"
             loading="lazy"
           />
           <div className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/50 backdrop-blur-sm">
             <span className="text-[10px] text-white font-medium">
-              {t('community.platform', 'المنصة')}
+              {t('community.platform')}
             </span>
           </div>
         </div>
         <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100">
           <img
             src={post.receiptScreenshot}
-            alt={t('community.receipt_screenshot', 'لقطة شاشة الإيصال')}
+            alt={t('community.receipt_screenshot')}
             className="w-full h-full object-cover"
             loading="lazy"
           />
           <div className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/50 backdrop-blur-sm">
             <span className="text-[10px] text-white font-medium">
-              {t('community.receipt', 'الإيصال')}
+              {t('community.receipt')}
             </span>
           </div>
         </div>

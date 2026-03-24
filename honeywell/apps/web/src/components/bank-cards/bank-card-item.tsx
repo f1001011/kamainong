@@ -209,7 +209,7 @@ export function BankCardItem({
             {/* 安全标识 */}
             <div className="flex items-center gap-1 text-white/80">
               <RiShieldCheckFill className="w-4 h-4" />
-              <span className="text-xs">{t('label.secure', 'آمن')}</span>
+              <span className="text-xs">{t('label.secure')}</span>
             </div>
           </div>
 
@@ -224,7 +224,7 @@ export function BankCardItem({
           <div className="flex items-end justify-between">
             <div>
               <div className="text-xs text-white/60 uppercase tracking-wide mb-1">
-                {t('label.card_holder', 'صاحب الحساب')}
+                {t('label.card_holder')}
               </div>
               <div className="text-sm font-medium truncate max-w-[180px]">
                 {card.accountName}
@@ -274,7 +274,7 @@ export function BankCardItem({
               exit={{ opacity: 0, y: -4 }}
               transition={SPRINGS.snappy}
             >
-              {t('tip.card_in_use', 'قيد الاستخدام')}
+              {t('tip.card_in_use')}
             </m.div>
           )}
         </AnimatePresence>

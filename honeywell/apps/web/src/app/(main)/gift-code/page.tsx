@@ -74,14 +74,14 @@ export default function GiftCodePage() {
       queryClient.invalidateQueries({ queryKey: ['userProfile'] });
     },
     onError: (error: Error) => {
-      toast.error(error.message || t('toast.redeem_failed', 'فشل الاسترداد'));
+      toast.error(error.message || t('toast.redeem_failed'));
     },
   });
 
   const handleRedeem = () => {
     const trimmed = code.trim();
     if (!trimmed) {
-      toast.error(t('gift_code.enter_code', 'أدخل رمز الهدية'));
+      toast.error(t('gift_code.enter_code'));
       inputRef.current?.focus();
       return;
     }
@@ -110,7 +110,7 @@ export default function GiftCodePage() {
                 className="flex items-center gap-1 text-white/80 hover:text-white mb-4 transition-colors"
               >
                 <RiArrowLeftSLine className="w-5 h-5" />
-                <span className="text-sm">{t('btn.back', 'رجوع')}</span>
+                <span className="text-sm">{t('btn.back')}</span>
               </button>
 
               <div className="flex items-center gap-3">
@@ -119,10 +119,10 @@ export default function GiftCodePage() {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-white">
-                    {t('gift_code.title', 'رمز الهدية')}
+                    {t('gift_code.title')}
                   </h1>
                   <p className="text-sm text-white/70">
-                    {t('gift_code.subtitle', 'أدخل الرمز للحصول على المكافآت')}
+                    {t('gift_code.subtitle')}
                   </p>
                 </div>
               </div>
@@ -141,7 +141,7 @@ export default function GiftCodePage() {
                 <div className="card-floating p-5 space-y-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-neutral-600">
-                      {t('gift_code.input_label', 'رمز الهدية')}
+                      {t('gift_code.input_label')}
                     </label>
                     <input
                       ref={inputRef}
@@ -149,7 +149,7 @@ export default function GiftCodePage() {
                       value={code}
                       onChange={(e) => setCode(e.target.value.toUpperCase())}
                       onKeyDown={(e) => e.key === 'Enter' && handleRedeem()}
-                      placeholder={t('gift_code.placeholder', 'أدخل الرمز هنا')}
+                      placeholder={t('gift_code.placeholder')}
                       maxLength={32}
                       className={cn(
                         'w-full h-12 px-4 rounded-xl',
@@ -171,8 +171,8 @@ export default function GiftCodePage() {
                     disabled={redeemMutation.isPending || !code.trim()}
                   >
                     {redeemMutation.isPending
-                      ? t('gift_code.redeeming', 'جارٍ الاسترداد...')
-                      : t('gift_code.redeem_btn', 'استرداد')
+                      ? t('gift_code.redeeming')
+                      : t('gift_code.redeem_btn')
                     }
                   </Button>
                 </div>
@@ -183,11 +183,11 @@ export default function GiftCodePage() {
                 <div className="card-floating overflow-hidden">
                   <div className="px-5 py-3 border-b border-neutral-100 flex items-center justify-between">
                     <h3 className="text-sm font-semibold text-neutral-700">
-                      {t('gift_code.history_title', 'سجل الاستردادات')}
+                      {t('gift_code.history_title')}
                     </h3>
                     {historyData?.pagination?.total ? (
                       <span className="text-xs text-neutral-400">
-                        {historyData.pagination.total} {t('gift_code.records', 'سجلات')}
+                        {historyData.pagination.total} {t('gift_code.records')}
                       </span>
                     ) : null}
                   </div>
@@ -222,7 +222,7 @@ export default function GiftCodePage() {
                     <div className="px-5 py-10 text-center">
                       <RiGiftFill className="w-10 h-10 text-neutral-200 mx-auto mb-2" />
                       <p className="text-sm text-neutral-400">
-                        {t('gift_code.no_history', 'لم تقم باسترداد أي رمز بعد')}
+                        {t('gift_code.no_history')}
                       </p>
                     </div>
                   )}
@@ -256,7 +256,7 @@ export default function GiftCodePage() {
                   <RiCheckboxCircleFill className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-neutral-800 mb-1">
-                  {t('gift_code.success_title', 'تم الاسترداد بنجاح')}
+                  {t('gift_code.success_title')}
                 </h3>
                 <p className="text-sm text-neutral-500 mb-4">{redeemResult.giftCodeName}</p>
                 <div className="flex items-center justify-center gap-1 mb-6">
@@ -271,7 +271,7 @@ export default function GiftCodePage() {
                   className="h-11 rounded-xl"
                   onClick={() => setShowSuccess(false)}
                 >
-                  {t('btn.confirm', 'تأكيد')}
+                  {t('btn.confirm')}
                 </Button>
               </m.div>
             </m.div>

@@ -88,6 +88,8 @@
           <span>活动</span>
         </div>
       </div>
+
+      <div
         style="background: linear-gradient(135deg,#00e676,#00c853); cursor: pointer; padding: 24px; border-radius: 16px; position: relative; overflow: hidden; margin-bottom: 20px;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 30% 50%,rgba(255,255,255,0.18),transparent 60%);"></div>
         <div style="position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between;">

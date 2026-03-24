@@ -162,11 +162,11 @@ export function PullToRefresh({
   const getHintText = () => {
     switch (pullState) {
       case 'pulling':
-        return t('tip.pull_to_refresh', 'اسحب للتحديث');
+        return t('tip.pull_to_refresh');
       case 'ready':
-        return t('tip.release_to_refresh', 'حرر للتحديث');
+        return t('tip.release_to_refresh');
       case 'refreshing':
-        return t('tip.refreshing', 'جارٍ التحديث...');
+        return t('tip.refreshing');
       default:
         return '';
     }
@@ -298,12 +298,12 @@ export function InfiniteScroll({
           <div className="flex items-center gap-2">
             <RiLoader4Line className="w-5 h-5 text-primary-500 animate-spin" />
             <span className="text-sm text-neutral-500">
-              {t('tip.loading', 'جارٍ التحميل...')}
+              {t('tip.loading')}
             </span>
           </div>
         ) : !hasMore ? (
           <span className="text-sm text-neutral-400">
-            {t('tip.no_more_data', 'لا توجد بيانات أخرى')}
+            {t('tip.no_more_data')}
           </span>
         ) : null}
       </div>

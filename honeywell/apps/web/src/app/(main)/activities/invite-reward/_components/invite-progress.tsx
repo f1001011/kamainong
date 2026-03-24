@@ -100,10 +100,10 @@ export function InviteProgress({
         </div>
         <div>
           <p className="font-medium text-success">
-            {t('activity.invite.allCompleted', 'لقد أكملت جميع الأهداف')}
+            {t('activity.invite.allCompleted')}
           </p>
           <p className="text-sm text-neutral-500">
-            {t('activity.invite.allCompletedDesc', 'استمر في الدعوة للمكافآت المستقبلية')}
+            {t('activity.invite.allCompletedDesc')}
           </p>
         </div>
       </div>
@@ -128,7 +128,7 @@ export function InviteProgress({
           <div className="flex items-center gap-2">
             <RiGiftFill className="size-5 text-primary-500" />
             <span className="font-medium text-neutral-700">
-              {t('activity.invite.nextGoal', 'الهدف التالي')}
+              {t('activity.invite.nextGoal')}
             </span>
           </div>
           <span className="text-lg font-bold text-primary-600">
@@ -150,17 +150,17 @@ export function InviteProgress({
         {/* 进度文字 */}
         <div className="flex items-center justify-between text-sm">
           <span className="text-neutral-500">
-            {validInviteCount} / {nextTier.requiredCount} {t('activity.invite.unit', 'دعوات')}
+            {validInviteCount} / {nextTier.requiredCount} {t('activity.invite.unit')}
           </span>
           
           {invitesNeeded > 0 ? (
             <span className="text-primary-600 font-medium">
-              {t('activity.invite.needMore', 'المتبقي {n}')
+              {t('activity.invite.needMore')
                 .replace('{n}', String(invitesNeeded))}
             </span>
           ) : (
             <span className="text-success font-medium">
-              {t('activity.invite.canClaim', 'يمكنك المطالبة')}
+              {t('activity.invite.canClaim')}
             </span>
           )}
         </div>

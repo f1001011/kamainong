@@ -224,7 +224,7 @@ export function BankCardSelector({
             >
               <RiAddLine className="w-6 h-6 text-neutral-400" />
               <span className="text-sm text-neutral-400">
-                {t('btn.add_card', 'إضافة')}
+                {t('btn.add_card')}
               </span>
             </m.button>
           )}
@@ -247,15 +247,15 @@ export function BankCardSelector({
           </div>
           <div className="text-center">
             <div className="font-medium text-neutral-600">
-              {t('empty.no_bank_card', 'لا توجد بطاقات مرتبطة')}
+              {t('empty.no_bank_card')}
             </div>
             <div className="text-sm text-neutral-400 mt-1">
-              {t('empty.add_bank_card_tip', 'أضف بطاقة لإجراء السحب')}
+              {t('empty.add_bank_card_tip')}
             </div>
           </div>
           <div className="flex items-center gap-2 text-primary-600 font-medium mt-2">
             <RiAddLine className="w-5 h-5" />
-            <span>{t('btn.bind_card', 'إضافة بطاقة')}</span>
+            <span>{t('btn.bind_card')}</span>
           </div>
         </m.button>
       )}

@@ -59,10 +59,10 @@ const EmptyState = memo(function EmptyState() {
         <RiMoneyDollarCircleFill className="w-10 h-10 text-neutral-400" />
       </div>
       <p className="text-base text-neutral-500">
-        {t('team.noCommissions', 'لا توجد عمولات بعد')}
+        {t('team.noCommissions')}
       </p>
       <p className="text-sm text-neutral-400 mt-1">
-        {t('team.inviteToEarn', 'ادعُ أصدقاءك لكسب العمولات')}
+        {t('team.inviteToEarn')}
       </p>
     </m.div>
   );

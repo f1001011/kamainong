@@ -245,7 +245,7 @@ export function HomeBalanceCard({
           )}
         >
           <RiAddFill className="w-4 h-4" />
-          <span>{t('btn.recharge', 'إيداع')}</span>
+          <span>{t('btn.recharge')}</span>
         </Link>
 
         <Link
@@ -261,7 +261,7 @@ export function HomeBalanceCard({
           )}
         >
           <RiArrowUpLine className="w-4 h-4" />
-          <span>{t('btn.withdraw', 'سحب')}</span>
+          <span>{t('btn.withdraw')}</span>
         </Link>
       </m.div>
     </m.div>

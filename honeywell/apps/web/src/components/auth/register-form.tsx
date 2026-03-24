@@ -12,7 +12,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { m } from 'motion/react';
 import { toast } from 'sonner';
-import Link from 'next/link';
 
 import { phoneSchema, createPasswordSchema, inviteCodeSchema } from '@/lib/validations';
 import { z } from 'zod';
@@ -118,26 +117,26 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
   const handleLockedInviteCodeClick = useCallback(() => {
     setShakeLockIcon(true);
     setTimeout(() => setShakeLockIcon(false), 300);
-    toast.info(t('tip.invite_code_locked', 'هذا الرمز من رابط الدعوة الخاص بك'));
+    toast.info(t('tip.invite_code_locked'));
   }, [t]);
 
   const handleApiError = useCallback((code: string) => {
     switch (code) {
       case 'PHONE_ALREADY_EXISTS':
-        toast.error(t('error.phone_already_exists', 'هذا الرقم مسجل بالفعل'));
+        toast.error(t('error.phone_already_exists'));
         triggerShake('phone');
         break;
       case 'INVALID_INVITE_CODE':
-        toast.warning(t('error.invalid_invite_code', 'رمز الدعوة غير صالح'));
+        toast.warning(t('error.invalid_invite_code'));
         break;
       case 'REGISTER_IP_LIMIT':
-        toast.error(t('error.register_ip_limit', 'عدد كبير من التسجيلات من هذا العنوان'));
+        toast.error(t('error.register_ip_limit'));
         break;
       case 'RATE_LIMITED':
-        toast.error(t('error.rate_limited', 'محاولات كثيرة جداً. انتظر لحظة.'));
+        toast.error(t('error.rate_limited'));
         break;
       default:
-        toast.error(t('toast.register_failed', 'فشل التسجيل'));
+        toast.error(t('toast.register_failed'));
     }
   }, [t, triggerShake]);
 
@@ -160,14 +159,14 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
         setRegisterRewardAmount(rewardAmount);
         setShowRewardModal(true);
       } else {
-        toast.success(t('toast.register_success', 'تم التسجيل بنجاح'));
+        toast.success(t('toast.register_success'));
         router.push('/');
       }
     } catch (error: unknown) {
       if (error && typeof error === 'object' && 'code' in error) {
         handleApiError((error as { code: string }).code);
       } else {
-        toast.error(t('toast.network_error', 'خطأ في الشبكة، حاول مرة أخرى'));
+        toast.error(t('toast.network_error'));
       }
     } finally {
       setIsSubmitting(false);
@@ -232,10 +231,10 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
       {/* 标题区域 */}
       <div className="text-center mb-2">
         <h1 className="text-xl font-bold text-white mb-1">
-          {t('page.register_title', 'إنشاء حساب')}
+          {t('page.register_title')}
         </h1>
         <p className="text-xs text-white/45">
-          {t('page.register_subtitle', 'سجّل للبدء')}
+          {t('page.register_subtitle')}
         </p>
       </div>
 
@@ -245,13 +244,13 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
         className="space-y-1"
       >
         <label className="block text-xs font-medium text-white/60">
-          {t('label.phone', 'رقم الهاتف')}
+          {t('label.phone')}
         </label>
         <div className="relative flex items-center">
           <div className="absolute left-0 top-0 bottom-0 flex items-center pl-3 gap-2 pointer-events-none">
             <RiPhoneLine className="w-5 h-5 text-white/30" />
             <span className="text-sm font-medium text-white/45 select-none">
-              {t('label.phone_prefix', '+212')}
+              {t('label.phone_prefix')}
             </span>
             <div className="w-px h-5 bg-white/10" />
           </div>
@@ -260,7 +259,7 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
             type="tel"
             inputMode="numeric"
             maxLength={9}
-            placeholder={t('placeholder.phone', 'أدخل 9 أرقام')}
+            placeholder={t('placeholder.phone')}
             disabled={isSubmitting}
             autoComplete="tel"
             className={`
@@ -288,7 +287,7 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
         className="space-y-1"
       >
         <label className="block text-xs font-medium text-white/60">
-          {t('label.password', 'كلمة المرور')}
+          {t('label.password')}
         </label>
         <div className="relative">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30">
@@ -297,7 +296,7 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
           <input
             {...register('password')}
             type={showPassword ? 'text' : 'password'}
-            placeholder={t('placeholder.password_register', `أحرف + أرقام، الحد الأدنى ${config.passwordMinLength ?? 6}`)}
+            placeholder={t.withVars('placeholder.password_register', { min: config.passwordMinLength ?? 6 })}
             disabled={isSubmitting}
             autoComplete="new-password"
             className={`${inputClass} pr-12 ${errors.password ? errorBorder : normalBorder}`}
@@ -331,7 +330,7 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
         className="space-y-1"
       >
         <label className="block text-xs font-medium text-white/60">
-          {t('label.confirm_password', 'تأكيد كلمة المرور')}
+          {t('label.confirm_password')}
         </label>
         <div className="relative">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30">
@@ -340,7 +339,7 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
           <input
             {...register('confirmPassword')}
             type={showConfirmPassword ? 'text' : 'password'}
-            placeholder={t('placeholder.confirm_password', 'أعد إدخال كلمة المرور')}
+            placeholder={t('placeholder.confirm_password')}
             disabled={isSubmitting}
             autoComplete="new-password"
             className={`${inputClass} pr-12 ${errors.confirmPassword ? errorBorder : normalBorder}`}
@@ -371,10 +370,10 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
         className="space-y-1"
       >
         <label className="block text-xs font-medium text-white/60">
-          {t('label.invite_code', 'رمز الدعوة')}
+          {t('label.invite_code')}
           {!isInviteCodeLocked && (
             <span className="text-white/30 font-normal ml-1">
-              ({t('label.optional', 'اختياري')})
+              ({t('label.optional')})
             </span>
           )}
         </label>
@@ -404,7 +403,7 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
               {...register('inviteCode')}
               type="text"
               maxLength={8}
-              placeholder={t('placeholder.invite_code', 'أدخل رمز من 8 أحرف')}
+              placeholder={t('placeholder.invite_code')}
               disabled={isSubmitting}
               autoComplete="off"
               className={`${inputClass} ${errors.inviteCode ? errorBorder : normalBorder}`}
@@ -415,7 +414,7 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
         {isInviteCodeLocked && (
           <p className="text-xs text-white/30 mt-1 flex items-center gap-1">
             <RiLockLine className="w-3 h-3" />
-            {t('tip.invite_from_link', 'من رابط الدعوة')}
+            {t('tip.invite_from_link')}
           </p>
         )}
 
@@ -448,22 +447,22 @@ export function RegisterForm({ defaultInviteCode, isInviteCodeLocked }: Register
         {isSubmitting ? (
           <>
             <RiLoader4Line className="w-5 h-5 animate-spin" />
-            {t('btn.registering', 'جارٍ التسجيل...')}
+            {t('btn.registering')}
           </>
         ) : (
-          t('btn.register', 'تسجيل')
+          t('btn.register')
         )}
       </m.button>
 
       {/* 登录链接 */}
       <p className="text-center text-sm text-white/40">
-        {t('tip.has_account', 'لديك حساب بالفعل؟')}{' '}
-        <Link
+        {t('tip.has_account')}{' '}
+        <a
           href="/login"
           className="text-amber-400/80 font-semibold hover:text-amber-400 transition-colors"
         >
-          {t('link.go_login', 'تسجيل الدخول')}
-        </Link>
+          {t('link.go_login')}
+        </a>
       </p>
     </form>
     </>

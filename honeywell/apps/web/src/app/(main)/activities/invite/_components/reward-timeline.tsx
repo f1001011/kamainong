@@ -115,7 +115,7 @@ export function RewardTimeline({ tiers, currentCount }: RewardTimelineProps) {
         {tiers.length > 0 && tiers.every((t) => t.status === 'CLAIMED') && (
           <div className="flex items-center gap-2 mt-5 ml-[40px] text-sm text-gold-600 font-medium">
             <RiCheckboxCircleFill className="w-5 h-5" />
-            {t('invite.all_completed', 'لقد أكملت جميع المستويات!')}
+            {t('invite.all_completed')}
           </div>
         )}
       </div>

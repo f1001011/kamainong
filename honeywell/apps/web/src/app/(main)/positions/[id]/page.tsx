@@ -141,12 +141,12 @@ export default function PositionDetailPage() {
           <button
             onClick={() => router.back()}
             className="p-2 -ml-2 rounded-lg hover:bg-neutral-100 transition-colors"
-            aria-label={t('btn.back', 'رجوع')}
+            aria-label={t('btn.back')}
           >
             <RiArrowLeftSLine className="h-5 w-5 text-neutral-700" />
           </button>
           <h1 className="flex-1 min-w-0 text-center text-base font-semibold tracking-tight text-neutral-800 truncate">
-            {t('page.position_detail', 'تفاصيل الاستثمار')}
+            {t('page.position_detail')}
           </h1>
           <button
             onClick={handleRefresh}
@@ -155,7 +155,7 @@ export default function PositionDetailPage() {
               'p-2 -mr-2 rounded-lg hover:bg-neutral-100 transition-colors',
               isValidating && 'opacity-50'
             )}
-            aria-label={t('btn.refresh', 'تحديث')}
+            aria-label={t('btn.refresh')}
           >
             <RiRefreshLine className={cn(
               'h-5 w-5 text-neutral-500',
@@ -171,12 +171,12 @@ export default function PositionDetailPage() {
           <PositionDetailSkeleton />
         ) : error ? (
           <div className="py-12 text-center">
-            <p className="text-neutral-500">{t('error.load_failed', 'خطأ في التحميل')}</p>
+            <p className="text-neutral-500">{t('error.load_failed')}</p>
             <button
               onClick={handleRefresh}
               className="mt-4 text-primary-500 hover:text-primary-600"
             >
-              {t('btn.retry', 'إعادة المحاولة')}
+              {t('btn.retry')}
             </button>
           </div>
         ) : position ? (
@@ -191,12 +191,12 @@ export default function PositionDetailPage() {
           />
         ) : (
           <div className="py-12 text-center">
-            <p className="text-neutral-500">{t('error.position_not_found', 'لم يتم العثور على الاستثمار')}</p>
+            <p className="text-neutral-500">{t('error.position_not_found')}</p>
             <button
               onClick={() => router.push('/positions')}
               className="mt-4 text-primary-500 hover:text-primary-600"
             >
-              {t('btn.back_to_positions', 'العودة إلى استثماراتي')}
+              {t('btn.back_to_positions')}
             </button>
           </div>
         )}

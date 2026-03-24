@@ -84,7 +84,7 @@ export default function ProductDetailPage() {
       setProduct(data);
     } catch (err: unknown) {
       const error = err as { message?: string };
-      setError(error.message || t('error.load_failed', 'فشل التحميل'));
+      setError(error.message || t('error.load_failed'));
     } finally {
       setIsLoading(false);
     }
@@ -96,7 +96,7 @@ export default function ProductDetailPage() {
 
   const handleBuyClick = useCallback(() => {
     if (!isAuthenticated && !token) {
-      toast.error(t('error.login_required', 'يرجى تسجيل الدخول'));
+      toast.error(t('error.login_required'));
       router.push('/login');
       return;
     }
@@ -110,7 +110,7 @@ export default function ProductDetailPage() {
         await navigator.share({ title: product.name, url: window.location.href });
       } else {
         await navigator.clipboard.writeText(window.location.href);
-        toast.success(t('share.link_copied', 'تم نسخ الرابط'));
+        toast.success(t('share.link_copied'));
       }
     } catch {}
   }, [product, t]);
@@ -124,11 +124,11 @@ export default function ProductDetailPage() {
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
             <RiErrorWarningLine className="h-8 w-8 text-red-500" />
           </div>
-          <h2 className="mb-2 text-lg font-semibold">{t('error.load_failed', 'فشل التحميل')}</h2>
-          <p className="mb-6 text-sm text-neutral-400">{error || t('error.product_not_found', 'المنتج غير موجود')}</p>
+          <h2 className="mb-2 text-lg font-semibold">{t('error.load_failed')}</h2>
+          <p className="mb-6 text-sm text-neutral-400">{error || t('error.product_not_found')}</p>
           <div className="flex gap-3">
-            <Button variant="secondary" onClick={handleBack}><RiArrowLeftLine className="mr-2 h-4 w-4" />{t('btn.back', 'رجوع')}</Button>
-            <Button onClick={fetchProduct}><RiRefreshLine className="mr-2 h-4 w-4" />{t('btn.retry', 'إعادة المحاولة')}</Button>
+            <Button variant="secondary" onClick={handleBack}><RiArrowLeftLine className="mr-2 h-4 w-4" />{t('btn.back')}</Button>
+            <Button onClick={fetchProduct}><RiRefreshLine className="mr-2 h-4 w-4" />{t('btn.retry')}</Button>
           </div>
         </m.div>
       </div>
@@ -234,12 +234,12 @@ export default function ProductDetailPage() {
           <div className="flex items-center gap-2 mb-1">
             {product.type === 'TRIAL' && (
               <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-primary-500 text-white">
-                {t('tag.trial', 'تجربة')}
+                {t('tag.trial')}
               </span>
             )}
             {product.showRecommendBadge && (
               <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-primary-500 text-white">
-                {product.customBadgeText || t('tag.recommend', 'موصى به')}
+                {product.customBadgeText || t('tag.recommend')}
               </span>
             )}
           </div>
@@ -266,7 +266,7 @@ export default function ProductDetailPage() {
             <div className="grid grid-cols-3 divide-x divide-neutral-100/80">
               <div className="py-4 px-3 text-center">
                 <p className="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mb-1">
-                  {t('product.price', 'السعر')}
+                  {t('product.price')}
                 </p>
                 <p className={cn('text-lg font-bold font-heading font-financial', isVip ? 'text-gold-600' : 'text-primary-500')}>
                   {formatCurrency(productPrice, config)}
@@ -274,7 +274,7 @@ export default function ProductDetailPage() {
               </div>
               <div className="py-4 px-3 text-center">
                 <p className="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mb-1">
-                  {t('biz.daily_income', 'يومي')}
+                  {t('biz.daily_income')}
                 </p>
                 <p className="text-lg font-bold font-heading font-financial text-primary-500">
                   +{formatCurrency(dailyIncome, config)}
@@ -282,10 +282,10 @@ export default function ProductDetailPage() {
               </div>
               <div className="py-4 px-3 text-center">
                 <p className="text-[10px] uppercase tracking-wider text-neutral-400 font-semibold mb-1">
-                  {t('product.cycle', 'الدورة')}
+                  {t('product.cycle')}
                 </p>
                 <p className="text-lg font-bold font-heading font-financial text-neutral-800">
-                  {product.cycleDays} {t('unit.days', 'أيام')}
+                  {product.cycleDays} {t('unit.days')}
                 </p>
               </div>
             </div>
@@ -306,7 +306,7 @@ export default function ProductDetailPage() {
             {/* 编辑式标题 + 金色线 */}
             <div className="flex items-center gap-3 mb-5">
               <h3 className="text-xs font-bold uppercase tracking-widest text-neutral-500 whitespace-nowrap">
-                {t('product.roi_title', 'عائد الاستثمار')}
+                {t('product.roi_title')}
               </h3>
               <div className="flex-1 divider-gradient" />
             </div>
@@ -316,12 +316,12 @@ export default function ProductDetailPage() {
               <p className="text-2xl font-heading font-financial text-neutral-800">
                 {formatCurrency(dailyIncome, config)}
               </p>
-              <p className="text-xs text-neutral-400">{t('biz.daily_income', 'الدخل اليومي')}</p>
+              <p className="text-xs text-neutral-400">{t('biz.daily_income')}</p>
             </div>
 
             {/* × 周期 */}
             <p className="text-sm text-neutral-600 mb-3">
-              &times; {product.cycleDays} {t('unit.days', 'أيام')}
+              &times; {product.cycleDays} {t('unit.days')}
             </p>
 
             {/* 金色分割线 */}
@@ -335,20 +335,20 @@ export default function ProductDetailPage() {
               )}>
                 {formatCurrency(totalIncome, config)}
               </p>
-              <p className="text-xs text-neutral-400">{t('biz.total_return', 'العائد الإجمالي')}</p>
+              <p className="text-xs text-neutral-400">{t('biz.total_return')}</p>
             </div>
 
             {/* 限购信息（使用 displayUserLimit 展示，null 表示无限购） */}
             {product.displayUserLimit != null && product.displayUserLimit > 0 && (
               <div className="mt-4 pt-3 border-t border-neutral-100/60">
                 <p className="text-xs text-neutral-400">
-                  {t('product.limit', 'الحد')}: {product.displayUserLimit} {t('product.per_user', 'لكل مستخدم')}
+                  {t('product.limit')}: {product.displayUserLimit} {t('product.per_user')}
                 </p>
               </div>
             )}
 
             <p className="mt-4 text-xs text-neutral-400 text-center leading-relaxed">
-              {t('product.income_tip', 'يتم إضافة الأرباح يومياً إلى رصيدك المتاح')}
+              {t('product.income_tip')}
             </p>
           </m.div>
 
@@ -379,12 +379,12 @@ export default function ProductDetailPage() {
               <div>
                 <p className="text-sm font-bold text-neutral-800">
                   {hasGrantSvip
-                    ? t('tag.svip_upgrade', 'ترقية إلى SVIP{level}').replace('{level}', String(product.grantSvipLevel))
-                    : t('tag.vip_upgrade', 'ترقية إلى VIP{level}').replace('{level}', String(product.grantVipLevel))
+                    ? t('tag.svip_upgrade').replace('{level}', String(product.grantSvipLevel))
+                    : t('tag.vip_upgrade').replace('{level}', String(product.grantVipLevel))
                   }
                 </p>
                 <p className="text-xs text-neutral-500">
-                  {t('product.grant_vip_desc', 'اشترِ هذا المنتج واحصل على مزايا VIP')}
+                  {t('product.grant_vip_desc')}
                 </p>
               </div>
             </m.div>
@@ -399,7 +399,7 @@ export default function ProductDetailPage() {
               className="rounded-2xl bg-white border border-neutral-100/80 p-5 shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
             >
               <div className="flex items-center gap-3 mb-4">
-                <h3 className="text-sm font-bold text-neutral-800">{t('product.detail', 'التفاصيل')}</h3>
+                <h3 className="text-sm font-bold text-neutral-800">{t('product.detail')}</h3>
                 <div className="flex-1 h-px bg-neutral-100" />
               </div>
               <div
@@ -440,7 +440,7 @@ export default function ProductDetailPage() {
           <div className="flex items-center gap-4">
             <div className="flex-1">
               <p className="text-[10px] text-neutral-400 uppercase tracking-wide mb-0.5">
-                {t('product.price', 'السعر')}
+                {t('product.price')}
               </p>
               <p className={cn('text-xl font-bold font-heading font-financial', isVip ? 'text-gold-600' : 'text-primary-500')}>
                 {formatCurrency(productPrice, config)}
@@ -476,19 +476,19 @@ export default function ProductDetailPage() {
               )}
             >
               {!isUserLoggedIn ? (
-                <span className="flex items-center gap-2"><RiShoppingCartLine className="h-5 w-5" />{t('btn.login_to_buy', 'تسجيل الدخول')}</span>
+                <span className="flex items-center gap-2"><RiShoppingCartLine className="h-5 w-5" />{t('btn.login_to_buy')}</span>
               ) : isPurchased ? (
-                <span className="flex items-center gap-2"><RiCheckLine className="h-5 w-5" />{t('btn.bought', 'تم الشراء')}</span>
+                <span className="flex items-center gap-2"><RiCheckLine className="h-5 w-5" />{t('btn.bought')}</span>
               ) : isStockExhausted ? (
-                <span className="flex items-center gap-2"><RiInboxUnarchiveLine className="h-5 w-5" />{t('btn.stock_exhausted', 'نفد المخزون')}</span>
+                <span className="flex items-center gap-2"><RiInboxUnarchiveLine className="h-5 w-5" />{t('btn.stock_exhausted')}</span>
               ) : isComingSoon ? (
-                <span className="flex items-center gap-2"><RiTimeLine className="h-5 w-5" />{t('btn.coming_soon', 'قريباً')}</span>
+                <span className="flex items-center gap-2"><RiTimeLine className="h-5 w-5" />{t('btn.coming_soon')}</span>
               ) : isVipLocked || !isVipLevelMet ? (
-                <span className="flex items-center gap-2"><RiLockLine className="h-5 w-5" />{t('btn.vip_required', 'يتطلب VIP')} {requiredVipLevel}</span>
+                <span className="flex items-center gap-2"><RiLockLine className="h-5 w-5" />{t('btn.vip_required')} {requiredVipLevel}</span>
               ) : !isBalanceSufficient ? (
-                <span>{t('btn.insufficient_balance', 'رصيد غير كافٍ')}</span>
+                <span>{t('btn.insufficient_balance')}</span>
               ) : (
-                <span className="flex items-center gap-2"><RiShoppingCartLine className="h-5 w-5" />{t('btn.buy_now', 'اشترِ الآن')}</span>
+                <span className="flex items-center gap-2"><RiShoppingCartLine className="h-5 w-5" />{t('btn.buy_now')}</span>
               )}
             </Button>
           </div>

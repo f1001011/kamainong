@@ -83,7 +83,7 @@ export function HomeProductRecommend({
               href="/products"
               className="inline-flex items-center gap-1 text-sm text-primary-500 hover:text-primary-600 transition-colors font-semibold whitespace-nowrap"
             >
-              <span>{t('common.viewMore', 'عرض المزيد')}</span>
+              <span>{t('common.viewMore')}</span>
               <RiArrowRightLine className="w-4 h-4" />
             </Link>
           )}

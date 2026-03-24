@@ -70,7 +70,7 @@ export function ProductIncomeCalc({ product, className }: ProductIncomeCalcProps
           <RiMoneyDollarCircleFill className="h-4 w-4 text-primary-500" />
         </div>
         <h3 className="font-semibold text-foreground">
-          {t('product.income_calc', 'حاسبة الأرباح')}
+          {t('product.income_calc')}
         </h3>
       </div>
 
@@ -79,7 +79,7 @@ export function ProductIncomeCalc({ product, className }: ProductIncomeCalcProps
         {/* 日收益 */}
         <div className="text-center">
           <p className="text-xs text-neutral-400 mb-1">
-            {t('product.daily', 'يومي')}
+            {t('product.daily')}
           </p>
           <p className="text-lg font-bold text-success tabular-nums">
             <AnimatedNumber
@@ -98,7 +98,7 @@ export function ProductIncomeCalc({ product, className }: ProductIncomeCalcProps
         {/* 周期天数 */}
         <div className="text-center">
           <p className="text-xs text-neutral-400 mb-1">
-            {t('product.days', 'أيام')}
+            {t('product.days')}
           </p>
           <div className="flex items-center justify-center gap-1">
             <RiTimeLine className="h-4 w-4 text-neutral-400" />
@@ -116,7 +116,7 @@ export function ProductIncomeCalc({ product, className }: ProductIncomeCalcProps
         {/* 总收益 */}
         <div className="text-center">
           <p className="text-xs text-neutral-400 mb-1">
-            {t('product.total', 'الإجمالي')}
+            {t('product.total')}
           </p>
           <p className="text-lg font-bold text-primary-500 tabular-nums">
             <AnimatedNumber
@@ -130,10 +130,7 @@ export function ProductIncomeCalc({ product, className }: ProductIncomeCalcProps
 
       {/* 收益说明 */}
       <p className="mt-3 text-xs text-neutral-400 text-center leading-relaxed">
-        {t(
-          'product.income_tip',
-          'يتم إضافة الأرباح يومياً إلى رصيدك المتاح'
-        )}
+        {t('product.income_tip')}
       </p>
     </m.div>
   );

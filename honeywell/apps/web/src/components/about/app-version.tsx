@@ -79,13 +79,13 @@ export function AppVersion({
     >
       {/* 版本号 - 依据：01.1-设计Token.md - 浅色小字 */}
       <p className="text-xs text-neutral-400">
-        {t('about.version', 'الإصدار')} {version}
+        {t('about.version')} {version}
       </p>
       
       {/* 更新时间（可选） */}
       {updatedAt && (
         <p className="text-xs text-neutral-300">
-          {t('about.last_updated', 'آخر تحديث')}: {updatedAt}
+          {t('about.last_updated')}: {updatedAt}
         </p>
       )}
     </m.div>

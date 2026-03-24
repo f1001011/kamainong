@@ -117,10 +117,10 @@ export default function ProfilePage() {
       api.put<UpdateProfileResponse>('/user/profile', data as Record<string, unknown>),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userProfile'] });
-      toast.success(t('toast.update_success', 'تم التحديث بنجاح'));
+      toast.success(t('toast.update_success'));
     },
     onError: (error: Error) => {
-      toast.error(error.message || t('toast.update_failed', 'فشل التحديث'));
+      toast.error(error.message || t('toast.update_failed'));
     },
   });
 
@@ -141,7 +141,7 @@ export default function ProfilePage() {
       logoutStore();
       queryClient.clear();
       router.replace('/login');
-      toast.success(t('toast.logout_success', 'تم تسجيل الخروج'));
+      toast.success(t('toast.logout_success'));
     },
     onError: () => {
       logoutStore();
@@ -223,7 +223,7 @@ export default function ProfilePage() {
                 <div className="card-floating p-5">
                   <BalanceDisplay
                     balance={userProfile?.availableBalance ?? '0.00'}
-                    label={t('label.available_balance', 'الرصيد المتاح')}
+                    label={t('label.available_balance')}
                     showToggle
                     balanceClassName="text-3xl"
                   />
@@ -231,10 +231,10 @@ export default function ProfilePage() {
                     style={{ borderTop: '1px solid rgba(0,0,0,0.04)' }}>
                     <div className="flex items-center gap-1">
                       <span className="text-sm text-neutral-400 font-medium">
-                        {t('label.frozen_balance', 'الرصيد المجمّد')}
+                        {t('label.frozen_balance')}
                       </span>
                       <InfoTooltip
-                        content={t('tip.frozen_balance', 'الرصيد المجمّد يشمل السحوبات قيد المعالجة')}
+                        content={t('tip.frozen_balance')}
                         size="sm"
                       />
                     </div>
@@ -258,10 +258,10 @@ export default function ProfilePage() {
                     </div>
                     <div className="flex-1 min-w-0 relative z-10">
                       <p className="text-sm font-bold text-white">
-                        {t('profile.download_app', 'تحميل التطبيق')}
+                        {t('profile.download_app')}
                       </p>
                       <p className="text-xs text-white/50 mt-0.5">
-                        {t('profile.download_desc', 'تجربة أفضل على جهازك')}
+                        {t('profile.download_desc')}
                       </p>
                     </div>
                     <RiArrowRightSLine className="w-5 h-5 text-white/30 flex-shrink-0 relative z-10" />
@@ -290,7 +290,7 @@ export default function ProfilePage() {
                   )}
                 >
                   <RiLogoutBoxRLine className="w-5 h-5 mr-2" />
-                  {t('btn.logout', 'تسجيل الخروج')}
+                  {t('btn.logout')}
                 </Button>
               </m.section>
 
@@ -320,10 +320,10 @@ export default function ProfilePage() {
           open={showLogoutDialog}
           onOpenChange={setShowLogoutDialog}
           type="warning"
-          title={t('dialog.logout_title', 'تسجيل الخروج')}
-          description={t('dialog.logout_desc', 'هل أنت متأكد من تسجيل الخروج؟')}
-          confirmText={t('btn.confirm', 'تأكيد')}
-          cancelText={t('btn.cancel', 'إلغاء')}
+          title={t('dialog.logout_title')}
+          description={t('dialog.logout_desc')}
+          confirmText={t('btn.confirm')}
+          cancelText={t('btn.cancel')}
           onConfirm={handleLogout}
           isLoading={logoutMutation.isPending}
         />

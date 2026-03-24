@@ -216,16 +216,16 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
         <RiErrorWarningLine className="h-12 w-12 text-error" />
       </div>
       <h3 className="text-lg font-semibold text-neutral-800 mb-2">
-        {t('error.order_not_found', 'لم يتم العثور على الطلب')}
+        {t('error.order_not_found')}
       </h3>
       <p className="text-sm text-neutral-500 text-center mb-6">
-        {t('error.order_not_found_desc', 'الطلب الذي تبحث عنه غير موجود أو تم حذفه')}
+        {t('error.order_not_found_desc')}
       </p>
       <Button
         variant="secondary"
         onClick={() => router.push('/withdraw/records')}
       >
-        {t('btn.back_to_list', 'العودة إلى القائمة')}
+        {t('btn.back_to_list')}
       </Button>
     </div>
   );
@@ -250,7 +250,7 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
             <div className="flex items-center justify-between">
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-neutral-500 mb-1">
-                  {t('biz.order_no', 'رقم الطلب')}
+                  {t('biz.order_no')}
                 </p>
                 <p className="font-mono text-neutral-800 break-all">
                   {order.orderNo}
@@ -270,7 +270,7 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
         >
           <Card className="p-4">
             <InfoItem
-              label={t('biz.apply_amount', 'المبلغ المطلوب')}
+              label={t('biz.apply_amount')}
               value={
                 <span className="font-mono text-lg font-bold text-primary-500">
                   {formatAmount(order.amount)}
@@ -279,12 +279,12 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
               highlight
             />
             <InfoItem
-              label={`${t('biz.fee', 'عمولة')} (${config.withdrawFeePercent || 5}%)`}
+              label={`${t('biz.fee')} (${config.withdrawFeePercent || 5}%)`}
               value={formatAmount(order.fee)}
               mono
             />
             <InfoItem
-              label={t('biz.actual_amount', 'المبلغ الفعلي')}
+              label={t('biz.actual_amount')}
               value={
                 <span className="font-mono text-success font-semibold">
                   {formatAmount(order.actualAmount)}
@@ -303,16 +303,16 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
         >
           <Card className="p-4">
             <InfoItem
-              label={t('label.bank', 'البنك')}
+              label={t('label.bank')}
               value={order.bankName}
             />
             <InfoItem
-              label={t('label.account_no', 'رقم الحساب')}
+              label={t('label.account_no')}
               value={order.accountNoMask}
               mono
             />
             <InfoItem
-              label={t('label.account_name', 'اسم صاحب الحساب')}
+              label={t('label.account_name')}
               value={order.accountName}
             />
           </Card>
@@ -327,7 +327,7 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
         >
           <Card className="p-4">
             <InfoItem
-              label={t('biz.status', 'الحالة')}
+              label={t('biz.status')}
               value={
                 <StatusBadge variant={statusConfig.variant} size="md" dot>
                   {t(statusConfig.textKey)}
@@ -335,18 +335,18 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
               }
             />
             <InfoItem
-              label={t('biz.create_time', 'تاريخ الإنشاء')}
+              label={t('biz.create_time')}
               value={formatTime(order.createdAt)}
             />
             {order.reviewedAt && (
               <InfoItem
-                label={t('biz.review_time', 'تاريخ المراجعة')}
+                label={t('biz.review_time')}
                 value={formatTime(order.reviewedAt)}
               />
             )}
             {order.completedAt && (
               <InfoItem
-                label={t('biz.complete_time', 'تاريخ الإتمام')}
+                label={t('biz.complete_time')}
                 value={formatTime(order.completedAt)}
               />
             )}
@@ -368,7 +368,7 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-medium text-error mb-1">
-                    {t('biz.reject_reason', 'سبب الرفض')}
+                    {t('biz.reject_reason')}
                   </p>
                   <p className="text-sm text-neutral-700">
                     {order.rejectReason}
@@ -390,12 +390,12 @@ export default function WithdrawOrderDetailPage({ params }: PageProps) {
           <button
             onClick={() => router.back()}
             className="p-2 -ml-2 rounded-lg hover:bg-neutral-100 transition-colors"
-            aria-label={t('btn.back', 'رجوع')}
+            aria-label={t('btn.back')}
           >
             <RiArrowLeftLine className="h-5 w-5 text-neutral-600" />
           </button>
           <h1 className="flex-1 text-center text-lg font-semibold text-neutral-800">
-            {t('page.withdraw_detail', 'تفاصيل السحب')}
+            {t('page.withdraw_detail')}
           </h1>
           {/* 占位，保持标题居中 */}
           <div className="w-9" />

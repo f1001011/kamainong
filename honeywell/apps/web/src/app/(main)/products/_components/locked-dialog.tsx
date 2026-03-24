@@ -63,7 +63,7 @@ export function LockedDialog({
     <ResponsiveModal
       open={open}
       onOpenChange={onOpenChange}
-      title={t('dialog.vip_required_title', 'مطلوب مستوى VIP')}
+      title={t('dialog.vip_required_title')}
     >
       <div className="flex flex-col items-center py-4">
         {/* 图标 */}
@@ -74,7 +74,7 @@ export function LockedDialog({
         {/* 提示内容 */}
         <div className="text-center space-y-2 mb-6">
           <p className="text-neutral-600">
-            {t('dialog.vip_required_msg', 'يجب أن تكون VIP{level} أو أعلى لشراء هذا المنتج.')
+            {t('dialog.vip_required_msg')
               .replace('{level}', String(requiredLevel))}
           </p>
           
@@ -82,12 +82,12 @@ export function LockedDialog({
           <div className="flex items-center justify-center gap-2 py-3 px-4 bg-gold-50 rounded-xl">
             <RiVipCrownFill className="w-5 h-5 text-gold-500" />
             <span className="text-gold-700 font-semibold">
-              {t('dialog.required_level', 'المستوى المطلوب')}: VIP{requiredLevel}
+              {t('dialog.required_level')}: VIP{requiredLevel}
             </span>
           </div>
 
           <p className="text-sm text-neutral-500">
-            {t('dialog.upgrade_tip', 'اشترِ منتجات Po لرفع مستوى VIP.')}
+            {t('dialog.upgrade_tip')}
           </p>
         </div>
 
@@ -98,14 +98,14 @@ export function LockedDialog({
             onClick={handleViewProducts}
             className="w-full"
           >
-            {t('btn.view_products', 'عرض المنتجات')}
+            {t('btn.view_products')}
           </Button>
           <Button
             variant="ghost"
             onClick={() => onOpenChange(false)}
             className="w-full"
           >
-            {t('btn.cancel', 'إلغاء')}
+            {t('btn.cancel')}
           </Button>
         </div>
       </div>

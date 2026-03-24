@@ -43,7 +43,7 @@ export function SvipRewardHistory() {
               <RiHistoryLine className="w-4 h-4 text-violet-600" />
             </div>
             <span className="text-sm font-semibold text-neutral-700">
-              {t('svip.reward_history', 'سجل المكافآت')}
+              {t('svip.reward_history')}
             </span>
             {total > 0 && (
               <span className="text-xs text-neutral-400 bg-neutral-100 px-2 py-0.5 rounded-full">
@@ -102,7 +102,7 @@ export function SvipRewardHistory() {
 
                     {total > rewards.length && (
                       <p className="text-center text-xs text-neutral-400 pt-2">
-                        {t('tip.no_more_data', 'لا مزيد من البيانات')}
+                        {t('tip.no_more_data')}
                       </p>
                     )}
                   </div>

@@ -96,12 +96,12 @@ export function EditNicknameModal({
     const trimmed = nickname.trim();
     
     if (trimmed.length < minLength) {
-      setError(t('error.nickname_too_short', `يجب أن يتكون الاسم من ${minLength} أحرف على الأقل`));
+      setError(t.withVars('error.nickname_too_short', { min: minLength }));
       return false;
     }
     
     if (trimmed.length > maxLength) {
-      setError(t('error.nickname_too_long', `لا يمكن أن يتجاوز الاسم ${maxLength} حرفًا`));
+      setError(t.withVars('error.nickname_too_long', { max: maxLength }));
       return false;
     }
     
@@ -140,7 +140,7 @@ export function EditNicknameModal({
     <ResponsiveModal
       open={open}
       onOpenChange={onOpenChange}
-      title={t('modal.edit_nickname_title', 'تعديل الاسم')}
+      title={t('modal.edit_nickname_title')}
       showClose={!isSubmitting}
       dismissible={!isSubmitting}
     >
@@ -151,7 +151,7 @@ export function EditNicknameModal({
             value={value}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
-            placeholder={t('placeholder.nickname', 'أدخل اسمك')}
+            placeholder={t('placeholder.nickname')}
             maxLength={maxLength}
             disabled={isSubmitting}
             autoFocus
@@ -166,7 +166,7 @@ export function EditNicknameModal({
               <span className="text-xs text-error">{error}</span>
             ) : (
               <span className="text-xs text-neutral-400">
-                {t('hint.nickname_length', `${minLength}-${maxLength} حرف`)}
+                {t.withVars('hint.nickname_length', { min: minLength, max: maxLength })}
               </span>
             )}
             <span className={cn(
@@ -186,7 +186,7 @@ export function EditNicknameModal({
             onClick={() => onOpenChange(false)}
             disabled={isSubmitting}
           >
-            {t('btn.cancel', 'إلغاء')}
+            {t('btn.cancel')}
           </Button>
           <Button
             variant="primary"
@@ -195,7 +195,7 @@ export function EditNicknameModal({
             isLoading={isSubmitting}
             disabled={!value.trim() || value.trim() === currentNickname}
           >
-            {t('btn.save', 'حفظ')}
+            {t('btn.save')}
           </Button>
         </div>
       </div>

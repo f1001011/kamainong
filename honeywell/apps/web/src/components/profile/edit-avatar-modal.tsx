@@ -115,13 +115,13 @@ export function EditAvatarModal({
   const validateFile = (file: File): boolean => {
     // 检查文件类型
     if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
-      toast.error(t('error.invalid_image_format', 'صيغة الصورة غير صالحة. استخدم JPG أو PNG أو GIF أو WEBP'));
+      toast.error(t('error.invalid_image_format'));
       return false;
     }
     
     // 检查文件大小
     if (file.size > maxSizeBytes) {
-      toast.error(t('error.file_too_large', `الملف كبير جدًا. الحد الأقصى ${maxSizeKB / 1024}MB`));
+      toast.error(t.withVars('error.file_too_large', { max: maxSizeKB / 1024 }));
       return false;
     }
     
@@ -230,7 +230,7 @@ export function EditAvatarModal({
     <ResponsiveModal
       open={open}
       onOpenChange={handleOpenChange}
-      title={t('modal.edit_avatar_title', 'تعديل صورة الملف الشخصي')}
+      title={t('modal.edit_avatar_title')}
       showClose={!isSubmitting && !isUploading}
       dismissible={!isSubmitting && !isUploading}
     >
@@ -277,7 +277,7 @@ export function EditAvatarModal({
                   'shadow-soft-md',
                   'hover:bg-red-600'
                 )}
-                aria-label={t('action.clear', 'مسح')}
+                aria-label={t('action.clear')}
               >
                 <RiCloseLine className="w-4 h-4" />
               </button>
@@ -308,10 +308,10 @@ export function EditAvatarModal({
           >
             <RiImageAddLine className="w-8 h-8 mx-auto text-neutral-400 mb-2" />
             <p className="text-sm text-neutral-500">
-              {t('hint.click_or_drag', 'انقر أو اسحب صورة')}
+              {t('hint.click_or_drag')}
             </p>
             <p className="text-xs text-neutral-400 mt-1">
-              {t('hint.image_format', `JPG, PNG, GIF, WEBP (الحد الأقصى ${maxSizeKB / 1024}MB)`)}
+              {t.withVars('hint.image_format', { max: maxSizeKB / 1024 })}
             </p>
           </div>
         </div>
@@ -324,7 +324,7 @@ export function EditAvatarModal({
             onClick={() => handleOpenChange(false)}
             disabled={isSubmitting || isUploading}
           >
-            {t('btn.cancel', 'إلغاء')}
+            {t('btn.cancel')}
           </Button>
           <Button
             variant="primary"
@@ -333,7 +333,7 @@ export function EditAvatarModal({
             isLoading={isSubmitting || isUploading}
             disabled={!selectedFile && !uploadedUrl}
           >
-            {t('btn.save', 'حفظ')}
+            {t('btn.save')}
           </Button>
         </div>
       </div>

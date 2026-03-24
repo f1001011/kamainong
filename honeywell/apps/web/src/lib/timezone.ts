@@ -13,7 +13,7 @@ export const DEFAULT_SYSTEM_TIMEZONE = 'Africa/Casablanca';
 /**
  * 默认时区显示名称
  */
-export const DEFAULT_TIMEZONE_DISPLAY_NAME = 'توقيت المغرب (UTC+1)';
+export const DEFAULT_TIMEZONE_DISPLAY_NAME = getLocaleText('timezone.default_display_name');
 
 /**
  * 时间格式化选项
@@ -118,22 +118,22 @@ export function formatRelativeTime(
   const diffSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
   
   if (diffSeconds < 60) {
-    return t('time.justNow') || 'الآن';
+    return t('time.justNow');
   }
   
   const diffMinutes = Math.floor(diffSeconds / 60);
   if (diffMinutes < 60) {
-    return `${diffMinutes} ${t('time.minutesAgo') || 'د'}`;
+    return `${diffMinutes} ${t('time.minutesAgo')}`;
   }
   
   const diffHours = Math.floor(diffMinutes / 60);
   if (diffHours < 24) {
-    return `${diffHours} ${t('time.hoursAgo') || 'س'}`;
+    return `${diffHours} ${t('time.hoursAgo')}`;
   }
   
   const diffDays = Math.floor(diffHours / 24);
   if (diffDays < 7) {
-    return `${diffDays} ${t('time.daysAgo') || 'ي'}`;
+    return `${diffDays} ${t('time.daysAgo')}`;
   }
   
   // 超过7天显示具体日期（使用传入的时区配置，禁止硬编码）
@@ -219,3 +219,4 @@ export function isToday(utcDate: string | Date, timezone: string): boolean {
   
   return formatter.format(date) === formatter.format(today);
 }
+import { getLocaleText } from '@/locales';

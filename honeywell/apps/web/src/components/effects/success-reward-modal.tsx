@@ -241,7 +241,7 @@ export function SuccessRewardModal({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: getDuration(1.5) }}
-                aria-label={t('aria.close', 'إغلاق')}
+                aria-label={t('aria.close')}
               >
                 <RiCloseLine className="size-5" />
               </m.button>
@@ -395,58 +395,58 @@ function getSceneConfig(
   switch (scene) {
     case 'register':
       return {
-        title: t('reward.register_title', 'تم التسجيل بنجاح!'),
+        title: t('reward.register_title'),
         subtitle: t.withVars('reward.register_subtitle', {
           amount: `${currencySymbol} ${Math.round(amount)}`,
         }),
-        primaryButtonText: t('reward.register_primary', 'ابدأ الاستكشاف'),
-        secondaryButtonText: t('reward.register_secondary', 'عرض أصولي'),
+        primaryButtonText: t('reward.register_primary'),
+        secondaryButtonText: t('reward.register_secondary'),
         checkmarkTheme: 'success' as const,
       };
 
     case 'purchase':
       return {
-        title: t('reward.purchase_title', 'تم الشراء بنجاح!'),
-        subtitle: t('reward.purchase_subtitle', 'تمت إضافة المنتج إلى محفظتك'),
-        primaryButtonText: t('reward.purchase_primary', 'عرض محفظتي'),
-        secondaryButtonText: t('reward.purchase_secondary', 'متابعة الشراء'),
+        title: t('reward.purchase_title'),
+        subtitle: t('reward.purchase_subtitle'),
+        primaryButtonText: t('reward.purchase_primary'),
+        secondaryButtonText: t('reward.purchase_secondary'),
         checkmarkTheme: 'primary' as const,
       };
 
     case 'signin':
       return {
-        title: t('reward.signin_title', 'تم تسجيل الحضور بنجاح!'),
+        title: t('reward.signin_title'),
         subtitle: t.withVars('reward.signin_subtitle', {
           amount: `${currencySymbol} ${Math.round(amount)}`,
         }),
-        primaryButtonText: t('reward.signin_primary', 'رائع'),
+        primaryButtonText: t('reward.signin_primary'),
         secondaryButtonText: undefined,
         checkmarkTheme: 'gold' as const,
       };
 
     case 'invite':
       return {
-        title: t('reward.invite_title', 'مكافأة الدعوة!'),
-        subtitle: t('reward.invite_subtitle', 'لقد حصلت على مكافأة عن دعوتك'),
-        primaryButtonText: t('reward.invite_primary', 'دعوة المزيد من الأصدقاء'),
-        secondaryButtonText: t('reward.invite_secondary', 'إغلاق'),
+        title: t('reward.invite_title'),
+        subtitle: t('reward.invite_subtitle'),
+        primaryButtonText: t('reward.invite_primary'),
+        secondaryButtonText: t('reward.invite_secondary'),
         checkmarkTheme: 'gold' as const,
       };
 
     case 'vip_upgrade':
       return {
-        title: t('reward.vip_title', 'تهانينا!'),
-        subtitle: t('reward.vip_subtitle', 'تم ترقية مستوى VIP الخاص بك'),
-        primaryButtonText: t('reward.vip_primary', 'عرض المزايا'),
+        title: t('reward.vip_title'),
+        subtitle: t('reward.vip_subtitle'),
+        primaryButtonText: t('reward.vip_primary'),
         secondaryButtonText: undefined,
         checkmarkTheme: 'gold' as const,
       };
 
     default:
       return {
-        title: t('reward.default_title', 'نجاح!'),
+        title: t('reward.default_title'),
         subtitle: '',
-        primaryButtonText: t('btn.confirm', 'تأكيد'),
+        primaryButtonText: t('btn.confirm'),
         secondaryButtonText: undefined,
         checkmarkTheme: 'success' as const,
       };

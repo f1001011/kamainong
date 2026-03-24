@@ -102,7 +102,7 @@ export function ChannelSelector({
                 {channel.name}
               </div>
               <div className="text-xs text-neutral-400 mt-0.5">
-                {t('recharge.fast_processing', 'معالجة سريعة')}
+                {t('recharge.fast_processing')}
               </div>
             </div>
 

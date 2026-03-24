@@ -84,10 +84,10 @@ export function TierList({ tiers, currentCount }: TierListProps) {
         </div>
         <div>
           <h2 className="text-base font-bold text-neutral-800">
-            {t('invite.tier_title', 'مستويات المكافآت')}
+            {t('invite.tier_title')}
           </h2>
           <p className="text-xs text-neutral-400 mt-0.5">
-            {t('invite.tier_subtitle', 'ادعُ أصدقاءك واربح مكافآت')}
+            {t('invite.tier_subtitle')}
           </p>
         </div>
       </m.div>

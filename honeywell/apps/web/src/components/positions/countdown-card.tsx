@@ -99,7 +99,7 @@ export function CountdownCard({
       <div className="flex items-center justify-center gap-2 mb-4">
         <RiTimeFill className="h-5 w-5 text-primary-500" />
         <h3 className="text-sm font-medium text-neutral-600">
-          {t('label.next_income_countdown', 'الدخل القادم خلال')}
+          {t('label.next_income_countdown')}
         </h3>
       </div>
 
@@ -119,10 +119,10 @@ export function CountdownCard({
       {/* 发放时间说明 */}
       <div className="pt-4 border-t border-neutral-100 space-y-2">
         <p className="text-sm text-neutral-500">
-          {t('label.settle_time', 'وقت التسوية')}: {displaySettleTime}
+          {t('label.settle_time')}: {displaySettleTime}
         </p>
         <p className="text-sm text-neutral-600">
-          {t('label.expected_income', 'الدخل المتوقع')}:
+          {t('label.expected_income')}:
           <span className="ml-2 font-mono text-success font-semibold">
             +{displayDailyIncome}
           </span>

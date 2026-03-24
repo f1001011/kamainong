@@ -41,7 +41,6 @@ import { SPRINGS } from '@/lib/animation/constants';
 interface NavItem {
   path: string;
   labelKey: string;
-  defaultLabel: string;
   icon: typeof RiHomeLine;
   activeIcon: typeof RiHomeFill;
   divider?: boolean;
@@ -51,28 +50,24 @@ const mainNavItems: NavItem[] = [
   {
     path: '/',
     labelKey: 'nav.home',
-    defaultLabel: 'الرئيسية',
     icon: RiHomeLine,
     activeIcon: RiHomeFill,
   },
   {
     path: '/products',
     labelKey: 'nav.products',
-    defaultLabel: 'المنتجات',
     icon: RiShoppingBagLine,
     activeIcon: RiShoppingBagFill,
   },
   {
     path: '/team',
     labelKey: 'nav.team',
-    defaultLabel: 'الفريق',
     icon: RiWalletLine,
     activeIcon: RiWalletFill,
   },
   {
     path: '/profile',
     labelKey: 'nav.profile',
-    defaultLabel: 'الملف الشخصي',
     icon: RiUserLine,
     activeIcon: RiUserFill,
   },
@@ -82,7 +77,6 @@ const secondaryNavItems: NavItem[] = [
   {
     path: '/positions',
     labelKey: 'nav.positions',
-    defaultLabel: 'استثماراتي',
     icon: RiExchangeFundsLine,
     activeIcon: RiExchangeFundsFill,
     divider: true,
@@ -90,35 +84,30 @@ const secondaryNavItems: NavItem[] = [
   {
     path: '/team',
     labelKey: 'nav.team',
-    defaultLabel: 'فريقي',
     icon: RiTeamLine,
     activeIcon: RiTeamFill,
   },
   {
     path: '/activities',
     labelKey: 'nav.activities',
-    defaultLabel: 'الأنشطة',
     icon: RiGiftLine,
     activeIcon: RiGiftFill,
   },
   {
     path: '/community',
     labelKey: 'nav.community',
-    defaultLabel: 'الساحة',
     icon: RiChat3Line,
     activeIcon: RiChat3Fill,
   },
   {
     path: '/activities/spin-wheel',
     labelKey: 'nav.spin_wheel',
-    defaultLabel: 'عجلة الحظ',
     icon: RiGamepadLine,
     activeIcon: RiGamepadFill,
   },
   {
     path: '/settings',
     labelKey: 'nav.settings',
-    defaultLabel: 'الإعدادات',
     icon: RiSettings4Line,
     activeIcon: RiSettings4Fill,
   },
@@ -167,7 +156,7 @@ function SidebarNavItem({ item, isActive }: { item: NavItem; isActive: boolean }
         'text-sm transition-all duration-200',
         isActive ? 'font-bold' : 'font-medium'
       )}>
-        {t(item.labelKey, item.defaultLabel)}
+        {t(item.labelKey)}
       </span>
     </div>
   );
@@ -287,7 +276,7 @@ export function Sidebar() {
                   {user.nickname || user.phone}
                 </p>
                 <p className="text-xs text-white/40 font-medium">
-                  {t('sidebar.viewProfile', 'عرض الملف الشخصي')}
+                  {t('sidebar.viewProfile')}
                 </p>
               </div>
             </div>

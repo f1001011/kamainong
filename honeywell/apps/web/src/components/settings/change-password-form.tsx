@@ -90,25 +90,25 @@ export function ChangePasswordForm({
    */
   const formSchema = z.object({
     oldPassword: z.string()
-      .min(1, t('validation.required', 'هذا الحقل مطلوب')),
+      .min(1, t('validation.required')),
     newPassword: z.string()
       .min(passwordMinLength, t.withVars('validation.password_min_length', { min: passwordMinLength }))
       .max(passwordMaxLength, t.withVars('validation.password_max_length', { max: passwordMaxLength }))
       .refine(
         (val) => !passwordRequireLetter || /[A-Za-z]/.test(val),
-        t('validation.password_require_letter', 'يجب أن تحتوي كلمة المرور على حرف واحد على الأقل')
+        t('validation.password_require_letter')
       )
       .refine(
         (val) => !passwordRequireNumber || /\d/.test(val),
-        t('validation.password_require_number', 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل')
+        t('validation.password_require_number')
       ),
     confirmPassword: z.string()
-      .min(1, t('validation.required', 'هذا الحقل مطلوب')),
+      .min(1, t('validation.required')),
   }).refine((data) => data.newPassword === data.confirmPassword, {
-    message: t('validation.password_not_match', 'كلمات المرور غير متطابقة'),
+    message: t('validation.password_not_match'),
     path: ['confirmPassword'],
   }).refine((data) => data.oldPassword !== data.newPassword, {
-    message: t('validation.password_same_as_old', 'كلمة المرور الجديدة لا يمكن أن تكون نفس القديمة'),
+    message: t('validation.password_same_as_old'),
     path: ['newPassword'],
   });
 
@@ -169,13 +169,13 @@ export function ChangePasswordForm({
       {/* 旧密码 */}
       <m.div variants={listItemVariants}>
         <FormField
-          label={t('security.old_password', 'كلمة المرور الحالية')}
+          label={t('security.old_password')}
           error={errors.oldPassword?.message}
           required
         >
           <Input
             type={showOldPassword ? 'text' : 'password'}
-            placeholder={t('placeholder.old_password', 'أدخل كلمة المرور الحالية')}
+            placeholder={t('placeholder.old_password')}
             leftElement={<RiLockPasswordLine className="w-5 h-5 text-neutral-400" />}
             rightElement={renderPasswordToggle(showOldPassword, () => setShowOldPassword(!showOldPassword))}
             error={errors.oldPassword?.message}
@@ -188,14 +188,14 @@ export function ChangePasswordForm({
       {/* 新密码 */}
       <m.div variants={listItemVariants}>
         <FormField
-          label={t('security.new_password', 'كلمة المرور الجديدة')}
+          label={t('security.new_password')}
           error={errors.newPassword?.message}
-          helperText={t('security.password_hint', `الحد الأدنى ${passwordMinLength} أحرف، يجب أن تتضمن أحرفًا وأرقامًا`)}
+          helperText={t.withVars('security.password_hint', { min: passwordMinLength })}
           required
         >
           <Input
             type={showNewPassword ? 'text' : 'password'}
-            placeholder={t('placeholder.new_password', 'أدخل كلمة المرور الجديدة')}
+            placeholder={t('placeholder.new_password')}
             leftElement={<RiLockPasswordLine className="w-5 h-5 text-neutral-400" />}
             rightElement={renderPasswordToggle(showNewPassword, () => setShowNewPassword(!showNewPassword))}
             error={errors.newPassword?.message}
@@ -210,13 +210,13 @@ export function ChangePasswordForm({
       {/* 确认新密码 */}
       <m.div variants={listItemVariants}>
         <FormField
-          label={t('security.confirm_password', 'تأكيد كلمة المرور')}
+          label={t('security.confirm_password')}
           error={errors.confirmPassword?.message}
           required
         >
           <Input
             type={showConfirmPassword ? 'text' : 'password'}
-            placeholder={t('placeholder.confirm_password', 'أكّد كلمة المرور الجديدة')}
+            placeholder={t('placeholder.confirm_password')}
             leftElement={<RiLockPasswordLine className="w-5 h-5 text-neutral-400" />}
             rightElement={renderPasswordToggle(showConfirmPassword, () => setShowConfirmPassword(!showConfirmPassword))}
             error={errors.confirmPassword?.message}
@@ -234,9 +234,9 @@ export function ChangePasswordForm({
           size="lg"
           fullWidth
           isLoading={isSubmitting}
-          loadingText={t('btn.submitting', 'جارٍ المعالجة...')}
+          loadingText={t('btn.submitting')}
         >
-          {t('btn.change_password', 'تغيير كلمة المرور')}
+          {t('btn.change_password')}
         </Button>
       </m.div>
     </m.form>

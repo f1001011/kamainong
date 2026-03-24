@@ -159,10 +159,10 @@ export const CommissionCard = memo(function CommissionCard({
       {/* 计算详情 */}
       <div className="flex items-center gap-4 text-xs text-neutral-500 mb-3">
         <span>
-          {t('team.commission_product', 'المنتج')}: {config ? formatCurrency(record.baseAmount, config) : record.baseAmount}
+          {t('team.commission_product')}: {config ? formatCurrency(record.baseAmount, config) : record.baseAmount}
         </span>
         <span>
-          {t('team.commission_rate', 'النسبة')}: {record.rate}%
+          {t('team.commission_rate')}: {record.rate}%
         </span>
       </div>
       

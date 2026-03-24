@@ -79,21 +79,21 @@ export function LoginForm() {
     
     switch (code) {
       case 'INVALID_CREDENTIALS':
-        toast.error(t('error.invalid_credentials', 'رقم الهاتف أو كلمة المرور غير صحيحة'));
+        toast.error(t('error.invalid_credentials'));
         triggerShake('password');
         break;
       case 'USER_BANNED':
-        toast.error(t('error.user_banned', 'تم تعليق حسابك. تواصل مع الدعم.'));
+        toast.error(t('error.user_banned'));
         break;
       case 'RATE_LIMITED':
-        toast.error(t('error.rate_limited', 'محاولات كثيرة جداً. انتظر لحظة.'));
+        toast.error(t('error.rate_limited'));
         break;
       case 'USER_NOT_FOUND':
-        toast.error(t('error.user_not_found', 'المستخدم غير موجود'));
+        toast.error(t('error.user_not_found'));
         triggerShake('phone');
         break;
       default:
-        toast.error(t('toast.login_failed', 'فشل تسجيل الدخول'));
+        toast.error(t('toast.login_failed'));
     }
   };
 
@@ -113,7 +113,7 @@ export function LoginForm() {
       haptic('success');
       
       setIsSuccess(true);
-      toast.success(t('toast.login_success', 'تم تسجيل الدخول بنجاح'));
+      toast.success(t('toast.login_success'));
       
       // 使用 window.location.href 作为可靠跳转，避免 router.push 被各种因素阻断
       setTimeout(() => {
@@ -124,7 +124,7 @@ export function LoginForm() {
         handleApiError((error as { code: string }).code);
       } else {
         haptic('error');
-        toast.error(t('toast.network_error', 'خطأ في الشبكة، حاول مرة أخرى'));
+        toast.error(t('toast.network_error'));
       }
     } finally {
       if (!loginSucceeded) {
@@ -155,10 +155,10 @@ export function LoginForm() {
       {/* 标题区域 */}
       <div className="text-center mb-3">
         <h1 className="text-xl font-bold text-white mb-1">
-          {t('page.login_title', 'تسجيل الدخول')}
+          {t('page.login_title')}
         </h1>
         <p className="text-xs text-white/45">
-          {t('page.login_subtitle', 'أدخل حسابك للمتابعة')}
+          {t('page.login_subtitle')}
         </p>
       </div>
 
@@ -168,13 +168,13 @@ export function LoginForm() {
         className="space-y-2"
       >
         <label className="block text-sm font-medium text-white/60">
-          {t('label.phone', 'رقم الهاتف')}
+          {t('label.phone')}
         </label>
         <div className="relative flex items-center">
           <div className="absolute left-0 top-0 bottom-0 flex items-center pl-3 gap-2 pointer-events-none">
             <RiPhoneLine className="w-5 h-5 text-white/30" />
             <span className="text-sm font-medium text-white/45 select-none">
-              {t('label.phone_prefix', '+212')}
+              {t('label.phone_prefix')}
             </span>
             <div className="w-px h-5 bg-white/10" />
           </div>
@@ -183,7 +183,7 @@ export function LoginForm() {
             type="tel"
             inputMode="numeric"
             maxLength={9}
-            placeholder={t('placeholder.phone', 'أدخل 9 أرقام')}
+            placeholder={t('placeholder.phone')}
             disabled={isSubmitting}
             autoComplete="tel"
             className={`
@@ -211,7 +211,7 @@ export function LoginForm() {
         className="space-y-2"
       >
         <label className="block text-sm font-medium text-white/60">
-          {t('label.password', 'كلمة المرور')}
+          {t('label.password')}
         </label>
         <div className="relative">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white/30">
@@ -220,7 +220,7 @@ export function LoginForm() {
           <input
             {...register('password')}
             type={showPassword ? 'text' : 'password'}
-            placeholder={t('placeholder.password', 'أدخل كلمة المرور')}
+            placeholder={t('placeholder.password')}
             disabled={isSubmitting}
             autoComplete="current-password"
             className={`${inputBaseClass} pr-12 ${errors.password ? 'border-red-400/60 focus:ring-red-400/30 focus:border-red-400/60' : 'border-white/10'}`}
@@ -247,7 +247,7 @@ export function LoginForm() {
           href="/forgot-password"
           className="text-xs text-white/35 hover:text-amber-400/70 transition-colors"
         >
-          {t('link.forgot_password', 'هل نسيت كلمة المرور؟')}
+          {t('link.forgot_password')}
         </Link>
       </div>
 
@@ -282,27 +282,27 @@ export function LoginForm() {
             transition={SPRINGS.bouncy}
           >
             <RiCheckLine className="w-5 h-5" />
-            {t('toast.login_success', 'تم تسجيل الدخول بنجاح')}
+            {t('toast.login_success')}
           </m.div>
         ) : isSubmitting ? (
           <>
             <RiLoader4Line className="w-5 h-5 animate-spin" />
-            {t('btn.logging_in', 'جارٍ الدخول...')}
+            {t('btn.logging_in')}
           </>
         ) : (
-          t('btn.login', 'تسجيل الدخول')
+          t('btn.login')
         )}
       </m.button>
 
       {/* 注册链接 */}
       <p className="text-center text-sm text-white/40">
-        {t('tip.no_account', 'ليس لديك حساب؟')}{' '}
-        <Link
+        {t('tip.no_account')}{' '}
+        <a
           href="/register"
           className="text-amber-400/80 font-semibold hover:text-amber-400 transition-colors"
         >
-          {t('link.go_register', 'سجّل الآن')}
-        </Link>
+          {t('link.go_register')}
+        </a>
       </p>
     </form>
   );

@@ -133,7 +133,7 @@ export function TierCard({ tier, currentCount, onClaim, isClaiming }: TierCardPr
           {/* 标题行 */}
           <div className="flex items-center justify-between mb-1">
             <span className={cn('font-semibold text-[15px]', cfg.titleColor)}>
-              {t('invite.tier_level', 'المستوى {n}').replace('{n}', String(tier.tier))}
+              {t('invite.tier_level').replace('{n}', String(tier.tier))}
             </span>
             <span className={cn('text-lg', cfg.amountColor)}>
               {formatCurrency(tier.reward, { currencySymbol })}
@@ -145,7 +145,7 @@ export function TierCard({ tier, currentCount, onClaim, isClaiming }: TierCardPr
             <div className="flex items-center gap-1.5">
               <RiUserAddLine className="w-3.5 h-3.5 text-neutral-400" />
               <span className="text-sm text-neutral-500">
-                {t('invite.tier_requirement', 'دعوة {n} أصدقاء').replace('{n}', String(tier.requiredCount))}
+                {t('invite.tier_requirement').replace('{n}', String(tier.requiredCount))}
               </span>
               {tier.status !== 'LOCKED' && (
                 <RiCheckLine className="w-4 h-4 text-success-500" />
@@ -155,7 +155,7 @@ export function TierCard({ tier, currentCount, onClaim, isClaiming }: TierCardPr
             {/* 状态/操作 */}
             {tier.status === 'LOCKED' && (
               <span className="text-xs text-neutral-400 bg-neutral-50 px-2 py-0.5 rounded-full">
-                {t('invite.status_locked', 'لم يتم بلوغه')}
+                {t('invite.status_locked')}
               </span>
             )}
             {tier.status === 'CLAIMABLE' && (
@@ -167,14 +167,14 @@ export function TierCard({ tier, currentCount, onClaim, isClaiming }: TierCardPr
                   disabled={isClaiming}
                   className="shadow-glow-sm"
                 >
-                  {t('invite.status_claimable', 'المطالبة')}
+                  {t('invite.status_claimable')}
                 </Button>
               </PulseWrapper>
             )}
             {tier.status === 'CLAIMED' && (
               <span className="text-xs text-success-600 font-medium bg-success-50 px-2 py-0.5 rounded-full flex items-center gap-1">
                 <RiCheckLine className="w-3 h-3" />
-                {t('invite.status_claimed', 'تم المطالبة')}
+                {t('invite.status_claimed')}
               </span>
             )}
           </div>

@@ -201,7 +201,7 @@ export function BankSelector({
         {isLoading ? (
           <div className="flex items-center gap-2 text-neutral-400">
             <div className="w-5 h-5 border-2 border-neutral-300 border-t-transparent rounded-full animate-spin" />
-            <span className="text-sm">{t('loading', 'جارٍ التحميل...')}</span>
+            <span className="text-sm">{t('loading')}</span>
           </div>
         ) : selectedBank ? (
           <div className="flex items-center gap-3 min-w-0">
@@ -214,7 +214,7 @@ export function BankSelector({
           </div>
         ) : (
           <span className="text-neutral-400">
-            {placeholder || t('placeholder.select_bank', 'اختر بنكًا')}
+            {placeholder || t('placeholder.select_bank')}
           </span>
         )}
 
@@ -256,7 +256,7 @@ export function BankSelector({
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder={t('placeholder.search_bank', 'البحث عن بنك...')}
+                  placeholder={t('placeholder.search_bank')}
                   className={cn(
                     'w-full h-10 pl-10 pr-10 rounded-lg',
                     'border border-neutral-200 bg-neutral-50',
@@ -340,7 +340,7 @@ export function BankSelector({
                 <div className="py-8 text-center">
                   <RiBankLine className="w-10 h-10 mx-auto text-neutral-300 mb-2" />
                   <p className="text-sm text-neutral-400">
-                    {t('empty.no_banks_found', 'لم يتم العثور على بنوك')}
+                    {t('empty.no_banks_found')}
                   </p>
                 </div>
               )}

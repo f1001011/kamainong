@@ -279,9 +279,9 @@ export default function WithdrawRecordsPage() {
   const renderEmptyState = () => (
     <EmptyState
       icon={<RiFileList3Line className="h-16 w-16 text-neutral-300" />}
-      title={t('empty.withdraw_record', 'لا يوجد سجل سحوبات')}
-      description={t('empty.withdraw_record_desc', 'قم بالسحب لعرض السجل هنا')}
-      actionText={t('btn.withdraw', 'سحب')}
+      title={t('empty.withdraw_record')}
+      description={t('empty.withdraw_record_desc')}
+      actionText={t('btn.withdraw')}
       onAction={() => router.push('/withdraw')}
     />
   );
@@ -312,12 +312,12 @@ export default function WithdrawRecordsPage() {
           <button
             onClick={() => router.back()}
             className="p-2 -ml-2 rounded-lg hover:bg-neutral-100 transition-colors"
-            aria-label={t('btn.back', 'رجوع')}
+            aria-label={t('btn.back')}
           >
             <RiArrowLeftLine className="h-5 w-5 text-neutral-600" />
           </button>
           <h1 className="flex-1 min-w-0 text-center text-lg font-bold tracking-tight text-neutral-800 truncate">
-            {t('page.withdraw_record', 'سجل السحوبات')}
+            {t('page.withdraw_record')}
           </h1>
           <button
             onClick={handleRefresh}
@@ -326,7 +326,7 @@ export default function WithdrawRecordsPage() {
               'p-2 -mr-2 rounded-lg hover:bg-neutral-100 transition-colors',
               isValidating && 'opacity-50'
             )}
-            aria-label={t('btn.refresh', 'تحديث')}
+            aria-label={t('btn.refresh')}
           >
             <RiRefreshLine className={cn(
               'h-5 w-5 text-neutral-600',
@@ -351,12 +351,12 @@ export default function WithdrawRecordsPage() {
             renderSkeleton()
           ) : error ? (
             <div className="py-12 text-center">
-              <p className="text-neutral-500">{t('error.load_failed', 'خطأ في التحميل')}</p>
+              <p className="text-neutral-500">{t('error.load_failed')}</p>
               <button
                 onClick={handleRefresh}
                 className="mt-4 text-primary-500 hover:text-primary-600"
               >
-                {t('btn.retry', 'إعادة المحاولة')}
+                {t('btn.retry')}
               </button>
             </div>
           ) : orders.length === 0 ? (

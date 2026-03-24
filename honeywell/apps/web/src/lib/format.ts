@@ -144,9 +144,9 @@ export function parseAmount(formattedAmount: string): number {
  * @returns 格式化后的天数字符串
  */
 export function formatDays(days: number, t: (key: string) => string): string {
-  if (days <= 0) return t('time.today') || 'اليوم';
-  if (days === 1) return t('time.oneDay') || '1 يوم';
-  return `${days} ${t('time.days') || 'أيام'}`;
+  if (days <= 0) return t('time.today');
+  if (days === 1) return t('time.oneDay');
+  return `${days} ${t('time.days')}`;
 }
 
 /**
@@ -229,12 +229,12 @@ export function formatMessageDate(
   
   // 使用系统时区判断是否是今天
   if (isTodayTz(dateStr, systemTimezone)) {
-    return t('date.today', 'اليوم');
+    return t('date.today');
   }
 
   // 使用系统时区判断是否是昨天
   if (isYesterday(dateStr, systemTimezone)) {
-    return t('date.yesterday', 'أمس');
+    return t('date.yesterday');
   }
 
   // 其他日期返回具体日期（使用系统时区格式化）

@@ -65,7 +65,7 @@ export default function ChangePasswordPage() {
       api.put<void>('/user/password', data as unknown as Record<string, unknown>),
     onSuccess: () => {
       // 显示成功提示
-      toast.success(t('toast.password_changed', 'تم تغيير كلمة المرور بنجاح'));
+      toast.success(t('toast.password_changed'));
       
       // 延迟执行退出登录，让用户看到成功提示
       setTimeout(() => {
@@ -82,16 +82,16 @@ export default function ChangePasswordPage() {
       // 依据：02.3-前端API接口清单.md 第3.3节 - 错误码
       switch (error.code) {
         case 'OLD_PASSWORD_WRONG':
-          toast.error(t('error.old_password_wrong', 'كلمة المرور الحالية غير صحيحة'));
+          toast.error(t('error.old_password_wrong'));
           break;
         case 'SAME_PASSWORD':
-          toast.error(t('error.same_password', 'كلمة المرور الجديدة لا يمكن أن تكون مطابقة للسابقة'));
+          toast.error(t('error.same_password'));
           break;
         case 'VALIDATION_ERROR':
-          toast.error(t('error.password_validation', 'كلمة المرور لا تستوفي المتطلبات'));
+          toast.error(t('error.password_validation'));
           break;
         default:
-          toast.error(error.message || t('error.unknown', 'حدث خطأ'));
+          toast.error(error.message || t('error.unknown'));
       }
     },
   });
@@ -132,10 +132,10 @@ export default function ChangePasswordPage() {
                 
                 <h1 className="text-xl font-bold tracking-tight text-neutral-800 flex items-center justify-center gap-2">
                   <RiLockPasswordLine className="w-5 h-5 text-primary-500" />
-                  {t('security.change_password', 'تغيير كلمة المرور')}
+                  {t('security.change_password')}
                 </h1>
                 <p className="text-sm text-neutral-400 mt-2">
-                  {t('security.password_page_desc', 'أدخل كلمة المرور الحالية وكلمة المرور الجديدة')}
+                  {t('security.password_page_desc')}
                 </p>
               </m.div>
 
@@ -156,7 +156,7 @@ export default function ChangePasswordPage() {
                   'border border-gold-200'
                 )}>
                   <p className="text-sm text-gold-700 text-center">
-                    {t('security.logout_notice', 'بعد تغيير كلمة المرور، سيتم تسجيل الخروج تلقائياً')}
+                    {t('security.logout_notice')}
                   </p>
                 </div>
               </m.section>

@@ -134,12 +134,12 @@ export default function PostDetailPage() {
   const formatRelativeTime = (dateStr: string) => {
     const diff = Date.now() - new Date(dateStr).getTime();
     const minutes = Math.floor(diff / 60000);
-    if (minutes < 1) return t('time.justNow', 'الآن');
-    if (minutes < 60) return `${minutes} ${t('time.minutesAgo', 'د')}`;
+    if (minutes < 1) return t('time.justNow');
+    if (minutes < 60) return `${minutes} ${t('time.minutesAgo')}`;
     const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours} ${t('time.hoursAgo', 'س')}`;
+    if (hours < 24) return `${hours} ${t('time.hoursAgo')}`;
     const days = Math.floor(hours / 24);
-    return `${days} ${t('time.daysAgo', 'ي')}`;
+    return `${days} ${t('time.daysAgo')}`;
   };
 
   if (isLoading) return <DetailSkeleton />;
@@ -151,8 +151,8 @@ export default function PostDetailPage() {
         <div className="px-4 py-20">
           <EmptyState
             icon={<RiChat3Line className="size-12 text-neutral-400" />}
-            title={t('error.load_failed', 'خطأ في التحميل')}
-            actionText={t('btn.retry', 'إعادة المحاولة')}
+            title={t('error.load_failed')}
+            actionText={t('btn.retry')}
             onAction={() => refetch()}
           />
         </div>
@@ -215,12 +215,12 @@ export default function PostDetailPage() {
               >
                 <img
                   src={post.platformScreenshot}
-                  alt={t('community.platform_screenshot', 'لقطة شاشة المنصة')}
+                  alt={t('community.platform_screenshot')}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-lg bg-black/50 backdrop-blur-sm">
                   <span className="text-xs text-white font-medium">
-                    {t('community.platform', 'المنصة')}
+                    {t('community.platform')}
                   </span>
                 </div>
               </button>
@@ -231,12 +231,12 @@ export default function PostDetailPage() {
               >
                 <img
                   src={post.receiptScreenshot}
-                  alt={t('community.receipt_screenshot', 'لقطة شاشة الإيصال')}
+                  alt={t('community.receipt_screenshot')}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-lg bg-black/50 backdrop-blur-sm">
                   <span className="text-xs text-white font-medium">
-                    {t('community.receipt', 'الإيصال')}
+                    {t('community.receipt')}
                   </span>
                 </div>
               </button>
@@ -284,14 +284,14 @@ export default function PostDetailPage() {
             {/* 评论列表 */}
             <div className="space-y-1">
               <h3 className="text-base font-semibold text-neutral-800 mb-3">
-                {t('community.comments', 'التعليقات')}
+                {t('community.comments')}
               </h3>
 
               {comments.length === 0 ? (
                 <div className="py-8 text-center">
                   <RiChat3Line className="size-8 text-neutral-200 mx-auto mb-2" />
                   <p className="text-sm text-neutral-400">
-                    {t('community.no_comments', 'كن أول من يعلّق')}
+                    {t('community.no_comments')}
                   </p>
                 </div>
               ) : (
@@ -339,7 +339,7 @@ export default function PostDetailPage() {
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSubmitComment()}
-              placeholder={t('community.write_comment', 'اكتب تعليقاً...')}
+              placeholder={t('community.write_comment')}
               className="flex-1 h-11 px-4 rounded-full bg-neutral-100 text-sm text-neutral-700 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-200 transition-all"
               maxLength={200}
             />
@@ -394,12 +394,12 @@ function DetailHeader() {
           <button
             onClick={() => router.back()}
             className="p-2 -ml-2 rounded-xl hover:bg-neutral-100/80 active:scale-95 transition-all"
-            aria-label={t('btn.back', 'رجوع')}
+            aria-label={t('btn.back')}
           >
             <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
           </button>
           <h1 className="text-lg font-bold text-neutral-800 tracking-tight">
-            {t('community.detail', 'التفاصيل')}
+            {t('community.detail')}
           </h1>
           <div className="w-10" />
         </div>

@@ -207,7 +207,7 @@ export default function WithdrawPage() {
       return data;
     } catch (error) {
       console.error('加载提现条件失败:', error);
-      toast.error(t('error.network', 'خطأ في الشبكة'));
+      toast.error(t('error.network'));
       throw error;
     }
   }, [t]);
@@ -299,15 +299,15 @@ export default function WithdrawPage() {
    */
   const validateAmount = useCallback((amount: number): string | null => {
     if (amount < minAmount) {
-      return t('error.amount_min', 'الحد الأدنى هو {min}')
+      return t('error.amount_min')
         .replace('{min}', formatCurrency(minAmount, config));
     }
     if (amount > maxAmount) {
-      return t('error.amount_max', 'الحد الأقصى هو {max}')
+      return t('error.amount_max')
         .replace('{max}', formatCurrency(maxAmount, config));
     }
     if (amount > availableBalance) {
-      return t('error.insufficient_balance', 'رصيد غير كافٍ');
+      return t('error.insufficient_balance');
     }
     return null;
   }, [minAmount, maxAmount, availableBalance, t, config]);
@@ -444,10 +444,10 @@ export default function WithdrawPage() {
 
       // 显示成功提示
       // 依据：03.5.1-提现页.md 第2.5节 - toast.withdraw_success
-      toast.success(t('toast.withdraw_success', 'تم إرسال طلب السحب'), {
+      toast.success(t('toast.withdraw_success'), {
         duration: 4000,
         action: {
-          label: t('community.share_proof', 'شارك في الساحة'),
+          label: t('community.share_proof'),
           onClick: () => router.push('/community/create'),
         },
       });
@@ -478,19 +478,19 @@ export default function WithdrawPage() {
             setShowBindCardDialog(true);
             break;
           case 'WITHDRAW_TIME_INVALID':
-            toast.error(t('tip.withdraw_outside_time', 'خارج وقت السحب'));
+            toast.error(t('tip.withdraw_outside_time'));
             break;
           case 'WITHDRAW_LIMIT_EXCEEDED':
-            toast.error(t('tip.withdraw_limit_reached', 'لقد وصلت إلى الحد اليومي للسحب'));
+            toast.error(t('tip.withdraw_limit_reached'));
             break;
           case 'INSUFFICIENT_BALANCE':
-            toast.error(t('error.insufficient_balance', 'رصيد غير كافٍ'));
+            toast.error(t('error.insufficient_balance'));
             break;
           default:
-            toast.error(t('error.server', 'خطأ في الخادم'));
+            toast.error(t('error.server'));
         }
       } else {
-        toast.error(t('error.network', 'خطأ في الشبكة'));
+        toast.error(t('error.network'));
       }
     } finally {
       setIsSubmitting(false);
@@ -535,7 +535,7 @@ export default function WithdrawPage() {
         </button>
         
         <h1 className="text-lg font-bold text-neutral-800 tracking-tight">
-          {t('page.withdraw', 'سحب')}
+          {t('page.withdraw')}
         </h1>
         
         <button
@@ -560,14 +560,14 @@ export default function WithdrawPage() {
                 {/* 可用余额标签 */}
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-neutral-400">
-                    {t('biz.available_balance', 'الرصيد المتاح')}
+                    {t('biz.available_balance')}
                   </span>
                   <button
                     type="button"
                     onClick={() => setIsBalanceHidden(!isBalanceHidden)}
                     className="text-xs text-primary-500"
                   >
-                    {isBalanceHidden ? t('action.show', 'إظهار') : t('action.hide', 'إخفاء')}
+                    {isBalanceHidden ? t('action.show') : t('action.hide')}
                   </button>
                 </div>
 
@@ -587,7 +587,7 @@ export default function WithdrawPage() {
                 {/* 冻结余额（小字体灰色） */}
                 {/* 依据：03.5.1-提现页.md 第2.2节 - 冻结余额从 /api/user/profile 获取 */}
                 <div className="text-sm text-neutral-400">
-                  {t('biz.frozen_balance', 'الرصيد المجمّد')}: {' '}
+                  {t('biz.frozen_balance')}: {' '}
                   {isBalanceHidden ? (
                     '****'
                   ) : (
@@ -632,8 +632,8 @@ export default function WithdrawPage() {
                 showAllButton
                 availableBalance={availableBalance}
                 onWithdrawAll={handleWithdrawAll}
-                label={t('label.amount', 'المبلغ')}
-                customLabel={t('label.custom_amount', 'مبلغ مخصص')}
+                label={t('label.amount')}
+                customLabel={t('label.custom_amount')}
                 error={amountError}
               />
 
@@ -657,7 +657,7 @@ export default function WithdrawPage() {
                 isLoading={isBankCardsLoading}
                 maxCount={bankCardsMaxCount}
                 canAdd={bankCardsCanAdd}
-                label={t('label.bank', 'البنك')}
+                label={t('label.bank')}
               />
             </Card>
 
@@ -674,12 +674,12 @@ export default function WithdrawPage() {
               {isSubmitting ? (
                 <>
                   <RiLoader4Line className="w-5 h-5 mr-2 animate-spin" />
-                  {t('btn.processing', 'جارٍ المعالجة...')}
+                  {t('btn.processing')}
                 </>
               ) : (
                 <>
                   <RiShieldCheckLine className="w-5 h-5 mr-2" />
-                  {t('btn.withdraw', 'سحب')}
+                  {t('btn.withdraw')}
                 </>
               )}
             </Button>
@@ -694,19 +694,19 @@ export default function WithdrawPage() {
               className="w-full flex items-center justify-center gap-2 py-3 text-sm text-primary-500 hover:text-primary-600 transition-colors rounded-xl hover:bg-primary-50/30"
             >
               <RiChat3Line className="size-4" />
-              {t('community.share_withdraw', 'شارك سحبك في الساحة')}
+              {t('community.share_withdraw')}
             </m.button>
 
             {/* 非时间窗口/次数用尽提示 */}
             {/* 依据：03.5.1-提现页.md 第3.4节 - 状态穷举表 */}
             {!inTimeRange && (
               <div className="text-center text-sm text-red-500">
-                {t('tip.withdraw_outside_time', 'خارج وقت السحب')}
+                {t('tip.withdraw_outside_time')}
               </div>
             )}
             {todayCount >= dailyLimit && inTimeRange && (
               <div className="text-center text-sm text-red-500">
-                {t('tip.withdraw_limit_reached', 'لقد وصلت إلى الحد اليومي للسحب')}
+                {t('tip.withdraw_limit_reached')}
               </div>
             )}
           </div>
@@ -725,10 +725,10 @@ export default function WithdrawPage() {
       <ConfirmDialog
         open={showThresholdDialog}
         onOpenChange={setShowThresholdDialog}
-        title={t('dialog.withdraw_threshold_title', 'لا يمكن السحب')}
-        description={t('dialog.withdraw_threshold_msg', 'يجب إيداع وشراء منتج مدفوع لتفعيل السحب')}
-        confirmText={t('btn.view_products', 'عرض المنتجات')}
-        cancelText={t('btn.cancel', 'إلغاء')}
+        title={t('dialog.withdraw_threshold_title')}
+        description={t('dialog.withdraw_threshold_msg')}
+        confirmText={t('btn.view_products')}
+        cancelText={t('btn.cancel')}
         onConfirm={handleThresholdConfirm}
       />
 
@@ -737,10 +737,10 @@ export default function WithdrawPage() {
       <ConfirmDialog
         open={showBindCardDialog}
         onOpenChange={setShowBindCardDialog}
-        title={t('dialog.bind_card_first', 'أضف بطاقة أولاً')}
-        description={t('dialog.bind_card_first_msg', 'يرجى إضافة بطاقة بنكية قبل السحب')}
-        confirmText={t('btn.bind_card', 'إضافة بطاقة')}
-        cancelText={t('btn.cancel', 'إلغاء')}
+        title={t('dialog.bind_card_first')}
+        description={t('dialog.bind_card_first_msg')}
+        confirmText={t('btn.bind_card')}
+        cancelText={t('btn.cancel')}
         onConfirm={handleBindCardConfirm}
       />
     </div>

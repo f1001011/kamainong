@@ -94,10 +94,10 @@ const EmptyState = memo(function EmptyState() {
         <RiTeamFill className="w-10 h-10 text-neutral-400" />
       </div>
       <p className="text-base text-neutral-500">
-        {t('team.noMembers', 'لا يوجد أعضاء بعد')}
+        {t('team.noMembers')}
       </p>
       <p className="text-sm text-neutral-400 mt-1">
-        {t('team.inviteFriends', 'ادعُ أصدقاءك للانضمام')}
+        {t('team.inviteFriends')}
       </p>
     </m.div>
   );
@@ -183,7 +183,7 @@ export const MemberList = memo(function MemberList({
   
   // 筛选选项
   const filterOptions: { value: LevelFilter; label: string }[] = [
-    { value: 'all', label: t('team.all', 'الكل') },
+    { value: 'all', label: t('team.all') },
     { value: 1, label: 'L1' },
     { value: 2, label: 'L2' },
     { value: 3, label: 'L3' },

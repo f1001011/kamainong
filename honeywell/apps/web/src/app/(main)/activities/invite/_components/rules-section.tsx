@@ -26,10 +26,10 @@ export function RulesSection({ className }: RulesSectionProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const rules = [
-    t('invite.rule_valid_1', 'الدعوة الصالحة: صديقك يقوم بالإيداع وشراء أي منتج'),
-    t('invite.rule_valid_2', 'أو صديقك يكمل 3 أيام متتالية من تسجيل الحضور'),
-    t('invite.rule_claim', 'يجب المطالبة بالمكافآت يدوياً'),
-    t('invite.rule_expire', 'المكافآت غير المطالب بها ستنتهي عند انتهاء النشاط'),
+    t('invite.rule_valid_1'),
+    t('invite.rule_valid_2'),
+    t('invite.rule_claim'),
+    t('invite.rule_expire'),
   ];
 
   return (
@@ -47,7 +47,7 @@ export function RulesSection({ className }: RulesSectionProps) {
             <RiInformationLine className="w-4 h-4 text-gold-700" />
           </div>
           <span className="text-sm font-heading text-neutral-700">
-            {t('invite.rule_title', 'قواعد النشاط')}
+            {t('invite.rule_title')}
           </span>
         </div>
         <m.div

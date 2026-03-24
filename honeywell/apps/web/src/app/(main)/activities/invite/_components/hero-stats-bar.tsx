@@ -62,7 +62,7 @@ export function HeroStatsBar({ validInviteCount, tiers }: HeroStatsBarProps) {
           <AnimatedNumber value={validInviteCount} />
         </span>
         <span className="text-[10px] tracking-[0.15em] uppercase text-white/30">
-          {t('invite.stat_valid', 'صالحة')}
+          {t('invite.stat_valid')}
         </span>
       </div>
 
@@ -73,7 +73,7 @@ export function HeroStatsBar({ validInviteCount, tiers }: HeroStatsBarProps) {
           {formatCurrency(totalClaimed, { currencySymbol })}
         </span>
         <span className="text-[10px] tracking-[0.15em] uppercase text-white/30">
-          {t('invite.stat_earned', 'مكتسب')}
+          {t('invite.stat_earned')}
         </span>
       </div>
 
@@ -84,7 +84,7 @@ export function HeroStatsBar({ validInviteCount, tiers }: HeroStatsBarProps) {
           {allClaimed ? '✓' : <AnimatedNumber value={invitesNeeded} />}
         </span>
         <span className="text-[10px] tracking-[0.15em] uppercase text-white/30">
-          {t('invite.stat_next', 'التالي')}
+          {t('invite.stat_next')}
         </span>
       </div>
     </div>

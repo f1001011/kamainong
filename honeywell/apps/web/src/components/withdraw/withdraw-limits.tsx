@@ -67,7 +67,7 @@ export function WithdrawLimits({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-sm text-neutral-400">
           <RiTimeFill className="w-4 h-4" />
-          <span>{t('biz.withdraw_time', 'أوقات السحب')}</span>
+          <span>{t('biz.withdraw_time')}</span>
         </div>
         <span className={cn(
           'text-sm font-medium',
@@ -81,13 +81,13 @@ export function WithdrawLimits({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-sm text-neutral-400">
           <RiRepeatLine className="w-4 h-4" />
-          <span>{t('biz.withdraw_limit', 'الحد اليومي')}</span>
+          <span>{t('biz.withdraw_limit')}</span>
         </div>
         <span className={cn(
           'text-sm font-medium',
           remainingCount > 0 ? 'text-neutral-600' : 'text-error'
         )}>
-          {todayCount}/{dailyLimit} ({t('biz.withdraw_remaining', 'المتبقي')}: {remainingCount})
+          {todayCount}/{dailyLimit} ({t('biz.withdraw_remaining')}: {remainingCount})
         </span>
       </div>
 
@@ -95,7 +95,7 @@ export function WithdrawLimits({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-sm text-neutral-400">
           <RiMoneyDollarCircleFill className="w-4 h-4" />
-          <span>{t('biz.withdraw_range', 'نطاق المبلغ')}</span>
+          <span>{t('biz.withdraw_range')}</span>
         </div>
         <span className="text-sm font-medium text-neutral-600">
           {minFormatted} - {maxFormatted}

@@ -194,7 +194,7 @@ export function ImagePreview({
             <button
               onClick={handleClose}
               className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm transition-colors hover:bg-white/20"
-              aria-label={t('aria.close_preview', 'إغلاق المعاينة')}
+              aria-label={t('aria.close_preview')}
             >
               <RiCloseLine className="h-6 w-6 text-white" />
             </button>
@@ -211,7 +211,7 @@ export function ImagePreview({
                       ? 'opacity-50 cursor-not-allowed'
                       : 'hover:bg-white/20'
                   )}
-                  aria-label={t('aria.zoom_out', 'تصغير')}
+                  aria-label={t('aria.zoom_out')}
                 >
                   <RiZoomOutLine className="h-5 w-5 text-white" />
                 </button>
@@ -229,7 +229,7 @@ export function ImagePreview({
                       ? 'opacity-50 cursor-not-allowed'
                       : 'hover:bg-white/20'
                   )}
-                  aria-label={t('aria.zoom_in', 'تكبير')}
+                  aria-label={t('aria.zoom_in')}
                 >
                   <RiZoomInLine className="h-5 w-5 text-white" />
                 </button>
@@ -276,8 +276,8 @@ export function ImagePreview({
           <div className="absolute bottom-6 left-0 right-0 text-center safe-area-bottom">
             <p className="text-xs text-white/60">
               {zoom > 1 
-                ? t('tip.image_drag', 'اسحب للعرض · انقر مرتين لإعادة التعيين') 
-                : t('tip.image_zoom', 'انقر مرتين للتكبير · انقر خارجاً للإغلاق')}
+                ? t('tip.image_drag') 
+                : t('tip.image_zoom')}
             </p>
           </div>
         </m.div>

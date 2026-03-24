@@ -50,11 +50,11 @@ function EmptyState() {
       </div>
       {/* 标题 */}
       <p className="text-base text-neutral-500">
-        {t('messages.empty.title', 'لا توجد إشعارات')}
+        {t('messages.empty.title')}
       </p>
       {/* 描述 */}
       <p className="mt-1 text-sm text-neutral-400">
-        {t('messages.empty.description', 'ستظهر الرسائل هنا')}
+        {t('messages.empty.description')}
       </p>
     </Wrapper>
   );

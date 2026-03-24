@@ -154,7 +154,7 @@ export function InfiniteScrollTrigger({
               <>
                 <LoadingSpinner size="sm" />
                 <span className="text-sm text-neutral-500">
-                  {t('tip.loading_more', 'جارٍ تحميل المزيد...')}
+                  {t('tip.loading_more')}
                 </span>
               </>
             )}
@@ -173,7 +173,7 @@ export function InfiniteScrollTrigger({
               <>
                 <RiCheckDoubleLine className="w-4 h-4 text-neutral-300" />
                 <span className="text-sm text-neutral-400">
-                  {t('tip.no_more_data', 'لا توجد بيانات أخرى')}
+                  {t('tip.no_more_data')}
                 </span>
               </>
             )}

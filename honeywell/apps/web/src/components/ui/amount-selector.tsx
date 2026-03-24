@@ -84,11 +84,11 @@ export function AmountSelector({
     onWithdrawAll();
   }, [disabled, availableBalance, onChange, onCustomChange, onWithdrawAll]);
 
-  const amountLabel = label || t('label.amount', 'المبلغ');
-  const customAmountLabel = customLabel || t('label.custom_amount', 'مبلغ مخصص');
+  const amountLabel = label || t('label.amount');
+  const customAmountLabel = customLabel || t('label.custom_amount');
   const minFormatted = formatCurrency(minAmount, config, { decimals: 0 });
   const maxFormatted = formatCurrency(maxAmount, config, { decimals: 0 });
-  const rangeTipTemplate = t('tip.amount_range', 'النطاق: {min} - {max}');
+  const rangeTipTemplate = t('tip.amount_range');
   const rangeTip = rangeTipTemplate.replace('{min}', minFormatted).replace('{max}', maxFormatted);
 
   return (
@@ -169,7 +169,7 @@ export function AmountSelector({
               'disabled:opacity-50 disabled:cursor-not-allowed',
             )}
           >
-            {t('btn.withdraw_all', 'الكل')}
+            {t('btn.withdraw_all')}
           </button>
         )}
       </div>
@@ -179,7 +179,7 @@ export function AmountSelector({
         <span className="text-neutral-400">{rangeTip}</span>
         {type === 'withdraw' && (
           <span className="text-neutral-400">
-            {t('label.available', 'المتاح')}: {formatCurrency(availableBalance, config)}
+            {t('label.available')}: {formatCurrency(availableBalance, config)}
           </span>
         )}
       </div>

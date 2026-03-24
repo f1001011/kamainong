@@ -225,7 +225,7 @@ export function ContactInfo({
     >
       {/* 标题 */}
       <h2 className="text-base font-semibold text-neutral-800 mb-4">
-        {t('about.contact_title', 'اتصل بنا')}
+        {t('about.contact_title')}
       </h2>
 
       {/* 联系方式列表 */}

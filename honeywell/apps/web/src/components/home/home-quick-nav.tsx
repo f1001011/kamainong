@@ -129,7 +129,7 @@ export function HomeQuickNav({ entries = [], isLoading = false, className }: Hom
     <div className={cn('space-y-3', className)}>
       <div className="flex items-center gap-3">
         <span className="text-xs font-semibold text-neutral-400 tracking-widest uppercase whitespace-nowrap">
-          {t('home.services', 'الخدمات')}
+          {t('home.services')}
         </span>
         <div className="flex-1 h-px bg-neutral-100" />
       </div>

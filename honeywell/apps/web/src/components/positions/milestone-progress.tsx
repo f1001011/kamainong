@@ -55,7 +55,7 @@ export function MilestoneProgress({
       className
     )}>
       <p className="text-[11px] text-neutral-400 uppercase tracking-wider font-medium mb-5">
-        {t('label.progress', 'التقدم')}
+        {t('label.progress')}
       </p>
 
       <div className="relative">
@@ -113,7 +113,7 @@ export function MilestoneProgress({
             style={{ paddingLeft: `calc(${Math.min(progressPercent, 95)}% - 16px)` }}
           >
             <span className="text-[10px] text-neutral-500">
-              ▲ {t('label.day_abbr', 'يوم')} {paidDays}
+              ▲ {t('label.day_abbr')} {paidDays}
             </span>
           </m.div>
         )}

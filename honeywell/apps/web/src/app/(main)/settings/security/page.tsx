@@ -153,10 +153,10 @@ export default function SecuritySettingsPage() {
               <m.div variants={listItemVariants} className="mb-2">
                 <h1 className="text-xl font-bold tracking-tight text-neutral-800 flex items-center gap-2">
                   <RiShieldCheckLine className="w-6 h-6 text-primary-500" />
-                  {t('security.title', 'الأمان')}
+                  {t('security.title')}
                 </h1>
                 <p className="text-sm text-neutral-400 mt-1">
-                  {t('security.subtitle', 'إدارة أمان حسابك')}
+                  {t('security.subtitle')}
                 </p>
               </m.div>
 
@@ -166,7 +166,7 @@ export default function SecuritySettingsPage() {
                   {/* 修改密码 */}
                   <SecurityItem
                     icon={<RiLockPasswordLine className="w-5 h-5" />}
-                    title={t('security.change_password', 'تغيير كلمة المرور')}
+                    title={t('security.change_password')}
                     route="/settings/password"
                     className="border-b border-neutral-50"
                   />
@@ -174,7 +174,7 @@ export default function SecuritySettingsPage() {
                   {/* 手机号绑定状态 */}
                   <SecurityItem
                     icon={<RiPhoneLine className="w-5 h-5" />}
-                    title={t('security.phone_binding', 'رقم الهاتف')}
+                    title={t('security.phone_binding')}
                     value={maskPhone(userProfile?.phone || '')}
                     status="bound"
                     showArrow={false}
@@ -190,20 +190,20 @@ export default function SecuritySettingsPage() {
                 )}>
                   <h3 className="text-sm font-semibold text-neutral-700 mb-2 flex items-center gap-2">
                     <RiShieldCheckLine className="w-4 h-4 text-primary-500" />
-                    {t('security.tips_title', 'نصائح أمنية')}
+                    {t('security.tips_title')}
                   </h3>
                   <ul className="space-y-2 text-sm text-neutral-500">
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-1.5 shrink-0" />
-                      {t('security.tip_1', 'قم بتغيير كلمة المرور بانتظام لمزيد من الأمان')}
+                      {t('security.tip_1')}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-1.5 shrink-0" />
-                      {t('security.tip_2', 'لا تشارك كلمة المرور مع أي شخص')}
+                      {t('security.tip_2')}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-1.5 shrink-0" />
-                      {t('security.tip_3', 'استخدم كلمة مرور فريدة لا تستخدمها في مواقع أخرى')}
+                      {t('security.tip_3')}
                     </li>
                   </ul>
                 </div>

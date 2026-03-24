@@ -147,7 +147,7 @@ export function Countdown({
             <div className="flex flex-col">
               {showLabel && (
                 <span className="text-xs text-neutral-500">
-                  {t('tip.countdown_label', 'الوقت المتبقي')}
+                  {t('tip.countdown_label')}
                 </span>
               )}
               <span className={cn(

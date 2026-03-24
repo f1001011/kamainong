@@ -85,7 +85,7 @@ export default function RechargePage() {
       }
     } catch (error) {
       console.error('加载充值通道失败:', error);
-      toast.error(t('toast.network_error', 'خطأ في الاتصال'));
+      toast.error(t('toast.network_error'));
     } finally {
       setIsLoading(false);
     }
@@ -110,7 +110,7 @@ export default function RechargePage() {
     if (finalAmount < minAmount || finalAmount > maxAmount) {
       const minFormatted = formatCurrency(minAmount, config, { decimals: 0 });
       const maxFormatted = formatCurrency(maxAmount, config, { decimals: 0 });
-      const errorTemplate = t('error.amount_out_of_range', 'يجب أن يكون المبلغ بين {min} و {max}');
+      const errorTemplate = t('error.amount_out_of_range');
       return errorTemplate.replace('{min}', minFormatted).replace('{max}', maxFormatted);
     }
     return undefined;
@@ -125,7 +125,7 @@ export default function RechargePage() {
   const handleSubmit = useCallback(async () => {
     if (!canSubmit || finalAmount === null) return;
     if (channels.length > 1 && selectedChannel === null) {
-      toast.error(t('error.select_channel', 'يرجى اختيار قناة الدفع'));
+      toast.error(t('error.select_channel'));
       return;
     }
     try {
@@ -142,14 +142,14 @@ export default function RechargePage() {
       console.error('创建充值订单失败:', error);
       if (error instanceof ApiError) {
         if (error.code === 'PENDING_ORDER_LIMIT') {
-          toast.error(t('error.pending_order_limit', 'لديك طلبات معلقة كثيرة'), {
-            action: { label: t('btn.view_record', 'عرض السجل'), onClick: () => router.push('/recharge/records') },
+          toast.error(t('error.pending_order_limit'), {
+            action: { label: t('btn.view_record'), onClick: () => router.push('/recharge/records') },
           });
           return;
         }
         toast.error(t(error.code, error.message));
       } else {
-        toast.error(t('toast.network_error', 'خطأ في الاتصال'));
+        toast.error(t('toast.network_error'));
       }
     } finally {
       setIsSubmitting(false);
@@ -171,7 +171,7 @@ export default function RechargePage() {
         <div className="flex items-center gap-2.5">
           <RiWallet3Fill className="w-5 h-5 text-white/70" />
           <span className="text-sm text-white/70 font-medium">
-            {t('home.availableBalance', 'الرصيد المتاح')}
+            {t('home.availableBalance')}
           </span>
         </div>
         <span className="text-lg font-bold font-mono text-white">
@@ -181,7 +181,7 @@ export default function RechargePage() {
 
       {/* 页面标题 */}
       <h1 className="text-xl font-bold text-neutral-800 tracking-tight">
-        {t('page.recharge', 'إيداع')}
+        {t('page.recharge')}
       </h1>
 
       {/* 金额选择卡片 */}
@@ -202,7 +202,7 @@ export default function RechargePage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-sm text-primary-600 font-medium mt-1.5"
             >
-              {t('recharge.new_balance', 'الرصيد الجديد')}: {formatCurrency(newBalance, config)}
+              {t('recharge.new_balance')}: {formatCurrency(newBalance, config)}
             </m.p>
           )}
         </div>
@@ -226,7 +226,7 @@ export default function RechargePage() {
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <span className="text-xs font-semibold text-neutral-400 tracking-widest uppercase whitespace-nowrap">
-              {t('label.select_channel', 'قناة الدفع')}
+              {t('label.select_channel')}
             </span>
             <div className="flex-1 h-px bg-neutral-100" />
           </div>
@@ -242,17 +242,17 @@ export default function RechargePage() {
         className="h-14 rounded-xl text-base font-bold tracking-wide shadow-[0_4px_20px_rgba(var(--color-primary-rgb),0.25)]"
         disabled={!canSubmit}
         isLoading={isSubmitting}
-        loadingText={t('btn.processing', 'جارٍ المعالجة...')}
+        loadingText={t('btn.processing')}
         onClick={handleSubmit}
       >
-        {t('btn.recharge', 'إيداع')} {finalAmount && isAmountValid ? formatCurrency(finalAmount, config, { decimals: 0 }) : ''}
+        {t('btn.recharge')} {finalAmount && isAmountValid ? formatCurrency(finalAmount, config, { decimals: 0 }) : ''}
       </Button>
 
       {/* 信任标识 */}
       <div className="flex items-center justify-center gap-2">
         <RiShieldCheckLine className="w-4 h-4 text-neutral-300" />
         <span className="text-xs text-neutral-400">
-          {t('recharge.secure', 'دفع آمن')} · {t('recharge.processing_time', 'المعالجة ~5 دقائق')}
+          {t('recharge.secure')} · {t('recharge.processing_time')}
         </span>
       </div>
 
@@ -269,7 +269,7 @@ export default function RechargePage() {
             <RiHistoryFill className="w-4 h-4 text-neutral-400" />
           </div>
           <span className="text-sm text-neutral-500 font-semibold">
-            {t('btn.view_recharge_history', 'عرض سجل الإيداعات')}
+            {t('btn.view_recharge_history')}
           </span>
         </div>
         <RiArrowRightSLine className="w-5 h-5 text-neutral-300" />

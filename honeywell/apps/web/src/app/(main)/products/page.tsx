@@ -92,7 +92,7 @@ export default function ProductsPage() {
         <button
           onClick={() => router.back()}
           className="p-2 rounded-xl hover:bg-neutral-100/80 active:scale-95 transition-all"
-          aria-label={t('btn.back', 'رجوع')}
+          aria-label={t('btn.back')}
           style={{
             background: 'rgba(250,250,248,0.7)',
             backdropFilter: 'blur(12px)',
@@ -106,10 +106,10 @@ export default function ProductsPage() {
       {/* 标题区（不吸顶，滚动时消失） */}
       <div ref={headerRef} className="px-5 pt-16 pb-4">
         <h1 className="font-heading text-[28px] leading-tight text-neutral-800">
-          {t('products.title_line1', 'استثمارات')}
+          {t('products.title_line1')}
         </h1>
         <h1 className="font-heading text-[28px] leading-tight text-neutral-800">
-          {t('products.title_line2', 'عقارية')}
+          {t('products.title_line2')}
         </h1>
       </div>
 

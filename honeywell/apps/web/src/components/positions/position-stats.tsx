@@ -144,7 +144,7 @@ export function PositionStats({
         {/* 上方：主统计 - 已获总收益 */}
         <div className="text-center mb-5">
           <p className="text-white/70 text-sm mb-1">
-            {t('label.total_earned', 'إجمالي الأرباح')}
+            {t('label.total_earned')}
           </p>
           <div className="text-white text-3xl font-bold">
             <AnimatedNumber
@@ -169,7 +169,7 @@ export function PositionStats({
             <div className="flex items-center justify-center gap-1 mb-1">
               <RiLineChartFill className="h-3.5 w-3.5 text-white/60" />
               <span className="text-xs text-white/60">
-                {t('label.active_positions', 'نشطة')}
+                {t('label.active_positions')}
               </span>
             </div>
             <div className="text-white text-lg font-bold">
@@ -182,7 +182,7 @@ export function PositionStats({
             <div className="flex items-center justify-center gap-1 mb-1">
               <RiFireFill className="h-3.5 w-3.5 text-white/60" />
               <span className="text-xs text-white/60">
-                {t('label.today_income', 'اليوم')}
+                {t('label.today_income')}
               </span>
             </div>
             <div className="text-white text-lg font-bold font-mono tabular-nums">
@@ -199,7 +199,7 @@ export function PositionStats({
             <div className="flex items-center justify-center gap-1 mb-1">
               <RiWalletFill className="h-3.5 w-3.5 text-white/60" />
               <span className="text-xs text-white/60">
-                {t('label.total_invested', 'الاستثمار')}
+                {t('label.total_invested')}
               </span>
             </div>
             <div className="text-white text-lg font-bold font-mono tabular-nums">
@@ -217,7 +217,7 @@ export function PositionStats({
               <div className="flex items-center justify-center gap-1 mb-1">
                 <RiCalendarCheckFill className="h-3.5 w-3.5 text-white/60" />
                 <span className="text-xs text-white/60">
-                  {t('label.completed_positions', 'مكتملة')}
+                  {t('label.completed_positions')}
                 </span>
               </div>
               <div className="text-white text-lg font-bold">
@@ -297,7 +297,7 @@ export function PositionStatsCompact({
       {/* 左侧：已获总收益 */}
       <div>
         <span className="text-xs text-neutral-500">
-          {t('label.total_earned', 'إجمالي الأرباح')}
+          {t('label.total_earned')}
         </span>
         <div className="text-xl font-bold text-success font-mono tabular-nums">
           +<AnimatedNumber
@@ -311,7 +311,7 @@ export function PositionStatsCompact({
       {/* 右侧：今日收益 */}
       <div className="text-right">
         <span className="text-xs text-neutral-500">
-          {t('label.today_income', 'اليوم')}
+          {t('label.today_income')}
         </span>
         <div className="text-lg font-bold text-primary-500 font-mono tabular-nums">
           +<AnimatedNumber

@@ -88,13 +88,13 @@ export function WeeklySalaryCard({
               'text-sm font-semibold',
               isLocked ? 'text-neutral-400' : 'text-neutral-700',
             )}>
-              {t('weekly.tier_level', 'المستوى')} {index + 1}
+              {t('weekly.tier_level')} {index + 1}
             </span>
           </div>
 
           {isClaimed && (
             <span className="text-xs font-semibold text-primary-600 px-2.5 py-1 rounded-full bg-primary-100/60">
-              {t('weekly.claimed', 'تم المطالبة')}
+              {t('weekly.claimed')}
             </span>
           )}
         </div>
@@ -103,7 +103,7 @@ export function WeeklySalaryCard({
         <div className="flex items-end justify-between">
           <div>
             <p className={cn('text-xs', isLocked ? 'text-neutral-400' : 'text-neutral-500')}>
-              {t('weekly.threshold', 'الهدف')}
+              {t('weekly.threshold')}
             </p>
             <p className={cn(
               'text-base font-bold tabular-nums',
@@ -114,7 +114,7 @@ export function WeeklySalaryCard({
           </div>
           <div className="text-right">
             <p className={cn('text-xs', isLocked ? 'text-neutral-400' : 'text-neutral-500')}>
-              {t('weekly.reward', 'المكافأة')}
+              {t('weekly.reward')}
             </p>
             <p className={cn(
               'text-lg font-black tabular-nums',

@@ -108,7 +108,7 @@ export function BankCardForm({
         setBanks(response.list || []);
       } catch (error) {
         console.error('加载银行列表失败:', error);
-        toast.error(t('error.load_banks_failed', 'خطأ في تحميل البنوك'));
+        toast.error(t('error.load_banks_failed'));
       } finally {
         setIsBanksLoading(false);
       }
@@ -144,22 +144,22 @@ export function BankCardForm({
 
     // 银行必填
     if (!formData.bankCode) {
-      newErrors.bankCode = t('error.bank_required', 'اختر بنكًا');
+      newErrors.bankCode = t('error.bank_required');
     }
 
     // 账号必填（不限制长度）
     if (!formData.accountNo) {
-      newErrors.accountNo = t('error.account_no_required', 'أدخل رقم الحساب');
+      newErrors.accountNo = t('error.account_no_required');
     }
 
     // 持卡人姓名必填（不限制长度）
     if (!formData.accountName.trim()) {
-      newErrors.accountName = t('error.account_name_required', 'أدخل اسم صاحب الحساب');
+      newErrors.accountName = t('error.account_name_required');
     }
 
     // 手机号必填（不限制长度）
     if (!formData.phone) {
-      newErrors.phone = t('error.phone_required', 'أدخل رقم الهاتف');
+      newErrors.phone = t('error.phone_required');
     }
 
     setErrors(newErrors);
@@ -188,7 +188,7 @@ export function BankCardForm({
       });
 
       // 成功提示
-      toast.success(t('toast.bank_card_added', 'تمت إضافة البطاقة بنجاح'));
+      toast.success(t('toast.bank_card_added'));
 
       // 回调
       onSuccess?.();
@@ -198,22 +198,22 @@ export function BankCardForm({
       if (error instanceof ApiError) {
         switch (error.code) {
           case 'BANK_CARD_LIMIT_EXCEEDED':
-            toast.error(t('error.bank_card_limit', 'لقد وصلت إلى الحد الأقصى للبطاقات'));
+            toast.error(t('error.bank_card_limit'));
             break;
           case 'BANK_DISABLED':
-            toast.error(t('error.bank_disabled', 'هذا البنك غير متاح'));
+            toast.error(t('error.bank_disabled'));
             break;
           case 'BLACKLIST_BANK_CARD':
-            toast.error(t('error.bank_card_blacklisted', 'هذه البطاقة غير مسموح بها'));
+            toast.error(t('error.bank_card_blacklisted'));
             break;
           case 'ACCOUNT_PHONE_LOCKED':
-            toast.error(t('error.account_phone_locked', 'هذا الحساب مسجل بالفعل برقم آخر'));
+            toast.error(t('error.account_phone_locked'));
             break;
           default:
-            toast.error(error.message || t('error.add_card_failed', 'خطأ في إضافة البطاقة'));
+            toast.error(error.message || t('error.add_card_failed'));
         }
       } else {
-        toast.error(t('error.network', 'خطأ في الشبكة'));
+        toast.error(t('error.network'));
       }
     } finally {
       setIsSubmitting(false);
@@ -240,15 +240,15 @@ export function BankCardForm({
         value={formData.bankCode}
         onChange={(code) => updateField('bankCode', code)}
         isLoading={isBanksLoading}
-        label={t('label.bank', 'البنك')}
-        placeholder={t('placeholder.select_bank', 'اختر بنكًا')}
+        label={t('label.bank')}
+        placeholder={t('placeholder.select_bank')}
         error={errors.bankCode}
         required
       />
 
       {/* 账号 - 不限制长度 */}
       <FormField
-        label={t('label.account_no', 'رقم الحساب')}
+        label={t('label.account_no')}
         error={errors.accountNo}
         required
       >
@@ -257,7 +257,7 @@ export function BankCardForm({
           inputMode="numeric"
           value={formData.accountNo}
           onChange={(e) => updateField('accountNo', e.target.value.replace(/\D/g, ''))}
-          placeholder={t('placeholder.account_no', 'أدخل رقم الحساب')}
+          placeholder={t('placeholder.account_no')}
           leftElement={<RiBankCardLine className="w-5 h-5 text-neutral-400" />}
           disabled={isSubmitting}
         />
@@ -265,7 +265,7 @@ export function BankCardForm({
 
       {/* 持卡人姓名 - 不限制长度 */}
       <FormField
-        label={t('label.account_name', 'اسم صاحب الحساب')}
+        label={t('label.account_name')}
         error={errors.accountName}
         required
       >
@@ -273,7 +273,7 @@ export function BankCardForm({
           type="text"
           value={formData.accountName}
           onChange={(e) => updateField('accountName', e.target.value)}
-          placeholder={t('placeholder.account_name', 'أدخل الاسم الكامل')}
+          placeholder={t('placeholder.account_name')}
           leftElement={<RiUserLine className="w-5 h-5 text-neutral-400" />}
           disabled={isSubmitting}
         />
@@ -281,7 +281,7 @@ export function BankCardForm({
 
       {/* 手机号 - 不限制长度 */}
       <FormField
-        label={t('label.phone', 'الهاتف')}
+        label={t('label.phone')}
         error={errors.phone}
         required
       >
@@ -290,11 +290,11 @@ export function BankCardForm({
           inputMode="numeric"
           value={formData.phone}
           onChange={(e) => updateField('phone', e.target.value.replace(/\D/g, ''))}
-          placeholder={t('placeholder.phone', '6XXXXXXXX')}
+          placeholder={t('placeholder.phone')}
           leftElement={
             <div className="flex items-center gap-1 text-neutral-400">
               <RiPhoneLine className="w-5 h-5" />
-              <span className="text-sm">{t('label.phone_prefix', '+212')}</span>
+              <span className="text-sm">{t('label.phone_prefix')}</span>
             </div>
           }
           disabled={isSubmitting}
@@ -309,10 +309,10 @@ export function BankCardForm({
           size="lg"
           fullWidth
           isLoading={isSubmitting}
-          loadingText={t('btn.adding', 'جارٍ الإضافة...')}
+          loadingText={t('btn.adding')}
           className="h-14 rounded-xl shadow-glow text-lg"
         >
-          {t('btn.add_card', 'إضافة بطاقة')}
+          {t('btn.add_card')}
         </Button>
 
         {onCancel && (
@@ -325,7 +325,7 @@ export function BankCardForm({
             disabled={isSubmitting}
             className="h-12"
           >
-            {t('btn.cancel', 'إلغاء')}
+            {t('btn.cancel')}
           </Button>
         )}
       </div>

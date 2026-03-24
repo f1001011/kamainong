@@ -6,6 +6,7 @@
 
 import type { ApiResponse, ApiSuccessResponse, ApiErrorResponse } from '@/types';
 import { useUserStore } from '@/stores/user';
+import { getLocaleText } from '@/locales';
 
 /**
  * API 基础 URL
@@ -144,7 +145,7 @@ export async function apiRequest<T>(
         window.location.href = `/login${redirectParam}`;
         return new Promise<T>(() => {});
       }
-      throw new ApiError('UNAUTHORIZED', 'يرجى تسجيل الدخول', 401);
+      throw new ApiError('UNAUTHORIZED', getLocaleText('error.unauthorized'), 401);
     }
 
     /**
@@ -167,7 +168,7 @@ export async function apiRequest<T>(
       const errorData = data as ApiErrorResponse;
       throw new ApiError(
         errorData.error?.code || 'UNKNOWN_ERROR',
-        errorData.error?.message || 'حدث خطأ غير متوقع',
+          errorData.error?.message || getLocaleText('error.unknown'),
         response.status
       );
     }
@@ -180,14 +181,14 @@ export async function apiRequest<T>(
     }
 
     if (error instanceof DOMException && error.name === 'AbortError') {
-      throw new ApiError('TIMEOUT', 'انتهت مهلة الطلب', 408);
+      throw new ApiError('TIMEOUT', getLocaleText('error.timeout'), 408);
     }
 
     if (error instanceof TypeError) {
-      throw new ApiError('NETWORK_ERROR', 'خطأ في الاتصال', 0);
+      throw new ApiError('NETWORK_ERROR', getLocaleText('error.network'), 0);
     }
 
-    throw new ApiError('UNKNOWN_ERROR', 'حدث خطأ غير متوقع', 500);
+    throw new ApiError('UNKNOWN_ERROR', getLocaleText('error.unknown'), 500);
   }
 }
 
@@ -261,7 +262,7 @@ export function getApiErrorMessage(error: unknown, fallbackKey: string = 'error.
     }
   }
 
-  return getText(fallbackKey, 'حدث خطأ');
+  return getText(fallbackKey, getLocaleText('error.unknown'));
 }
 
 // 导出默认 API 对象

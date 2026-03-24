@@ -47,7 +47,7 @@ export function HistoryPanel({
     return (
       <div className={cn('bg-white rounded-2xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] border border-neutral-100/60 py-12 text-center', className)}>
         <RiTimeLine className="h-12 w-12 text-neutral-200 mx-auto mb-3" />
-        <p className="text-sm text-neutral-400">{t('empty.income_records', 'لا توجد سجلات دخل بعد')}</p>
+        <p className="text-sm text-neutral-400">{t('empty.income_records')}</p>
       </div>
     );
   }
@@ -83,7 +83,7 @@ export function HistoryPanel({
 
             {/* 天数 */}
             <span className="ml-3 text-sm font-medium text-neutral-700 w-14 shrink-0">
-              {t('label.day_abbr', 'اليوم')} {record.settleSequence}
+              {t('label.day_abbr')} {record.settleSequence}
             </span>
 
             {/* 日期 */}
@@ -94,7 +94,7 @@ export function HistoryPanel({
               'text-xs rounded-full px-2 py-0.5 mr-3',
               isSettled ? 'bg-success/10 text-success' : isFailed ? 'bg-error/10 text-error' : 'bg-neutral-100 text-neutral-500'
             )}>
-              {isSettled ? t('status.settled', 'تمت التسوية') : isFailed ? t('status.failed', 'فشل') : t('status.pending', 'معلّق')}
+              {isSettled ? t('status.settled') : isFailed ? t('status.failed') : t('status.pending')}
             </span>
 
             {/* 金额 */}
@@ -117,11 +117,11 @@ export function HistoryPanel({
             className="inline-flex items-center gap-1 text-sm text-primary-500 hover:text-primary-600 disabled:opacity-50"
           >
             {loading ? (
-              <span className="animate-pulse">{t('tip.loading', 'جارٍ التحميل...')}</span>
+              <span className="animate-pulse">{t('tip.loading')}</span>
             ) : (
               <>
                 <RiArrowDownSLine className="h-4 w-4" />
-                {t('btn.load_more', 'تحميل المزيد')}
+                {t('btn.load_more')}
               </>
             )}
           </button>

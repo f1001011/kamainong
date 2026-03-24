@@ -68,10 +68,10 @@ export default function RechargeRecordsPage() {
 
   // Tab 选项
   const tabItems: TabItem[] = useMemo(() => [
-    { key: 'all', label: t('tab.all', 'الكل') },
-    { key: 'pending', label: t('tab.pending_payment', 'معلّق') },
-    { key: 'completed', label: t('tab.completed', 'مكتمل') },
-    { key: 'cancelled', label: t('tab.cancelled', 'ملغي') },
+    { key: 'all', label: t('tab.all') },
+    { key: 'pending', label: t('tab.pending_payment') },
+    { key: 'completed', label: t('tab.completed') },
+    { key: 'cancelled', label: t('tab.cancelled') },
   ], [t]);
 
   /**
@@ -198,9 +198,9 @@ export default function RechargeRecordsPage() {
   const renderEmptyState = () => (
     <EmptyState
       icon={<RiHistoryFill className="h-16 w-16 text-neutral-300" />}
-      title={t('empty.recharge_record', 'لا يوجد سجل إيداعات')}
-      description={t('empty.recharge_record_desc', 'قم بالإيداع لعرض السجل هنا')}
-      actionText={t('btn.recharge', 'إيداع')}
+      title={t('empty.recharge_record')}
+      description={t('empty.recharge_record_desc')}
+      actionText={t('btn.recharge')}
       onAction={() => router.push('/recharge')}
     />
   );
@@ -232,12 +232,12 @@ export default function RechargeRecordsPage() {
           <button
             onClick={() => router.back()}
             className="p-2 -ml-2 rounded-lg hover:bg-neutral-100 transition-colors"
-            aria-label={t('btn.back', 'رجوع')}
+            aria-label={t('btn.back')}
           >
             <RiArrowLeftLine className="h-5 w-5 text-neutral-600" />
           </button>
           <h1 className="flex-1 min-w-0 text-center text-lg font-bold tracking-tight text-neutral-800 truncate">
-            {t('page.recharge_record', 'سجل الإيداعات')}
+            {t('page.recharge_record')}
           </h1>
           <button
             onClick={handleRefresh}
@@ -246,7 +246,7 @@ export default function RechargeRecordsPage() {
               'p-2 -mr-2 rounded-lg hover:bg-neutral-100 transition-colors',
               isValidating && 'opacity-50'
             )}
-            aria-label={t('btn.refresh', 'تحديث')}
+            aria-label={t('btn.refresh')}
           >
             <RiRefreshLine className={cn(
               'h-5 w-5 text-neutral-600',
@@ -272,12 +272,12 @@ export default function RechargeRecordsPage() {
               renderSkeleton()
             ) : error ? (
               <div className="py-12 text-center">
-                <p className="text-neutral-500">{t('error.load_failed', 'خطأ في التحميل')}</p>
+                <p className="text-neutral-500">{t('error.load_failed')}</p>
                 <button
                   onClick={handleRefresh}
                   className="mt-4 text-primary-500 hover:text-primary-600"
                 >
-                  {t('btn.retry', 'إعادة المحاولة')}
+                  {t('btn.retry')}
                 </button>
               </div>
             ) : orders.length === 0 ? (

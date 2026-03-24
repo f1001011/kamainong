@@ -118,7 +118,7 @@ export function SvipHero({
                 transition={{ ...SPRINGS.gentle, delay: 0.15 }}
               >
                 <p className="text-sm text-violet-300/70 mb-1">
-                  {t('svip.current_level', 'المستوى الحالي')}
+                  {t('svip.current_level')}
                 </p>
                 <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-violet-300">
                   SVIP{currentMaxLevel}
@@ -131,10 +131,10 @@ export function SvipHero({
                 transition={{ delay: 0.15 }}
               >
                 <p className="text-lg font-bold text-white/80">
-                  {t('svip.not_unlocked', 'لم يتم فتح SVIP بعد')}
+                  {t('svip.not_unlocked')}
                 </p>
                 <p className="text-sm text-violet-300/50 mt-1">
-                  {t('svip.unlock_hint', 'اشترِ منتجين من نفس النوع لفتح المستوى')}
+                  {t('svip.unlock_hint')}
                 </p>
               </m.div>
             )}
@@ -165,8 +165,8 @@ export function SvipHero({
                     <RiHandCoinLine className="size-5" />
                     <span>
                       {isClaiming
-                        ? t('svip.claiming', 'جاري المطالبة...')
-                        : `${t('svip.claim_btn', 'المطالبة بالمكافأة')} ${formatCurrency(parseFloat(todayUnclaimedAmount) || 0, config)}`
+                        ? t('svip.claiming')
+                        : `${t('svip.claim_btn')} ${formatCurrency(parseFloat(todayUnclaimedAmount) || 0, config)}`
                       }
                     </span>
                   </button>
@@ -180,7 +180,7 @@ export function SvipHero({
                 >
                   <RiCheckDoubleLine className="size-5 text-emerald-400" />
                   <span className="text-sm font-medium text-emerald-400/90">
-                    {t('svip.claimed_today', 'تمت المطالبة اليوم')} · +{formatCurrency(parseFloat(todayClaimedAmount) || 0, config)}
+                    {t('svip.claimed_today')} · +{formatCurrency(parseFloat(todayClaimedAmount) || 0, config)}
                   </span>
                 </div>
               ) : null}
@@ -202,7 +202,7 @@ export function SvipHero({
               }}
             >
               <p className="text-xs text-violet-300/60 mb-1">
-                {t('svip.daily_total', 'المكافأة اليومية')}
+                {t('svip.daily_total')}
               </p>
               <p className="text-xl font-bold text-amber-300 tabular-nums">
                 {formatCurrency(parseFloat(totalDailyReward) || 0, config)}
@@ -217,7 +217,7 @@ export function SvipHero({
               }}
             >
               <p className="text-xs text-violet-300/60 mb-1">
-                {t('svip.qualified_levels', 'المستويات المؤهلة')}
+                {t('svip.qualified_levels')}
               </p>
               <p className="text-xl font-bold text-white">
                 <AnimatedNumber value={qualifiedCount} decimals={0} />

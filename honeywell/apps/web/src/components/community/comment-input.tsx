@@ -56,7 +56,7 @@ export function CommentInput({ onSubmit, loading = false, className }: CommentIn
         value={content}
         onChange={(e) => setContent(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder={t('community.comment_placeholder', 'اكتب تعليقاً...')}
+        placeholder={t('community.comment_placeholder')}
         disabled={loading}
         className={cn(
           'flex-1 h-10 px-3 bg-neutral-50 rounded-xl text-sm text-neutral-700',

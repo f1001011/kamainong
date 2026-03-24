@@ -183,8 +183,8 @@ export function PurchaseConfirmModal({
         }, 800);
       } else {
         // 动画禁用 → 直接 toast + 跳转
-        toast.success(t('purchase.success', 'تم الشراء بنجاح'), {
-          description: t('purchase.success_desc', 'تمت إضافة المنتج إلى محفظتك'),
+        toast.success(t('purchase.success'), {
+          description: t('purchase.success_desc'),
             icon: <RiCheckboxCircleFill className="h-5 w-5 text-primary-500" />,
         });
         router.push('/positions');
@@ -196,24 +196,24 @@ export function PurchaseConfirmModal({
     } catch (error: unknown) {
       // 处理错误 - 依据：02.3-前端API接口清单.md 错误码
       const err = error as { code?: string; message?: string };
-      let errorMessage = t('error.unknown', 'خطأ غير معروف');
+      let errorMessage = t('error.unknown');
 
       switch (err.code) {
         case 'INSUFFICIENT_BALANCE':
-          errorMessage = t('error.insufficient_balance', 'رصيد غير كافٍ');
+          errorMessage = t('error.insufficient_balance');
           break;
         case 'ALREADY_PURCHASED':
-          errorMessage = t('error.already_purchased', 'لقد اشتريت هذا المنتج بالفعل');
+          errorMessage = t('error.already_purchased');
           break;
         case 'VIP_LEVEL_REQUIRED':
-          errorMessage = t('error.vip_required', 'مستوى VIP غير كافٍ');
+          errorMessage = t('error.vip_required');
           break;
         default:
           errorMessage = err.message || errorMessage;
       }
 
       setPurchaseError(errorMessage);
-      toast.error(t('purchase.failed', 'فشل الشراء'), {
+      toast.error(t('purchase.failed'), {
         description: errorMessage,
         icon: <RiCloseCircleFill className="h-5 w-5 text-red-500" />,
       });
@@ -243,10 +243,10 @@ export function PurchaseConfirmModal({
         <ResponsiveModalHeader>
           <ResponsiveModalTitle className="flex items-center gap-2">
             <RiShoppingCartLine className="h-5 w-5 text-primary-500" />
-            {t('purchase.confirm_title', 'تأكيد الشراء')}
+            {t('purchase.confirm_title')}
           </ResponsiveModalTitle>
           <ResponsiveModalDescription>
-            {t('purchase.confirm_desc', 'راجع التفاصيل قبل التأكيد')}
+            {t('purchase.confirm_desc')}
           </ResponsiveModalDescription>
         </ResponsiveModalHeader>
 
@@ -288,7 +288,7 @@ export function PurchaseConfirmModal({
             {/* 体验标签 */}
             {isTrialProduct && (
               <span className="shrink-0 rounded-full bg-primary-100 px-2 py-0.5 text-xs font-medium text-primary-600">
-                {t('tag.trial', 'تجربة')}
+                {t('tag.trial')}
               </span>
             )}
           </m.div>
@@ -305,7 +305,7 @@ export function PurchaseConfirmModal({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-sm text-neutral-500">
                   <RiWalletLine className="h-4 w-4" />
-                  {t('balance.current', 'الرصيد الحالي')}
+                  {t('balance.current')}
                 </div>
                 <span className="font-medium text-foreground tabular-nums">
                   {formattedCurrentBalance}
@@ -316,7 +316,7 @@ export function PurchaseConfirmModal({
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-sm text-neutral-500">
                   <RiArrowDownLine className="h-4 w-4" />
-                  {t('balance.deduct', 'الخصم')}
+                  {t('balance.deduct')}
                 </div>
                 <span className="font-medium text-red-500 tabular-nums">
                   -{formattedPrice}
@@ -329,7 +329,7 @@ export function PurchaseConfirmModal({
               {/* 扣款后余额 */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-sm font-medium text-foreground">
-                  {t('balance.after', 'الرصيد بعد')}
+                  {t('balance.after')}
                 </div>
                 <span
                   className={cn(
@@ -354,7 +354,7 @@ export function PurchaseConfirmModal({
               >
                 <RiCloseCircleFill className="h-5 w-5 shrink-0 text-red-500" />
                 <p className="text-sm text-red-600">
-                  {t('error.insufficient_balance', 'رصيد غير كافٍ')}
+                  {t('error.insufficient_balance')}
                 </p>
               </m.div>
             )}
@@ -369,11 +369,11 @@ export function PurchaseConfirmModal({
                 <RiLockLine className="h-5 w-5 shrink-0 text-gold-500" />
                 <div className="text-sm">
                   <p className="font-medium text-gold-600">
-                    {t('error.vip_required', 'مستوى VIP غير كافٍ')}
+                    {t('error.vip_required')}
                   </p>
                   <p className="text-gold-500 mt-0.5">
-                    {t('error.vip_required_desc', 'يتطلب VIP')} {requiredVipLevel}
-                    {' '}{t('common.or_above', 'أو أعلى')}
+                    {t('error.vip_required_desc')} {requiredVipLevel}
+                    {' '}{t('common.or_above')}
                   </p>
                 </div>
               </m.div>
@@ -401,7 +401,7 @@ export function PurchaseConfirmModal({
             disabled={isPurchasing}
             className="flex-1"
           >
-            {t('btn.cancel', 'إلغاء')}
+            {t('btn.cancel')}
           </Button>
           <Button
             ref={buyButtonRef}
@@ -416,12 +416,12 @@ export function PurchaseConfirmModal({
             {isPurchasing ? (
               <span className="flex items-center gap-2">
                 <RiLoader4Line className="h-4 w-4 animate-spin" />
-                {t('btn.purchasing', 'جارٍ المعالجة...')}
+                {t('btn.purchasing')}
               </span>
             ) : (
               <span className="flex items-center gap-2">
                 <RiShoppingCartLine className="h-4 w-4" />
-                {t('btn.confirm_purchase', 'تأكيد الشراء')}
+                {t('btn.confirm_purchase')}
               </span>
             )}
           </Button>
@@ -440,8 +440,8 @@ export function PurchaseConfirmModal({
           router.push('/positions');
         }}
         scene="purchase"
-        title={t('purchase.success', 'تم الشراء بنجاح!')}
-        subtitle={t('purchase.success_desc', 'تمت إضافة المنتج إلى محفظتك')}
+        title={t('purchase.success')}
+        subtitle={t('purchase.success_desc')}
         checkmarkTheme="primary"
         showConfetti
         showSparkles

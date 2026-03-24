@@ -105,14 +105,14 @@ export default function PositionsPage() {
     { 
       key: 'active', 
       label: summary 
-        ? `${t('tab.active', 'قيد التنفيذ')} (${summary.activeCount})`
-        : t('tab.active', 'قيد التنفيذ')
+        ? `${t('tab.active')} (${summary.activeCount})`
+        : t('tab.active')
     },
     { 
       key: 'completed', 
       label: summary 
-        ? `${t('tab.completed', 'مكتمل')} (${summary.completedCount})`
-        : t('tab.completed', 'مكتمل')
+        ? `${t('tab.completed')} (${summary.completedCount})`
+        : t('tab.completed')
     },
   ], [t, summary]);
 
@@ -231,15 +231,15 @@ export default function PositionsPage() {
       icon={<RiBriefcaseFill className="h-16 w-16 text-neutral-300" />}
       title={
         activeTab === 'active'
-          ? t('empty.position_active', 'لا توجد استثمارات نشطة')
-          : t('empty.position_completed', 'لا توجد استثمارات مكتملة')
+          ? t('empty.position_active')
+          : t('empty.position_completed')
       }
       description={
         activeTab === 'active'
-          ? t('empty.position_active_desc', 'استكشف منتجاتنا لبدء الاستثمار')
-          : t('empty.position_completed_desc', 'ستظهر الاستثمارات المكتملة هنا')
+          ? t('empty.position_active_desc')
+          : t('empty.position_completed_desc')
       }
-      actionText={activeTab === 'active' ? t('btn.explore_products', 'استكشاف المنتجات') : undefined}
+      actionText={activeTab === 'active' ? t('btn.explore_products') : undefined}
       onAction={activeTab === 'active' ? () => router.push('/products') : undefined}
     />
   );
@@ -270,12 +270,12 @@ export default function PositionsPage() {
           <button
             onClick={() => router.back()}
             className="p-2 -ml-2 rounded-lg hover:bg-neutral-100 transition-colors"
-            aria-label={t('btn.back', 'رجوع')}
+            aria-label={t('btn.back')}
           >
             <RiArrowLeftLine className="h-5 w-5 text-neutral-600" />
           </button>
           <h1 className="flex-1 min-w-0 text-center text-lg font-bold tracking-tight text-neutral-800 truncate">
-            {t('page.my_positions', 'استثماراتي')}
+            {t('page.my_positions')}
           </h1>
           <button
             onClick={handleRefresh}
@@ -284,7 +284,7 @@ export default function PositionsPage() {
               'p-2 -mr-2 rounded-lg hover:bg-neutral-100 transition-colors',
               isValidating && 'opacity-50'
             )}
-            aria-label={t('btn.refresh', 'تحديث')}
+            aria-label={t('btn.refresh')}
           >
             <RiRefreshLine className={cn(
               'h-5 w-5 text-neutral-600',
@@ -320,12 +320,12 @@ export default function PositionsPage() {
               renderSkeleton()
             ) : error ? (
               <div className="py-12 text-center">
-                <p className="text-neutral-500">{t('error.load_failed', 'خطأ في التحميل')}</p>
+                <p className="text-neutral-500">{t('error.load_failed')}</p>
                 <button
                   onClick={handleRefresh}
                   className="mt-4 text-primary-500 hover:text-primary-600"
                 >
-                  {t('btn.retry', 'إعادة المحاولة')}
+                  {t('btn.retry')}
                 </button>
               </div>
             ) : positions.length === 0 ? (

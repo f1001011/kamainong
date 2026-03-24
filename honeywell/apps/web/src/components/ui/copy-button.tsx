@@ -124,7 +124,7 @@ export function CopyButton({
       
       // Toast 提示
       if (!disableToast) {
-        toast.success(t('toast.copy_success', 'تم النسخ بنجاح'));
+        toast.success(t('toast.copy_success'));
       }
       
       // 调用成功回调
@@ -137,7 +137,7 @@ export function CopyButton({
     } catch (error) {
       console.error('复制失败:', error);
       if (!disableToast) {
-        toast.error(t('toast.copy_failed', 'خطأ في النسخ'));
+        toast.error(t('toast.copy_failed'));
       }
       onCopyError?.(error as Error);
     }
@@ -174,7 +174,7 @@ export function CopyButton({
         )}
         whileHover={isAnimationEnabled ? { scale: 1.05 } : undefined}
         whileTap={isAnimationEnabled ? { scale: 0.9 } : undefined}
-        aria-label={copied ? t('status.copied', 'تم النسخ') : t('btn.copy', 'نسخ')}
+        aria-label={copied ? t('status.copied') : t('btn.copy')}
       >
         {/* 图标切换动画 */}
         <AnimatePresence mode="wait" initial={false}>
@@ -214,7 +214,7 @@ export function CopyButton({
               transition={{ duration: 0.15 }}
               className="text-xs"
             >
-              {copied ? t('status.copied', 'تم النسخ') : t('btn.copy', 'نسخ')}
+              {copied ? t('status.copied') : t('btn.copy')}
             </m.span>
           </AnimatePresence>
         )}

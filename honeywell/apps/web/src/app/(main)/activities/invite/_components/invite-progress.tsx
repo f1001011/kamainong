@@ -74,7 +74,7 @@ export function InviteProgress({
                 <RiUserAddFill className="w-4 h-4 text-primary-400" />
               </div>
               <h2 className="text-sm font-medium text-white/70">
-                {t('invite.progress_title', 'تقدمك')}
+                {t('invite.progress_title')}
               </h2>
             </div>
 
@@ -100,7 +100,7 @@ export function InviteProgress({
 
             {/* 标签 */}
             <p className="relative z-10 text-sm text-white/50 text-center mb-5">
-              {t('invite.valid_count', 'دعوات صالحة')}
+              {t('invite.valid_count')}
             </p>
 
             {/* 团队入口 - 毛玻璃风格按钮 */}
@@ -110,7 +110,7 @@ export function InviteProgress({
               className="relative z-10 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-white/8 backdrop-blur-sm border border-white/10 text-sm text-white/70 hover:text-white hover:bg-white/12 transition-all"
             >
               <RiTeamFill className="w-4 h-4" />
-              {t('invite.go_team', 'عرض فريقي')}
+              {t('invite.go_team')}
               <RiArrowRightSLine className="w-4 h-4" />
             </m.button>
           </m.div>

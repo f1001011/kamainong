@@ -84,7 +84,7 @@ export default function AddBankCardPage() {
         </button>
         
         <h1 className="text-lg font-bold tracking-tight text-neutral-700">
-          {t('page.add_bank_card', 'إضافة بطاقة')}
+          {t('page.add_bank_card')}
         </h1>
         
         {/* 占位，保持标题居中 */}
@@ -111,10 +111,10 @@ export default function AddBankCardPage() {
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium text-primary-700">
-                {t('tip.add_card_secure', 'معلومات آمنة')}
+                {t('tip.add_card_secure')}
               </div>
               <div className="text-xs text-primary-600/80 mt-0.5">
-                {t('tip.add_card_secure_desc', 'بياناتك المصرفية محمية بتشفير AES-256')}
+                {t('tip.add_card_secure_desc')}
               </div>
             </div>
           </m.div>
@@ -137,7 +137,7 @@ export default function AddBankCardPage() {
             })}
           >
             <RiLockLine className="w-4 h-4" />
-            <span>{t('tip.data_encrypted', 'جميع البيانات مشفرة')}</span>
+            <span>{t('tip.data_encrypted')}</span>
           </m.div>
         </div>
       </div>

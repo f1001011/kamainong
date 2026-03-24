@@ -63,7 +63,7 @@ function DetailHeader({ onBack }: DetailHeaderProps) {
           <RiArrowLeftLine className="w-5 h-5 text-neutral-600" />
         </m.button>
         <span className="text-base font-medium text-neutral-800">
-          {t('messages.detail_title', 'تفاصيل الرسالة')}
+          {t('messages.detail_title')}
         </span>
       </div>
     </div>
@@ -123,7 +123,7 @@ export default function MessageDetailPage() {
         <DetailHeader onBack={handleBack} />
         <div className="flex items-center justify-center pt-20">
           <p className="text-neutral-500">
-            {t('messages.not_found', 'الرسالة غير موجودة')}
+            {t('messages.not_found')}
           </p>
         </div>
       </div>

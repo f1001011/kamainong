@@ -84,16 +84,16 @@ export function PositionHeroSection({
             {/* 产品名 */}
             <span className="text-sm font-semibold text-neutral-800">{productName}</span>
             <span className="text-neutral-300">·</span>
-            <span className="text-xs text-neutral-500">{cycleDays} {t('unit.day', 'يوم')}</span>
+            <span className="text-xs text-neutral-500">{cycleDays} {t('unit.day')}</span>
             <span className="text-neutral-300">·</span>
             {/* 状态 */}
             {isActive ? (
               <span className="flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                <span className="text-xs text-success font-medium">{t('status.active', 'نشط')}</span>
+                <span className="text-xs text-success font-medium">{t('status.active')}</span>
               </span>
             ) : (
-              <span className="text-xs text-neutral-500">{t('status.completed', 'مكتمل')}</span>
+              <span className="text-xs text-neutral-500">{t('status.completed')}</span>
             )}
             {/* 赠送标记 */}
             {isGift && <RiGiftFill className="h-4 w-4 text-gold-500" />}
@@ -108,13 +108,13 @@ export function PositionHeroSection({
           className="text-center"
         >
           <p className="text-xs text-neutral-500 tracking-wider uppercase mb-2">
-            {t('label.earned_income', 'الأرباح المحققة')}
+            {t('label.earned_income')}
           </p>
           <p className="text-[40px] font-extrabold text-neutral-900 font-mono tabular-nums tracking-tight leading-none">
             {displayEarned}
           </p>
           <p className="text-sm text-neutral-400 font-mono mt-2">
-            {t('label.of_total', 'من')} {displayTotal}
+            {t('label.of_total')} {displayTotal}
           </p>
         </m.div>
 
@@ -131,12 +131,12 @@ export function PositionHeroSection({
               isVIP ? 'bg-gold-50 text-gold-600' : 'bg-success/10 text-success'
             )}>
               <RiArrowUpSLine className="h-3.5 w-3.5" />
-              <span className="text-xs font-semibold">{dailyRate}% / {t('label.day_abbr', 'يوم')}</span>
+              <span className="text-xs font-semibold">{dailyRate}% / {t('label.day_abbr')}</span>
             </span>
           ) : (
             <span className="inline-flex items-center gap-1.5 bg-success/10 rounded-full px-4 py-1.5">
               <RiCheckboxCircleFill className="h-4 w-4 text-success" />
-              <span className="text-sm font-semibold text-success">{t('status.completed', 'مكتمل')}</span>
+              <span className="text-sm font-semibold text-success">{t('status.completed')}</span>
             </span>
           )}
         </m.div>

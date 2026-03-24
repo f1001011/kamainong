@@ -77,7 +77,7 @@ export function IncomeTimeline({
       <div className={cn('py-8 text-center', className)}>
         <RiTimeLine className="h-12 w-12 text-neutral-200 mx-auto mb-3" />
         <p className="text-sm text-neutral-400">
-          {t('empty.income_records', 'لا توجد سجلات دخل بعد')}
+          {t('empty.income_records')}
         </p>
       </div>
     );
@@ -88,10 +88,10 @@ export function IncomeTimeline({
       {/* 标题行 */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-base font-semibold text-neutral-800">
-          {t('title.income_records', 'سجل الأرباح')}
+          {t('title.income_records')}
         </h3>
         <span className="text-xs text-neutral-400">
-          {t('label.total_records', 'الإجمالي')}: {records.length}
+          {t('label.total_records')}: {records.length}
         </span>
       </div>
 
@@ -134,11 +134,11 @@ export function IncomeTimeline({
             )}
           >
             {loading ? (
-              <span className="animate-pulse">{t('tip.loading', 'جارٍ التحميل...')}</span>
+              <span className="animate-pulse">{t('tip.loading')}</span>
             ) : (
               <>
                 <RiArrowDownLine className="h-4 w-4" />
-                {t('btn.load_more', 'تحميل المزيد')}
+                {t('btn.load_more')}
               </>
             )}
           </button>
@@ -205,10 +205,10 @@ function IncomeTimelineItem({
 
   // 状态文案
   const statusText = isSettled
-    ? t('status.settled', 'تمت التسوية')
+    ? t('status.settled')
     : isFailed
-      ? t('status.failed', 'فشل')
-      : t('status.pending', 'معلّق');
+      ? t('status.failed')
+      : t('status.pending');
 
   // 状态标签颜色
   const statusBadgeClass = cn(
@@ -266,7 +266,7 @@ function IncomeTimelineItem({
         {/* 顶部信息行 */}
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-medium text-neutral-700">
-            {t('label.day_n', 'اليوم')} {record.settleSequence}
+            {t('label.day_n')} {record.settleSequence}
           </span>
           <span className={statusBadgeClass}>
             {statusText}

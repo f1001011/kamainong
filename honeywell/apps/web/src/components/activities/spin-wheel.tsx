@@ -132,7 +132,7 @@ export function SpinWheel({
           >
             {prize.amount > 0
               ? formatCurrency(prize.amount, config, { decimals: 0 })
-              : t('spin.thanks', 'شكراً')}
+              : t('spin.thanks')}
           </text>
         </g>
       );

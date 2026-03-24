@@ -135,7 +135,7 @@ export function UserInfoCard({
             onClick={onEditAvatar}
             role="button"
             tabIndex={0}
-            aria-label={t('action.edit_avatar', 'تعديل صورة الملف الشخصي')}
+            aria-label={t('action.edit_avatar')}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 onEditAvatar?.();
@@ -168,7 +168,7 @@ export function UserInfoCard({
               'transition-colors'
             )}
             whileTap={{ scale: 0.9 }}
-            aria-label={t('action.edit_avatar', 'تعديل صورة الملف الشخصي')}
+            aria-label={t('action.edit_avatar')}
           >
             <RiCameraLine className="w-4 h-4" />
           </m.button>
@@ -190,7 +190,7 @@ export function UserInfoCard({
                 'hover:bg-primary-50',
                 'transition-colors'
               )}
-              aria-label={t('action.edit_nickname', 'تعديل الاسم')}
+              aria-label={t('action.edit_nickname')}
             >
               <RiEditLine className="w-4 h-4" />
             </button>
@@ -212,7 +212,7 @@ export function UserInfoCard({
               <VipBadge type="vip" level={vipLevel} size="md" />
             ) : (
               <span className="text-xs text-neutral-400 bg-neutral-100 px-2 py-0.5 rounded-full">
-                {t('label.new_user', 'جديد')}
+                {t('label.new_user')}
               </span>
             )}
           </div>
@@ -223,7 +223,7 @@ export function UserInfoCard({
       <div className="relative mt-6 pt-4 border-t border-neutral-100/80">
         <div className="flex items-center justify-center gap-3 bg-gradient-to-r from-primary-50/50 via-white to-primary-50/50 rounded-xl py-3 px-4">
           <span className="text-sm text-neutral-500">
-            {t('label.invite_code', 'رمز الدعوة')}:
+            {t('label.invite_code')}:
           </span>
           <span className="text-lg font-bold text-gradient-primary tracking-widest font-mono">
             {inviteCode}

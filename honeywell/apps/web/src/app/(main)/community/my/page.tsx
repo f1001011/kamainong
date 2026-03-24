@@ -126,12 +126,12 @@ export default function MyPostsPage() {
   const formatRelativeTime = (dateStr: string) => {
     const diff = Date.now() - new Date(dateStr).getTime();
     const minutes = Math.floor(diff / 60000);
-    if (minutes < 1) return t('time.justNow', 'الآن');
-    if (minutes < 60) return `${minutes} ${t('time.minutesAgo', 'د')}`;
+    if (minutes < 1) return t('time.justNow');
+    if (minutes < 60) return `${minutes} ${t('time.minutesAgo')}`;
     const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours} ${t('time.hoursAgo', 'س')}`;
+    if (hours < 24) return `${hours} ${t('time.hoursAgo')}`;
     const days = Math.floor(hours / 24);
-    return `${days} ${t('time.daysAgo', 'ي')}`;
+    return `${days} ${t('time.daysAgo')}`;
   };
 
   if (isLoading) return <MyPostsSkeleton />;
@@ -153,12 +153,12 @@ export default function MyPostsPage() {
               <button
                 onClick={() => router.back()}
                 className="p-2 -ml-2 rounded-xl hover:bg-neutral-100/80 active:scale-95 transition-all"
-                aria-label={t('btn.back', 'رجوع')}
+                aria-label={t('btn.back')}
               >
                 <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
               </button>
               <h1 className="text-lg font-bold text-neutral-800 tracking-tight">
-                {t('community.my_posts', 'منشوراتي')}
+                {t('community.my_posts')}
               </h1>
               <div className="w-10" />
             </div>
@@ -170,16 +170,16 @@ export default function MyPostsPage() {
             {isError ? (
               <EmptyState
                 icon={<RiChat3Line className="size-12 text-neutral-400" />}
-                title={t('error.load_failed', 'خطأ في التحميل')}
-                actionText={t('btn.retry', 'إعادة المحاولة')}
+                title={t('error.load_failed')}
+                actionText={t('btn.retry')}
                 onAction={() => refetch()}
               />
             ) : posts.length === 0 ? (
               <EmptyState
                 icon={<RiFileList3Line className="size-12 text-neutral-400" />}
-                title={t('community.my_empty', 'لا توجد لديك منشورات')}
-                description={t('community.my_empty_desc', 'شارك أول سحب ناجح لك')}
-                actionText={t('community.create_first', 'إنشاء منشور')}
+                title={t('community.my_empty')}
+                description={t('community.my_empty_desc')}
+                actionText={t('community.create_first')}
                 onAction={() => router.push('/community/create')}
               />
             ) : (
@@ -216,7 +216,7 @@ export default function MyPostsPage() {
                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100">
                       <img
                         src={post.platformScreenshot}
-                        alt={t('community.platform', 'المنصة')}
+                        alt={t('community.platform')}
                         className="w-full h-full object-cover"
                         loading="lazy"
                       />
@@ -224,7 +224,7 @@ export default function MyPostsPage() {
                     <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100">
                       <img
                         src={post.receiptScreenshot}
-                        alt={t('community.receipt', 'الإيصال')}
+                        alt={t('community.receipt')}
                         className="w-full h-full object-cover"
                         loading="lazy"
                       />
@@ -240,7 +240,7 @@ export default function MyPostsPage() {
                   {post.status === 'REJECTED' && post.rejectReason && (
                     <div className="mx-4 mb-3 p-3 rounded-xl bg-red-50/50 border border-red-100/60">
                       <p className="text-xs text-red-600">
-                        <span className="font-medium">{t('community.reject_reason', 'السبب')}: </span>
+                        <span className="font-medium">{t('community.reject_reason')}: </span>
                         {post.rejectReason}
                       </p>
                     </div>

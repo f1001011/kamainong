@@ -48,13 +48,13 @@ export function ImageUploader({ value, onChange, label, className }: ImageUpload
 
       // 类型校验
       if (!ACCEPTED_TYPES.includes(file.type)) {
-        toast.error(t('community.invalid_image_type', 'يُسمح فقط بصور JPG و PNG و WebP'));
+        toast.error(t('community.invalid_image_type'));
         return;
       }
 
       // 大小校验
       if (file.size > MAX_SIZE_BYTES) {
-        toast.error(t('community.image_too_large', 'لا يمكن أن يتجاوز حجم الصورة 5MB'));
+        toast.error(t('community.image_too_large'));
         return;
       }
 
@@ -143,7 +143,7 @@ export function ImageUploader({ value, onChange, label, className }: ImageUpload
               <RiCameraLine className="size-6 text-neutral-400 group-hover:text-primary-500 transition-colors" />
             </div>
             <span className="text-xs text-neutral-400 group-hover:text-primary-500 transition-colors">
-              {t('community.tap_to_upload', 'انقر للرفع')}
+              {t('community.tap_to_upload')}
             </span>
             <span className="text-[10px] text-neutral-300">
               JPG, PNG, WebP · Max 5MB

@@ -103,11 +103,11 @@ export default function CreatePostPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['community-posts'] });
-      toast.success(t('community.post_success', 'تم نشر المنشور بنجاح'));
+      toast.success(t('community.post_success'));
       router.back();
     },
     onError: () => {
-      toast.error(t('community.post_error', 'فشل في نشر المنشور، حاول مرة أخرى'));
+      toast.error(t('community.post_error'));
     },
   });
 
@@ -160,12 +160,12 @@ export default function CreatePostPage() {
               <button
                 onClick={() => router.back()}
                 className="p-2 -ml-2 rounded-xl hover:bg-neutral-100/80 active:scale-95 transition-all"
-                aria-label={t('btn.back', 'رجوع')}
+                aria-label={t('btn.back')}
               >
                 <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
               </button>
               <h1 className="text-lg font-bold text-neutral-800 tracking-tight">
-                {t('community.create_title', 'منشور جديد')}
+                {t('community.create_title')}
               </h1>
               <div className="w-10" />
             </div>
@@ -180,7 +180,7 @@ export default function CreatePostPage() {
             transition={SPRINGS.gentle}
           >
             <label className="block text-sm font-semibold text-neutral-700 mb-2">
-              {t('community.select_order', 'اختر طلب السحب')}
+              {t('community.select_order')}
             </label>
             <button
               onClick={() => setShowOrderPicker(!showOrderPicker)}
@@ -200,7 +200,7 @@ export default function CreatePostPage() {
                 </div>
               ) : (
                 <span className="text-sm text-neutral-400">
-                  {t('community.choose_order', 'اختر طلباً مكتملاً')}
+                  {t('community.choose_order')}
                 </span>
               )}
               <RiArrowDownSLine className={`size-5 text-neutral-400 transition-transform ${showOrderPicker ? 'rotate-180' : ''}`} />
@@ -216,11 +216,11 @@ export default function CreatePostPage() {
               >
                 {withdrawsLoading ? (
                   <div className="p-4 text-center text-sm text-neutral-400">
-                    {t('tip.loading', 'جارٍ التحميل...')}
+                    {t('tip.loading')}
                   </div>
                 ) : completedWithdraws.length === 0 ? (
                   <div className="p-4 text-center text-sm text-neutral-400">
-                    {t('community.no_withdraws', 'لا توجد لديك سحوبات مكتملة')}
+                    {t('community.no_withdraws')}
                   </div>
                 ) : (
                   <div className="max-h-48 overflow-y-auto divide-y divide-neutral-50">
@@ -255,13 +255,13 @@ export default function CreatePostPage() {
             transition={{ ...SPRINGS.gentle, delay: 0.1 }}
           >
             <label className="block text-sm font-semibold text-neutral-700 mb-2">
-              {t('community.upload_screenshots', 'لقطات الشاشة')}
+              {t('community.upload_screenshots')}
             </label>
             <div className="grid grid-cols-2 gap-3">
               {/* 平台截图 */}
               <ImageUploadArea
                 preview={platformPreview}
-                label={t('community.platform_screenshot', 'لقطة شاشة المنصة')}
+                label={t('community.platform_screenshot')}
                 onSelect={() => platformInputRef.current?.click()}
                 onClear={() => clearImage('platform')}
               />
@@ -276,7 +276,7 @@ export default function CreatePostPage() {
               {/* 收据截图 */}
               <ImageUploadArea
                 preview={receiptPreview}
-                label={t('community.receipt_screenshot', 'لقطة شاشة الإيصال')}
+                label={t('community.receipt_screenshot')}
                 onSelect={() => receiptInputRef.current?.click()}
                 onClear={() => clearImage('receipt')}
               />
@@ -297,12 +297,12 @@ export default function CreatePostPage() {
             transition={{ ...SPRINGS.gentle, delay: 0.2 }}
           >
             <label className="block text-sm font-semibold text-neutral-700 mb-2">
-              {t('community.comment_optional', 'تعليق (اختياري)')}
+              {t('community.comment_optional')}
             </label>
             <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder={t('community.comment_placeholder', 'شارك تجربتك...')}
+              placeholder={t('community.comment_placeholder')}
               maxLength={200}
               rows={3}
               className="w-full p-4 rounded-xl bg-white border border-neutral-200/60 text-sm text-neutral-700 placeholder:text-neutral-400 focus:outline-none focus:border-primary-300 focus:ring-2 focus:ring-primary-100 resize-none transition-all"
@@ -319,10 +319,10 @@ export default function CreatePostPage() {
             fullWidth
             disabled={!canSubmit}
             isLoading={submitMutation.isPending}
-            loadingText={t('tip.submitting', 'جارٍ الإرسال...')}
+            loadingText={t('tip.submitting')}
             onClick={() => submitMutation.mutate()}
           >
-            {t('community.submit', 'نشر')}
+            {t('community.submit')}
           </Button>
         </div>
       </div>

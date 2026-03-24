@@ -253,7 +253,7 @@ export function HomeBanner({
               'opacity-0 group-hover:opacity-100',
               'hover:scale-105 active:scale-95'
             )}
-            aria-label={t('aria.prev_slide', 'السابق')}
+            aria-label={t('aria.prev_slide')}
           >
             <RiArrowLeftSLine className="w-5 h-5 text-neutral-700" />
           </button>
@@ -268,7 +268,7 @@ export function HomeBanner({
               'opacity-0 group-hover:opacity-100',
               'hover:scale-105 active:scale-95'
             )}
-            aria-label={t('aria.next_slide', 'التالي')}
+            aria-label={t('aria.next_slide')}
           >
             <RiArrowRightSLine className="w-5 h-5 text-neutral-700" />
           </button>
@@ -288,7 +288,7 @@ export function HomeBanner({
                   ? 'w-5 h-[5px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]'
                   : 'w-[5px] h-[5px] bg-white/50 hover:bg-white/70'
               )}
-              aria-label={t('aria.go_to_slide', `الانتقال للشريحة ${index + 1}`)}
+              aria-label={t.withVars('aria.go_to_slide', { number: index + 1 })}
               aria-current={index === currentIndex ? 'true' : 'false'}
             >
               {/* 当前指示器的进度动画 */}

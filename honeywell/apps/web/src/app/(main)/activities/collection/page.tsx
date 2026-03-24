@@ -106,7 +106,7 @@ export default function CollectionActivityPage() {
               <RiArrowLeftSLine className="w-6 h-6 text-white/60" />
             </button>
             <h1 className="text-2xl font-bold text-white tracking-tight">
-              {t('page.activity_collection', 'مكافأة المجموعة')}
+              {t('page.activity_collection')}
             </h1>
           </div>
         </div>
@@ -118,10 +118,10 @@ export default function CollectionActivityPage() {
               <RiAlertLine className="w-8 h-8 text-error-500" />
             </div>
             <p className="text-neutral-500 mb-4">
-              {error?.message || t('error.load_failed', 'خطأ في التحميل')}
+              {error?.message || t('error.load_failed')}
             </p>
             <Button variant="secondary" onClick={() => refetch()}>
-              {t('btn.retry', 'إعادة المحاولة')}
+              {t('btn.retry')}
             </Button>
           </div>
         </main>

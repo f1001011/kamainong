@@ -87,7 +87,7 @@ export function NetworkOverview({
       {/* 总人数 */}
       <div className="flex items-baseline gap-1.5 mb-4">
         <span className="text-2xl font-bold text-neutral-800">{totalMembers}</span>
-        <span className="text-sm text-neutral-400">{t('team.members', 'أعضاء')}</span>
+        <span className="text-sm text-neutral-400">{t('team.members')}</span>
       </div>
 
       {/* L1/L2/L3 贡献条 */}

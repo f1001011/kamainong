@@ -181,21 +181,21 @@ export function PositionDetail({
             <div className="flex items-center gap-2 mb-3">
               <RiMoneyDollarCircleFill className="h-5 w-5 text-primary-500" />
               <span className="font-semibold text-primary-700">
-                {t('position.maturity_info', 'معلومات الاستحقاق')}
+                {t('position.maturity_info')}
               </span>
             </div>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-neutral-500">{t('position.principal', 'رأس المال')}</span>
+                <span className="text-neutral-500">{t('position.principal')}</span>
                 <span className="font-medium">{formatCurrency(position.purchaseAmount, config)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-neutral-500">{t('position.interest', 'الأرباح')}</span>
+                <span className="text-neutral-500">{t('position.interest')}</span>
                 <span className="font-medium text-primary-600">{formatCurrency(position.totalIncome, config)}</span>
               </div>
               <div className="h-px bg-primary-200/50" />
               <div className="flex justify-between">
-                <span className="font-medium text-neutral-700">{t('position.total_return', 'الإجمالي عند الاستحقاق')}</span>
+                <span className="font-medium text-neutral-700">{t('position.total_return')}</span>
                 <span className="font-bold text-primary-600">
                   {formatCurrency(Number(position.purchaseAmount) + Number(position.totalIncome), config)}
                 </span>

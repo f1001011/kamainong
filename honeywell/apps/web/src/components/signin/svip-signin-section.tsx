@@ -95,10 +95,10 @@ export function SvipSignInSection({
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-primary-100">
-                  SVIP{svipLevel} {t('signin.svip.title', 'تسجيل حضور حصري')}
+                  SVIP{svipLevel} {t('signin.svip.title')}
                 </h3>
                 <p className="text-xs text-primary-300/70">
-                  {t('signin.svip.subtitle', 'مكافأة مضاعفة يومياً')}
+                  {t('signin.svip.subtitle')}
                 </p>
               </div>
             </div>
@@ -115,10 +115,10 @@ export function SvipSignInSection({
               {todaySigned ? (
                 <>
                   <RiCheckDoubleLine className="size-3.5" />
-                  <span>{t('signin.claimed', 'تم المطالبة')}</span>
+                  <span>{t('signin.claimed')}</span>
                 </>
               ) : (
-                <span>{t('signin.available', 'متاح')}</span>
+                <span>{t('signin.available')}</span>
               )}
             </div>
           </div>
@@ -128,7 +128,7 @@ export function SvipSignInSection({
             {/* 奖励金额 */}
             <div className="flex items-baseline gap-1">
               <span className="text-xs text-primary-300/70">
-                {t('signin.svip.reward', 'مكافأة')}:
+                {t('signin.svip.reward')}:
               </span>
               <span className="text-2xl font-bold text-primary-200">
                 +{currencySymbol}{reward}
@@ -152,13 +152,13 @@ export function SvipSignInSection({
                   )}
                 >
                   <RiVipCrownLine className="size-4" />
-                  <span>{t('signin.btn.claim', 'مطالبة')}</span>
+                  <span>{t('signin.btn.claim')}</span>
                 </button>
               </PulseWrapper>
             ) : todaySigned ? (
               <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary-500/10 text-primary-300/60">
                 <RiCheckDoubleLine className="size-4" />
-                <span className="text-sm">{t('signin.claimed', 'تم المطالبة')}</span>
+                <span className="text-sm">{t('signin.claimed')}</span>
               </div>
             ) : null}
           </div>
@@ -194,7 +194,7 @@ export function SvipUpgradeBadge({ className }: SvipUpgradeBadgeProps) {
       )}
     >
       <RiVipCrownLine className="size-3.5" />
-      <span>{t('signin.svip.upgrade', 'SVIP يحصل على الضعف')}</span>
+      <span>{t('signin.svip.upgrade')}</span>
     </div>
   );
 }

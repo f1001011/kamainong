@@ -33,12 +33,12 @@ export interface CommentListProps {
 function formatRelativeTime(dateStr: string, t: ReturnType<typeof useText>) {
   const diff = Date.now() - new Date(dateStr).getTime();
   const minutes = Math.floor(diff / 60000);
-  if (minutes < 1) return t('time.justNow', 'الآن');
-  if (minutes < 60) return `${minutes}${t('time.minutesAgo', 'د')}`;
+  if (minutes < 1) return t('time.justNow');
+  if (minutes < 60) return `${minutes}${t('time.minutesAgo')}`;
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}${t('time.hoursAgo', 'س')}`;
+  if (hours < 24) return `${hours}${t('time.hoursAgo')}`;
   const days = Math.floor(hours / 24);
-  return `${days}${t('time.daysAgo', 'ي')}`;
+  return `${days}${t('time.daysAgo')}`;
 }
 
 /**
@@ -52,7 +52,7 @@ export function CommentList({ comments, className }: CommentListProps) {
     return (
       <div className={cn('text-center py-6', className)}>
         <p className="text-sm text-neutral-400">
-          {t('community.no_comments', 'لا توجد تعليقات بعد')}
+          {t('community.no_comments')}
         </p>
       </div>
     );

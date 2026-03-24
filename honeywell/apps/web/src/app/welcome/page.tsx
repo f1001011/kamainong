@@ -10,6 +10,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { m, LazyMotion, domAnimation, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import Link from 'next/link';
+import { getLocaleText } from '@/locales';
 import {
   RiMenuLine,
   RiCloseLine,
@@ -52,46 +53,46 @@ const IMG = {
 /* ━━━━━━━━━━━━━━━ 数据常量 ━━━━━━━━━━━━━━━ */
 
 const NAV_LINKS = [
-  { label: 'الرئيسية', href: '#hero' },
-  { label: 'من نحن', href: '#about' },
-  { label: 'الخدمات', href: '#services' },
-  { label: 'المشاريع', href: '#projects' },
-  { label: 'اتصل بنا', href: '#contact' },
+  { label: getLocaleText('welcome.nav.home'), href: '#hero' },
+  { label: getLocaleText('welcome.nav.about'), href: '#about' },
+  { label: getLocaleText('welcome.nav.services'), href: '#services' },
+  { label: getLocaleText('welcome.nav.projects'), href: '#projects' },
+  { label: getLocaleText('welcome.nav.contact'), href: '#contact' },
 ];
 
 const SERVICES = [
   {
     icon: RiFundsBoxLine,
-    title: 'إدارة الاستثمارات',
-    desc: 'إدارة نشطة للمحافظ الدولية، تركز على تحقيق أقصى عوائد مع مخاطر مدروسة لمستثمرينا.',
+    title: getLocaleText('welcome.service.investment.title'),
+    desc: getLocaleText('welcome.service.investment.desc'),
     img: IMG.investment,
   },
   {
     icon: RiBuildingLine,
-    title: 'التطوير العقاري',
-    desc: 'نبتكر مشاريع حضرية مستدامة ومباني عالية الجودة تحوّل المجتمعات وتخلق قيمة دائمة.',
+    title: getLocaleText('welcome.service.development.title'),
+    desc: getLocaleText('welcome.service.development.desc'),
     img: IMG.development,
   },
   {
     icon: RiShieldCheckLine,
-    title: 'إدارة الأصول',
-    desc: 'حماية ونمو ثروتك من خلال استراتيجيات متنوعة وإشراف مهني مستمر.',
+    title: getLocaleText('welcome.service.management.title'),
+    desc: getLocaleText('welcome.service.management.desc'),
     img: IMG.management,
   },
 ];
 
 const PROJECTS = [
-  { title: 'برج متروبوليتان', location: 'الدار البيضاء، المغرب', category: 'سكني', img: IMG.project1 },
-  { title: 'مرتفعات الهادئ', location: 'الرباط، المغرب', category: 'متعدد الاستخدامات', img: IMG.project2 },
-  { title: 'إقامات ذهبية', location: 'مراكش، المغرب', category: 'سكني', img: IMG.project3 },
-  { title: 'مركز الزمرد للأعمال', location: 'طنجة، المغرب', category: 'تجاري', img: IMG.project4 },
+  { title: getLocaleText('welcome.project.metropolitan.title'), location: getLocaleText('welcome.project.metropolitan.location'), category: getLocaleText('welcome.project.metropolitan.category'), img: IMG.project1 },
+  { title: getLocaleText('welcome.project.pacific.title'), location: getLocaleText('welcome.project.pacific.location'), category: getLocaleText('welcome.project.pacific.category'), img: IMG.project2 },
+  { title: getLocaleText('welcome.project.golden.title'), location: getLocaleText('welcome.project.golden.location'), category: getLocaleText('welcome.project.golden.category'), img: IMG.project3 },
+  { title: getLocaleText('welcome.project.emerald.title'), location: getLocaleText('welcome.project.emerald.location'), category: getLocaleText('welcome.project.emerald.category'), img: IMG.project4 },
 ];
 
 const STATS = [
-  { value: '65+', label: 'سنوات من الخبرة', icon: RiTimeLine },
-  { value: '10K+', label: 'مستثمرون نشطون', icon: RiTeamLine },
-  { value: '2.5B د.م.', label: 'أصول مُدارة', icon: RiLineChartLine },
-  { value: '98%', label: 'رضا العملاء', icon: RiAwardLine },
+  { value: '65+', label: getLocaleText('welcome.stat.experience'), icon: RiTimeLine },
+  { value: '10K+', label: getLocaleText('welcome.stat.investors'), icon: RiTeamLine },
+  { value: '2.5B د.م.', label: getLocaleText('welcome.stat.assets'), icon: RiLineChartLine },
+  { value: '98%', label: getLocaleText('welcome.stat.satisfaction'), icon: RiAwardLine },
 ];
 
 /* ━━━━━━━━━━━━━━━ 导航栏 ━━━━━━━━━━━━━━━ */
@@ -167,7 +168,7 @@ function Navbar() {
                     : 'text-white/90 hover:bg-white/10'
                 }`}
               >
-                تسجيل الدخول
+                {getLocaleText('welcome.nav.login')}
               </Link>
               <Link
                 href="/register"
@@ -177,7 +178,7 @@ function Navbar() {
                     : 'bg-white text-dark-950 hover:bg-white/90 shadow-lg'
                 }`}
               >
-                ابدأ الآن
+                {getLocaleText('welcome.nav.get_started')}
                 <RiArrowRightLine className="w-3.5 h-3.5" />
               </Link>
 
@@ -240,7 +241,7 @@ function Navbar() {
                   className="flex items-center justify-center gap-2 w-full py-4 bg-primary-500 text-white font-semibold rounded-2xl text-base"
                   onClick={() => setMobileOpen(false)}
                 >
-                  إنشاء حساب
+                  {getLocaleText('welcome.mobile.register')}
                   <RiArrowRightLine className="w-4 h-4" />
                 </Link>
                 <Link
@@ -248,7 +249,7 @@ function Navbar() {
                   className="flex items-center justify-center w-full py-4 border border-white/20 text-white/80 font-medium rounded-2xl text-base"
                   onClick={() => setMobileOpen(false)}
                 >
-                  تسجيل الدخول
+                  {getLocaleText('welcome.mobile.login')}
                 </Link>
               </div>
             </m.div>
@@ -308,7 +309,7 @@ function HeroSection() {
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse" />
             <span className="text-xs sm:text-sm font-medium text-white/60 tracking-wider uppercase">
-              استثمارات عقارية موثوقة
+              {getLocaleText('welcome.hero.badge')}
             </span>
           </m.div>
 
@@ -319,12 +320,12 @@ function HeroSection() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.08] tracking-tight"
           >
-            استثمارات{' '}
+            {getLocaleText('welcome.hero.title_line1')}{' '}
             <span className="relative inline-block">
-              <span className="text-gradient-shine">تبني</span>
+              <span className="text-gradient-shine">{getLocaleText('welcome.hero.title_highlight')}</span>
             </span>
             <br />
-            مستقبلك
+            {getLocaleText('welcome.hero.title_line2')}
           </m.h1>
 
           {/* 金色分割线 */}
@@ -342,8 +343,7 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 1.0 }}
             className="text-base sm:text-lg lg:text-xl text-white/50 mt-5 sm:mt-6 max-w-xl leading-relaxed font-light"
           >
-            مع أكثر من 65 عاماً من الخبرة العالمية، تحوّل Lendlease مشهد الاستثمار
-            العقاري بالشفافية والربحية والثقة.
+            {getLocaleText('welcome.hero.subtitle')}
           </m.p>
 
           {/* CTA 按钮 */}
@@ -357,14 +357,14 @@ function HeroSection() {
               href="/register"
               className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-primary-500 text-white font-semibold rounded-xl text-base transition-all duration-300 hover:bg-primary-400 shadow-primary-lg hover:shadow-primary-xl hover:-translate-y-0.5"
             >
-              ابدأ الآن
+              {getLocaleText('welcome.hero.primary_cta')}
               <RiArrowRightLine className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href="/login"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-white/80 font-medium rounded-xl text-base transition-all duration-300 hover:bg-white/8 hover:border-white/30 hover:text-white backdrop-blur-sm"
             >
-              تسجيل الدخول
+              {getLocaleText('welcome.hero.secondary_cta')}
             </Link>
           </m.div>
         </div>
@@ -411,30 +411,27 @@ function AboutSection() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 border border-primary-100 mb-5">
               <RiGlobalLine className="w-3.5 h-3.5 text-primary-500" />
-              <span className="text-xs font-semibold text-primary-600 tracking-wider uppercase">من نحن</span>
+              <span className="text-xs font-semibold text-primary-600 tracking-wider uppercase">{getLocaleText('welcome.about.badge')}</span>
             </div>
 
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-dark-950 leading-tight">
-              نحن Lendlease
+              {getLocaleText('welcome.about.title')}
             </h2>
 
             <div className="w-16 h-[2px] bg-gradient-to-r from-gold-400 to-gold-600 mt-5 mb-6" />
 
             <p className="text-neutral-600 text-base sm:text-lg leading-relaxed">
-              Lendlease شركة رائدة في الاستثمار العقاري بثلاث قدرات أساسية:
-              <strong className="text-dark-950"> الاستثمارات، التطوير وإدارة الأصول</strong>.
+              {getLocaleText('welcome.about.body_1')}
             </p>
             <p className="text-neutral-500 text-base sm:text-lg leading-relaxed mt-4">
-              نستفيد من هذه الخبرة لخلق قيمة لشركائنا وعملائنا والمجتمعات
-              التي نطوّر فيها مشاريعنا. على مدار أكثر من 65 عاماً، بنينا شراكات تحقق
-              نتائج استثمارية استثنائية.
+              {getLocaleText('welcome.about.body_2')}
             </p>
 
             <Link
               href="/register"
               className="group inline-flex items-center gap-2 mt-8 text-primary-600 font-semibold text-base hover:text-primary-700 transition-colors"
             >
-              اعرف المزيد عنا
+              {getLocaleText('welcome.about.cta')}
               <RiArrowRightUpLine className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </m.div>
@@ -450,7 +447,7 @@ function AboutSection() {
             <div className="relative rounded-2xl overflow-hidden shadow-soft-xl">
               <img
                 src={IMG.about}
-                alt="مكتب حديث"
+                alt={getLocaleText('welcome.about.image_alt')}
                 className="w-full aspect-[4/3] object-cover"
                 loading="lazy"
                 decoding="async"
@@ -472,7 +469,7 @@ function AboutSection() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-dark-950 font-heading">65+</p>
-                  <p className="text-xs text-neutral-500">سنوات من الثقة</p>
+                  <p className="text-xs text-neutral-500">{getLocaleText('welcome.about.floating_stat')}</p>
                 </div>
               </div>
             </m.div>
@@ -505,15 +502,14 @@ function ServicesSection() {
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-50 border border-gold-100 mb-5">
             <RiBuildingLine className="w-3.5 h-3.5 text-gold-600" />
-            <span className="text-xs font-semibold text-gold-700 tracking-wider uppercase">خدماتنا</span>
+            <span className="text-xs font-semibold text-gold-700 tracking-wider uppercase">{getLocaleText('welcome.services.badge')}</span>
           </div>
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-dark-950 leading-tight">
-            ثلاث قدرات، هدف واحد
+            {getLocaleText('welcome.services.title')}
           </h2>
           <div className="w-16 h-[2px] bg-gradient-to-r from-gold-400 to-gold-600 mx-auto mt-5 mb-5" />
           <p className="text-neutral-500 text-base sm:text-lg">
-            ندمج الاستثمارات والتطوير والإدارة لتقديم نتائج استثنائية
-            لكل مستثمر من مستثمرينا.
+            {getLocaleText('welcome.services.subtitle')}
           </p>
         </m.div>
 
@@ -549,7 +545,7 @@ function ServicesSection() {
                 <p className="text-neutral-500 text-sm leading-relaxed">{service.desc}</p>
                 <div className="mt-5 pt-4 border-t border-neutral-100">
                   <span className="group/link inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors cursor-pointer">
-                    اعرف المزيد
+                    {getLocaleText('welcome.services.learn_more')}
                     <RiArrowRightLine className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
                   </span>
                 </div>
@@ -626,10 +622,10 @@ function ProjectsSection() {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-50 border border-primary-100 mb-5">
               <RiMapPinLine className="w-3.5 h-3.5 text-primary-500" />
-              <span className="text-xs font-semibold text-primary-600 tracking-wider uppercase">المحفظة</span>
+              <span className="text-xs font-semibold text-primary-600 tracking-wider uppercase">{getLocaleText('welcome.projects.badge')}</span>
             </div>
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-dark-950 leading-tight">
-              مشاريع مميزة
+              {getLocaleText('welcome.projects.title')}
             </h2>
             <div className="w-16 h-[2px] bg-gradient-to-r from-gold-400 to-gold-600 mt-5" />
           </div>
@@ -637,7 +633,7 @@ function ProjectsSection() {
             href="/register"
             className="group inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors shrink-0"
           >
-            عرض جميع المشاريع
+            {getLocaleText('welcome.projects.cta')}
             <RiArrowRightLine className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </m.div>
@@ -698,10 +694,10 @@ function ProjectsSection() {
 
 function TrustSection() {
   const features = [
-    { icon: RiShieldCheckLine, title: 'أمان مضمون', desc: 'أموال محمية بتقنية التشفير البنكي ومراجعات دورية.' },
-    { icon: RiLineChartLine, title: 'ربحية مثبتة', desc: 'سجل ثابت من العوائد الأعلى من متوسط السوق.' },
-    { icon: RiCustomerService2Line, title: 'دعم على مدار الساعة', desc: 'فريق من الخبراء متاح في كل الأوقات لمساعدتك.' },
-    { icon: RiGlobalLine, title: 'حضور عالمي', desc: 'عمليات في أكثر من 40 دولة بمعرفة محلية عميقة.' },
+    { icon: RiShieldCheckLine, title: getLocaleText('welcome.feature.security.title'), desc: getLocaleText('welcome.feature.security.desc') },
+    { icon: RiLineChartLine, title: getLocaleText('welcome.feature.profit.title'), desc: getLocaleText('welcome.feature.profit.desc') },
+    { icon: RiCustomerService2Line, title: getLocaleText('welcome.feature.support.title'), desc: getLocaleText('welcome.feature.support.desc') },
+    { icon: RiGlobalLine, title: getLocaleText('welcome.feature.global.title'), desc: getLocaleText('welcome.feature.global.desc') },
   ];
 
   return (
@@ -721,7 +717,7 @@ function TrustSection() {
             <div className="relative rounded-2xl overflow-hidden shadow-soft-xl">
               <img
                 src={IMG.team}
-                alt="فريق محترف"
+                alt={getLocaleText('welcome.trust.image_alt')}
                 className="w-full aspect-[4/3] object-cover"
                 loading="lazy"
                 decoding="async"
@@ -744,7 +740,7 @@ function TrustSection() {
                   </svg>
                 ))}
               </div>
-              <p className="text-xs text-neutral-500">تقييم المستثمرين</p>
+              <p className="text-xs text-neutral-500">{getLocaleText('welcome.trust.rating_label')}</p>
               <p className="text-lg font-bold text-dark-950">4.9/5.0</p>
             </m.div>
           </m.div>
@@ -758,7 +754,7 @@ function TrustSection() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-dark-950 leading-tight">
-                لماذا تختارنا؟
+                {getLocaleText('welcome.trust.title')}
               </h2>
               <div className="w-16 h-[2px] bg-gradient-to-r from-gold-400 to-gold-600 mt-5 mb-8" />
             </m.div>
@@ -819,12 +815,11 @@ function CTASection() {
           transition={{ duration: 0.7 }}
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
-            ابدأ رحلتك الاستثمارية اليوم
+            {getLocaleText('welcome.cta.title')}
           </h2>
           <div className="w-16 h-[2px] bg-gradient-to-r from-gold-400 to-gold-600 mx-auto mt-6 mb-5" />
           <p className="text-base sm:text-lg text-white/50 max-w-xl mx-auto leading-relaxed">
-            انضم إلى أكثر من 10,000 مستثمر يثقون في Lendlease لبناء
-            ثروتهم بأمان وربحية مثبتة.
+            {getLocaleText('welcome.cta.subtitle')}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-10">
@@ -832,14 +827,14 @@ function CTASection() {
               href="/register"
               className="group inline-flex items-center justify-center gap-2.5 px-10 py-4 bg-primary-500 text-white font-semibold rounded-xl text-base transition-all duration-300 hover:bg-primary-400 shadow-primary-lg hover:shadow-primary-xl hover:-translate-y-0.5"
             >
-              إنشاء حساب مجاني
+              {getLocaleText('welcome.cta.primary')}
               <RiArrowRightLine className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href="/login"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 border border-white/20 text-white/80 font-medium rounded-xl text-base transition-all duration-300 hover:bg-white/8 hover:border-white/30 hover:text-white backdrop-blur-sm"
             >
-              لدي حساب بالفعل
+              {getLocaleText('welcome.cta.secondary')}
             </Link>
           </div>
         </m.div>
@@ -853,16 +848,31 @@ function CTASection() {
 function Footer() {
   const linkGroups = [
     {
-      title: 'الشركة',
-      links: ['من نحن', 'فريقنا', 'وظائف', 'اتصل بنا'],
+      title: getLocaleText('welcome.footer.company'),
+      links: [
+        getLocaleText('welcome.footer.company.about'),
+        getLocaleText('welcome.footer.company.team'),
+        getLocaleText('welcome.footer.company.careers'),
+        getLocaleText('welcome.footer.company.contact'),
+      ],
     },
     {
-      title: 'الاستثمارات',
-      links: ['المحفظة', 'الاستراتيجيات', 'العوائد', 'أسئلة شائعة'],
+      title: getLocaleText('welcome.footer.investment'),
+      links: [
+        getLocaleText('welcome.footer.investment.portfolio'),
+        getLocaleText('welcome.footer.investment.strategies'),
+        getLocaleText('welcome.footer.investment.returns'),
+        getLocaleText('welcome.footer.investment.faq'),
+      ],
     },
     {
-      title: 'قانوني',
-      links: ['شروط الاستخدام', 'الخصوصية', 'ملفات تعريف الارتباط', 'اللوائح'],
+      title: getLocaleText('welcome.footer.legal'),
+      links: [
+        getLocaleText('welcome.footer.legal.terms'),
+        getLocaleText('welcome.footer.legal.privacy'),
+        getLocaleText('welcome.footer.legal.cookies'),
+        getLocaleText('welcome.footer.legal.regulations'),
+      ],
     },
   ];
 
@@ -886,8 +896,7 @@ function Footer() {
           <div className="lg:col-span-2">
             <img src="/images/logo.png" alt="Lendlease" className="h-8 w-auto brightness-0 invert mb-4" />
             <p className="text-sm text-white/30 leading-relaxed max-w-sm">
-              Lendlease شركة رائدة عالمياً في الاستثمار العقاري،
-              ملتزمة بخلق قيمة مستدامة ونتائج استثنائية لمستثمرينا.
+              {getLocaleText('welcome.footer.description')}
             </p>
             <div className="flex gap-3 mt-6">
               {[RiInstagramLine, RiFacebookCircleLine, RiTwitterXLine, RiLinkedinBoxLine].map((Icon, i) => (
@@ -919,10 +928,10 @@ function Footer() {
 
         {/* 底部 */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8">
-          <p className="text-xs text-white/20">&copy; {new Date().getFullYear()} Lendlease Corporation. جميع الحقوق محفوظة.</p>
+          <p className="text-xs text-white/20">&copy; {new Date().getFullYear()} Lendlease Corporation. {getLocaleText('welcome.footer.copyright_suffix')}</p>
           <div className="flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-primary-400" />
-            <span className="text-xs text-white/30">الدار البيضاء، المغرب</span>
+            <span className="text-xs text-white/30">{getLocaleText('welcome.footer.location')}</span>
           </div>
         </div>
       </div>

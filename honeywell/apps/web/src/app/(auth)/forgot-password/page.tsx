@@ -134,7 +134,7 @@ export default function ForgotPasswordPage() {
             className="inline-flex items-center gap-1 text-sm text-white/50 hover:text-white/80 transition-colors mb-6"
           >
             <RiArrowLeftLine className="w-4 h-4" />
-            {t('link.back_to_login', 'العودة لتسجيل الدخول')}
+            {t('link.back_to_login')}
           </Link>
 
           {/* 图标 */}
@@ -157,16 +157,16 @@ export default function ForgotPasswordPage() {
           {/* 标题 */}
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-white mb-2">
-              {t('page.forgot_password_title', 'هل نسيت كلمة المرور؟')}
+              {t('page.forgot_password_title')}
             </h1>
             <p className="text-sm text-white/50">
-              {t('page.forgot_password_subtitle', 'لا تقلق، نحن هنا لمساعدتك')}
+              {t('page.forgot_password_subtitle')}
             </p>
           </div>
 
           {/* 说明文案 */}
           <p className="text-sm text-white/45 text-center mb-6 leading-relaxed">
-            {t('page.forgot_password_desc', 'لاستعادة حسابك، يرجى التواصل مع فريق الدعم من خلال القنوات التالية:')}
+            {t('page.forgot_password_desc')}
           </p>
 
           {/* 客服链接列表 */}
@@ -211,7 +211,7 @@ export default function ForgotPasswordPage() {
               })
             ) : (
               <div className="text-center py-6 text-sm text-white/30">
-                {t('empty.noData', 'لا توجد بيانات')}
+                {t('empty.noData')}
               </div>
             )}
           </div>
@@ -222,7 +222,7 @@ export default function ForgotPasswordPage() {
               href="/login"
               className="text-amber-400/80 font-semibold hover:text-amber-400 transition-colors"
             >
-              {t('link.back_to_login', 'العودة لتسجيل الدخول')}
+              {t('link.back_to_login')}
             </Link>
           </p>
         </div>

@@ -226,7 +226,7 @@ export function CountdownTimer({
   }), [remaining]);
 
   // 标签文案
-  const displayLabel = label || t('label.next_income', 'الدخل القادم');
+  const displayLabel = label || t('label.next_income');
 
   // 已完成不显示
   if (remaining.totalSeconds <= 0) {

@@ -143,7 +143,7 @@ export function BalanceDisplay({
               type="button"
               onClick={handleToggle}
               className="flex items-center justify-center w-6 h-6 rounded-full hover:bg-neutral-100 transition-colors"
-              aria-label={isHiddenValue ? t('action.show_balance', 'إظهار الرصيد') : t('action.hide_balance', 'إخفاء الرصيد')}
+              aria-label={isHiddenValue ? t('action.show_balance') : t('action.hide_balance')}
             >
               {isHiddenValue ? (
                 <RiEyeOffLine className="w-4 h-4 text-neutral-400" />

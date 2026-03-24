@@ -100,7 +100,7 @@ export function FeeCalculator({
   const hasValidAmount = amount > 0 && !isNaN(amount);
 
   // 空状态提示
-  const emptyMessage = emptyText || t('tip.enter_amount_to_calculate', 'أدخل المبلغ للحساب');
+  const emptyMessage = emptyText || t('tip.enter_amount_to_calculate');
 
   // 空状态渲染
   if (showEmpty && !hasValidAmount) {
@@ -136,7 +136,7 @@ export function FeeCalculator({
       {/* 依据：03.5.1-提现页.md 第2.5节 - biz.apply_amount */}
       <div className="flex items-center justify-between">
         <span className="text-sm text-neutral-400">
-          {t('biz.apply_amount', 'المبلغ المطلوب')}
+          {t('biz.apply_amount')}
         </span>
         <AnimatedNumber
           value={amount}
@@ -153,7 +153,7 @@ export function FeeCalculator({
       {/* 依据：03.5.1-提现页.md 第2.5节 - biz.fee */}
       <div className="flex items-center justify-between">
         <span className="text-sm text-neutral-400">
-          {t('biz.fee', 'الرسوم')} ({feePercent}%)
+          {t('biz.fee')} ({feePercent}%)
         </span>
         <AnimatedNumber
           value={fee}
@@ -170,7 +170,7 @@ export function FeeCalculator({
       {/* 依据：03.5.1-提现页.md 第2.5节 - biz.actual_amount */}
       <div className="flex items-center justify-between pt-1">
         <span className="text-base font-medium text-neutral-600">
-          {t('biz.actual_amount', 'المبلغ الفعلي')}
+          {t('biz.actual_amount')}
         </span>
         <AnimatedNumber
           value={actualAmount}

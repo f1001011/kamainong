@@ -99,7 +99,7 @@ export function PrizePoolCard({
                   'text-sm font-semibold',
                   isLocked ? 'text-neutral-400' : 'text-neutral-700',
                 )}>
-                  {tier.requiredInvites} {t('pool.invites', 'دعوات')}
+                  {tier.requiredInvites} {t('pool.invites')}
                 </span>
                 {!isLocked && !isClaimed && (
                   <span className="text-xs text-neutral-400 tabular-nums">
@@ -109,7 +109,7 @@ export function PrizePoolCard({
               </div>
               {isClaimed && (
                 <span className="text-xs text-primary-600 font-medium">
-                  {t('pool.claimed', 'تم المطالبة')}
+                  {t('pool.claimed')}
                 </span>
               )}
             </div>

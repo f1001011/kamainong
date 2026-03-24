@@ -49,10 +49,10 @@ export function CompletionCelebration({
         <RiTrophyFill className="h-10 w-10 text-gold-400 mx-auto mb-3" />
       </m.div>
       <h3 className="text-lg font-semibold text-neutral-800">
-        {t('celebration.title', 'اكتمل الاستثمار')}
+        {t('celebration.title')}
       </h3>
       <p className="text-sm text-neutral-500 mt-1">
-        {t('celebration.subtitle', 'لقد حصلت على')} +{displayEarned} {t('celebration.in_days', 'خلال')} {cycleDays} {t('label.days', 'أيام')}
+        {t('celebration.subtitle')} +{displayEarned} {t('celebration.in_days')} {cycleDays} {t('label.days')}
       </p>
     </m.div>
   );

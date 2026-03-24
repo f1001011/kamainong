@@ -183,7 +183,7 @@ export function SignInModal({ open, onClose }: SignInModalProps) {
       <ResponsiveModal
         open={open}
         onOpenChange={(isOpen) => !isOpen && onClose()}
-        title={t('signin.title', 'تسجيل الحضور')}
+        title={t('signin.title')}
       >
         <LazyMotion features={domAnimation}>
           <div className="space-y-4 pb-safe">
@@ -353,7 +353,7 @@ function NormalSignInSection({
             </m.div>
             <div>
               <p className="text-sm text-muted-foreground">
-                {t('signin.daily.reward', 'مكافأة يومية')}
+                {t('signin.daily.reward')}
               </p>
               <div className="flex items-baseline gap-0.5">
                 <span className="text-lg font-bold text-primary-500">+</span>
@@ -384,7 +384,7 @@ function NormalSignInSection({
                 )}
               >
                 <RiCalendarCheckLine className="size-5 mr-2" />
-                {t('signin.btn.checkin', 'تسجيل الحضور')}
+                {t('signin.btn.checkin')}
               </Button>
             </PulseWrapper>
           ) : status.todaySigned ? (
@@ -395,7 +395,7 @@ function NormalSignInSection({
               transition={SPRINGS.bouncy}
             >
               <RiCheckDoubleLine className="size-5" />
-              <span className="font-medium">{t('signin.done', 'مكتمل')}</span>
+              <span className="font-medium">{t('signin.done')}</span>
             </m.div>
           ) : null}
         </div>
@@ -501,11 +501,11 @@ function SignInSuccessView({ result, onClose, onGoActivities, isSvip }: SignInSu
         transition={{ ...SPRINGS.gentle, delay: 0.7 }}
       >
         <h3 className="text-xl font-bold text-foreground">
-          {t('signin.success', 'تم تسجيل الحضور بنجاح')}
+          {t('signin.success')}
         </h3>
         <p className="text-sm text-muted-foreground">
           {result.signInCompleted
-            ? t('signin.normal_completed', 'لقد أكملت مهمة الحضور لمدة 3 أيام')
+            ? t('signin.normal_completed')
             : t.withVars('signin.continuous_days', { n: result.newStreak.toString() })}
         </p>
       </m.div>
@@ -584,7 +584,7 @@ function SignInSuccessView({ result, onClose, onGoActivities, isSvip }: SignInSu
               transition={{ delay: 1.4 }}
             >
               <RiSparklingLine className="size-3.5 text-gold-500" />
-              <span>{t('signin.total_reward', 'إجمالي المكافأة')}</span>
+              <span>{t('signin.total_reward')}</span>
             </m.div>
           )}
         </div>
@@ -607,7 +607,7 @@ function SignInSuccessView({ result, onClose, onGoActivities, isSvip }: SignInSu
               transition={{ ...SPRINGS.gentle, delay: 1.4 + index * 0.1 }}
             >
               <span className="text-sm text-muted-foreground">
-                {reward.type === 'SVIP' ? 'SVIP' : t('signin.daily.reward', 'مكافأة يومية')}
+                {reward.type === 'SVIP' ? 'SVIP' : t('signin.daily.reward')}
               </span>
               <span className="text-sm font-semibold text-primary-500">
                 +{currencySymbol}{reward.amount}
@@ -637,7 +637,7 @@ function SignInSuccessView({ result, onClose, onGoActivities, isSvip }: SignInSu
             'text-white'
           )}
         >
-          {t('btn.confirm', 'تأكيد')}
+          {t('btn.confirm')}
         </Button>
 
         {/* 活动中心入口 */}
@@ -695,8 +695,8 @@ function SignInCompletedState({ type, onGoBuy, onGoActivities }: SignInCompleted
         transition={{ ...SPRINGS.gentle, delay: 0.2 }}
       >
         {type === 'completed' 
-          ? t('signin.normal_completed', 'لقد أكملت الحضور لمدة 3 أيام! اشترِ منتجاً للاستمرار.')
-          : t('signin.window_expired', 'انتهت فترة الحضور. اشترِ منتجاً للاستمرار.')
+          ? t('signin.normal_completed')
+          : t('signin.window_expired')
         }
       </m.p>
 
@@ -716,7 +716,7 @@ function SignInCompletedState({ type, onGoBuy, onGoActivities }: SignInCompleted
           onClick={onGoBuy}
         >
           <RiShoppingBag3Line className="size-5 mr-2" />
-          {t('signin.btn_go_buy', 'اذهب للشراء')}
+          {t('signin.btn_go_buy')}
         </Button>
       </m.div>
 
@@ -745,7 +745,7 @@ function ActivityCenterLink({ onClick }: { onClick: () => void }) {
       whileTap={{ scale: 0.97 }}
       className="w-full flex items-center justify-center gap-1 text-sm text-primary-500 hover:text-primary-600 transition-colors py-2 group"
     >
-      {t('signin.go_activities', 'عرض المزيد من الأنشطة')}
+      {t('signin.go_activities')}
       <RiArrowRightSLine className="size-4 transition-transform group-hover:translate-x-0.5" />
     </m.button>
   );
@@ -821,14 +821,14 @@ function SignInErrorState({ onRetry }: { onRetry: () => void }) {
         <RiAlertLine className="size-8 text-destructive" />
       </m.div>
       <p className="text-sm text-muted-foreground text-center">
-        {t('signin.error.load', 'خطأ في تحميل حالة الحضور')}
+        {t('signin.error.load')}
       </p>
       <Button 
         onClick={() => { haptic('light'); onRetry(); }} 
         variant="secondary" 
         size="sm"
       >
-        {t('btn.retry', 'إعادة المحاولة')}
+        {t('btn.retry')}
       </Button>
     </m.div>
   );

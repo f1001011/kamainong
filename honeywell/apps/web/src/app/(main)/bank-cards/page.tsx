@@ -91,7 +91,7 @@ export default function BankCardsPage() {
       setCanAdd(data.canAdd !== false);
     } catch (error) {
       console.error('加载银行卡列表失败:', error);
-      toast.error(t('error.load_cards_failed', 'فشل تحميل البطاقات'));
+      toast.error(t('error.load_cards_failed'));
     } finally {
       setIsLoading(false);
     }
@@ -144,7 +144,7 @@ export default function BankCardsPage() {
       await del(`/bank-cards/${cardToDelete.id}`);
 
       // 成功提示
-      toast.success(t('toast.card_deleted', 'تم حذف البطاقة'));
+      toast.success(t('toast.card_deleted'));
 
       // 关闭弹窗
       setDeleteDialogOpen(false);
@@ -158,16 +158,16 @@ export default function BankCardsPage() {
       if (error instanceof ApiError) {
         switch (error.code) {
           case 'BANK_CARD_IN_USE':
-            toast.error(t('error.card_in_use', 'هذه البطاقة لديها سحوبات معلقة'));
+            toast.error(t('error.card_in_use'));
             break;
           case 'BANK_CARD_LAST_ONE':
-            toast.error(t('error.card_last_one', 'يجب الاحتفاظ ببطاقة واحدة على الأقل'));
+            toast.error(t('error.card_last_one'));
             break;
           default:
-            toast.error(error.message || t('error.delete_failed', 'فشل الحذف'));
+            toast.error(error.message || t('error.delete_failed'));
         }
       } else {
-        toast.error(t('error.network', 'خطأ في الشبكة'));
+        toast.error(t('error.network'));
       }
     } finally {
       setIsDeleting(false);
@@ -204,7 +204,7 @@ export default function BankCardsPage() {
         </button>
         
         <h1 className="text-lg font-bold tracking-tight text-neutral-700">
-          {t('page.bank_cards', 'بطاقاتي')}
+          {t('page.bank_cards')}
         </h1>
         
         {/* 占位，保持标题居中 */}
@@ -231,10 +231,10 @@ export default function BankCardsPage() {
             </div>
             <div className="flex-1 min-w-0">
               <div className="text-sm font-medium text-primary-700">
-                {t('tip.cards_secure_title', 'بياناتك آمنة')}
+                {t('tip.cards_secure_title')}
               </div>
               <div className="text-xs text-primary-600/80 mt-0.5">
-                {t('tip.cards_secure_desc', 'جميع المعلومات البنكية مشفرة ومحمية')}
+                {t('tip.cards_secure_desc')}
               </div>
             </div>
           </m.div>
@@ -242,12 +242,12 @@ export default function BankCardsPage() {
           {/* 银行卡数量提示 */}
           <div className="flex items-center justify-between text-sm">
             <span className="text-neutral-500">
-              {t('label.bound_cards', 'البطاقات المربوطة')}: {cards.length}/{maxCount}
+              {t('label.bound_cards')}: {cards.length}/{maxCount}
             </span>
             {cards.length >= maxCount && (
               <span className="text-gold-600 flex items-center gap-1">
                 <RiInformationLine className="w-4 h-4" />
-                {t('tip.max_cards_reached', 'تم الوصول إلى الحد')}
+                {t('tip.max_cards_reached')}
               </span>
             )}
           </div>
@@ -271,9 +271,9 @@ export default function BankCardsPage() {
             // 空状态 - 依据：03.6.1文案规范
             <EmptyState
               icon={<RiBankCardFill className="w-12 h-12 text-neutral-300" />}
-              title={t('empty.no_card', 'لا توجد بطاقات مربوطة')}
-              description={t('empty.no_card_desc', 'أضف بطاقة بنكية لإجراء السحوبات')}
-              actionText={t('btn.add_card', 'إضافة بطاقة')}
+              title={t('empty.no_card')}
+              description={t('empty.no_card_desc')}
+              actionText={t('btn.add_card')}
               onAction={handleAddCard}
             />
           )}
@@ -303,10 +303,10 @@ export default function BankCardsPage() {
               </div>
               <div className="text-center">
                 <div className="text-base font-medium text-neutral-600">
-                  {t('btn.add_new_card', 'إضافة بطاقة جديدة')}
+                  {t('btn.add_new_card')}
                 </div>
                 <div className="text-sm text-neutral-400 mt-1">
-                  {t('tip.add_card_hint', 'اضغط لإضافة بطاقة بنكية')}
+                  {t('tip.add_card_hint')}
                 </div>
               </div>
             </m.button>
@@ -314,7 +314,7 @@ export default function BankCardsPage() {
 
           {/* 底部提示 */}
           <div className="pt-4 text-center text-xs text-neutral-400">
-            <p>{t('tip.withdraw_bank_note', 'يمكنك السحب فقط إلى البطاقات المسجلة')}</p>
+            <p>{t('tip.withdraw_bank_note')}</p>
           </div>
         </div>
       </div>
@@ -324,11 +324,11 @@ export default function BankCardsPage() {
         open={deleteDialogOpen}
         onOpenChange={setDeleteDialogOpen}
         type="danger"
-        title={t('dialog.delete_card_title', 'حذف البطاقة')}
+        title={t('dialog.delete_card_title')}
         description={
           cardToDelete ? (
             <div className="space-y-2">
-              <p>{t('dialog.delete_card_msg', 'هل أنت متأكد من حذف هذه البطاقة البنكية؟')}</p>
+              <p>{t('dialog.delete_card_msg')}</p>
               <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-neutral-50 text-neutral-600">
                 <RiBankCardFill className="w-5 h-5 text-neutral-400" />
                 <span className="font-mono">{cardToDelete.accountNoMask}</span>
@@ -338,8 +338,8 @@ export default function BankCardsPage() {
             </div>
           ) : undefined
         }
-        confirmText={t('btn.delete', 'حذف')}
-        cancelText={t('btn.cancel', 'إلغاء')}
+        confirmText={t('btn.delete')}
+        cancelText={t('btn.cancel')}
         onConfirm={handleConfirmDelete}
         onCancel={handleCancelDelete}
         isLoading={isDeleting}

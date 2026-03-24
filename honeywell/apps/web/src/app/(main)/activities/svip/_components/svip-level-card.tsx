@@ -129,10 +129,10 @@ export function SvipLevelCard({
           </p>
           <p className={cn('text-[10px]', status === 'claimed' ? 'text-emerald-500 font-medium' : 'text-neutral-400')}>
             {status === 'claimed'
-              ? t('svip.claimed', 'تم المطالبة')
+              ? t('svip.claimed')
               : status === 'qualified'
-                ? t('svip.unclaimed', 'متاح للمطالبة')
-                : t('svip.per_day', '/ يومياً')
+                ? t('svip.unclaimed')
+                : t('svip.per_day')
             }
           </p>
         </div>
@@ -143,7 +143,7 @@ export function SvipLevelCard({
         <div className="mt-3 pt-3 border-t border-neutral-100">
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="text-neutral-400">
-              {t('svip.progress', 'التقدم')}
+              {t('svip.progress')}
             </span>
             <span className={cn('tabular-nums', hasPartial ? 'text-violet-500 font-medium' : 'text-neutral-400')}>
               {activeCount} / {requiredCount}

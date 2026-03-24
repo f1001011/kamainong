@@ -195,7 +195,7 @@ export function CalendarPanel({
                   animate={{ opacity: 1, scale: 1 }}
                   className="absolute -top-10 left-1/2 -translate-x-1/2 bg-neutral-800 text-white text-[10px] rounded-lg px-2.5 py-1.5 shadow-lg whitespace-nowrap z-10"
                 >
-                  {t('label.day_abbr', 'اليوم')} {record.settleSequence} · +{formatCurrency(record.amount, config)} · {record.status === 'SETTLED' ? t('status.settled', 'تمت التسوية') : record.status === 'FAILED' ? t('status.failed', 'فشل') : t('status.pending', 'معلّق')}
+                  {t('label.day_abbr')} {record.settleSequence} · +{formatCurrency(record.amount, config)} · {record.status === 'SETTLED' ? t('status.settled') : record.status === 'FAILED' ? t('status.failed') : t('status.pending')}
                 </m.div>
               )}
             </button>
@@ -205,19 +205,19 @@ export function CalendarPanel({
 
       {/* 图例 */}
       <div className="flex justify-center gap-5 mt-4 pt-3 border-t border-neutral-100">
-        <LegendItem color="bg-success/30" label={t('status.settled', 'تمت التسوية')} />
-        <LegendItem color="bg-neutral-200" label={t('status.pending', 'معلّق')} />
-        <LegendItem color="bg-primary-300" label={t('label.today', 'اليوم')} />
+        <LegendItem color="bg-success/30" label={t('status.settled')} />
+        <LegendItem color="bg-neutral-200" label={t('status.pending')} />
+        <LegendItem color="bg-primary-300" label={t('label.today')} />
       </div>
 
       {/* 月度汇总 */}
       <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-neutral-100">
         <div>
-          <p className="text-[11px] text-neutral-400 uppercase tracking-wider mb-1">{t('label.earned_this_month', 'المحقق')}</p>
+          <p className="text-[11px] text-neutral-400 uppercase tracking-wider mb-1">{t('label.earned_this_month')}</p>
           <p className="text-base font-bold font-mono text-success">+{monthStats.settled}</p>
         </div>
         <div className="text-right">
-          <p className="text-[11px] text-neutral-400 uppercase tracking-wider mb-1">{t('label.pending_this_month', 'معلّق')}</p>
+          <p className="text-[11px] text-neutral-400 uppercase tracking-wider mb-1">{t('label.pending_this_month')}</p>
           <p className="text-base font-bold font-mono text-neutral-600">{monthStats.pending}</p>
         </div>
       </div>

@@ -81,7 +81,7 @@ export default function RechargeOrderDetailPage({ params }: PageProps) {
       // 跳转到支付页面
       window.location.href = order.payUrl;
     } else {
-      toast.error(t('error.pay_url_invalid', 'رابط الدفع غير صالح'));
+      toast.error(t('error.pay_url_invalid'));
     }
   }, [order?.payUrl, t]);
 
@@ -101,12 +101,12 @@ export default function RechargeOrderDetailPage({ params }: PageProps) {
     setIsCancelling(true);
     try {
       await api.post(`/recharge/orders/${order.id}/cancel`);
-      toast.success(t('toast.order_cancelled', 'تم إلغاء الطلب'));
+      toast.success(t('toast.order_cancelled'));
       mutate(); // 刷新订单详情
       setShowCancelDialog(false);
     } catch (err) {
       console.error('取消订单失败:', err);
-      toast.error(t('toast.cancel_failed', 'فشل في الإلغاء'));
+      toast.error(t('toast.cancel_failed'));
     } finally {
       setIsCancelling(false);
     }
@@ -172,16 +172,16 @@ export default function RechargeOrderDetailPage({ params }: PageProps) {
         <RiErrorWarningLine className="h-12 w-12 text-error" />
       </div>
       <h3 className="text-lg font-semibold text-neutral-800 mb-2">
-        {t('error.order_not_found', 'لم يتم العثور على الطلب')}
+        {t('error.order_not_found')}
       </h3>
       <p className="text-sm text-neutral-500 text-center mb-6">
-        {t('error.order_not_found_desc', 'الطلب الذي تبحث عنه غير موجود أو تم حذفه')}
+        {t('error.order_not_found_desc')}
       </p>
       <Button
         variant="secondary"
         onClick={() => router.push('/recharge/records')}
       >
-        {t('btn.back_to_list', 'العودة إلى القائمة')}
+        {t('btn.back_to_list')}
       </Button>
     </div>
   );
@@ -215,12 +215,12 @@ export default function RechargeOrderDetailPage({ params }: PageProps) {
           <button
             onClick={() => router.back()}
             className="p-2 -ml-2 rounded-lg hover:bg-neutral-100 transition-colors"
-            aria-label={t('btn.back', 'رجوع')}
+            aria-label={t('btn.back')}
           >
             <RiArrowLeftLine className="h-5 w-5 text-neutral-600" />
           </button>
           <h1 className="flex-1 min-w-0 text-center text-lg font-bold tracking-tight text-neutral-800 truncate">
-            {t('page.recharge_detail', 'تفاصيل الإيداع')}
+            {t('page.recharge_detail')}
           </h1>
           {/* 占位，保持标题居中 */}
           <div className="w-9" />
@@ -243,10 +243,10 @@ export default function RechargeOrderDetailPage({ params }: PageProps) {
         open={showCancelDialog}
         onOpenChange={setShowCancelDialog}
         type="warning"
-        title={t('dialog.cancel_order_title', 'إلغاء الطلب')}
-        description={t('dialog.cancel_order_message', 'هل أنت متأكد من إلغاء هذا الطلب؟')}
-        confirmText={t('btn.confirm', 'تأكيد')}
-        cancelText={t('btn.cancel', 'إلغاء')}
+        title={t('dialog.cancel_order_title')}
+        description={t('dialog.cancel_order_message')}
+        confirmText={t('btn.confirm')}
+        cancelText={t('btn.cancel')}
         onConfirm={handleConfirmCancel}
         isLoading={isCancelling}
       />

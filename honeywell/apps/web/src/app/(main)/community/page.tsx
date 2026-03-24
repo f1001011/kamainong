@@ -120,9 +120,9 @@ export default function CommunityPage() {
         <div className="px-4 py-20">
           <EmptyState
             icon={<RiChat3Line className="size-12 text-neutral-400" />}
-            title={t('error.load_failed', 'خطأ في التحميل')}
-            description={t('error.try_again', 'تعذر التحميل. حاول مرة أخرى.')}
-            actionText={t('btn.retry', 'إعادة المحاولة')}
+            title={t('error.load_failed')}
+            description={t('error.try_again')}
+            actionText={t('btn.retry')}
             onAction={() => refetch()}
           />
         </div>
@@ -145,10 +145,10 @@ export default function CommunityPage() {
             className="relative z-10 px-4 pt-4 pb-2"
           >
             <h2 className="text-xl font-bold text-neutral-800">
-              {t('community.title', 'الساحة')}
+              {t('community.title')}
             </h2>
             <p className="text-sm text-neutral-500 mt-0.5">
-              {t('community.subtitle', 'شارك نجاحك مع المجتمع')}
+              {t('community.subtitle')}
             </p>
           </m.div>
 
@@ -157,8 +157,8 @@ export default function CommunityPage() {
             {posts.length === 0 ? (
               <EmptyState
                 icon={<RiChat3Line className="size-12 text-neutral-400" />}
-                title={t('community.empty', 'لا توجد منشورات بعد')}
-                description={t('community.empty_desc', 'كن أول من يشارك سحبه الناجح')}
+                title={t('community.empty')}
+                description={t('community.empty_desc')}
               />
             ) : (
               posts.map((post, index) => (
@@ -217,17 +217,17 @@ function FeedHeader() {
           <button
             onClick={() => router.back()}
             className="p-2 -ml-2 rounded-xl hover:bg-neutral-100/80 active:scale-95 transition-all"
-            aria-label={t('btn.back', 'رجوع')}
+            aria-label={t('btn.back')}
           >
             <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
           </button>
           <h1 className="text-lg font-bold text-neutral-800 tracking-tight">
-            {t('nav.community', 'المجتمع')}
+            {t('nav.community')}
           </h1>
           <button
             onClick={() => router.push('/community/my')}
             className="p-2 -mr-2 rounded-xl hover:bg-neutral-100/80 active:scale-95 transition-all"
-            aria-label={t('community.my_posts', 'منشوراتي')}
+            aria-label={t('community.my_posts')}
           >
             <RiUserLine className="w-5 h-5 text-neutral-600" />
           </button>
@@ -269,12 +269,12 @@ function PostCard({
   const formatRelativeTime = (dateStr: string) => {
     const diff = Date.now() - new Date(dateStr).getTime();
     const minutes = Math.floor(diff / 60000);
-    if (minutes < 1) return t('time.justNow', 'الآن');
-    if (minutes < 60) return `${minutes} ${t('time.minutesAgo', 'د')}`;
+    if (minutes < 1) return t('time.justNow');
+    if (minutes < 60) return `${minutes} ${t('time.minutesAgo')}`;
     const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours} ${t('time.hoursAgo', 'س')}`;
+    if (hours < 24) return `${hours} ${t('time.hoursAgo')}`;
     const days = Math.floor(hours / 24);
-    return `${days} ${t('time.daysAgo', 'ي')}`;
+    return `${days} ${t('time.daysAgo')}`;
   };
 
   return (
@@ -327,26 +327,26 @@ function PostCard({
         <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100">
           <img
             src={post.platformScreenshot}
-            alt={t('community.platform_screenshot', 'لقطة شاشة المنصة')}
+            alt={t('community.platform_screenshot')}
             className="w-full h-full object-cover"
             loading="lazy"
           />
           <div className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/50 backdrop-blur-sm">
             <span className="text-[10px] text-white font-medium">
-              {t('community.platform', 'المنصة')}
+              {t('community.platform')}
             </span>
           </div>
         </div>
         <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-neutral-100">
           <img
             src={post.receiptScreenshot}
-            alt={t('community.receipt_screenshot', 'لقطة شاشة الإيصال')}
+            alt={t('community.receipt_screenshot')}
             className="w-full h-full object-cover"
             loading="lazy"
           />
           <div className="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-md bg-black/50 backdrop-blur-sm">
             <span className="text-[10px] text-white font-medium">
-              {t('community.receipt', 'الإيصال')}
+              {t('community.receipt')}
             </span>
           </div>
         </div>

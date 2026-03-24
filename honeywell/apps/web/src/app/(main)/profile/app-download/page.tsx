@@ -155,7 +155,7 @@ export default function AppDownloadPage() {
                   className="flex items-center gap-1 text-sm text-white/80 hover:text-white transition-colors"
                 >
                   <RiArrowLeftSLine className="w-5 h-5" />
-                  <span>{t('btn.back_profile', 'الملف الشخصي')}</span>
+                  <span>{t('btn.back_profile')}</span>
                 </button>
               </m.div>
 
@@ -210,10 +210,7 @@ export default function AppDownloadPage() {
                   lendlease
                 </h1>
                 <p className="text-sm text-white/50 mt-2 tracking-wide">
-                  {t(
-                    'download.subtitle',
-                    'حمّل تطبيقنا لنظام أندرويد'
-                  )}
+                  {t('download.subtitle')}
                 </p>
               </m.section>
 
@@ -223,16 +220,10 @@ export default function AppDownloadPage() {
                   <div className="card-floating p-8 text-center space-y-3">
                     <RiCheckboxCircleFill className="w-14 h-14 text-primary-500 mx-auto" />
                     <h2 className="text-lg font-bold text-foreground">
-                      {t(
-                        'download.already_using',
-                        'أنت تستخدم التطبيق بالفعل'
-                      )}
+                      {t('download.already_using')}
                     </h2>
                     <p className="text-sm text-neutral-400">
-                      {t(
-                        'download.already_desc',
-                        'استمتع بأفضل تجربة استثمار'
-                      )}
+                      {t('download.already_desc')}
                     </p>
                   </div>
                 </m.section>
@@ -282,7 +273,7 @@ export default function AppDownloadPage() {
                       )}
                     >
                       <RiDownload2Line className="w-5 h-5" />
-                      {t('download.btn', 'تحميل APK')}
+                      {t('download.btn')}
                     </a>
                     <p className="text-center text-xs text-neutral-400 mt-2.5">
                       Android 7.0+ &middot; v1.1.0
@@ -292,7 +283,7 @@ export default function AppDownloadPage() {
                   {/* 安装步骤 */}
                   <m.section variants={listItemVariants} className="space-y-3">
                     <h2 className="text-base font-bold text-foreground px-1">
-                      {t('download.how_title', 'كيفية التثبيت')}
+                      {t('download.how_title')}
                     </h2>
                     <div className="card-floating divide-y divide-neutral-100">
                       {STEPS.map((step, idx) => (
@@ -329,10 +320,7 @@ export default function AppDownloadPage() {
                     <div className="flex gap-3 p-4 bg-warning-50 rounded-2xl border border-warning/10">
                       <RiInformationLine className="w-5 h-5 text-warning-600 flex-shrink-0 mt-0.5" />
                       <p className="text-xs text-warning-600 leading-relaxed">
-                        {t(
-                          'download.security_note',
-                          'إذا منع جهازك التثبيت، انتقل إلى الإعدادات > الأمان > السماح بالمصادر غير المعروفة لإتمام التثبيت.'
-                        )}
+                        {t('download.security_note')}
                       </p>
                     </div>
                   </m.section>

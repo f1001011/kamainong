@@ -32,7 +32,6 @@ import { cn } from '@/lib/utils';
 interface NavItem {
   path: string;
   labelKey: string;
-  defaultLabel: string;
   icon: typeof RiHomeLine;
   activeIcon: typeof RiHomeFill;
 }
@@ -41,35 +40,30 @@ const navItems: NavItem[] = [
   {
     path: '/',
     labelKey: 'nav.home',
-    defaultLabel: 'الرئيسية',
     icon: RiHomeLine,
     activeIcon: RiHomeFill,
   },
   {
     path: '/products',
     labelKey: 'nav.products',
-    defaultLabel: 'المنتجات',
     icon: RiShoppingBagLine,
     activeIcon: RiShoppingBagFill,
   },
   {
     path: '/activities',
     labelKey: 'nav.activities',
-    defaultLabel: 'الأنشطة',
     icon: RiGiftLine,
     activeIcon: RiGiftFill,
   },
   {
     path: '/team?tab=invite',
     labelKey: 'nav.team',
-    defaultLabel: 'الفريق',
     icon: RiTeamLine,
     activeIcon: RiTeamFill,
   },
   {
     path: '/profile',
     labelKey: 'nav.profile',
-    defaultLabel: 'الملف الشخصي',
     icon: RiUserLine,
     activeIcon: RiUserFill,
   },
@@ -147,7 +141,7 @@ export function BottomNav() {
                       active ? 'text-white/90' : 'text-white/40'
                     )}
                   >
-                    {t(item.labelKey, item.defaultLabel)}
+                    {t(item.labelKey)}
                   </span>
                 </m.div>
               ) : (
@@ -171,7 +165,7 @@ export function BottomNav() {
                       active ? 'text-white/90' : 'text-white/40'
                     )}
                   >
-                    {t(item.labelKey, item.defaultLabel)}
+                    {t(item.labelKey)}
                   </span>
                 </div>
               )}

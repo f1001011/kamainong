@@ -49,10 +49,10 @@ export default function SvipPage() {
     claimMutation.mutate(undefined, {
       onSuccess: (result) => {
         const amountStr = formatCurrency(parseFloat(result.totalAmount) || 0, config);
-        toast.success(`${t('svip.claim_success', 'تمت المطالبة بنجاح')} +${amountStr}`);
+        toast.success(`${t('svip.claim_success')} +${amountStr}`);
       },
       onError: (error) => {
-        toast.error(error.message || t('error.claim_failed', 'فشل في المطالبة'));
+        toast.error(error.message || t('error.claim_failed'));
       },
     });
   }, [claimMutation, config, t]);
@@ -82,13 +82,13 @@ export default function SvipPage() {
               <button
                 onClick={() => router.back()}
                 className="p-2 -ml-2 rounded-xl hover:bg-white/10 active:scale-95 transition-all"
-                aria-label={t('btn.back', 'رجوع')}
+                aria-label={t('btn.back')}
               >
                 <RiArrowLeftSLine className="w-6 h-6 text-white/70" />
               </button>
               <h1 className="text-lg font-bold text-white tracking-tight flex items-center gap-2">
                 <RiVipCrownFill className="w-5 h-5 text-amber-400" />
-                {t('svip.page_title', 'مكافأة SVIP اليومية')}
+                {t('svip.page_title')}
               </h1>
               <div className="w-10" />
             </div>
@@ -119,7 +119,7 @@ export default function SvipPage() {
             >
               <RiVipCrownFill className="w-5 h-5 text-violet-500" />
               <h2 className="text-base font-bold text-neutral-800">
-                {t('svip.all_levels', 'جميع المستويات')}
+                {t('svip.all_levels')}
               </h2>
             </m.div>
 

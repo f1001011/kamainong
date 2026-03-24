@@ -109,7 +109,7 @@ export const LoadingSpinner = forwardRef<HTMLDivElement, LoadingSpinnerProps>(
     const { isAnimationEnabled } = useAnimationConfig();
 
     // 默认加载文案
-    const loadingText = text || t('tip.loading', 'جارٍ التحميل...');
+    const loadingText = text || t('tip.loading');
 
     // 文案尺寸映射
     const textSizeMap: Record<string, string> = {
@@ -248,7 +248,7 @@ export function PageLoader({ text }: { text?: string }) {
   
   return (
     <div className="flex flex-col items-center justify-center min-h-[200px] py-12">
-      <LoadingSpinner size="lg" showText text={text || t('tip.loading', 'جارٍ التحميل...')} />
+      <LoadingSpinner size="lg" showText text={text || t('tip.loading')} />
     </div>
   );
 }

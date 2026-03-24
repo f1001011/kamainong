@@ -43,10 +43,10 @@ export function RulesSection({ className }: RulesSectionProps) {
 
   // 规则列表（从文案配置获取）- 依据文档 2.7节 文案配置
   const rules = [
-    t('collection.rule_prerequisite', 'يجب استيفاء الشرط المسبق للمشاركة'),
-    t('collection.rule_purchase', 'اشترِ منتجات VIP لإكمال المجموعات'),
-    t('collection.rule_claim', 'يجب المطالبة بالمكافآت يدوياً'),
-    t('collection.rule_expire', 'المكافآت غير المطالب بها ستنتهي عند انتهاء النشاط'),
+    t('collection.rule_prerequisite'),
+    t('collection.rule_purchase'),
+    t('collection.rule_claim'),
+    t('collection.rule_expire'),
   ];
 
   return (
@@ -60,7 +60,7 @@ export function RulesSection({ className }: RulesSectionProps) {
           <div className="w-7 h-7 rounded-lg bg-neutral-100 flex items-center justify-center">
             <RiInformationLine className="w-4 h-4 text-neutral-500" />
           </div>
-          <span className="text-sm font-semibold text-neutral-700">{t('collection.rule_title', 'قواعد النشاط')}</span>
+          <span className="text-sm font-semibold text-neutral-700">{t('collection.rule_title')}</span>
         </div>
         <m.div
           animate={{ rotate: isExpanded ? 180 : 0 }}

@@ -58,9 +58,9 @@ function getGreeting(t: (key: string, fallback?: string) => string, timezone: st
     new Date().toLocaleString('en-US', { timeZone: timezone, hour: 'numeric', hour12: false }),
     10
   );
-  if (hour >= 5 && hour < 12) return t('greeting.morning', 'صباح الخير');
-  if (hour >= 12 && hour < 19) return t('greeting.afternoon', 'مساء الخير');
-  return t('greeting.evening', 'مساء الخير');
+  if (hour >= 5 && hour < 12) return t('greeting.morning');
+  if (hour >= 12 && hour < 19) return t('greeting.afternoon');
+  return t('greeting.evening');
 }
 
 export default function HomePage() {

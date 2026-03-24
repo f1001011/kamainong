@@ -121,7 +121,7 @@ export function InviteHero({
                 className="font-heading text-[48px] text-gradient-gold tabular-nums leading-none"
               />
               <span className="text-[9px] tracking-[0.15em] uppercase text-white/35 mt-1.5 whitespace-nowrap">
-                {t('invite.hero_count_label', 'دعوات صالحة')}
+                {t('invite.hero_count_label')}
               </span>
             </div>
           </CircularProgress>
@@ -158,7 +158,7 @@ export function InviteHero({
             leftIcon={<RiShareLine className="w-5 h-5" />}
             onClick={() => router.push('/team?tab=invite')}
           >
-            {t('invite.hero_cta', 'دعوة أصدقاء')}
+            {t('invite.hero_cta')}
           </Button>
         </div>
       </m.div>

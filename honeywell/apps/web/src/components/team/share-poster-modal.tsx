@@ -112,9 +112,9 @@ export const SharePosterModal = memo(function SharePosterModal({
           setIsSaving(false);
           if (success) {
             setIsSaved(true);
-            toast.success(t('toast.saveSuccess', 'تم الحفظ بنجاح'));
+            toast.success(t('toast.saveSuccess'));
           } else {
-            toast.error(t('toast.saveFailed', 'خطأ في الحفظ'));
+            toast.error(t('toast.saveFailed'));
           }
         });
         return;
@@ -134,10 +134,10 @@ export const SharePosterModal = memo(function SharePosterModal({
       URL.revokeObjectURL(url);
       
       setIsSaved(true);
-      toast.success(t('toast.downloadSuccess', 'تم التحميل بنجاح'));
+      toast.success(t('toast.downloadSuccess'));
     } catch (error) {
       console.error('Save poster failed:', error);
-      toast.error(t('toast.saveFailed', 'خطأ في الحفظ'));
+      toast.error(t('toast.saveFailed'));
     } finally {
       setIsSaving(false);
     }
@@ -154,7 +154,7 @@ export const SharePosterModal = memo(function SharePosterModal({
       try {
         await navigator.share({
           title: config?.siteName || 'lendlease',
-          text: t('team.shareText', 'انضم واربح معي!'),
+          text: t('team.shareText'),
           url: posterData.inviteLink,
         });
       } catch (error) {
@@ -167,9 +167,9 @@ export const SharePosterModal = memo(function SharePosterModal({
       // 不支持时复制链接
       try {
         await navigator.clipboard.writeText(posterData.inviteLink);
-        toast.success(t('toast.copy_success', 'تم نسخ الرابط'));
+        toast.success(t('toast.copy_success'));
       } catch {
-        toast.error(t('toast.copyFailed', 'خطأ في النسخ'));
+        toast.error(t('toast.copyFailed'));
       }
     }
   }, [posterData, config, t]);
@@ -178,7 +178,7 @@ export const SharePosterModal = memo(function SharePosterModal({
     <ResponsiveModal
       open={open}
       onOpenChange={onOpenChange}
-      title={t('team.sharePosterTitle', 'مشاركة')}
+      title={t('team.sharePosterTitle')}
     >
       <div className="flex flex-col items-center px-4 pb-6">
         {/* 海报预览区 */}
@@ -232,7 +232,7 @@ export const SharePosterModal = memo(function SharePosterModal({
               {/* 邀请码 */}
               <div className="mt-4 text-center">
                 <p className="text-white/80 text-sm mb-1">
-                  {t('team.inviteCode', 'رمز الدعوة')}
+                  {t('team.inviteCode')}
                 </p>
                 <p className="font-mono text-2xl font-bold text-white tracking-wider">
                   {posterData.inviteCode}
@@ -241,7 +241,7 @@ export const SharePosterModal = memo(function SharePosterModal({
               
               {/* 口号 */}
               <p className="mt-4 text-white/70 text-sm text-center">
-                {t('team.posterSlogan', 'امسح وانضم لتربح!')}
+                {t('team.posterSlogan')}
               </p>
             </m.div>
           ) : null}
@@ -266,8 +266,8 @@ export const SharePosterModal = memo(function SharePosterModal({
             }
           >
             {isSaved 
-              ? t('team.saved', 'تم الحفظ') 
-              : t('team.save', 'حفظ')
+              ? t('team.saved') 
+              : t('team.save')
             }
           </Button>
           
@@ -280,13 +280,13 @@ export const SharePosterModal = memo(function SharePosterModal({
             disabled={!posterData || isLoading}
             leftIcon={<RiShareLine className="w-5 h-5" />}
           >
-            {t('team.share', 'مشاركة')}
+            {t('team.share')}
           </Button>
         </div>
         
         {/* 提示文字 */}
         <p className="mt-4 text-sm text-neutral-500 text-center">
-          {t('team.shareHint', 'شارك مع أصدقائك لكسب العمولات')}
+          {t('team.shareHint')}
         </p>
       </div>
     </ResponsiveModal>

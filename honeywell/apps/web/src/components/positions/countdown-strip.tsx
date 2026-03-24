@@ -57,7 +57,7 @@ export function CountdownStrip({
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-1.5">
           <RiTimeFill className="h-4 w-4 text-primary-400" />
-          <span className="text-sm text-neutral-600">{t('label.next_income_countdown', 'الدخل القادم')}</span>
+          <span className="text-sm text-neutral-600">{t('label.next_income_countdown')}</span>
         </div>
         <CountdownTimer
           targetTime={nextIncomeTime}
@@ -72,7 +72,7 @@ export function CountdownStrip({
       {/* 底部行 */}
       <div className="flex items-center justify-between">
         <span className="text-xs text-neutral-400">
-          {t('label.estimated', 'المتوقع')}: {displaySettleTime}
+          {t('label.estimated')}: {displaySettleTime}
         </span>
         <span className="text-sm font-bold font-mono text-success">
           +{displayDailyIncome}

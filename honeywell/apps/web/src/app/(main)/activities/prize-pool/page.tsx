@@ -119,12 +119,12 @@ export default function PrizePoolPage() {
               <button
                 onClick={() => router.back()}
                 className="p-2 -ml-2 rounded-xl hover:bg-purple-100/80 active:scale-95 transition-all"
-                aria-label={t('btn.back', 'رجوع')}
+                aria-label={t('btn.back')}
               >
                 <RiArrowLeftSLine className="w-6 h-6 text-neutral-600" />
               </button>
               <h1 className="text-lg font-bold text-neutral-800 tracking-tight">
-                {t('pool.title', 'صندوق الجوائز اليومي')}
+                {t('pool.title')}
               </h1>
               <div className="w-10" />
             </div>
@@ -151,7 +151,7 @@ export default function PrizePoolPage() {
               >
                 <div className="text-center">
                   <p className="text-xs text-neutral-400 mb-0.5">
-                    {t('pool.remaining', 'المتبقي')}
+                    {t('pool.remaining')}
                   </p>
                   <p className="text-2xl font-black text-purple-600 tabular-nums">
                     {formatCurrency(data.poolRemaining, config)}
@@ -166,7 +166,7 @@ export default function PrizePoolPage() {
               <div className="flex items-center gap-2 mt-4 px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-purple-200/50 shadow-[0_2px_8px_rgba(168,85,247,0.1)]">
                 <RiTimeLine className="size-4 text-purple-500" />
                 <span className="text-xs text-neutral-500">
-                  {t('pool.next_reset', 'إعادة التعيين التالية')}:
+                  {t('pool.next_reset')}:
                 </span>
                 <CountdownTimer
                   targetTime={data.nextResetTime}
@@ -188,7 +188,7 @@ export default function PrizePoolPage() {
                 <div className="flex items-center gap-2">
                   <RiUserAddFill className="size-5 text-purple-200" />
                   <span className="text-sm text-purple-100">
-                    {t('pool.your_invites', 'دعواتك الصالحة اليوم')}
+                    {t('pool.your_invites')}
                   </span>
                 </div>
                 <div className="flex items-baseline gap-1">
@@ -196,7 +196,7 @@ export default function PrizePoolPage() {
                     {data.validInviteCount}
                   </span>
                   <span className="text-sm text-purple-200">
-                    {t('pool.people', 'أشخاص')}
+                    {t('pool.people')}
                   </span>
                 </div>
               </div>
@@ -206,7 +206,7 @@ export default function PrizePoolPage() {
             <div className="space-y-3">
               <h3 className="text-base font-semibold text-neutral-800 flex items-center gap-2">
                 <RiTrophyFill className="size-5 text-purple-500" />
-                {t('pool.reward_tiers', 'مستويات المكافآت')}
+                {t('pool.reward_tiers')}
               </h3>
 
               {data.tiers.map((tier, index) => (
@@ -237,11 +237,11 @@ export default function PrizePoolPage() {
                   size="lg"
                   fullWidth
                   isLoading={claimMutation.isPending}
-                  loadingText={t('tip.claiming', 'جارٍ المطالبة...')}
+                  loadingText={t('tip.claiming')}
                   onClick={() => claimMutation.mutate(claimableTier.id)}
                   leftIcon={<RiCoinsFill className="size-5" />}
                 >
-                  {t('pool.claim_reward', 'المطالبة')} {formatCurrency(claimableTier.reward, config)}
+                  {t('pool.claim_reward')} {formatCurrency(claimableTier.reward, config)}
                 </Button>
               </m.div>
             )}
@@ -256,15 +256,15 @@ export default function PrizePoolPage() {
               <div className="flex items-center gap-2 mb-3">
                 <RiInformationLine className="size-5 text-neutral-500" />
                 <h3 className="text-base font-semibold text-neutral-800">
-                  {t('pool.rules', 'القواعد')}
+                  {t('pool.rules')}
                 </h3>
               </div>
               <ul className="space-y-2">
                 {[
-                  t('pool.rule_1', 'يتم إعادة تعيين الصندوق يومياً عند الساعة 00:00'),
-                  t('pool.rule_2', 'تُحسب فقط الدعوات الصالحة لهذا اليوم'),
-                  t('pool.rule_3', 'يمكن المطالبة فقط بأعلى مستوى تم بلوغه'),
-                  t('pool.rule_4', 'يتم إضافة المكافآت فوراً'),
+                  t('pool.rule_1'),
+                  t('pool.rule_2'),
+                  t('pool.rule_3'),
+                  t('pool.rule_4'),
                 ].map((rule, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-neutral-500">
                     <span className="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -345,7 +345,7 @@ function PoolTierCard({
             <div>
               <div className="flex items-center gap-1.5">
                 <span className={`text-sm font-semibold ${isLocked ? 'text-neutral-400' : 'text-neutral-700'}`}>
-                  {tier.requiredInvites} {t('pool.invites', 'دعوات')}
+                  {tier.requiredInvites} {t('pool.invites')}
                 </span>
                 {!isLocked && !isClaimed && (
                   <span className="text-xs text-neutral-400 tabular-nums">
@@ -355,7 +355,7 @@ function PoolTierCard({
               </div>
               {isClaimed && (
                 <span className="text-xs text-primary-600 font-medium">
-                  {t('pool.claimed', 'تم المطالبة')}
+                  {t('pool.claimed')}
                 </span>
               )}
             </div>

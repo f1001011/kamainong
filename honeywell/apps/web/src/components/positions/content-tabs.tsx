@@ -29,9 +29,9 @@ export function ContentTabs({
   const [activeTab, setActiveTab] = useState<TabKey>('details');
 
   const tabs: { key: TabKey; label: string }[] = [
-    { key: 'details', label: t('tab.details', 'التفاصيل') },
-    { key: 'calendar', label: t('tab.calendar', 'التقويم') },
-    { key: 'history', label: t('tab.history', 'السجل') },
+    { key: 'details', label: t('tab.details') },
+    { key: 'calendar', label: t('tab.calendar') },
+    { key: 'history', label: t('tab.history') },
   ];
 
   const content = {

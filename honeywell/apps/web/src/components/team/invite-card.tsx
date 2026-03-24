@@ -88,12 +88,12 @@ export const InviteCard = memo(function InviteCard({
       }
       
       setLinkCopied(true);
-      toast.success(t('toast.copy_success', 'تم النسخ بنجاح'));
+      toast.success(t('toast.copy_success'));
       
       setTimeout(() => setLinkCopied(false), 2000);
     } catch (error) {
       console.error('复制失败:', error);
-      toast.error(t('toast.copy_failed', 'خطأ في النسخ'));
+      toast.error(t('toast.copy_failed'));
     }
   }, [inviteInfo.inviteLink, t]);
   
@@ -108,7 +108,7 @@ export const InviteCard = memo(function InviteCard({
       transition={{ ...SPRINGS.gentle, delay: 0.1 }}
     >
       <h3 className="text-sm font-bold text-neutral-800 mb-3">
-        {t('team.inviteTitle', 'ادعُ أصدقاءك')}
+        {t('team.inviteTitle')}
       </h3>
       
       {/* 邀请码展示 */}
@@ -133,8 +133,8 @@ export const InviteCard = memo(function InviteCard({
             : <RiFileCopyLine className="w-4 h-4" />
           }
           {linkCopied
-            ? t('status.copied', 'تم النسخ')
-            : t('team.copyLink', 'نسخ الرابط')
+            ? t('status.copied')
+            : t('team.copyLink')
           }
         </button>
         
@@ -143,7 +143,7 @@ export const InviteCard = memo(function InviteCard({
           onClick={onOpenPoster}
         >
           <RiQrCodeLine className="w-4 h-4" />
-          {t('team.sharePoster', 'مشاركة QR')}
+          {t('team.sharePoster')}
         </button>
       </div>
     </m.div>

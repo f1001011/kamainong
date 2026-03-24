@@ -5,6 +5,7 @@
  */
 
 import { z } from 'zod';
+import { getLocaleText, getLocaleTextWithVars } from '@/locales';
 
 // ========================================
 // 基础验证规则
@@ -16,8 +17,8 @@ import { z } from 'zod';
  */
 export const phoneSchema = z
   .string()
-  .length(9, 'يجب أن يتكون الرقم من 9 أرقام')
-  .regex(/^[567]\d{8}$/, 'رقم الهاتف غير صالح');
+  .length(9, 'validation.phone_length')
+  .regex(/^[567]\d{8}$/, 'validation.phone_invalid');
 
 /**
  * 密码验证 Schema
@@ -26,10 +27,10 @@ export const phoneSchema = z
  */
 export const passwordSchema = z
   .string()
-  .min(6, 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل')
+  .min(6, getLocaleTextWithVars('validation.password_min_length', { min: 6 }))
   .regex(
     /^(?=.*[a-zA-Z])(?=.*\d)/,
-    'يجب أن تحتوي كلمة المرور على أحرف وأرقام'
+    'validation.password_alphanumeric'
   );
 
 /**
@@ -46,14 +47,14 @@ export function createPasswordSchema(config: {
   const minLen = config.minLength ?? 6;
   const maxLen = config.maxLength ?? 32;
   let schema = z.string()
-    .min(minLen, `يجب أن تتكون كلمة المرور من ${minLen} أحرف على الأقل`)
-    .max(maxLen, `لا يمكن أن تتجاوز كلمة المرور ${maxLen} حرفاً`);
+    .min(minLen, getLocaleTextWithVars('validation.password_min_length', { min: minLen }))
+    .max(maxLen, getLocaleTextWithVars('validation.password_max_length', { max: maxLen }));
 
   if (config.requireLetter !== false) {
-    schema = schema.regex(/[a-zA-Z]/, 'يجب أن تحتوي كلمة المرور على حرف واحد على الأقل');
+    schema = schema.regex(/[a-zA-Z]/, 'validation.password_require_letter');
   }
   if (config.requireNumber !== false) {
-    schema = schema.regex(/\d/, 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل');
+    schema = schema.regex(/\d/, 'validation.password_require_number');
   }
 
   return schema;
@@ -77,8 +78,8 @@ export const inviteCodeSchema = z
  */
 export const amountSchema = z
   .string()
-  .regex(/^\d+(\.\d{1,2})?$/, 'مبلغ غير صالح')
-  .refine((val) => parseFloat(val) > 0, 'يجب أن يكون المبلغ أكبر من 0');
+  .regex(/^\d+(\.\d{1,2})?$/, 'validation.amount_invalid')
+  .refine((val) => parseFloat(val) > 0, 'validation.amount_positive');
 
 /**
  * 银行卡号验证 Schema
@@ -86,9 +87,9 @@ export const amountSchema = z
  */
 export const cardNumberSchema = z
   .string()
-  .min(13, 'يجب أن يتكون رقم الحساب من 13 رقماً على الأقل')
-  .max(24, 'لا يمكن أن يتجاوز رقم الحساب 24 رقماً')
-  .regex(/^\d+$/, 'يجب أن يحتوي رقم الحساب على أرقام فقط');
+  .min(13, 'validation.card_number_min')
+  .max(24, 'validation.card_number_max')
+  .regex(/^\d+$/, 'validation.card_number_numeric');
 
 /**
  * 持卡人姓名验证 Schema
@@ -96,9 +97,9 @@ export const cardNumberSchema = z
  */
 export const holderNameSchema = z
   .string()
-  .min(2, 'يجب أن يتكون الاسم من حرفين على الأقل')
-  .max(50, 'لا يمكن أن يتجاوز الاسم 50 حرفاً')
-  .regex(/^[\p{L}\s]+$/u, 'يجب أن يحتوي الاسم على أحرف فقط');
+  .min(2, 'validation.holder_name_min')
+  .max(50, 'validation.holder_name_max')
+  .regex(/^[\p{L}\s]+$/u, 'validation.holder_name_letters');
 
 // ========================================
 // 表单验证 Schema
@@ -117,7 +118,7 @@ export const registerSchema = z.object({
   /** 邀请码（可选） */
   inviteCode: inviteCodeSchema,
 }).refine((data) => data.password === data.confirmPassword, {
-  message: 'كلمات المرور غير متطابقة',
+  message: 'validation.password_not_match',
   path: ['confirmPassword'],
 });
 
@@ -128,7 +129,7 @@ export const loginSchema = z.object({
   /** 手机号 */
   phone: phoneSchema,
   /** 密码 */
-  password: z.string().min(1, 'الرجاء إدخال كلمة المرور'),
+  password: z.string().min(1, 'validation.password_required'),
 });
 
 /**
@@ -138,7 +139,7 @@ export const withdrawSchema = z.object({
   /** 提现金额 */
   amount: amountSchema,
   /** 银行卡ID */
-  bankCardId: z.number().positive('الرجاء اختيار بطاقة بنكية'),
+  bankCardId: z.number().positive('validation.bank_card_required'),
 });
 
 /**
@@ -150,16 +151,16 @@ export const createWithdrawSchema = (minAmount: number, maxAmount: number) =>
   z.object({
     amount: z
       .string()
-      .regex(/^\d+(\.\d{1,2})?$/, 'مبلغ غير صالح')
+      .regex(/^\d+(\.\d{1,2})?$/, 'validation.amount_invalid')
       .refine(
         (val) => parseFloat(val) >= minAmount,
-        `الحد الأدنى للسحب هو ${minAmount}`
+        getLocaleTextWithVars('error.amount_min', { min: minAmount })
       )
       .refine(
         (val) => parseFloat(val) <= maxAmount,
-        `الحد الأقصى للسحب هو ${maxAmount}`
+        getLocaleTextWithVars('error.amount_max', { max: maxAmount })
       ),
-    bankCardId: z.number().positive('الرجاء اختيار بطاقة بنكية'),
+    bankCardId: z.number().positive('validation.bank_card_required'),
   });
 
 /**
@@ -167,7 +168,7 @@ export const createWithdrawSchema = (minAmount: number, maxAmount: number) =>
  */
 export const bankCardSchema = z.object({
   /** 银行代码 */
-  bankCode: z.string().min(1, 'الرجاء اختيار بنك'),
+  bankCode: z.string().min(1, 'validation.bank_required'),
   /** 银行卡号 */
   cardNumber: cardNumberSchema,
   /** 持卡人姓名 */
@@ -191,14 +192,14 @@ export const createRechargeSchema = (minAmount: number, maxAmount: number) =>
   z.object({
     amount: z
       .string()
-      .regex(/^\d+(\.\d{1,2})?$/, 'مبلغ غير صالح')
+      .regex(/^\d+(\.\d{1,2})?$/, 'validation.amount_invalid')
       .refine(
         (val) => parseFloat(val) >= minAmount,
-        `الحد الأدنى للإيداع هو ${minAmount}`
+        getLocaleTextWithVars('error.amount_min', { min: minAmount })
       )
       .refine(
         (val) => parseFloat(val) <= maxAmount,
-        `الحد الأقصى للإيداع هو ${maxAmount}`
+        getLocaleTextWithVars('error.amount_max', { max: maxAmount })
       ),
   });
 
@@ -207,16 +208,16 @@ export const createRechargeSchema = (minAmount: number, maxAmount: number) =>
  */
 export const changePasswordSchema = z.object({
   /** 当前密码 */
-  currentPassword: z.string().min(1, 'الرجاء إدخال كلمة المرور الحالية'),
+  currentPassword: z.string().min(1, 'validation.current_password_required'),
   /** 新密码 */
   newPassword: passwordSchema,
   /** 确认新密码 */
   confirmNewPassword: z.string(),
 }).refine((data) => data.newPassword === data.confirmNewPassword, {
-  message: 'كلمات المرور غير متطابقة',
+  message: 'validation.password_not_match',
   path: ['confirmNewPassword'],
 }).refine((data) => data.currentPassword !== data.newPassword, {
-  message: 'يجب أن تكون كلمة المرور الجديدة مختلفة عن الحالية',
+  message: 'validation.new_password_different',
   path: ['newPassword'],
 });
 
@@ -227,8 +228,8 @@ export const nicknameSchema = z.object({
   /** 昵称 */
   nickname: z
     .string()
-    .min(2, 'يجب أن يتكون الاسم المستعار من حرفين على الأقل')
-    .max(20, 'لا يمكن أن يتجاوز الاسم المستعار 20 حرفاً'),
+    .min(2, 'validation.nickname_min')
+    .max(20, 'validation.nickname_max'),
 });
 
 // ========================================

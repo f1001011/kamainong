@@ -77,7 +77,7 @@ export function TeamStatsCard({ stats, isLoading, className }: TeamStatsCardProp
 
       {/* 主内容 */}
       <p className="text-sm text-white/70 font-medium">
-        {t('team.network_generated', 'شبكتك حققت')}
+        {t('team.network_generated')}
       </p>
       <div className="mt-1 mb-1">
         <AnimatedNumber
@@ -88,14 +88,14 @@ export function TeamStatsCard({ stats, isLoading, className }: TeamStatsCardProp
         />
       </div>
       <p className="text-xs text-white/50">
-        {t('team.in_commissions', 'في العمولات')}
+        {t('team.in_commissions')}
       </p>
 
       {/* 内嵌三栏：今日 / 本月 / 累计 */}
       <div className="mt-4 grid grid-cols-3 divide-x divide-white/10 rounded-xl bg-white/10 overflow-hidden">
         <div className="py-3 px-2 text-center">
           <p className="text-[10px] uppercase tracking-wider text-white/50 font-semibold mb-1">
-            {t('team.today', 'اليوم')}
+            {t('team.today')}
           </p>
           <p className="text-sm font-bold font-mono text-white">
             {formatCurrency(todayCommission, config)}
@@ -103,7 +103,7 @@ export function TeamStatsCard({ stats, isLoading, className }: TeamStatsCardProp
         </div>
         <div className="py-3 px-2 text-center">
           <p className="text-[10px] uppercase tracking-wider text-white/50 font-semibold mb-1">
-            {t('team.this_month', 'هذا الشهر')}
+            {t('team.this_month')}
           </p>
           <p className="text-sm font-bold font-mono text-white">
             {formatCurrency(monthCommission, config)}
@@ -111,7 +111,7 @@ export function TeamStatsCard({ stats, isLoading, className }: TeamStatsCardProp
         </div>
         <div className="py-3 px-2 text-center">
           <p className="text-[10px] uppercase tracking-wider text-white/50 font-semibold mb-1">
-            {t('team.total', 'الإجمالي')}
+            {t('team.total')}
           </p>
           <p className="text-sm font-bold font-mono text-white">
             {formatCurrency(totalCommission, config)}

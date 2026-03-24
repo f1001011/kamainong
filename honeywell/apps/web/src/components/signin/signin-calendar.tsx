@@ -125,11 +125,11 @@ export function SignInCalendar({
         {/* 日历标题 */}
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">
-            {t('signin.calendar.title', 'تقويم تسجيل الحضور')}
+            {t('signin.calendar.title')}
           </span>
           {targetDays > 0 && (
             <span className="text-sm font-medium text-primary-500">
-              {currentStreak}/{targetDays} {t('signin.days', 'أيام')}
+              {currentStreak}/{targetDays} {t('signin.days')}
             </span>
           )}
         </div>
@@ -171,7 +171,7 @@ function CalendarDayItem({ day }: { day: CalendarDay }) {
           )}
         >
           <span className="text-xs text-primary-500 font-medium">
-            {t('signin.today', 'اليوم')}
+            {t('signin.today')}
           </span>
           <RiGiftLine className="size-5 text-primary-500 mt-0.5" />
         </div>
@@ -206,7 +206,7 @@ function CalendarDayItem({ day }: { day: CalendarDay }) {
         )}
       >
         <span className="text-xs text-primary-500 font-medium">
-            {t('signin.today', 'اليوم')}
+            {t('signin.today')}
           </span>
           <RiCheckLine className="size-5 text-primary-500 mt-0.5" />
       </div>
@@ -265,13 +265,13 @@ export function SignInProgress({
         {/* 进度标签 */}
         <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">
-            {t('signin.progress.title', 'تقدم تسجيل الحضور')}
+            {t('signin.progress.title')}
           </span>
           <span className={cn(
             'font-medium',
             completed ? 'text-primary-500' : 'text-foreground'
           )}>
-            {currentStreak}/{targetDays} {t('signin.days', 'أيام')}
+            {currentStreak}/{targetDays} {t('signin.days')}
           </span>
         </div>
 
@@ -313,7 +313,7 @@ export function SignInProgress({
                 )}
               </div>
               <span className="text-xs mt-1">
-                {t('signin.day', 'يوم')} {i + 1}
+                {t('signin.day')} {i + 1}
               </span>
             </div>
           ))}

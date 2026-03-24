@@ -116,7 +116,7 @@ export function FinancialProductCard({
         {/* 价格 + 日收益 + 周期 三栏 */}
         <div className="grid grid-cols-3 gap-2">
           <div>
-            <p className="text-[10px] text-neutral-400 mb-0.5">{t('product.price', 'السعر')}</p>
+            <p className="text-[10px] text-neutral-400 mb-0.5">{t('product.price')}</p>
             <p className={cn(
               'text-lg font-heading font-financial leading-tight',
               isComingSoon ? 'text-neutral-400' : 'text-neutral-800',
@@ -125,7 +125,7 @@ export function FinancialProductCard({
             </p>
           </div>
           <div>
-            <p className="text-[10px] text-neutral-400 mb-0.5">{t('biz.daily_income', 'يومي')}</p>
+            <p className="text-[10px] text-neutral-400 mb-0.5">{t('biz.daily_income')}</p>
             <p className={cn(
               'text-lg font-financial font-semibold leading-tight',
               isComingSoon ? 'text-neutral-400' : 'text-primary-500',
@@ -134,12 +134,12 @@ export function FinancialProductCard({
             </p>
           </div>
           <div>
-            <p className="text-[10px] text-neutral-400 mb-0.5">{t('biz.cycle_days', 'المدة')}</p>
+            <p className="text-[10px] text-neutral-400 mb-0.5">{t('biz.cycle_days')}</p>
             <p className={cn(
               'text-lg font-financial font-semibold leading-tight',
               isComingSoon ? 'text-neutral-400' : 'text-neutral-700',
             )}>
-              {product.cycleDays}{t('unit.days', ' أيام')}
+              {product.cycleDays}{t('unit.days')}
             </p>
           </div>
         </div>
@@ -150,7 +150,7 @@ export function FinancialProductCard({
             <div className="flex items-center gap-1 mb-2">
               <RiCoinsFill className="size-4 text-gold-500 flex-shrink-0" />
               <span className="text-xs text-neutral-500">
-                {t('financial.maturity', 'عند الاستحقاق')}
+                {t('financial.maturity')}
               </span>
             </div>
             <div className="flex items-center gap-1.5 text-sm font-financial flex-wrap">
@@ -172,7 +172,7 @@ export function FinancialProductCard({
             disabled
             className="h-11 rounded-xl"
           >
-            {t('product.coming_soon', 'قريبًا')}
+            {t('product.coming_soon')}
           </Button>
         ) : (
           <Button
@@ -182,7 +182,7 @@ export function FinancialProductCard({
             onClick={() => onBuy?.(product)}
             className="h-11 rounded-xl btn-gradient"
           >
-            {t('financial.invest_now', 'استثمر الآن')}
+            {t('financial.invest_now')}
           </Button>
         )}
       </div>

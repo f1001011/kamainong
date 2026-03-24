@@ -26,25 +26,21 @@ export interface PostStatusBadgeProps {
 const STATUS_CONFIG: Record<PostStatus, {
   icon: typeof RiTimeLine;
   textKey: string;
-  defaultText: string;
   colorClass: string;
 }> = {
   PENDING: {
     icon: RiTimeLine,
     textKey: 'community.status.pending',
-    defaultText: 'قيد المراجعة',
     colorClass: 'bg-gold-50 text-gold-600 border-gold-200/60',
   },
   APPROVED: {
     icon: RiCheckboxCircleFill,
     textKey: 'community.status.approved',
-    defaultText: 'تمت الموافقة',
     colorClass: 'bg-primary-50 text-primary-600 border-primary-200/60',
   },
   REJECTED: {
     icon: RiCloseCircleFill,
     textKey: 'community.status.rejected',
-    defaultText: 'مرفوض',
     colorClass: 'bg-red-50 text-red-600 border-red-200/60',
   },
 };
@@ -66,7 +62,7 @@ export function PostStatusBadge({ status, className }: PostStatusBadgeProps) {
       )}
     >
       <Icon className="size-3.5" />
-      {t(cfg.textKey, cfg.defaultText)}
+      {t(cfg.textKey)}
     </span>
   );
 }

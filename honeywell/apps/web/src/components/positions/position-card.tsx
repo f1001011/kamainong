@@ -179,7 +179,7 @@ export function PositionCard({
         <div className="absolute top-3 left-3 z-10">
           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-100 text-primary-600 text-xs font-medium">
             <RiGiftFill className="h-3 w-3" />
-            {t('label.gift', 'هدية')}
+            {t('label.gift')}
           </span>
         </div>
       )}
@@ -188,7 +188,7 @@ export function PositionCard({
       {!isActive && (
         <div className="absolute top-3 right-3 z-10">
           <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-500 text-xs font-medium">
-            {t('status.completed', 'مكتمل')}
+            {t('status.completed')}
           </span>
         </div>
       )}
@@ -222,7 +222,7 @@ export function PositionCard({
             </h3>
             <div className="mt-1 flex items-center gap-2">
               <span className="text-xs text-neutral-400">
-                {t('label.daily_income', 'الدخل اليومي')}
+                {t('label.daily_income')}
               </span>
               <span className="text-sm font-medium text-primary-500">
                 +{displayDailyIncome}
@@ -251,7 +251,7 @@ export function PositionCard({
           {/* 已获收益 - 带脉冲动画 */}
           <div className="flex flex-col">
             <span className="text-xs text-neutral-400">
-              {t('label.earned_income', 'الأرباح المحققة')}
+              {t('label.earned_income')}
             </span>
             <IncomePulse enabled={isActive}>
               <span className={cn(
@@ -267,7 +267,7 @@ export function PositionCard({
           {isActive && nextIncomeTime ? (
             <div className="flex flex-col items-end">
               <span className="text-xs text-neutral-400 mb-1">
-                {t('label.next_income', 'الدخل القادم')}
+                {t('label.next_income')}
               </span>
               <CountdownTimer
                 targetTime={nextIncomeTime}
@@ -280,11 +280,11 @@ export function PositionCard({
           ) : isActive ? (
             <div className="flex items-center gap-1 text-xs text-neutral-400">
               <RiTimeLine className="h-3.5 w-3.5" />
-              <span>{remainingDays} {t('label.days_remaining', 'أيام متبقية')}</span>
+              <span>{remainingDays} {t('label.days_remaining')}</span>
             </div>
           ) : (
             <div className="text-xs text-neutral-400">
-              {t('label.all_income_received', 'تم استلام جميع الأرباح')}
+              {t('label.all_income_received')}
             </div>
           )}
         </div>

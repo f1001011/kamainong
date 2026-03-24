@@ -148,7 +148,7 @@ export function PositionProgressCenter({
           className="p-4 bg-white rounded-xl shadow-[0_2px_12px_rgba(0,0,0,0.04)] text-center"
         >
           <p className="text-xs text-neutral-500 mb-2">
-            {t('label.earned_income', 'الأرباح المحققة')}
+            {t('label.earned_income')}
           </p>
           {/* 依据：03.8.2-持仓详情页.md - 收益数字带脉冲呼吸 */}
           <IncomePulse enabled={isActive}>
@@ -167,8 +167,8 @@ export function PositionProgressCenter({
         >
           <p className="text-xs text-neutral-500 mb-2">
             {isActive
-              ? t('label.pending_income', 'الأرباح المعلّقة')
-              : t('label.total_income', 'إجمالي الأرباح')
+              ? t('label.pending_income')
+              : t('label.total_income')
             }
           </p>
           <span className="text-2xl font-bold text-neutral-600 font-mono tabular-nums">
