@@ -19,12 +19,12 @@ class Income extends Model
     public static function getStatusText($status)
     {
         $statusMap = [
-            self::STATUS_WAITING => '待领取',
-            self::STATUS_CLAIMED => '已领取',
-            self::STATUS_EXPIRED => '已过期',
+            self::STATUS_WAITING => 'WAITING',
+            self::STATUS_CLAIMED => 'CLAIMED',
+            self::STATUS_EXPIRED => 'EXPIRED',
         ];
         
-        return $statusMap[$status] ?? '未知状态';
+        return $statusMap[$status] ?? 'UNKNOWN';
     }
     
     /**

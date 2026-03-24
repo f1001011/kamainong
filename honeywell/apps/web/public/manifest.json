@@ -1,0 +1,11 @@
+{
+  "name": "Lendlease - Inversiones Inteligentes",
+  "short_name": "Lendlease",
+  "description": "Plataforma de inversion segura y rentable",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait",
+  "icons": []
+}
