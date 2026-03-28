@@ -1,6 +1,9 @@
 <template>
   <div class="activities-page">
-    <section class="poster-card">
+    <section
+      class="poster-card"
+      :style="{ backgroundImage: `linear-gradient(180deg, rgba(2, 16, 10, 0.16), rgba(2, 16, 10, 0.84)), url(${ACTIVITY_POSTER_IMAGE})` }"
+    >
       <div class="glow glow-left"></div>
       <div class="glow glow-right"></div>
       <p class="eyebrow">活动页</p>
@@ -10,6 +13,10 @@
     </section>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { ACTIVITY_POSTER_IMAGE } from '@/config/worldCup'
+</script>
 
 <style scoped>
 .activities-page {
@@ -28,9 +35,8 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  background:
-    linear-gradient(180deg, rgba(2, 16, 10, 0.16), rgba(2, 16, 10, 0.84)),
-    url('https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1200&q=80') center/cover;
+  background-position: center;
+  background-size: cover;
   color: #fff;
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.22);
 }

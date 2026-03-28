@@ -1,0 +1,381 @@
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100%;
+}
+
+.dashboard-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 32px;
+  border-radius: 24px;
+  color: #fff;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 30%),
+    linear-gradient(135deg, #0f172a 0%, #1d4ed8 58%, #4f46e5 100%);
+  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.25);
+}
+
+.hero-tag {
+  margin: 0 0 10px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+}
+
+.dashboard-hero h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.hero-desc {
+  max-width: 760px;
+  margin: 12px 0 0;
+  line-height: 1.75;
+  opacity: 0.88;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.hero-date-picker {
+  width: 320px;
+}
+
+.hero-action-row {
+  display: flex;
+  gap: 10px;
+}
+
+.update-time {
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+}
+
+.compare-tip {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 13px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.kpi-card,
+.panel-card,
+.pending-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.kpi-card {
+  padding: 20px;
+}
+
+.kpi-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kpi-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  font-size: 18px;
+}
+
+.kpi-title {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.kpi-value {
+  display: block;
+  margin-top: 16px;
+  color: #0f172a;
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+.kpi-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.kpi-change {
+  font-weight: 600;
+}
+
+.kpi-change.up,
+.success {
+  color: #16a34a;
+}
+
+.kpi-change.down,
+.danger {
+  color: #dc2626;
+}
+
+.pending-card,
+.panel-card {
+  padding: 22px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.section-title h3 {
+  margin: 0;
+  color: #0f172a;
+  font-size: 20px;
+}
+
+.section-title p {
+  margin: 8px 0 0;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.pending-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.pending-item {
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+  border: 1px solid #e2e8f0;
+}
+
+.pending-item.warning {
+  border-color: #fde68a;
+  background: linear-gradient(180deg, #fffbeb 0%, #fff 100%);
+}
+
+.pending-item.danger {
+  border-color: #fecaca;
+  background: linear-gradient(180deg, #fef2f2 0%, #fff 100%);
+}
+
+.pending-item.info {
+  border-color: #bfdbfe;
+  background: linear-gradient(180deg, #eff6ff 0%, #fff 100%);
+}
+
+.pending-title {
+  color: #334155;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pending-main {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.pending-main strong {
+  color: #0f172a;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.pending-main span {
+  color: #475569;
+  font-size: 15px;
+}
+
+.pending-item p {
+  margin: 10px 0 0;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 16px;
+}
+
+.capital-grid,
+.growth-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.capital-item,
+.growth-item {
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.capital-item span,
+.growth-item span {
+  display: block;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.capital-item strong,
+.growth-item strong {
+  display: block;
+  margin-top: 10px;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+.chart-block,
+.double-chart,
+.channel-layout {
+  margin-top: 18px;
+}
+
+.chart-block h4,
+.chart-pane h4 {
+  margin: 0 0 14px;
+  color: #334155;
+  font-size: 15px;
+}
+
+.double-chart {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 16px;
+}
+
+.chart-pane {
+  padding: 16px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.channel-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.channel-chart {
+  padding: 12px 16px 16px;
+  border-radius: 18px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.channel-table {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.table-head,
+.table-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.table-head {
+  padding: 0 12px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.table-row {
+  padding: 14px 12px;
+  border-radius: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 14px;
+}
+
+@media (max-width: 1500px) {
+  .kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .capital-grid,
+  .growth-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .dashboard-hero,
+  .panel-grid,
+  .double-chart,
+  .channel-layout,
+  .pending-grid {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+  }
+
+  .dashboard-hero {
+    align-items: flex-start;
+  }
+
+  .hero-actions {
+    align-items: flex-start;
+  }
+
+  .hero-date-picker {
+    width: 100%;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .kpi-grid,
+  .capital-grid,
+  .growth-grid,
+  .pending-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-head,
+  .table-row {
+    grid-template-columns: 1fr;
+  }
+}

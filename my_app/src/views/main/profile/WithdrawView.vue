@@ -9,15 +9,19 @@
     </header>
 
     <section class="form-card">
-      <label for="withdraw-input">仅保留字母数字输入</label>
+      <div class="field-head">
+        <strong>仅保留字母数字输入</strong>
+        <span>先保留最轻量的提现流程，方便后续替换成真实表单。</span>
+      </div>
+
       <input
-        id="withdraw-input"
         v-model="account"
         type="text"
         inputmode="text"
         placeholder="请输入字母或数字"
         @input="sanitize"
       />
+
       <button class="submit-btn" @click="submit">提交</button>
       <p v-if="message" class="message">{{ message }}</p>
     </section>
@@ -38,25 +42,21 @@ function sanitize() {
 
 function submit() {
   sanitize()
-  if (!account.value) {
-    message.value = '请先输入字母数字账号。'
-    return
-  }
-
-  message.value = `已提交：${account.value}`
+  message.value = account.value ? `已提交：${account.value}` : '请先输入字母数字账号。'
 }
 </script>
 
 <style scoped>
 .sub-page {
   min-height: 100vh;
-  padding: 16px 14px 110px;
+  padding: 12px 12px calc(112px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, var(--wc-bg) 0 160px, var(--wc-surface) 160px 100%);
 }
 
 .page-header,
 .form-card {
-  border-radius: 28px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
+  border-radius: var(--wc-radius-xl);
+  box-shadow: var(--wc-shadow-card);
 }
 
 .page-header {
@@ -64,7 +64,7 @@ function submit() {
   align-items: center;
   gap: 14px;
   padding: 16px;
-  background: rgba(8, 44, 28, 0.92);
+  background: rgba(11, 31, 23, 0.94);
 }
 
 .back-btn {
@@ -72,21 +72,22 @@ function submit() {
   height: 42px;
   border: 0;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--wc-text-on-dark);
   font-size: 28px;
 }
 
 .page-header p {
   margin: 0 0 4px;
-  color: #9ae6b4;
+  color: #a9dcc2;
   font-size: 12px;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .page-header h1 {
   margin: 0;
-  color: #fff;
+  color: var(--wc-text-on-dark);
   font-size: 24px;
 }
 
@@ -95,46 +96,61 @@ function submit() {
   padding: 22px 18px;
   display: grid;
   gap: 14px;
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--wc-surface-elevated);
+  border: 1px solid var(--wc-border);
 }
 
-.form-card label {
-  color: #0d3b23;
-  font-weight: 700;
+.field-head strong,
+.field-head span {
+  display: block;
+}
+
+.field-head strong {
+  color: var(--wc-text);
+  font-size: 18px;
+}
+
+.field-head span {
+  margin-top: 8px;
+  color: var(--wc-text-soft);
+  line-height: 1.6;
 }
 
 .form-card input {
-  height: 50px;
-  border: 1px solid rgba(13, 59, 35, 0.12);
+  height: 52px;
+  border: 1px solid var(--wc-border-strong);
   border-radius: 16px;
   padding: 0 16px;
+  background: #fff;
+  color: var(--wc-text);
   font-size: 15px;
   outline: none;
 }
 
 .form-card input:focus {
-  border-color: rgba(56, 189, 248, 0.6);
-  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.14);
+  border-color: rgba(125, 196, 244, 0.8);
+  box-shadow: 0 0 0 4px rgba(125, 196, 244, 0.16);
 }
 
 .submit-btn {
-  height: 50px;
+  height: 52px;
   border: 0;
   border-radius: 16px;
-  background: linear-gradient(135deg, #f4d66d, #38bdf8);
-  color: #062315;
+  background: linear-gradient(135deg, var(--wc-gold-soft), var(--wc-blue));
+  color: var(--wc-bg);
   font-size: 15px;
   font-weight: 800;
 }
 
 .message {
   margin: 0;
-  color: rgba(13, 59, 35, 0.72);
+  color: var(--wc-text-soft);
 }
 
 @media (min-width: 768px) {
   .sub-page {
-    max-width: 720px;
+    max-width: 760px;
+    margin: 0 auto;
     padding: 24px 24px 40px;
   }
 }

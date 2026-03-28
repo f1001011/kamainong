@@ -22,7 +22,7 @@ export function useAuth() {
 
   const logout = () => {
     localStorage.removeItem('token')
-    router.push({ name: 'Home' })
+    router.push({ name: 'Login' })
   }
 
   return { login, register, logout }

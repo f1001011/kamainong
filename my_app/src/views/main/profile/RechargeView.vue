@@ -9,37 +9,46 @@
     </header>
 
     <section class="qr-card">
-      <div class="qr-code"></div>
+      <img class="qr-image" :src="RECHARGE_QR_IMAGE" alt="世界杯主题收款码" />
       <strong>世界杯主题收款码</strong>
-      <p>请使用支持扫码的应用完成充值。本页为静态演示，后续可直接替换为正式二维码图片。</p>
+      <p>先保留静态二维码占位，后续替换真实图片地址即可，不需要大改页面结构。</p>
     </section>
 
     <section class="tips-card">
-      <article v-for="tip in rechargeTips" :key="tip">
-        {{ tip }}
+      <article v-for="note in rechargeNotes" :key="note">
+        {{ note }}
       </article>
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { rechargeTips } from '@/config/worldCup'
+import { RECHARGE_QR_IMAGE } from '@/config/worldCup'
+import { fetchProfileContent } from '@/services/worldCupContent'
 
 const router = useRouter()
+const rechargeNotes = ref<string[]>([])
+
+onMounted(async () => {
+  const data = await fetchProfileContent()
+  rechargeNotes.value = data.rechargeNotes
+})
 </script>
 
 <style scoped>
 .sub-page {
   min-height: 100vh;
-  padding: 16px 14px 110px;
+  padding: 12px 12px calc(112px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, var(--wc-bg) 0 160px, var(--wc-surface) 160px 100%);
 }
 
 .page-header,
 .qr-card,
 .tips-card {
-  border-radius: 28px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
+  border-radius: var(--wc-radius-xl);
+  box-shadow: var(--wc-shadow-card);
 }
 
 .page-header {
@@ -47,7 +56,7 @@ const router = useRouter()
   align-items: center;
   gap: 14px;
   padding: 16px;
-  background: rgba(8, 44, 28, 0.92);
+  background: rgba(11, 31, 23, 0.94);
 }
 
 .back-btn {
@@ -55,57 +64,55 @@ const router = useRouter()
   height: 42px;
   border: 0;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--wc-text-on-dark);
   font-size: 28px;
 }
 
 .page-header p {
   margin: 0 0 4px;
-  color: #9ae6b4;
+  color: #a9dcc2;
   font-size: 12px;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .page-header h1 {
   margin: 0;
-  color: #fff;
+  color: var(--wc-text-on-dark);
   font-size: 24px;
 }
 
 .qr-card {
   margin-top: 16px;
   padding: 24px 20px;
-  background: rgba(255, 255, 255, 0.96);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background: var(--wc-surface-elevated);
+  border: 1px solid var(--wc-border);
 }
 
-.qr-code {
+.qr-image {
   width: 220px;
   height: 220px;
   border-radius: 24px;
-  background:
-    linear-gradient(90deg, transparent 45%, #0b3b23 45%, #0b3b23 55%, transparent 55%),
-    linear-gradient(transparent 45%, #0b3b23 45%, #0b3b23 55%, transparent 55%),
-    repeating-linear-gradient(0deg, #0b3b23 0 12px, #ffffff 12px 24px),
-    repeating-linear-gradient(90deg, #0b3b23 0 12px, #ffffff 12px 24px);
-  padding: 16px;
-  box-shadow: inset 0 0 0 10px #fff;
+  object-fit: cover;
+  background: #fff;
+  box-shadow: inset 0 0 0 12px #ffffff;
 }
 
 .qr-card strong {
   margin-top: 18px;
-  color: #0d3b23;
+  color: var(--wc-text);
   font-size: 22px;
 }
 
 .qr-card p {
+  max-width: 300px;
   margin: 12px 0 0;
-  max-width: 280px;
-  color: rgba(13, 59, 35, 0.72);
+  color: var(--wc-text-soft);
   line-height: 1.7;
 }
 
@@ -114,20 +121,22 @@ const router = useRouter()
   padding: 18px;
   display: grid;
   gap: 12px;
-  background: linear-gradient(180deg, rgba(8, 44, 28, 0.94), rgba(8, 44, 28, 0.88));
-  color: #fff;
+  background: var(--wc-surface-elevated);
+  border: 1px solid var(--wc-border);
 }
 
 .tips-card article {
   padding: 14px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(27, 91, 65, 0.06);
+  color: var(--wc-text-soft);
   line-height: 1.7;
 }
 
 @media (min-width: 768px) {
   .sub-page {
-    max-width: 720px;
+    max-width: 760px;
+    margin: 0 auto;
     padding: 24px 24px 40px;
   }
 }

@@ -3,12 +3,12 @@ declare (strict_types = 1);
 
 namespace app\command;
 
+use app\model\Income;
+use app\model\Order;
 use think\console\Command;
 use think\console\Input;
 use think\console\Output;
 use think\facade\Db;
-use app\model\Income;
-use app\model\Order;
 
 /**
  * 生成当日收益记录（每天00:05执行）

@@ -17,15 +17,15 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { CalendarDays, Home, Trophy, User } from 'lucide-vue-next'
+import { Gamepad2, Home, Trophy, User } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
 
 const navItems = computed(() => [
   { path: '/', label: '首页', icon: Home },
+  { path: '/games', label: '游戏', icon: Gamepad2 },
   { path: '/sports', label: '体育', icon: Trophy },
-  { path: '/activities', label: '活动', icon: CalendarDays },
   { path: '/profile', label: '我的', icon: User },
 ])
 
@@ -40,17 +40,17 @@ function isActive(path: string) {
   position: fixed;
   left: 12px;
   right: 12px;
-  bottom: 12px;
+  bottom: max(12px, env(safe-area-inset-bottom));
   z-index: 50;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 6px;
-  padding: 8px;
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
   border-radius: 26px;
-  background: rgba(6, 31, 19, 0.88);
+  background: rgba(11, 31, 23, 0.88);
   backdrop-filter: blur(24px) saturate(1.4);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.26);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .bottom-nav-item {
@@ -70,9 +70,9 @@ function isActive(path: string) {
 }
 
 .bottom-nav-item.active {
-  color: #f4d66d;
+  color: var(--wc-gold-soft);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(19, 101, 60, 0.12)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(45, 116, 86, 0.12)),
     rgba(255, 255, 255, 0.04);
 }
 
@@ -82,7 +82,7 @@ function isActive(path: string) {
   width: 5px;
   height: 5px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #f4d66d, #38bdf8);
+  background: linear-gradient(90deg, var(--wc-gold), var(--wc-blue));
   opacity: 0;
 }
 

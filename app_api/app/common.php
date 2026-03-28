@@ -1,198 +1,39 @@
 <?php
+require_once __DIR__ . '/helper/Code.php';
 // 应用公共文件
-use think\facade\Cache;
-use think\facade\Db;
-use app\helper\Response;
-use app\helper\Money;
-
-// ============================================
-// Honeywell Web API 统一响应方法
-// ============================================
-
-/**
- * 成功响应
- * @param mixed $data 数据
- * @param string $message 消息
- * @return \think\response\Json
- */
-function api_success($data = null, $message = '')
-{
-    return Response::success($data, $message);
-}
-
-/**
- * 错误响应
- * @param string $code 错误码名称（对应法语语言包）
- * @param array $params 参数替换（如 ['min' => 5000]）
- * @param int $httpStatus HTTP状态码
- * @return \think\response\Json
- */
-function api_error($code, $params = [], $httpStatus = 400)
-{
-    return Response::error($code, $params, $httpStatus);
-}
-
-/**
- * 分页响应
- * @param array $list 数据列表
- * @param int $total 总数
- * @param int $page 当前页
- * @param int $pageSize 每页数量
- * @return \think\response\Json
- */
-function api_paginated($list, $total, $page = 1, $pageSize = 20)
-{
-    return Response::paginated($list, $total, $page, $pageSize);
-}
-
-/**
- * 列表响应（带总数）
- * @param array $list 数据列表
- * @param int|null $total 总数
- * @return \think\response\Json
- */
-function api_list($list, $total = null)
-{
-    return Response::list($list, $total);
-}
-
-/**
- * 空响应
- * @param string $message 消息
- * @return \think\response\Json
- */
-function api_empty($message = '')
-{
-    return Response::empty($message);
-}
-
-/**
- * 格式化金额（XAF）
- * @param float $amount 金额
- * @param bool $withSymbol 是否带货币符号
- * @return string
- */
-function api_money($amount, $withSymbol = false)
-{
-    return Money::format($amount, $withSymbol);
-}
-
-/**
- * 获取当前用户ID
- * @return int|null
- */
-function api_user_id()
-{
-    $token = request()->header('authorization');
-    if (empty($token)) return null;
-    
-    $token = str_replace('Bearer ', '', $token);
-    if (empty($token)) return null;
-    
-    $tokenInfo = Db::name('common_home_token')
-        ->where('token', $token)
-        ->where('expire_time', '>', time())
-        ->find();
-    
-    return $tokenInfo ? $tokenInfo['uid'] : null;
-}
-
-/**
- * 未授权响应
- * @return \think\response\Json
- */
-function api_unauthorized()
-{
-    return api_error('UNAUTHORIZED', [], 401);
-}
-
-/**
- * 获取分页参数
- * @return array [page, pageSize]
- */
-function api_page_params()
-{
-    $page = max(1, (int)input('page', 1));
-    $pageSize = min(100, max(1, (int)input('pageSize', 20)));
-    
-    return [$page, $pageSize];
-}
-
-// ============================================
-// 原有方法保持不变
-// ============================================
-
-// 获取多语言翻译
-
-
-function show($code, $data = [], $msg = ""){
+function Show($code, $data = [], $msg = 0){
     // 如果 msg 为空或者是数字，使用 lang() 获取多语言
-    if (empty($msg) || is_numeric($msg)){
-        $langCode = is_numeric($msg) ? $msg : ($code == 1 ? 1000 : 1001);
-        $msg = lang($langCode);
-    }
-    
+
+    $message = lang("".$msg);
+
     $token = md5(uniqid());
     $result = array(
         'code' => $code,
-        'message'  => $msg,
+        'message'  => $message,
         'data' => $data,
     );
 
-    if (\think\facade\Request::isPost()){
-        $result['sub_token'] = $token;
-        session('sub_token',$token);
-    }
+    $result['sub_token'] = $token;
+    session('sub_token',$token);
     //输出json
     return json($result);
     exit;
 }
 
-function addShow($code, $data = '', $msg = ""){
-    if ($code == 0){
-        $code = TC('error_code');
-    }elseif ($code ==1){
-        $code = TC('success_code');
-    }
 
-    if (empty($msg)){
-        $msg = 'ok';
-        if ($code == 0){
-            $msg = 'no';
-        }
-    }
-    $token = md5(uniqid());
-    $result = array(
-        'code' => $code,
-        'msg'  => $msg,
-        'data' => $data,
-    );
-
-    if (\think\facade\Request::isPost()){
-        $result['sub_token'] = $token;
-        session('sub_token',$token);
-    }
-    //输出json
-    return json_encode($result,JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
-function api_token($id)
+function ApiToken($id)
 {
     return md5($id . 'api' . date('Y-m-d H:i:s', time()) . 'token');
 }
 
 //购买商品生成订单号
-function orderCode($string = '')
+function OrderCode($string = '')
 {
-//    if (empty($string))
-//        return false;
     //生成订单 字符串 + 随机数 + 时间 +
     return $string . mt_rand(1000, 9999) . date('YmdHis');
 }
 
 
-//加密 rsa
 function rsa_encrypt($data)
 {
     openssl_public_encrypt($data, $encrypted, TC('public_key'));
@@ -207,103 +48,6 @@ function rsa_decrypt($encrypted)
     return $decrypted;
 }
 
-//获取 toConfig配置
-function TC($value){
-    return config("toConfig.".$value);
-}
-
-function config_image($str = ''){
-    if (empty($str)){
-        return '';
-    }
-    return config('ToConfig.app_update.image_url') . '/' .$str;
-}
-
-function code_check($value){
-    $v = new app\controller\Verify();
-    return $v->check($value);
-}
-
-//可以领取团队奖励的时间，每月的几号
-function received_date(){
-    return date('Y-m-') . "01 00:00:00";
-}
-
-/*
- * 富文本返回，需要把域名加上
- */
-function returnEditor($content){
-
-    return  str_replace('/topic/',config('ToConfig.image_url').'/topic/',$content);
-
-}
-
-/**
- * 获取身份验证token地址
- * @return string
- */
-function realIdToken(){
-    $domainName = config("realId.domainName");
-    $apiKey = config("realId.apiKey");
-    $secretKey = config("realId.secretKey");
-    $url = $domainName.'/aip/oauth/2.0/token?grant_type=client_credentials&client_id='.$apiKey.'&client_secret='.$secretKey;
-    return $url;
-}
-
-/**
- * 缓存token
- * @return mixed
- */
-function obtainToken(){
-    $url = realIdToken();
-    $result = curl_request($url);
-    if(isset($result['code']) && $result['code']==0){
-        show(0, [], $result['msg']);
-    }
-    if(isset($result['error'])){
-        show(0, [], $result['error_description']);
-    }
-    Cache::set('real_idCard_token',$result['access_token'],'84600');
-    return $result['access_token'];
-}
-
-/**
- * 短信验证码url
- * @return string
- */
-function codeUrl($token){
-    $domainName = config("realId.domainName");
-    $url = $domainName.'/aip/sms/v1/batchSendSmsTp?access_token='.$token;
-    return $url;
-}
-/**
- * 身份证核对url
- * @param $token
- * @return string
- */
-function realIdCheck($token){
-    $domainName = config("realId.domainName");
-    $url = $domainName.'/aip/check/v1/id/elem2?access_token='.$token;
-    return $url;
-}
-function randomCode($num = 4){
-    //$text = 'abcdefghijklmnopqrstuvwxyz123456789';
-    $text = '123456789';
-    $code = '';
-    for($i=0;$i<$num;$i++) {
-        $code .= $text[mt_rand(0,strlen($text)-1)];
-    };
-    return $code;
-}
-
-function is_code_off()
-{
-    $find = Db::name('common_sys_config')->where(['name'=>'code_off'])->find();
-    if(!empty($find)&&$find['value']==1){
-        return true;
-    }
-    return false;
-}
 /**
  * @Description: curl请求
  * @Author:
@@ -357,7 +101,20 @@ function curl_request($url, $datas = null, $method = 'post', $header = array("co
     return $data;
 }
 
-
-
-
-
+//加密
+function ShiftEncode($data, $shift = 3) {
+    $result = '';
+    for ($i = 0; $i < strlen($data); $i++) {
+        $result .= chr(ord($data[$i]) + $shift);
+    }
+    return base64_encode($result);
+}
+//解密
+function ShiftDecode($data, $shift = 3) {
+    $data = base64_decode($data);
+    $result = '';
+    for ($i = 0; $i < strlen($data); $i++) {
+        $result .= chr(ord($data[$i]) - $shift);
+    }
+    return $result;
+}

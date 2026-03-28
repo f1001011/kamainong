@@ -1,0 +1,636 @@
+{
+  "code": 200,
+  "data": [
+    {
+      "path": "/home/index",
+      "name": "dashboard",
+      "component": "/home/index",
+      "meta": {
+        "icon": "Odometer",
+        "title": "仪表盘",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": true,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/user",
+      "name": "userManage",
+      "redirect": "/user/list",
+      "meta": {
+        "icon": "User",
+        "title": "用户管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/user/list",
+          "name": "userList",
+          "component": "/user/list/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "用户列表",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/user/tag",
+          "name": "userTag",
+          "component": "/admin/placeholder/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "用户标签",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/gift/product",
+      "name": "giftProduct",
+      "component": "/gift/product/index",
+      "meta": {
+        "icon": "Present",
+        "title": "赠送产品管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/finance",
+      "name": "financeCenter",
+      "redirect": "/finance/recharge",
+      "meta": {
+        "icon": "Wallet",
+        "title": "财务中心",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/finance/recharge",
+          "name": "financeRecharge",
+          "component": "/finance/recharge/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "充值页面",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/finance/withdraw",
+          "name": "financeWithdraw",
+          "component": "/finance/withdraw/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "提现管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/finance/money-log",
+          "name": "financeMoneyLog",
+          "component": "/finance/moneyLog/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "资金流水",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/finance/report",
+          "name": "financeReport",
+          "component": "/finance/report/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "财务报表",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/finance/withdraw-showcase",
+          "name": "withdrawShowcase",
+          "component": "/finance/withdrawShowcase/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "提现凭证",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/finance/coupon",
+          "name": "financeCoupon",
+          "component": "/finance/coupon/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "优惠券列表",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/finance/recharge-voucher",
+          "name": "financeRechargeVoucher",
+          "component": "/finance/rechargeVoucher/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "充值凭证列表",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/goods",
+      "name": "goodsManage",
+      "redirect": "/goods/list",
+      "meta": {
+        "icon": "Goods",
+        "title": "产品管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/goods/list",
+          "name": "goodsList",
+          "component": "/goods/list/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "产品列表",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/goods/order",
+          "name": "goodsOrder",
+          "component": "/goods/order/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "商品订单",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/goods/income-claim",
+          "name": "incomeClaimLog",
+          "component": "/goods/incomeClaim/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "收益领取",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/goods/wares-order",
+          "name": "waresOrder",
+          "component": "/goods/waresOrder/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "兑换订单",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/vip/level",
+      "name": "vipLevelManage",
+      "component": "/vip/level/index",
+      "meta": {
+        "icon": "Medal",
+        "title": "VIP 等级管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/task/weekly",
+      "name": "weeklyTaskManage",
+      "component": "/task/weekly/index",
+      "meta": {
+        "icon": "Calendar",
+        "title": "周任务管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/activity",
+      "name": "activityManage",
+      "redirect": "/activity/prize-pool",
+      "meta": {
+        "icon": "Flag",
+        "title": "活动管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/activity/prize-pool",
+          "name": "prizePoolManage",
+          "component": "/activity/prizePool/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "奖池管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/activity/lottery",
+          "name": "lotteryManage",
+          "component": "/activity/lottery/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "转盘管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/activity/lottery-log",
+          "name": "lotteryLogManage",
+          "component": "/activity/lotteryLog/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "转盘使用数据",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/activity/sign-record",
+          "name": "signRecordManage",
+          "component": "/activity/signRecord/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "签到记录",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/activity/monthly-salary",
+          "name": "monthlySalaryManage",
+          "component": "/activity/monthlySalary/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "月薪记录",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/activity/commission",
+          "name": "commissionManage",
+          "component": "/activity/commission/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "返佣记录",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/channel/link",
+      "name": "channelLink",
+      "component": "/admin/placeholder/index",
+      "meta": {
+        "icon": "Link",
+        "title": "渠道链接",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/payment",
+      "name": "paymentChannel",
+      "redirect": "/payment/pay-channel",
+      "meta": {
+        "icon": "CreditCard",
+        "title": "支付通道",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/payment/pay-channel",
+          "name": "payChannel",
+          "component": "/payment/payChannel/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "支付渠道",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/payment/channel-manage",
+          "name": "channelManage",
+          "component": "/payment/channelManage/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "渠道管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/content",
+      "name": "contentManage",
+      "redirect": "/content/notice",
+      "meta": {
+        "icon": "Document",
+        "title": "内容管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/content/notice",
+          "name": "noticeManage",
+          "component": "/content/notification/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "通知列表",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/content/broadcast",
+          "name": "broadcastManage",
+          "component": "/content/email/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "邮件列表",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/risk/index",
+      "name": "riskCenter",
+      "component": "/admin/placeholder/index",
+      "meta": {
+        "icon": "Warning",
+        "title": "风控中心",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      }
+    },
+    {
+      "path": "/system",
+      "name": "systemManage",
+      "redirect": "/system/accountManage",
+      "meta": {
+        "icon": "Setting",
+        "title": "系统管理",
+        "isLink": "",
+        "isHide": false,
+        "isFull": false,
+        "isAffix": false,
+        "isKeepAlive": true
+      },
+      "children": [
+        {
+          "path": "/system/accountManage",
+          "name": "accountManage",
+          "component": "/system/accountManage/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "账号管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/roleManage",
+          "name": "roleManage",
+          "component": "/system/roleManage/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "角色管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/menuMange",
+          "name": "menuMange",
+          "component": "/system/menuMange/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "菜单管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/departmentManage",
+          "name": "departmentManage",
+          "component": "/system/departmentManage/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "部门管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/dictManage",
+          "name": "dictManage",
+          "component": "/system/dictManage/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "字典管理",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/sysConfig",
+          "name": "sysConfigManage",
+          "component": "/system/sysConfig/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "系统配置",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/timingTask",
+          "name": "timingTask",
+          "component": "/system/timingTask/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "定时任务",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        },
+        {
+          "path": "/system/systemLog",
+          "name": "systemLog",
+          "component": "/system/systemLog/index",
+          "meta": {
+            "icon": "Menu",
+            "title": "系统日志",
+            "isLink": "",
+            "isHide": false,
+            "isFull": false,
+            "isAffix": false,
+            "isKeepAlive": true
+          }
+        }
+      ]
+    }
+  ],
+  "msg": "成功"
+}

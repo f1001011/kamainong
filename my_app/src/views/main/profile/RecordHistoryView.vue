@@ -8,7 +8,7 @@
       </div>
     </header>
 
-    <section class="record-list">
+    <section class="record-panel">
       <article v-for="item in items" :key="item.id" class="record-item">
         <div>
           <strong>{{ item.title }}</strong>
@@ -29,47 +29,46 @@
 <script lang="ts" setup>
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { recordMockMap, type RecordItem } from '@/config/worldCup'
+import type { RecordItem } from '@/config/worldCup'
+import { fetchRecordPages, getRecordTitle } from '@/services/worldCupContent'
 
 const route = useRoute()
 const router = useRouter()
 const items = ref<RecordItem[]>([])
+const pages = ref<RecordItem[][]>([])
 const page = ref(0)
 const isLoading = ref(false)
 const isFinished = ref(false)
 
-const titleMap: Record<string, string> = {
-  recharge: '我的充值历史',
-  withdraw: '我的提现历史',
-  bet: '我的下注历史',
-}
-
 const recordType = computed(() => String(route.params.type || 'recharge'))
-const pageTitle = computed(() => titleMap[recordType.value] ?? '历史记录')
+const pageTitle = computed(() => getRecordTitle(recordType.value))
+
+async function primePages() {
+  pages.value = await fetchRecordPages(recordType.value)
+}
 
 function loadNextPage() {
   if (isLoading.value || isFinished.value) return
-
-  const pageList = recordMockMap[recordType.value] ?? []
-  if (page.value >= pageList.length) {
+  if (page.value >= pages.value.length) {
     isFinished.value = true
     return
   }
 
   isLoading.value = true
   window.setTimeout(() => {
-    items.value = [...items.value, ...pageList[page.value]]
+    items.value = [...items.value, ...pages.value[page.value]]
     page.value += 1
     isLoading.value = false
-    isFinished.value = page.value >= pageList.length
-  }, 500)
+    isFinished.value = page.value >= pages.value.length
+  }, 420)
 }
 
-function resetList() {
+async function resetList() {
   items.value = []
   page.value = 0
   isLoading.value = false
   isFinished.value = false
+  await primePages()
   loadNextPage()
 }
 
@@ -85,12 +84,12 @@ function statusClass(status: string) {
   return 'warn'
 }
 
-watch(() => route.params.type, () => {
-  resetList()
+watch(() => route.params.type, async () => {
+  await resetList()
 })
 
-onMounted(() => {
-  resetList()
+onMounted(async () => {
+  await resetList()
   window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
@@ -102,13 +101,14 @@ onUnmounted(() => {
 <style scoped>
 .sub-page {
   min-height: 100vh;
-  padding: 16px 14px 110px;
+  padding: 12px 12px calc(112px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, var(--wc-bg) 0 160px, var(--wc-surface) 160px 100%);
 }
 
 .page-header,
-.record-list {
-  border-radius: 28px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
+.record-panel {
+  border-radius: var(--wc-radius-xl);
+  box-shadow: var(--wc-shadow-card);
 }
 
 .page-header {
@@ -116,7 +116,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 14px;
   padding: 16px;
-  background: rgba(8, 44, 28, 0.92);
+  background: rgba(11, 31, 23, 0.94);
 }
 
 .back-btn {
@@ -124,51 +124,56 @@ onUnmounted(() => {
   height: 42px;
   border: 0;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--wc-text-on-dark);
   font-size: 28px;
 }
 
 .page-header p {
   margin: 0 0 4px;
-  color: #9ae6b4;
+  color: #a9dcc2;
   font-size: 12px;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
 }
 
 .page-header h1 {
   margin: 0;
-  color: #fff;
+  color: var(--wc-text-on-dark);
   font-size: 24px;
 }
 
-.record-list {
+.record-panel {
   margin-top: 16px;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.96);
+  padding: 12px 16px;
+  background: var(--wc-surface-elevated);
+  border: 1px solid var(--wc-border);
 }
 
 .record-item {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px 10px;
+  padding: 16px 0;
 }
 
 .record-item + .record-item {
-  border-top: 1px solid rgba(8, 44, 28, 0.08);
+  border-top: 1px solid var(--wc-border);
+}
+
+.record-item strong,
+.record-item small {
+  display: block;
 }
 
 .record-item strong {
-  display: block;
-  color: #0d3b23;
+  color: var(--wc-text);
   font-size: 16px;
 }
 
 .record-item small {
-  display: block;
   margin-top: 6px;
-  color: rgba(13, 59, 35, 0.58);
+  color: var(--wc-text-soft);
 }
 
 .record-meta {
@@ -179,7 +184,7 @@ onUnmounted(() => {
 }
 
 .record-meta span {
-  color: #0d3b23;
+  color: var(--wc-text);
   font-weight: 700;
 }
 
@@ -190,26 +195,27 @@ onUnmounted(() => {
 }
 
 .record-meta em.ok {
-  color: #15803d;
+  color: #1f8a4d;
 }
 
 .record-meta em.pending {
-  color: #0284c7;
+  color: #2f82bd;
 }
 
 .record-meta em.warn {
-  color: #b45309;
+  color: #ba7a2c;
 }
 
 .list-state {
-  padding: 20px 10px 10px;
+  padding: 20px 0 10px;
   text-align: center;
-  color: rgba(13, 59, 35, 0.62);
+  color: var(--wc-text-soft);
 }
 
 @media (min-width: 768px) {
   .sub-page {
-    max-width: 720px;
+    max-width: 760px;
+    margin: 0 auto;
     padding: 24px 24px 40px;
   }
 }

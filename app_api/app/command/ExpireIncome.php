@@ -3,11 +3,11 @@ declare (strict_types = 1);
 
 namespace app\command;
 
+use app\model\Income;
 use think\console\Command;
 use think\console\Input;
 use think\console\Output;
 use think\facade\Db;
-use app\model\Income;
 
 /**
  * 收益过期处理（每分钟执行）

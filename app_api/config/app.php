@@ -6,6 +6,8 @@
 return [
     // 应用地址
     'app_host'         => env('app.host', ''),
+    // 上传文件访问域名
+    'upload_domain'    => env('app.upload_domain', ''),
     // 应用的命名空间
     'app_namespace'    => '',
     // 是否启用路由
@@ -28,5 +30,6 @@ return [
     // 错误显示信息,非调试模式有效
     'error_message'    => '页面错误！请稍后再试～',
     // 显示错误信息
-    'show_error_msg'   => true,
+    'show_error_msg'   => false,
+    'image_url'         =>"http://127.0.0.1:8081/"
 ];

@@ -18,7 +18,11 @@
       </div>
     </header>
 
-    <section id="hero" class="hero-section">
+    <section
+      id="hero"
+      class="hero-section"
+      :style="{ backgroundImage: `linear-gradient(140deg, rgba(3, 22, 14, 0.94), rgba(13, 107, 61, 0.82)), url(${welcomeHeroImage})` }"
+    >
       <div class="hero-backdrop"></div>
       <div class="hero-content">
         <p class="eyebrow">ARCHITECTURAL WEALTH</p>
@@ -102,6 +106,7 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const scrolled = ref(false)
+const welcomeHeroImage = '/worldcup/welcome/welcome-hero.svg'
 
 const navLinks = [
   { label: 'الرئيسية', href: '#hero' },
@@ -125,9 +130,9 @@ const services = [
 ]
 
 const projects = [
-  { title: 'برج متروبوليتان', category: 'سكني', location: 'الدار البيضاء، المغرب', image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80&auto=format&fit=crop' },
-  { title: 'مرتفعات الهادئ', category: 'متعدد الاستخدامات', location: 'الرباط، المغرب', image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80&auto=format&fit=crop' },
-  { title: 'مركز الزمرد للأعمال', category: 'تجاري', location: 'طنجة، المغرب', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80&auto=format&fit=crop' },
+  { title: 'برج متروبوليتان', category: 'سكني', location: 'الدار البيضاء، المغرب', image: '/worldcup/welcome/welcome-project-01.svg' },
+  { title: 'مرتفعات الهادئ', category: 'متعدد الاستخدامات', location: 'الرباط، المغرب', image: '/worldcup/welcome/welcome-project-02.svg' },
+  { title: 'مركز الزمرد للأعمال', category: 'تجاري', location: 'طنجة، المغرب', image: '/worldcup/welcome/welcome-project-03.svg' },
 ]
 
 function scrollTo(selector: string) {
@@ -254,7 +259,8 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   grid-template-columns: 1.2fr 0.8fr;
   gap: 28px;
   align-items: end;
-  background: linear-gradient(140deg, rgba(3, 22, 14, 0.94), rgba(13, 107, 61, 0.82)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format&fit=crop') center/cover;
+  background-position: center;
+  background-size: cover;
 }
 
 .hero-backdrop {

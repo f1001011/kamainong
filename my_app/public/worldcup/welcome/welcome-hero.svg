@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+<rect width="1920" height="1080" fill="#0d2319"/>
+<rect width="1920" height="1080" fill="url(#g1)"/>
+<defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#17382d"/><stop offset="1" stop-color="#091912"/></linearGradient></defs>
+<circle cx="1500" cy="220" r="260" fill="#e7cb94" fill-opacity=".16"/><circle cx="340" cy="820" r="340" fill="#7dc4f4" fill-opacity=".12"/>
+<text x="140" y="470" fill="#f7f3ea" font-size="126" font-family="Arial, sans-serif" font-weight="700">WELCOME HERO</text>
+<text x="140" y="580" fill="#cfe7da" font-size="52" font-family="Arial, sans-serif">replace this file directly</text>
+</svg>
