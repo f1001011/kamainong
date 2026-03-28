@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="77a1851a-06d1-42d4-ab8a-310ce7d2d0d3" name="更改" comment="11231">
+      <change beforePath="$PROJECT_DIR$/my_app/src/components/layout/AppBottomNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/components/layout/AppBottomNav.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/components/layout/AppSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/components/layout/AppSidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/layouts/MainLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/layouts/MainLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/GamesView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/GamesView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/HomeView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/SportsView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/SportsView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/profile/ProfileView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/profile/ProfileView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/profile/RechargeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/profile/RechargeView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/profile/RecordHistoryView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/profile/RecordHistoryView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/profile/WithdrawView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/profile/WithdrawView.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerConfigs">
+    <option name="configs">
+      <option value="$PROJECT_DIR$/admin_api/composer.json" />
+    </option>
+  </component>
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/app_api/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/app_api/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/app_api/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/app_api/vendor/topthink/think-helper" />
+      <path value="$PROJECT_DIR$/app_api/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/app_api/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/app_api/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/app_api/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/app_api/vendor/composer" />
+      <path value="$PROJECT_DIR$/app_api/vendor/topthink/framework" />
+      <path value="$PROJECT_DIR$/app_api/vendor/league/flysystem-cached-adapter" />
+      <path value="$PROJECT_DIR$/app_api/vendor/topthink/think-trace" />
+      <path value="$PROJECT_DIR$/app_api/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/app_api/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/app_api/vendor/topthink/think-orm" />
+      <path value="$PROJECT_DIR$/app_api/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/app_api/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/app_api/vendor/topthink/think-filesystem" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/league/flysystem" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/league/flysystem-cached-adapter" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/league/mime-type-detection" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/topthink/think-helper" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/topthink/think-orm" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/topthink/think-trace" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/composer" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/topthink/framework" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/topthink/think-filesystem" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/psr/simple-cache" />
+      <path value="$PROJECT_DIR$/admin_api/vendor/psr/cache" />
+    </include_path>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="3BNA8yuepPcg9OGchelzh9RptlV" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main__tiyue",
+    "last_opened_file_path": "D:/phpstudy/jiuge/kamainong",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "ts.external.directory.path": "D:\\phpstudy\\jiuge\\kamainong\\my_app - 改版\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\phpstudy\jiuge\kamainong" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PS-243.26053.13" />
+        <option value="bundled-php-predefined-a98d8de5180a-1ec7b7818973-com.jetbrains.php.sharedIndexes-PS-243.26053.13" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="77a1851a-06d1-42d4-ab8a-310ce7d2d0d3" name="更改" comment="" />
+      <created>1774318999749</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774318999749</updated>
+      <workItem from="1774319001382" duration="632000" />
+      <workItem from="1774319640094" duration="9134000" />
+      <workItem from="1774331191009" duration="6250000" />
+      <workItem from="1774338819742" duration="1854000" />
+      <workItem from="1774340705347" duration="7369000" />
+      <workItem from="1774349542181" duration="617000" />
+      <workItem from="1774350430794" duration="2424000" />
+      <workItem from="1774353502913" duration="3062000" />
+      <workItem from="1774679119838" duration="71000" />
+      <workItem from="1774679214412" duration="8166000" />
+    </task>
+    <task id="LOCAL-00001" summary="1">
+      <option name="closed" value="true" />
+      <created>1774327097410</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774327097410</updated>
+    </task>
+    <task id="LOCAL-00002" summary="1">
+      <option name="closed" value="true" />
+      <created>1774339888099</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1774339888099</updated>
+    </task>
+    <task id="LOCAL-00003" summary="1">
+      <option name="closed" value="true" />
+      <created>1774339990468</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1774339990468</updated>
+    </task>
+    <task id="LOCAL-00004" summary="1">
+      <option name="closed" value="true" />
+      <created>1774340009837</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1774340009837</updated>
+    </task>
+    <task id="LOCAL-00005" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774340305464</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1774340305464</updated>
+    </task>
+    <task id="LOCAL-00006" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774340493295</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1774340493295</updated>
+    </task>
+    <task id="LOCAL-00007" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774340712287</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1774340712287</updated>
+    </task>
+    <task id="LOCAL-00008" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774345985411</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1774345985411</updated>
+    </task>
+    <task id="LOCAL-00009" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774350457505</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1774350457505</updated>
+    </task>
+    <task id="LOCAL-00010" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774353627813</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1774353627813</updated>
+    </task>
+    <task id="LOCAL-00011" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774354418778</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1774354418778</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774679165944</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1774679165944</updated>
+    </task>
+    <task id="LOCAL-00013" summary="1123">
+      <option name="closed" value="true" />
+      <created>1774679171334</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1774679171335</updated>
+    </task>
+    <task id="LOCAL-00014" summary="11231">
+      <option name="closed" value="true" />
+      <created>1774679218702</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1774679218702</updated>
+    </task>
+    <task id="LOCAL-00015" summary="11231">
+      <option name="closed" value="true" />
+      <created>1774679220495</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1774679220495</updated>
+    </task>
+    <task id="LOCAL-00016" summary="11231">
+      <option name="closed" value="true" />
+      <created>1774679275073</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1774679275073</updated>
+    </task>
+    <task id="LOCAL-00017" summary="11231">
+      <option name="closed" value="true" />
+      <created>1774680283993</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1774680283993</updated>
+    </task>
+    <task id="LOCAL-00018" summary="11231">
+      <option name="closed" value="true" />
+      <created>1774687017386</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1774687017386</updated>
+    </task>
+    <task id="LOCAL-00019" summary="11231">
+      <option name="closed" value="true" />
+      <created>1774687054334</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1774687054334</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="1" />
+    <MESSAGE value="1123" />
+    <MESSAGE value="11231" />
+    <option name="LAST_COMMIT_MESSAGE" value="11231" />
+  </component>
+</project>

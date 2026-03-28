@@ -31,7 +31,7 @@ onMounted(() => {
   padding-bottom: 104px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1100px) {
   .main-content {
     padding-left: 240px;
     padding-bottom: 32px;

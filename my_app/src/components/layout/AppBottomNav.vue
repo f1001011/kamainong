@@ -90,7 +90,7 @@ function isActive(path: string) {
   opacity: 1;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1100px) {
   .bottom-nav {
     display: none;
   }

@@ -48,7 +48,7 @@ function isActive(path: string) {
   display: none;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1100px) {
   .sidebar {
     position: fixed;
     top: 0;
