@@ -1,6 +1,6 @@
 # my_app 世界杯 H5 / PC 交接日志
 
-更新时间：2026-03-28
+更新时间：2026-03-28（本轮补充：登录 / 欢迎页 PC 结构）
 
 ## 1. 项目当前定位
 
@@ -15,6 +15,8 @@
 - H5 主页面重构
 - PC / H5 自动识别并切换不同页面结构
 - 我的页子页面 `充值 / 提现 / 历史记录` 已补齐 PC 版
+- 登录页 PC 双栏结构已补齐（AuthLayout 层统一处理）
+- 欢迎页已拆分为 Mobile / Desktop 双结构，内容切换为世界杯中文主题
 
 当前不是：
 
@@ -257,6 +259,22 @@ H5 版处理方式：
 - `src/components/layout/AppBottomNav.vue`
 - `src/components/layout/AppSidebar.vue`
 
+### Auth 页面（登录 / 注册 / 找回密码）的 PC 切换规则
+
+Auth 页面不走 MainLayout，走 `AuthLayout`，由 AuthLayout 统一处理 PC / H5 切换：
+
+- H5：顶部居中品牌 logo，底部弹出表单卡片
+- PC：左侧 56% 为世界杯英雄区（品牌 + 大标题 + 数据统计），右侧 44% 为表单卡片居中
+
+实现方式：
+
+- `AuthLayout.vue` 内部调用 `useViewportMode`，根据 `isDesktop` 切换布局
+- `LoginView.vue` / `RegisterView.vue` / `ForgotPasswordView.vue` 本身只是表单卡片，不感知 PC/H5，由 AuthLayout 负责容器切换
+
+相关文件：
+
+- `src/layouts/AuthLayout.vue`
+
 重要说明：
 
 - 目前没有独立 `/pc` 页面
@@ -314,6 +332,20 @@ H5 版处理方式：
   - `src/views/main/profile/RecordHistoryView.vue`
   - `src/views/main/profile/RecordHistoryMobile.vue`
   - `src/views/main/profile/RecordHistoryDesktop.vue`
+
+#### 公开页（public）
+
+- 欢迎页
+  - `src/views/public/WelcomeView.vue`（switcher）
+  - `src/views/public/WelcomeMobile.vue`
+  - `src/views/public/WelcomeDesktop.vue`
+
+#### Auth 页面（特殊：由 AuthLayout 统一切换，View 本身只是表单卡片）
+
+- 登录：`src/views/auth/LoginView.vue`
+- 注册：`src/views/auth/RegisterView.vue`
+- 找回密码：`src/views/auth/ForgotPasswordView.vue`
+- PC / H5 切换在：`src/layouts/AuthLayout.vue`
 
 ---
 
@@ -444,8 +476,15 @@ H5 版处理方式：
 
 ### 欢迎页图片
 
-- 页面：`src/views/public/WelcomeView.vue`
+- 页面（switcher）：`src/views/public/WelcomeView.vue`
+- Mobile 版：`src/views/public/WelcomeMobile.vue`
+- Desktop 版：`src/views/public/WelcomeDesktop.vue`
 - 素材目录：`public/worldcup/welcome`
+
+欢迎页 Desktop 版当前使用的图片路径：
+
+- 英雄背景：`/worldcup/welcome/welcome-hero.svg`
+- 精选赛事卡图：`/worldcup/welcome/welcome-project-01.svg` ~ `03.svg`
 
 ---
 
@@ -493,6 +532,8 @@ H5 版处理方式：
 - PC 页不是把 H5 直接放大，而是单独重排信息层级
 - 图片必须放在项目固定目录，不再散落网络地址
 - mock 数据必须集中管理，不散写在模板里
+- Auth 页面（登录 / 注册 / 找回密码）的 PC 结构统一在 AuthLayout 层处理，View 本身只是表单卡片，不需要再拆 Mobile/Desktop
+- 欢迎页（WelcomeView）按主页面模式拆成 Mobile/Desktop switcher，而不是用 CSS 媒体查询兼容，原因是内容层级差异大，不适合同一套模板
 
 ---
 
@@ -507,13 +548,14 @@ H5 版处理方式：
 - 图片本地化已完成
 - 欢迎页图片已迁移到本地目录
 - 充值二维码本地化已完成
-- 构建已通过
+- 登录页 PC 双栏结构已补齐（AuthLayout 统一处理，同时覆盖注册 / 找回密码）
+- 欢迎页 PC / H5 双结构已补齐，内容已切换为世界杯中文主题
+- 构建已通过（2026-03-28）
 
 ### 当前保留状态
 
 - `SPORTS_IFRAME_URL` 仍为空
 - 体育页现在是空状态承载器
-- 登录页和欢迎页尚未补完整 PC 结构
 - 当前仍然是静态 mock 展示，不接真实后端
 
 ### 登录态
@@ -533,7 +575,8 @@ H5 版处理方式：
 
 当前结果：
 
-- 2026-03-28 构建通过
+- 2026-03-28（第一轮）构建通过 — 主框架 + 主页面 + 我的子页面
+- 2026-03-28（第二轮）构建通过 — 补充登录 PC 布局 + 欢迎页双结构
 
 ---
 
@@ -545,11 +588,12 @@ H5 版处理方式：
 2. `src/router/index.ts`
 3. `src/App.vue`
 4. `src/composables/useViewportMode.ts`
-5. `src/config/worldCup.ts`
-6. `src/services/worldCupContent.ts`
-7. `src/composables/useRecordHistory.ts`
-8. `src/layouts/MainLayout.vue`
-9. 相关页面包装页与 `Mobile/Desktop` 组件
+5. `src/layouts/AuthLayout.vue`（登录/注册 PC 结构在这里）
+6. `src/config/worldCup.ts`
+7. `src/services/worldCupContent.ts`
+8. `src/composables/useRecordHistory.ts`
+9. `src/layouts/MainLayout.vue`
+10. 相关页面包装页与 `Mobile/Desktop` 组件
 
 ---
 
@@ -557,15 +601,14 @@ H5 版处理方式：
 
 建议优先级如下：
 
-1. 给 `Login` 和 `Welcome` 也补 PC 结构
-2. 补真实 `SPORTS_IFRAME_URL`
-3. 如果接真实接口，优先改 `worldCupContent.ts`
-4. 如果接真实分页，优先改 `useRecordHistory.ts`
-5. 如果换图片，直接替换 `public/worldcup/*`
-6. 继续补充 PC hover、active、滚动细节
+1. 补真实 `SPORTS_IFRAME_URL`（填完体育页就能正常用了）
+2. 如果接真实接口，优先改 `worldCupContent.ts`
+3. 如果接真实分页，优先改 `useRecordHistory.ts`
+4. 如果换图片，直接替换 `public/worldcup/*`
+5. 继续补充 PC hover、active、滚动细节
 
 ---
 
 ## 17. 给下一个 AI 窗口的一句话说明
 
-当前 `my_app` 已是世界杯主题版本，采用同一路由自动区分 PC / H5，主页面和我的子页面都已有双结构，图片全部走项目内固定目录，当前下一步重点是补登录欢迎页 PC、接体育 iframe 和替换真实 API。
+当前 `my_app` 已是世界杯主题版本，采用同一路由自动区分 PC / H5，全部页面（主页面、我的子页面、欢迎页、登录 / 注册）均已有 PC 结构，图片全部走项目内固定目录，当前下一步重点是填 `SPORTS_IFRAME_URL`、接体育 iframe 和替换真实 API。

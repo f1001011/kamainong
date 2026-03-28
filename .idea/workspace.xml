@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77a1851a-06d1-42d4-ab8a-310ce7d2d0d3" name="更改" comment="11231">
-      <change beforePath="$PROJECT_DIR$/my_app/src/components/layout/AppBottomNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/components/layout/AppBottomNav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/components/layout/AppSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/components/layout/AppSidebar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/layouts/MainLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/layouts/MainLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/GamesView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/GamesView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/HomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/HomeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/SportsView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/SportsView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/profile/ProfileView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/profile/ProfileView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/profile/RechargeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/profile/RechargeView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/profile/RecordHistoryView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/profile/RecordHistoryView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_app/src/views/main/profile/WithdrawView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/main/profile/WithdrawView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/layouts/AuthLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/layouts/AuthLayout.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_app/src/views/public/WelcomeView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/my_app/src/views/public/WelcomeView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +127,7 @@
       <workItem from="1774350430794" duration="2424000" />
       <workItem from="1774353502913" duration="3062000" />
       <workItem from="1774679119838" duration="71000" />
-      <workItem from="1774679214412" duration="8166000" />
+      <workItem from="1774679214412" duration="10640000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <option name="closed" value="true" />
@@ -288,7 +281,15 @@
       <option name="project" value="LOCAL" />
       <updated>1774687054334</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="11231">
+      <option name="closed" value="true" />
+      <created>1774694017595</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1774694017595</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

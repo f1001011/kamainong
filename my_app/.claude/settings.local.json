@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run:*)",
+      "Bash(cd /d D:phpstudyjiugekamainongmy_app)",
+      "Bash(npx vite:*)",
+      "Bash(echo \"EXIT:$?\")"
+    ]
+  }
+}
