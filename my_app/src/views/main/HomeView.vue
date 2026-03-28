@@ -119,7 +119,7 @@ onUnmounted(() => {
 <style scoped>
 .worldcup-page {
   min-height: 100vh;
-  padding: 16px 14px 110px;
+  padding: 8px 10px 110px;
   color: #f4faf6;
 }
 

@@ -30,6 +30,22 @@ const layoutComponent = computed(() => {
 </script>
 
 <style>
+html,
+body,
+#app {
+  margin: 0;
+  min-height: 100%;
+  background: #03180e;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .popup-msg {
   margin: 0;
   font-size: 15px;

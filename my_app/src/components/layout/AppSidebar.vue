@@ -25,14 +25,13 @@
 
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router'
-import { CalendarDays, Gamepad2, Home, Trophy, User } from 'lucide-vue-next'
+import { CalendarDays, Home, Trophy, User } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
 
 const navItems = [
   { path: '/', label: '首页', icon: Home },
-  { path: '/games', label: '游戏', icon: Gamepad2 },
   { path: '/sports', label: '体育', icon: Trophy },
   { path: '/activities', label: '活动', icon: CalendarDays },
   { path: '/profile', label: '我的', icon: User },

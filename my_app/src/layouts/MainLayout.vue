@@ -24,7 +24,7 @@ onMounted(() => {
   min-height: 100vh;
   background:
     radial-gradient(circle at top, rgba(28, 151, 91, 0.16), transparent 24%),
-    linear-gradient(180deg, #03180e 0%, #062315 28%, #f2f7f3 28%, #eef4ef 100%);
+    linear-gradient(180deg, #03180e 0%, #062315 40%, #052113 100%);
   font-family: 'PingFang SC', 'Microsoft YaHei', Inter, sans-serif;
 }
 
@@ -34,6 +34,12 @@ onMounted(() => {
 }
 
 @media (min-width: 768px) {
+  .main-layout {
+    background:
+      radial-gradient(circle at top, rgba(28, 151, 91, 0.16), transparent 24%),
+      linear-gradient(180deg, #03180e 0%, #062315 28%, #f2f7f3 28%, #eef4ef 100%);
+  }
+
   .main-content {
     padding-left: 240px;
     padding-bottom: 32px;

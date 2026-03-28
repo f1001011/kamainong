@@ -17,14 +17,13 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { CalendarDays, Gamepad2, Home, Trophy, User } from 'lucide-vue-next'
+import { CalendarDays, Home, Trophy, User } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
 
 const navItems = computed(() => [
   { path: '/', label: '首页', icon: Home },
-  { path: '/games', label: '游戏', icon: Gamepad2 },
   { path: '/sports', label: '体育', icon: Trophy },
   { path: '/activities', label: '活动', icon: CalendarDays },
   { path: '/profile', label: '我的', icon: User },
@@ -44,7 +43,7 @@ function isActive(path: string) {
   bottom: 12px;
   z-index: 50;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 6px;
   padding: 8px;
   border-radius: 26px;
