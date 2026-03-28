@@ -1,10 +1,10 @@
 <template>
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <div class="sidebar-brand-mark">L</div>
+      <div class="sidebar-brand-mark">WC</div>
       <div>
-        <div class="sidebar-brand-title">lendlease</div>
-        <div class="sidebar-brand-sub">wealth architecture</div>
+        <div class="sidebar-brand-title">World Cup H5</div>
+        <div class="sidebar-brand-sub">football showcase</div>
       </div>
     </div>
 
@@ -25,20 +25,17 @@
 
 <script lang="ts" setup>
 import { useRoute, useRouter } from 'vue-router'
-import { Home, Package, Gift, Bell, Users, User, Wallet, Shield } from 'lucide-vue-next'
+import { CalendarDays, Gamepad2, Home, Trophy, User } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
 
 const navItems = [
-  { path: '/', label: 'الرئيسية', icon: Home },
-  { path: '/products', label: 'المنتجات', icon: Package },
-  { path: '/activities', label: 'الأنشطة', icon: Gift },
-  { path: '/messages', label: 'الرسائل', icon: Bell },
-  { path: '/team', label: 'الفريق', icon: Users },
-  { path: '/profile', label: 'الملف الشخصي', icon: User },
-  { path: '/transactions', label: 'المعاملات', icon: Wallet },
-  { path: '/security', label: 'الأمان', icon: Shield },
+  { path: '/', label: '首页', icon: Home },
+  { path: '/games', label: '游戏', icon: Gamepad2 },
+  { path: '/sports', label: '体育', icon: Trophy },
+  { path: '/activities', label: '活动', icon: CalendarDays },
+  { path: '/profile', label: '我的', icon: User },
 ]
 
 function isActive(path: string) {
@@ -56,7 +53,7 @@ function isActive(path: string) {
   .sidebar {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     z-index: 40;
     width: 240px;
     min-height: 100vh;
@@ -64,9 +61,9 @@ function isActive(path: string) {
     display: flex;
     flex-direction: column;
     gap: 28px;
-    background: rgba(255, 255, 255, 0.84);
+    background: rgba(8, 26, 18, 0.9);
     backdrop-filter: blur(24px);
-    border-left: 1px solid rgba(0, 0, 0, 0.06);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .sidebar-brand {
@@ -82,19 +79,20 @@ function isActive(path: string) {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #d0ac73, #8f6c3a);
-    color: #111;
+    background: linear-gradient(135deg, #f4d66d, #2dd4bf);
+    color: #052f1b;
+    font-size: 12px;
     font-weight: 800;
   }
 
   .sidebar-brand-title {
-    color: #163b2a;
+    color: #ffffff;
     font-size: 19px;
     font-weight: 700;
   }
 
   .sidebar-brand-sub {
-    color: rgba(22, 59, 42, 0.52);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -115,27 +113,27 @@ function isActive(path: string) {
     align-items: center;
     gap: 12px;
     background: transparent;
-    color: rgba(22, 59, 42, 0.68);
+    color: rgba(255, 255, 255, 0.72);
     font-size: 14px;
     font-weight: 600;
     transition: all 0.2s ease;
   }
 
   .sidebar-link.active {
-    color: #163b2a;
-    background: rgba(13, 107, 61, 0.08);
-    box-shadow: inset 0 0 0 1px rgba(208, 172, 115, 0.26);
+    color: #f4d66d;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(244, 214, 109, 0.18);
   }
 
   .sidebar-link.active::before {
     content: '';
     position: absolute;
-    right: 0;
+    left: 0;
     top: 10px;
     bottom: 10px;
     width: 3px;
     border-radius: 999px;
-    background: linear-gradient(180deg, #d0ac73, #b38743);
+    background: linear-gradient(180deg, #f4d66d, #38bdf8);
   }
 }
 </style>

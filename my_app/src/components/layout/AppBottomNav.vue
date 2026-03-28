@@ -17,17 +17,17 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Home, Package, Gift, Users, User } from 'lucide-vue-next'
+import { CalendarDays, Gamepad2, Home, Trophy, User } from 'lucide-vue-next'
 
 const route = useRoute()
 const router = useRouter()
 
 const navItems = computed(() => [
-  { path: '/', label: 'الرئيسية', icon: Home },
-  { path: '/products', label: 'المنتجات', icon: Package },
-  { path: '/activities', label: 'الأنشطة', icon: Gift },
-  { path: '/team', label: 'الفريق', icon: Users },
-  { path: '/profile', label: 'حسابي', icon: User },
+  { path: '/', label: '首页', icon: Home },
+  { path: '/games', label: '游戏', icon: Gamepad2 },
+  { path: '/sports', label: '体育', icon: Trophy },
+  { path: '/activities', label: '活动', icon: CalendarDays },
+  { path: '/profile', label: '我的', icon: User },
 ])
 
 function isActive(path: string) {
@@ -48,9 +48,10 @@ function isActive(path: string) {
   gap: 6px;
   padding: 8px;
   border-radius: 26px;
-  background: rgba(10, 22, 16, 0.9);
+  background: rgba(6, 31, 19, 0.88);
   backdrop-filter: blur(24px) saturate(1.4);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.26);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .bottom-nav-item {
@@ -70,8 +71,10 @@ function isActive(path: string) {
 }
 
 .bottom-nav-item.active {
-  color: #d0ac73;
-  background: rgba(255, 255, 255, 0.06);
+  color: #f4d66d;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(19, 101, 60, 0.12)),
+    rgba(255, 255, 255, 0.04);
 }
 
 .nav-dot {
@@ -80,7 +83,7 @@ function isActive(path: string) {
   width: 5px;
   height: 5px;
   border-radius: 999px;
-  background: #d0ac73;
+  background: linear-gradient(90deg, #f4d66d, #38bdf8);
   opacity: 0;
 }
 
